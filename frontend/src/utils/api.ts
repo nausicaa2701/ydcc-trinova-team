@@ -4,6 +4,7 @@ import { SaltIntrusionData, RiskSurface, SaltIntrusionBoundary } from '@/types'
 import { Farm, Cooperative } from '@/types'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const AI_API_BASE_URL = import.meta.env.VITE_AI_API_BASE_URL || 'http://localhost:8001'
 
 // Salt Intrusion API
 export async function fetchSaltIntrusionData(
@@ -24,7 +25,7 @@ export async function fetchBoundariesForDate(
   salinity?: number
 ): Promise<SaltIntrusionBoundary[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/boundaries?date=${date}`)
+    const response = await fetch(`${AI_API_BASE_URL}/boundaries?date=${date}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -54,7 +55,7 @@ export async function fetchRiskSurfaceForDate(
   date: string
 ): Promise<RiskSurface | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/risk?date=${date}`)
+    const response = await fetch(`${AI_API_BASE_URL}/risk?date=${date}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -113,7 +114,7 @@ export async function fetchSalinityPrediction(
   date?: string
 ): Promise<SalinityPrediction | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/predict`, {
+    const response = await fetch(`${AI_API_BASE_URL}/predict`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
