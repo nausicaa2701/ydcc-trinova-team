@@ -1,85 +1,37 @@
-﻿station_name,temperature,water_level,ec,salinity,do,source_file,extraction_method,extraction_timestamp,extracted_date
-None,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564109,
-Hồ Hòa Bình,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564136,
-Yên Bái,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564138,
-Phú Thọ,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564139,
-Tuyên Quang,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564140,
-Vụ Quang,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564141,
-Đáp Cầu,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564141,
-"Phủ Lạng
-Thương",,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564142,
-Lục Nam,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564143,
-Phả Lại,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564144,
-Hà Nội,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564144,
-Giàng,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564145,
-Nam Đàn,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564146,
-Linh Cảm,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564147,
-Mai Hóa,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564147,
-Kim Long,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564148,
-Câu Lâu,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564149,
-Trà Khúc,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564150,
-None,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564150,
-Thạnh Hòa,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564151,
-Phú Lâm,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564152,
-Kon Tum,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564153,
-Giang Sơn,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564154,
-Tà Lài,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564154,
-Phước Hòa,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564155,
-Tân Châu,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564156,
-Châu Đốc,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564157,
-None,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564157,
-Hồ Hòa Bình,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564158,
-Yên Bái,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564159,
-Tuyên Quang,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564159,
-Hà Nội,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564160,
-Gia Bảy,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564161,
-Cẩm Thủy,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564162,
-Yên Thượng,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564162,
-Hòa Duyệt,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564163,
-Thượng Nhật,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564164,
-Nông Sơn,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564165,
-Sơn Giang,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564165,
-Củng Sơn,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564166,
-Đồng Trăng,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564167,
-KonTum,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564168,
-Giang Sơn,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564168,
-Tân Châu,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564169,
-Châu Đốc,,,,,,dbqg_tvhm_20260115.pdf,table,2026-01-18T10:52:46.564170,
-Tin phát ngày:,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.571129,15/01/2026
-ian ban hành bản tin tiếp theo:,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.571724,15/01/2026
-Lào Cai,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.573444,15/01/2026
-Tuyên Quang xấp xỉ TBNN,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.574144,15/01/2026
-Kim Long ở trên mức BĐ,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.575444,15/01/2026
-Phú Ốc đạt mức,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.576716,15/01/2026
-Hòa Duyệt cao hơn từ,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.584171,15/01/2026
-"Sơn Diệm
-cao hơn",,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.591169,15/01/2026
-An Chỉ thấp hơn khoa,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.596784,15/01/2026
-Tân Mỹ đạt,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.601551,15/01/2026
-Thạnh Hòa,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.606084,15/01/2026
-Củng Sơn là,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.610627,15/01/2026
-"Phú
-Lâm",,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.614918,15/01/2026
-Hà Bằng,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.619436,15/01/2026
-"Thạnh Hòa ở trên
-mức BĐ",,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.623168,15/01/2026
-Thanh Bình đã vượt lũ lịch sử năm,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.626864,15/01/2026
-Sông Lũy vượt BĐ,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.630346,15/01/2026
-Sông Lũy cao hơn so với TBNN,,30598.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.633427,15/01/2026
-"Bản Đôn
-là",,17819.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.635806,15/01/2026
-Thanh Bình là,,83436.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.637918,15/01/2026
-"Tà Lài
-là",,11279.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.639271,15/01/2026
-trên dòng chính sông Mê Công biến đổi chậm vơ,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.640594,15/01/2026
-Kompong Luong cao hơn,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.641797,15/01/2026
-Kratie,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.642702,15/01/2026
-Thành Mỹ và sông Vệ,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.650762,15/01/2026
-An Chỉ thấp hơn từ,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.659475,15/01/2026
-"H H H H H H H H H
-min max TB min max TB min max TB",,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.665466,15/01/2026
-Tháng Tháng Tháng,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.667171,15/01/2026
-"Thành Mỹ và sông Vệ tại trạm An Chỉ
-thấp hơn từ",,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.668850,15/01/2026
-Tà Lài,,11279.0,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.670314,15/01/2026
-Phước Hoà khả năng xuất hiện,,,,,,dbqg_tvhm_20260115.pdf,text,2026-01-18T10:52:46.671067,15/01/2026
+﻿station_name,river_name,distance_km,smax_observed,observed_period,smax_forecast,forecast_date,temperature,water_level,ec,salinity,do,source_file,extraction_method,extraction_timestamp
+Lý Nhơn,Soài Rạp,7.0,27.0,"Smax thực đo từ
+21/03 - 31/03
+(‰)",27.3,07/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:41:21.531538
+Nhà Bè,Đồng Điền,38.0,15.8,"Smax thực đo từ
+21/03 - 31/03
+(‰)",16.8,08/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:41:21.531546
+Cát Lái,Sài Gòn,58.0,9.9,"Smax thực đo từ
+21/03 - 31/03
+(‰)",9.7,09/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:41:21.531547
+Long Đại,Đồng Nai,80.0,2.8,"Smax thực đo từ
+21/03 - 31/03
+(‰)",2.7,01/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:41:21.531548
+Lý Nhơn,Soài Rạp,7.0,18.0,"Smax thực đo từ
+11/01 - 20/01
+(‰)",18.9,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:41:21.584601
+Nhà Bè,Đồng Điền,38.0,7.3,"Smax thực đo từ
+11/01 - 20/01
+(‰)",8.6,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:41:21.584607
+Cát Lái,Sài Gòn,58.0,5.1,"Smax thực đo từ
+11/01 - 20/01
+(‰)",6.6,23/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:41:21.584608
+Long Đại,Đồng Nai,80.0,0.0,"Smax thực đo từ
+11/01 - 20/01
+(‰)",0.0,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:41:21.584609
+Lý Nhơn,Soài Rạp,7.0,23.2,"Smax thực đo từ
+01/03 - 10/03
+(‰)",24.1,12/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:41:21.633860
+Nhà Bè,Đồng Điền,38.0,11.7,"Smax thực đo từ
+01/03 - 10/03
+(‰)",12.3,12/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:41:21.633868
+Cát Lái,Sài Gòn,58.0,6.9,"Smax thực đo từ
+01/03 - 10/03
+(‰)",7.2,15/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:41:21.633869
+Long Đại,Đồng Nai,80.0,1.5,"Smax thực đo từ
+01/03 - 10/03
+(‰)",2.2,16/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:41:21.633870

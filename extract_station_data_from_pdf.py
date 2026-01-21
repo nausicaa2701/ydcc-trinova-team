@@ -7,6 +7,7 @@ Supports both text-based and image-based (scanned) PDFs using OCR
 import re
 import json
 import csv
+import urllib.parse
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional, Tuple
@@ -23,6 +24,15 @@ except ImportError:
     OCR_AVAILABLE = False
     print("⚠️  OCR libraries not installed. Install with: pip install pdf2image pytesseract pillow")
     print("   Also install Tesseract OCR: brew install tesseract (macOS) or apt-get install tesseract-ocr (Linux)")
+
+# Networking imports (optional for auto-downloading PDFs)
+try:
+    import requests
+    from bs4 import BeautifulSoup
+    HTTP_AVAILABLE = True
+except ImportError:
+    HTTP_AVAILABLE = False
+    print("⚠️  requests/bs4 not installed. Install with: pip install requests beautifulsoup4")
 
 
 def extract_text_with_ocr(pdf_path: Path) -> str:
@@ -299,7 +309,191 @@ def extract_stations_from_tables(tables: list) -> List[Dict]:
         
         # Find column indices
         headers = table[header_row]
-        col_indices = {}
+        header_text_joined = " ".join(str(h).lower() for h in headers if h)
+
+        # --- Special handling for salinity forecast tables (Độ mặn dự báo) ---
+        # These tables typically have columns:
+        # Trạm | Sông | K/c đến cửa sông (km) | Smax thực đo từ xx/xx-yy/yy (‰) | Độ mặn dự báo Smax (‰) | ngày XH
+        if (
+            'độ mặn dự báo' in header_text_joined
+            or 'smax thực đo' in header_text_joined
+            or 'k/c đến cửa sông' in header_text_joined
+        ):
+            forecast_indices: Dict[str, int] = {}
+            observed_period: Optional[str] = None
+
+            for idx, header in enumerate(headers):
+                if not header:
+                    continue
+                header_str = str(header).strip()
+                header_lower = header_str.lower()
+
+                if any(k in header_lower for k in ['trạm', 'station', 'tên trạm']):
+                    forecast_indices['station'] = idx
+                # River column is typically just "Sông" (avoid matching "cửa sông")
+                elif ('sông' in header_lower) and ('cửa sông' not in header_lower):
+                    forecast_indices['river'] = idx
+                # Distance column should reference the river mouth explicitly (avoid matching any random "km")
+                elif (
+                    'cửa sông' in header_lower
+                    or 'đến cửa sông' in header_lower
+                    or ('k/c' in header_lower and 'sông' in header_lower)
+                    or ('khoảng cách' in header_lower and 'sông' in header_lower)
+                    or '(km' in header_lower
+                ):
+                    forecast_indices['distance'] = idx
+                elif 'smax' in header_lower and 'thực đo' in header_lower:
+                    forecast_indices['smax_observed'] = idx
+                    observed_period = header_str
+                elif ('độ mặn' in header_lower and 'dự báo' in header_lower) or (
+                    'smax' in header_lower and 'dự báo' in header_lower
+                ):
+                    forecast_indices['smax_forecast'] = idx
+                elif 'ngày' in header_lower and ('xh' in header_lower or 'xuất hiện' in header_lower):
+                    forecast_indices['forecast_date'] = idx
+
+            # If we have at least station and a salinity forecast column, treat this as forecast table
+            if 'station' in forecast_indices and 'smax_forecast' in forecast_indices:
+                for row in table[header_row + 1 :]:
+                    if not row or len(row) < 2:
+                        continue
+
+                    station_cell = row[forecast_indices['station']] if forecast_indices['station'] < len(row) else None
+                    station_name = str(station_cell).strip() if station_cell is not None else ""
+                    if not station_name or station_name in ['None', 'nan']:
+                        continue
+
+                    def _to_float(val: Optional[str]) -> Optional[float]:
+                        if val is None:
+                            return None
+                        s = str(val).strip()
+                        if not s or s in ['None', 'nan']:
+                            return None
+                        try:
+                            # Remove any non-numeric characters except .,- and ,
+                            numeric = re.sub(r'[^\d,.\-]', '', s)
+                            numeric = numeric.replace(',', '')
+                            return float(numeric) if numeric else None
+                        except ValueError:
+                            return None
+                    
+                    def _looks_like_text(val: Optional[str]) -> bool:
+                        if val is None:
+                            return False
+                        s = str(val).strip()
+                        if not s or s in ['None', 'nan']:
+                            return False
+                        # If it contains letters (including Vietnamese chars), treat as text-ish
+                        return bool(re.search(r'[A-Za-zÀ-ỹđĐ]', s))
+
+                    record = {
+                        'station_name': station_name,
+                        'river_name': None,
+                        'distance_km': None,
+                        'smax_observed': None,
+                        'observed_period': observed_period,
+                        'smax_forecast': None,
+                        'forecast_date': None,
+                        # Keep existing keys so CSV has consistent columns
+                        'temperature': None,
+                        'water_level': None,
+                        'ec': None,
+                        'salinity': None,
+                        'do': None,
+                    }
+
+                    # River name
+                    river_raw = None
+                    if 'river' in forecast_indices and forecast_indices['river'] < len(row):
+                        river_raw = row[forecast_indices['river']]
+                        river = str(river_raw).strip()
+                        if river and river not in ['None', 'nan']:
+                            record['river_name'] = river
+
+                    # Distance to river mouth (km)
+                    distance_raw = None
+                    if 'distance' in forecast_indices and forecast_indices['distance'] < len(row):
+                        distance_raw = row[forecast_indices['distance']]
+                        record['distance_km'] = _to_float(distance_raw)
+
+                    # Row-level sanity check: if river looks numeric and distance looks like text, swap
+                    # (pdfplumber sometimes shifts these two columns)
+                    river_as_float = _to_float(river_raw) if river_raw is not None else None
+                    if (
+                        river_as_float is not None
+                        and record['distance_km'] is None
+                        and _looks_like_text(distance_raw)
+                    ):
+                        record['distance_km'] = river_as_float
+                        record['river_name'] = str(distance_raw).strip()
+
+                    # Robust fallback: some PDFs produce shifted columns / broken headers.
+                    # If river is still numeric (e.g. "7") and distance is missing, infer from row values.
+                    if (record['river_name'] is None or _to_float(record['river_name']) is not None) or record['distance_km'] is None:
+                        row_cells = [c for c in row if c is not None and str(c).strip() not in ['', 'None', 'nan']]
+
+                        # Infer forecast_date if missing (typically last column like "31/01")
+                        if not record.get('forecast_date'):
+                            for c in reversed(row_cells):
+                                s = str(c).strip()
+                                if re.fullmatch(r'\d{1,2}/\d{1,2}', s):
+                                    record['forecast_date'] = s
+                                    break
+
+                        # Infer river_name: first text-ish cell that isn't the station name
+                        if record.get('river_name') is None or _to_float(record.get('river_name')) is not None:
+                            for c in row_cells:
+                                s = str(c).strip()
+                                if s != record['station_name'] and _looks_like_text(s):
+                                    record['river_name'] = s
+                                    break
+
+                        # Infer distance_km: choose an integer-ish km value (0..200) not equal to smax values
+                        if record.get('distance_km') is None:
+                            smax_vals = set()
+                            if record.get('smax_observed') is not None:
+                                smax_vals.add(float(record['smax_observed']))
+                            if record.get('smax_forecast') is not None:
+                                smax_vals.add(float(record['smax_forecast']))
+
+                            best = None
+                            for c in row_cells:
+                                f = _to_float(c)
+                                if f is None:
+                                    continue
+                                if f < 0 or f > 200:
+                                    continue
+                                # prefer integer-ish values for distance
+                                if abs(f - round(f)) > 1e-6:
+                                    continue
+                                # avoid accidentally selecting Smax values
+                                if any(abs(f - sv) < 1e-6 for sv in smax_vals):
+                                    continue
+                                best = f
+                                break
+                            record['distance_km'] = best
+
+                    # Historical observed Smax
+                    if 'smax_observed' in forecast_indices and forecast_indices['smax_observed'] < len(row):
+                        record['smax_observed'] = _to_float(row[forecast_indices['smax_observed']])
+
+                    # Forecast Smax
+                    if 'smax_forecast' in forecast_indices and forecast_indices['smax_forecast'] < len(row):
+                        record['smax_forecast'] = _to_float(row[forecast_indices['smax_forecast']])
+
+                    # Forecast date (ngày XH)
+                    if 'forecast_date' in forecast_indices and forecast_indices['forecast_date'] < len(row):
+                        date_raw = str(row[forecast_indices['forecast_date']]).strip()
+                        if date_raw and date_raw not in ['None', 'nan']:
+                            record['forecast_date'] = date_raw
+
+                    stations_data.append(record)
+
+                # This table has been handled as a forecast table, move to next table
+                continue
+
+        # --- Default handling for regular water-quality station tables ---
+        col_indices: Dict[str, int] = {}
         for idx, header in enumerate(headers):
             if not header:
                 continue
@@ -324,6 +518,13 @@ def extract_stations_from_tables(tables: list) -> List[Dict]:
             
             station_data = {
                 'station_name': None,
+                # Forecast-related fields (will remain None for regular tables)
+                'river_name': None,
+                'distance_km': None,
+                'smax_observed': None,
+                'observed_period': None,
+                'smax_forecast': None,
+                'forecast_date': None,
                 'temperature': None,
                 'water_level': None,
                 'ec': None,
@@ -357,6 +558,200 @@ def extract_stations_from_tables(tables: list) -> List[Dict]:
                 stations_data.append(station_data)
     
     return stations_data
+
+
+def _extract_pdf_url_from_viewer(href: str) -> Optional[str]:
+    """Extract the real PDF URL from Google viewer links."""
+    m = re.search(r"url=([^&]+\\.pdf)", href, flags=re.IGNORECASE)
+    if m:
+        return urllib.parse.unquote(m.group(1))
+    return None
+
+
+def _extract_article_id(url: str) -> int:
+    """Extract numeric article id from url if present, else -1."""
+    m = re.search(r'/article/(\\d+)', url)
+    if not m:
+        m = re.search(r'attachments/[^/]+/(\\d+)', url)
+    try:
+        return int(m.group(1)) if m else -1
+    except Exception:
+        return -1
+
+
+def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> List[Path]:
+    """
+    Crawl the HCM salinity forecast category, find PDF links, and download them.
+    Returns a list of downloaded file paths.
+    """
+    if not HTTP_AVAILABLE:
+        print("⚠️  Skipping PDF fetch (requests/bs4 not installed)")
+        return []
+
+    base = "http://www.kttv-nb.org.vn"
+    category_url = f"{base}/index.php/thong-tin-kttv/thuy-van"
+    download_dir.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n🔍 Fetching PDFs from: {category_url}")
+    
+    session = requests.Session()
+    # Add user agent to avoid blocking
+    session.headers.update({
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+    })
+    downloaded_files: List[Path] = []
+
+    try:
+        print(f"📡 Connecting to {category_url}...")
+        resp = session.get(category_url, timeout=45)  # slow legacy PHP site
+        resp.raise_for_status()
+        print(f"✓ Got response: {len(resp.text)} characters, status: {resp.status_code}")
+    except Exception as e:
+        print(f"❌ Cannot fetch category page: {e}")
+        print(f"   Check your internet connection and try again.")
+        return []
+
+    try:
+        soup = BeautifulSoup(resp.text, "lxml")
+    except:
+        soup = BeautifulSoup(resp.text, "html.parser")
+    
+    print(f"📄 Parsed HTML, looking for links...")
+
+    # Find ALL links first for debugging
+    all_links = soup.find_all("a", href=True)
+    print(f"   Found {len(all_links)} total <a> tags")
+    
+    # 1) Direct PDF links on category page (fallback if article detection fails)
+    direct_pdf_urls: List[str] = []
+    for a in all_links:
+        href = a.get("href", "")
+        if ".pdf" in href.lower() and "attachments/article" in href:
+            pdf_url = urllib.parse.urljoin(base, href)
+            direct_pdf_urls.append(pdf_url)
+            print(f"   📎 Direct PDF: {pdf_url}")
+    # Keep only the latest direct PDF (by article id)
+    if direct_pdf_urls:
+        direct_pdf_urls = sorted(direct_pdf_urls, key=_extract_article_id, reverse=True)[:1]
+
+    # 2) Find article links that mention xâm nhập mặn + HCM
+    article_links: List[str] = []
+    for a in all_links:
+        text = (a.get_text() or "").lower()
+        href = a.get("href", "")
+        
+        # Check if link text matches
+        if "xâm nhập mặn" in text and any(k in text for k in ["tphcm", "tp.hcm", "hồ chí minh", "ho chi minh", "thành phố"]):
+            url = urllib.parse.urljoin(base, href)
+            article_links.append(url)
+            print(f"   📰 Article link (text match): {text[:60]}... -> {url}")
+        
+        # Fallback: links in the same category path that look like article pages
+        elif "thong-tin-kttv" in href and "thuy-van" in href and "article" in href:
+            url = urllib.parse.urljoin(base, href)
+            if url not in article_links:
+                article_links.append(url)
+                print(f"   📰 Article link (href pattern): {url}")
+
+    # De-duplicate while preserving order, then sort by article id desc (latest first)
+    seen = set()
+    unique_articles = []
+    for url in article_links:
+        if url not in seen:
+            seen.add(url)
+            unique_articles.append(url)
+    article_links = sorted(unique_articles, key=_extract_article_id, reverse=True)[:max_articles]
+
+    print(f"\n📊 Summary:")
+    print(f"   Direct PDFs found: {len(direct_pdf_urls)}")
+    print(f"   Article links found: {len(article_links)}")
+    
+    if not article_links and not direct_pdf_urls:
+        print("⚠️  No matching articles or PDF links found on category page.")
+        print("   Trying fallback: looking for any article links...")
+        # Fallback: find any article links
+        for a in all_links[:100]:  # Check first 100 links
+            href = a.get("href", "")
+            if "/article/" in href:
+                url = urllib.parse.urljoin(base, href)
+                if url not in article_links:
+                    article_links.append(url)
+                    print(f"   📰 Found article (fallback): {url}")
+        if not article_links and not direct_pdf_urls:
+            print("❌ Still no links found. The page structure may have changed.")
+            return []
+
+    def _download_pdf(pdf_url: str) -> Optional[Path]:
+        try:
+            fname = Path(urllib.parse.urlparse(pdf_url).path).name or "download.pdf"
+            dest = download_dir / fname
+            if dest.exists():
+                return dest
+            r = session.get(pdf_url, stream=True, timeout=60)  # allow slow download
+            r.raise_for_status()
+            with open(dest, "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+            return dest
+        except Exception as e:
+            print(f"⚠️  Failed to download {pdf_url}: {e}")
+            return None
+
+    # Download any direct PDFs from category page
+    for pdf_url in direct_pdf_urls:
+        dest = _download_pdf(pdf_url)
+        if dest:
+            downloaded_files.append(dest)
+
+    # Then visit articles and look for more PDFs
+    for article_url in article_links:
+        try:
+            ar = session.get(article_url, timeout=45)  # slow legacy PHP site
+            ar.raise_for_status()
+            asoup = BeautifulSoup(ar.text, "lxml") if 'lxml' in BeautifulSoup.__module__ else BeautifulSoup(ar.text, "html.parser")
+
+            pdf_urls: List[str] = []
+            for aa in asoup.find_all("a", href=True):
+                href = aa["href"]
+                if ".pdf" in href and "attachments/article" in href:
+                    pdf_urls.append(urllib.parse.urljoin(base, href))
+                elif "viewer" in href or "gview" in href:
+                    real = _extract_pdf_url_from_viewer(href)
+                    if real:
+                        pdf_urls.append(real)
+
+            # De-duplicate
+            uniq_pdf = []
+            seen_pdf = set()
+            for u in pdf_urls:
+                if u not in seen_pdf:
+                    seen_pdf.add(u)
+                    uniq_pdf.append(u)
+
+            if uniq_pdf:
+                print(f"  ✓ {article_url} -> {len(uniq_pdf)} PDF link(s) found.")
+            else:
+                print(f"  ⚠️  {article_url} -> No PDF links found.")
+
+            for pdf_url in uniq_pdf:
+                print(f"    📥 Downloading: {pdf_url}")
+                dest = _download_pdf(pdf_url)
+                if dest:
+                    downloaded_files.append(dest)
+                    print(f"    ✓ Saved: {dest.name}")
+                else:
+                    print(f"    ✗ Failed to download")
+        except Exception as e:
+            print(f"⚠️  Skip article {article_url}: {e}")
+            continue
+
+    if downloaded_files:
+        print(f"\n✅ Successfully downloaded {len(downloaded_files)} PDF file(s)")
+    else:
+        print(f"\n⚠️  No PDFs were downloaded")
+    
+    return downloaded_files
 
 
 def extract_all_stations_from_pdf(pdf_path: Path) -> List[Dict]:
@@ -429,6 +824,56 @@ def extract_all_stations_from_pdf(pdf_path: Path) -> List[Dict]:
     return all_data
 
 
+def clean_missing_data(data: List[Dict], required_fields: List[str] = None, max_missing: int = 5) -> List[Dict]:
+    """
+    Remove records that have too many missing required fields.
+    
+    Args:
+        data: List of station data dictionaries
+        required_fields: List of field names that are considered important (default: forecast fields)
+        max_missing: Maximum number of missing fields allowed (default: 5)
+    
+    Returns:
+        Filtered list with records that have <= max_missing missing fields
+    """
+    if required_fields is None:
+        required_fields = [
+            'station_name',
+            'river_name',
+            'distance_km',
+            'smax_observed',
+            'observed_period',
+            'smax_forecast',
+            'forecast_date'
+        ]
+    
+    cleaned_data = []
+    removed_count = 0
+    
+    for record in data:
+        missing_count = 0
+        
+        for field in required_fields:
+            value = record.get(field)
+            # Consider None, empty string, or empty list as missing
+            if value is None or value == '' or (isinstance(value, (list, dict)) and len(value) == 0):
+                missing_count += 1
+        
+        if missing_count < max_missing:
+            cleaned_data.append(record)
+        else:
+            removed_count += 1
+            station_name = record.get('station_name', 'Unknown')
+            print(f"  ⚠️  Removed record: {station_name} (missing {missing_count}/{len(required_fields)} required fields)")
+    
+    if removed_count > 0:
+        print(f"\n🧹 Data cleaning:")
+        print(f"   Removed {removed_count} record(s) with >= {max_missing} missing fields")
+        print(f"   Kept {len(cleaned_data)} record(s)")
+    
+    return cleaned_data
+
+
 def main():
     """Main function to extract data from all PDFs."""
     # Path to PDF directory
@@ -439,6 +884,13 @@ def main():
     if not pdf_dir.exists():
         print(f"Error: Directory {pdf_dir} not found!")
         return
+
+    # Auto-fetch latest HCM salinity forecast PDFs (if networking deps are available)
+    fetched = fetch_tphcm_salinity_pdfs(pdf_dir, max_articles=3)
+    if fetched:
+        print(f"✓ Downloaded {len(fetched)} PDF(s) into {pdf_dir}")
+    else:
+        print("ℹ️  No new PDFs downloaded (or networking deps missing).")
     
     # Find all PDF files
     pdf_files = list(pdf_dir.glob('*.pdf'))
@@ -459,16 +911,24 @@ def main():
         print("\n⚠️  No data extracted from any PDF!")
         return
     
-    # Save to CSV
+    # Clean data: remove records with >= 5 missing required fields
+    print(f"\n🧹 Cleaning data (removing records with >= 5 missing required fields)...")
+    cleaned_data = clean_missing_data(all_stations_data, max_missing=5)
+    
+    if not cleaned_data:
+        print("\n⚠️  No data remaining after cleaning!")
+        return
+    
+    # Save cleaned data to CSV
     csv_path = output_dir / 'station_data_extracted.csv'
-    df = pd.DataFrame(all_stations_data)
+    df = pd.DataFrame(cleaned_data)
     df.to_csv(csv_path, index=False, encoding='utf-8-sig')
     print(f"\n✓ Saved {len(df)} records to {csv_path}")
     
-    # Save to JSON
+    # Save cleaned data to JSON
     json_path = output_dir / 'station_data_extracted.json'
     with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump(all_stations_data, f, ensure_ascii=False, indent=2)
+        json.dump(cleaned_data, f, ensure_ascii=False, indent=2)
     print(f"✓ Saved to {json_path}")
     
     # Print summary
@@ -481,10 +941,10 @@ def main():
         pct = (count / len(df)) * 100 if len(df) > 0 else 0
         print(f"    - {param}: {count}/{len(df)} ({pct:.1f}%)")
     
-    # Print all extracted data to console
-    print(f"\n📋 All Extracted Data:")
+    # Print all extracted data to console (use cleaned_data)
+    print(f"\n📋 All Extracted Data (after cleaning):")
     print("=" * 100)
-    for idx, record in enumerate(all_stations_data, 1):
+    for idx, record in enumerate(cleaned_data, 1):
         print(f"\n[{idx}] Station: {record.get('station_name', 'N/A')}")
         print(f"    Source: {record.get('source_file', 'N/A')}")
         print(f"    Method: {record.get('extraction_method', 'text')}")
