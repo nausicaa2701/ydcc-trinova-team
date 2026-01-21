@@ -22,7 +22,7 @@ try:
     OCR_AVAILABLE = True
 except ImportError:
     OCR_AVAILABLE = False
-    print("⚠️  OCR libraries not installed. Install with: pip install pdf2image pytesseract pillow")
+    print("WARNING: OCR libraries not installed. Install with: pip install pdf2image pytesseract pillow")
     print("   Also install Tesseract OCR: brew install tesseract (macOS) or apt-get install tesseract-ocr (Linux)")
 
 # Networking imports (optional for auto-downloading PDFs)
@@ -32,7 +32,7 @@ try:
     HTTP_AVAILABLE = True
 except ImportError:
     HTTP_AVAILABLE = False
-    print("⚠️  requests/bs4 not installed. Install with: pip install requests beautifulsoup4")
+    print("WARNING: requests/bs4 not installed. Install with: pip install requests beautifulsoup4")
 
 
 def extract_text_with_ocr(pdf_path: Path) -> str:
@@ -48,8 +48,8 @@ def extract_text_with_ocr(pdf_path: Path) -> str:
         try:
             pytesseract.get_tesseract_version()
         except Exception:
-            print(f"    ⚠️  Tesseract OCR not found!")
-            print(f"    💡 Install Tesseract:")
+            print(f"    WARNING: Tesseract OCR not found!")
+            print(f"    Install Tesseract:")
             print(f"       macOS: brew install tesseract tesseract-lang")
             print(f"       Linux: sudo apt-get install tesseract-ocr tesseract-ocr-vie")
             print(f"       Windows: Download from https://github.com/UB-Mannheim/tesseract/wiki")
@@ -61,8 +61,8 @@ def extract_text_with_ocr(pdf_path: Path) -> str:
             print(f"    Converted {len(images)} pages to images")
         except Exception as e:
             if "poppler" in str(e).lower() or "pdfinfo" in str(e).lower():
-                print(f"    ⚠️  Poppler not installed!")
-                print(f"    💡 Install Poppler:")
+                print(f"    WARNING: Poppler not installed!")
+                print(f"    Install Poppler:")
                 print(f"       macOS: brew install poppler")
                 print(f"       Linux: sudo apt-get install poppler-utils")
                 print(f"       Windows: Download from https://github.com/oschwartz10612/poppler-windows/releases")
@@ -83,13 +83,13 @@ def extract_text_with_ocr(pdf_path: Path) -> str:
                     text += page_text + "\n"
             except Exception as e:
                 if "Error opening data file" in str(e):
-                    print(f"\n    ⚠️  Vietnamese language pack not found, using English only")
+                    print(f"\n    WARNING: Vietnamese language pack not found, using English only")
                     page_text = pytesseract.image_to_string(image, lang='eng')
                     if page_text:
                         text += page_text + "\n"
                 else:
                     print(f"\n    Error OCRing page {i+1}: {e}")
-        print(f"    ✓ OCR completed for {len(images)} pages")
+        print(f"    OK: OCR completed for {len(images)} pages")
     except Exception as e:
         print(f"    Error during OCR: {e}")
     return text
@@ -585,14 +585,14 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
     Returns a list of downloaded file paths.
     """
     if not HTTP_AVAILABLE:
-        print("⚠️  Skipping PDF fetch (requests/bs4 not installed)")
+        print("WARNING: Skipping PDF fetch (requests/bs4 not installed)")
         return []
 
     base = "http://www.kttv-nb.org.vn"
     category_url = f"{base}/index.php/thong-tin-kttv/thuy-van"
     download_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n🔍 Fetching PDFs from: {category_url}")
+    print(f"\nFetching PDFs from: {category_url}")
     
     session = requests.Session()
     # Add user agent to avoid blocking
@@ -602,12 +602,12 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
     downloaded_files: List[Path] = []
 
     try:
-        print(f"📡 Connecting to {category_url}...")
+        print(f"Connecting to {category_url}...")
         resp = session.get(category_url, timeout=45)  # slow legacy PHP site
         resp.raise_for_status()
-        print(f"✓ Got response: {len(resp.text)} characters, status: {resp.status_code}")
+        print(f"OK: Got response: {len(resp.text)} characters, status: {resp.status_code}")
     except Exception as e:
-        print(f"❌ Cannot fetch category page: {e}")
+        print(f"ERROR: Cannot fetch category page: {e}")
         print(f"   Check your internet connection and try again.")
         return []
 
@@ -616,7 +616,7 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
     except:
         soup = BeautifulSoup(resp.text, "html.parser")
     
-    print(f"📄 Parsed HTML, looking for links...")
+    print(f"Parsed HTML, looking for links...")
 
     # Find ALL links first for debugging
     all_links = soup.find_all("a", href=True)
@@ -629,7 +629,7 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
         if ".pdf" in href.lower() and "attachments/article" in href:
             pdf_url = urllib.parse.urljoin(base, href)
             direct_pdf_urls.append(pdf_url)
-            print(f"   📎 Direct PDF: {pdf_url}")
+            print(f"   Direct PDF: {pdf_url}")
     # Keep only the latest direct PDF (by article id)
     if direct_pdf_urls:
         direct_pdf_urls = sorted(direct_pdf_urls, key=_extract_article_id, reverse=True)[:1]
@@ -644,14 +644,14 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
         if "xâm nhập mặn" in text and any(k in text for k in ["tphcm", "tp.hcm", "hồ chí minh", "ho chi minh", "thành phố"]):
             url = urllib.parse.urljoin(base, href)
             article_links.append(url)
-            print(f"   📰 Article link (text match): {text[:60]}... -> {url}")
+            print(f"   Article link (text match): {text[:60]}... -> {url}")
         
         # Fallback: links in the same category path that look like article pages
         elif "thong-tin-kttv" in href and "thuy-van" in href and "article" in href:
             url = urllib.parse.urljoin(base, href)
             if url not in article_links:
                 article_links.append(url)
-                print(f"   📰 Article link (href pattern): {url}")
+                print(f"   Article link (href pattern): {url}")
 
     # De-duplicate while preserving order, then sort by article id desc (latest first)
     seen = set()
@@ -662,12 +662,12 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
             unique_articles.append(url)
     article_links = sorted(unique_articles, key=_extract_article_id, reverse=True)[:max_articles]
 
-    print(f"\n📊 Summary:")
+    print(f"\nSummary:")
     print(f"   Direct PDFs found: {len(direct_pdf_urls)}")
     print(f"   Article links found: {len(article_links)}")
     
     if not article_links and not direct_pdf_urls:
-        print("⚠️  No matching articles or PDF links found on category page.")
+        print("WARNING: No matching articles or PDF links found on category page.")
         print("   Trying fallback: looking for any article links...")
         # Fallback: find any article links
         for a in all_links[:100]:  # Check first 100 links
@@ -676,9 +676,9 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
                 url = urllib.parse.urljoin(base, href)
                 if url not in article_links:
                     article_links.append(url)
-                    print(f"   📰 Found article (fallback): {url}")
+                    print(f"   Found article (fallback): {url}")
         if not article_links and not direct_pdf_urls:
-            print("❌ Still no links found. The page structure may have changed.")
+            print("ERROR: Still no links found. The page structure may have changed.")
             return []
 
     def _download_pdf(pdf_url: str) -> Optional[Path]:
@@ -695,7 +695,7 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
                         f.write(chunk)
             return dest
         except Exception as e:
-            print(f"⚠️  Failed to download {pdf_url}: {e}")
+            print(f"WARNING: Failed to download {pdf_url}: {e}")
             return None
 
     # Download any direct PDFs from category page
@@ -730,26 +730,26 @@ def fetch_tphcm_salinity_pdfs(download_dir: Path, max_articles: int = 10) -> Lis
                     uniq_pdf.append(u)
 
             if uniq_pdf:
-                print(f"  ✓ {article_url} -> {len(uniq_pdf)} PDF link(s) found.")
+                print(f"  OK: {article_url} -> {len(uniq_pdf)} PDF link(s) found.")
             else:
-                print(f"  ⚠️  {article_url} -> No PDF links found.")
+                print(f"  WARNING: {article_url} -> No PDF links found.")
 
             for pdf_url in uniq_pdf:
-                print(f"    📥 Downloading: {pdf_url}")
+                print(f"    Downloading: {pdf_url}")
                 dest = _download_pdf(pdf_url)
                 if dest:
                     downloaded_files.append(dest)
-                    print(f"    ✓ Saved: {dest.name}")
+                    print(f"    OK: Saved: {dest.name}")
                 else:
-                    print(f"    ✗ Failed to download")
+                    print(f"    ERROR: Failed to download")
         except Exception as e:
-            print(f"⚠️  Skip article {article_url}: {e}")
+            print(f"WARNING: Skip article {article_url}: {e}")
             continue
 
     if downloaded_files:
-        print(f"\n✅ Successfully downloaded {len(downloaded_files)} PDF file(s)")
+        print(f"\nOK: Successfully downloaded {len(downloaded_files)} PDF file(s)")
     else:
-        print(f"\n⚠️  No PDFs were downloaded")
+        print(f"\nWARNING: No PDFs were downloaded")
     
     return downloaded_files
 
@@ -763,13 +763,13 @@ def extract_all_stations_from_pdf(pdf_path: Path) -> List[Dict]:
     
     # If no text extracted, try OCR for image-based PDFs
     if not text and OCR_AVAILABLE:
-        print(f"  ⚠️  No text extracted, attempting OCR...")
+        print(f"  WARNING: No text extracted, attempting OCR...")
         ocr_text = extract_text_with_ocr(pdf_path)
         if ocr_text:
             text = ocr_text
-            print(f"  ✓ OCR extracted {len(text)} characters")
+            print(f"  OK: OCR extracted {len(text)} characters")
         else:
-            print(f"  ⚠️  OCR failed or no text found")
+            print(f"  WARNING: OCR failed or no text found")
     
     # Try extracting from tables first
     if tables:
@@ -785,9 +785,9 @@ def extract_all_stations_from_pdf(pdf_path: Path) -> List[Dict]:
     
     # Also try text extraction
     if not text and not all_data:
-        print(f"  ⚠️  No text extracted from {pdf_path.name}")
+        print(f"  WARNING: No text extracted from {pdf_path.name}")
         if not OCR_AVAILABLE:
-            print(f"  💡 Tip: Install OCR libraries to process image-based PDFs")
+            print(f"  Tip: Install OCR libraries to process image-based PDFs")
         return all_data
     
     # Extract from text if we have text
@@ -799,7 +799,7 @@ def extract_all_stations_from_pdf(pdf_path: Path) -> List[Dict]:
         station_names = parse_station_name(text)
         
         if not station_names:
-            print(f"  ⚠️  No stations found in text")
+            print(f"  WARNING: No stations found in text")
             # Try alternative approach - look for numbered stations
             numbered_stations = re.findall(r'(\d+)\.\s*([^\n]{10,50})', text)
             if numbered_stations:
@@ -864,10 +864,10 @@ def clean_missing_data(data: List[Dict], required_fields: List[str] = None, max_
         else:
             removed_count += 1
             station_name = record.get('station_name', 'Unknown')
-            print(f"  ⚠️  Removed record: {station_name} (missing {missing_count}/{len(required_fields)} required fields)")
+            print(f"  WARNING: Removed record: {station_name} (missing {missing_count}/{len(required_fields)} required fields)")
     
     if removed_count > 0:
-        print(f"\n🧹 Data cleaning:")
+        print(f"\nData cleaning:")
         print(f"   Removed {removed_count} record(s) with >= {max_missing} missing fields")
         print(f"   Kept {len(cleaned_data)} record(s)")
     
@@ -888,9 +888,9 @@ def main():
     # Auto-fetch latest HCM salinity forecast PDFs (if networking deps are available)
     fetched = fetch_tphcm_salinity_pdfs(pdf_dir, max_articles=3)
     if fetched:
-        print(f"✓ Downloaded {len(fetched)} PDF(s) into {pdf_dir}")
+        print(f"OK: Downloaded {len(fetched)} PDF(s) into {pdf_dir}")
     else:
-        print("ℹ️  No new PDFs downloaded (or networking deps missing).")
+        print("INFO: No new PDFs downloaded (or networking deps missing).")
     
     # Find all PDF files
     pdf_files = list(pdf_dir.glob('*.pdf'))
@@ -908,31 +908,31 @@ def main():
         all_stations_data.extend(stations_data)
     
     if not all_stations_data:
-        print("\n⚠️  No data extracted from any PDF!")
+        print("\nWARNING: No data extracted from any PDF!")
         return
     
     # Clean data: remove records with >= 5 missing required fields
-    print(f"\n🧹 Cleaning data (removing records with >= 5 missing required fields)...")
+    print(f"\nCleaning data (removing records with >= 5 missing required fields)...")
     cleaned_data = clean_missing_data(all_stations_data, max_missing=5)
     
     if not cleaned_data:
-        print("\n⚠️  No data remaining after cleaning!")
+        print("\nWARNING: No data remaining after cleaning!")
         return
     
     # Save cleaned data to CSV
     csv_path = output_dir / 'station_data_extracted.csv'
     df = pd.DataFrame(cleaned_data)
     df.to_csv(csv_path, index=False, encoding='utf-8-sig')
-    print(f"\n✓ Saved {len(df)} records to {csv_path}")
+    print(f"\nOK: Saved {len(df)} records to {csv_path}")
     
     # Save cleaned data to JSON
     json_path = output_dir / 'station_data_extracted.json'
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(cleaned_data, f, ensure_ascii=False, indent=2)
-    print(f"✓ Saved to {json_path}")
+    print(f"OK: Saved to {json_path}")
     
     # Print summary
-    print(f"\n📊 Summary:")
+    print(f"\nSummary:")
     print(f"  Total stations extracted: {len(df)}")
     print(f"  Unique stations: {df['station_name'].nunique()}")
     print(f"  Parameters found:")
@@ -942,7 +942,7 @@ def main():
         print(f"    - {param}: {count}/{len(df)} ({pct:.1f}%)")
     
     # Print all extracted data to console (use cleaned_data)
-    print(f"\n📋 All Extracted Data (after cleaning):")
+    print(f"\nAll Extracted Data (after cleaning):")
     print("=" * 100)
     for idx, record in enumerate(cleaned_data, 1):
         print(f"\n[{idx}] Station: {record.get('station_name', 'N/A')}")
@@ -965,7 +965,7 @@ def main():
         print("-" * 100)
     
     # Show sample data in table format
-    print(f"\n📋 Sample data (first 5 records in table format):")
+    print(f"\nSample data (first 5 records in table format):")
     print(df.head(5).to_string())
 
 
