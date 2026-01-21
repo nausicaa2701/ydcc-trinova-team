@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LanguageSwitcher from './LanguageSwitcher'
+import Logo from './Logo'
 import { useLanguage } from '@/contexts/LanguageContext'
+import heroIllustration from '@/assets/images/hero-illustration.svg'
+import aiPrediction from '@/assets/images/ai-prediction.svg'
 
 export default function LandingPage() {
   const navigate = useNavigate()
@@ -13,18 +16,7 @@ export default function LandingPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 lg:px-10 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3 text-primary">
-            <div className="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
-            </div>
-            <div>
-              <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-none tracking-tight">
-                {t('header.appName')}
-              </h2>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-primary/80">
-                {t('header.appSubtitle')}
-              </span>
-            </div>
-          </div>
+          <Logo size="md" />
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <button
@@ -83,12 +75,18 @@ export default function LandingPage() {
           </div>
           <div className="relative order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
-              <div className="w-full h-full bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/10 flex items-center justify-center">
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <img
+                src={heroIllustration}
+                alt="iCoop Mekong Dashboard"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-4 rounded-xl flex items-center gap-4 border border-white/30 dark:border-slate-700">
+                <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm p-4 rounded-xl flex items-center gap-4 border border-white/30 dark:border-slate-700">
                   <div className="size-12 rounded-lg bg-red-500 flex items-center justify-center text-white">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
                   </div>
                   <div>
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">
@@ -126,7 +124,12 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2 relative">
-              <div className="rounded-2xl border-4 border-white dark:border-slate-800 shadow-2xl overflow-hidden aspect-video relative group bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+              <div className="rounded-2xl border-4 border-white dark:border-slate-800 shadow-2xl overflow-hidden aspect-video relative group bg-slate-900">
+                <img
+                  src={aiPrediction}
+                  alt="AI Prediction Chart"
+                  className="w-full h-full object-contain p-2"
+                />
               </div>
             </div>
             <div className="flex flex-col gap-6">
@@ -188,6 +191,9 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all group">
               <div className="size-14 rounded-2xl bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
               </div>
               <h4 className="text-xl font-black text-slate-900 dark:text-white mb-3">{t('landing.farmManagement')}</h4>
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
@@ -204,6 +210,9 @@ export default function LandingPage() {
             </div>
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all group border-t-4 border-t-primary">
               <div className="size-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
               </div>
               <h4 className="text-xl font-black text-slate-900 dark:text-white mb-3">{t('landing.coopManagement')}</h4>
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
@@ -220,6 +229,9 @@ export default function LandingPage() {
             </div>
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all group">
               <div className="size-14 rounded-2xl bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
               </div>
               <h4 className="text-xl font-black text-slate-900 dark:text-white mb-3">{t('landing.frontendVisualization')}</h4>
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
@@ -561,10 +573,9 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="px-4 lg:px-10 py-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-3 text-primary opacity-60">
-            <div className="size-6 bg-primary rounded flex items-center justify-center text-white">
-            </div>
-            <span className="text-slate-900 dark:text-white font-bold text-sm">
+          <div className="flex items-center gap-4 opacity-80">
+            <Logo size="sm" showText={false} />
+            <span className="text-slate-600 dark:text-slate-400 font-medium text-sm">
               {t('landing.footerCopyright')}
             </span>
           </div>
