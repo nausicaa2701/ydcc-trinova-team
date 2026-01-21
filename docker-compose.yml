@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # Frontend service
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: mekong-farm-frontend
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_URL=http://backend:8000
+      - VITE_MAPBOX_TOKEN=${VITE_MAPBOX_TOKEN}
+    depends_on:
+      - backend
+    networks:
+      - mekong-network
+    restart: unless-stopped
+
+  # Backend service
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: mekong-farm-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-sqlite:///./test.db}
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+    volumes:
+      - ./backend:/app/backend
+      - ./dataset:/app/dataset
+    networks:
+      - mekong-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  mekong-network:
+    driver: bridge
+
+# Usage:
+# 1. Create .env file with required variables:
+#    VITE_MAPBOX_TOKEN=your_mapbox_token_here
+#    DATABASE_URL=sqlite:///./test.db (or your database URL)
+#    SECRET_KEY=your-secret-key
+#
+# 2. Build and run:
+#    docker-compose up -d
+#
+# 3. View logs:
+#    docker-compose logs -f frontend
+#    docker-compose logs -f backend
+#
+# 4. Stop:
+#    docker-compose down
+#
+# 5. Rebuild:
+#    docker-compose up -d --build

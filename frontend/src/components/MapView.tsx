@@ -63,6 +63,41 @@ export default function MapView() {
       })
 
       map.current.on('load', () => {
+        // Add river layer styling
+        if (map.current) {
+          // Style water features (rivers, streams) in blue
+          const layers = map.current.getStyle().layers
+          const waterLayerIndex = layers?.findIndex(layer => layer.id === 'water')
+          
+          if (waterLayerIndex !== undefined && waterLayerIndex !== -1) {
+            // Modify existing water layer
+            map.current.setPaintProperty('water', 'fill-color', '#3b82f6')
+            map.current.setPaintProperty('water', 'fill-opacity', 0.6)
+          } else {
+            // Add water layer if it doesn't exist
+            map.current.addLayer({
+              id: 'river-water',
+              type: 'fill',
+              source: {
+                type: 'vector',
+                url: 'mapbox://mapbox.mapbox-streets-v8',
+              },
+              'source-layer': 'water',
+              paint: {
+                'fill-color': '#3b82f6',
+                'fill-opacity': 0.6,
+              },
+            })
+          }
+          
+          // Also style water outlines
+          const waterOutlineLayerIndex = layers?.findIndex(layer => layer.id === 'water-line')
+          if (waterOutlineLayerIndex !== undefined && waterOutlineLayerIndex !== -1) {
+            map.current.setPaintProperty('water-line', 'line-color', '#0369a1')
+            map.current.setPaintProperty('water-line', 'line-opacity', 0.8)
+            map.current.setPaintProperty('water-line', 'line-width', 2)
+          }
+        }
         setMapLoaded(true)
         setMapError(null)
       })
@@ -244,7 +279,7 @@ export default function MapView() {
 
       // Add click handler
       map.current.on('click', 'farms-fill', (e) => {
-        if (e.features && e.features[0]) {
+        if (e.features && e.features[0] && e.features[0].properties) {
           const props = e.features[0].properties
           const farm = mockFarms.find(f => f.id === props.id)
           if (farm) {
