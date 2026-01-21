@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { Map, Users, BarChart3, Settings, LogOut, User } from 'lucide-react'
 import LanguageSwitcher from './LanguageSwitcher'
+import Logo from './Logo'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function RoleBasedHeader() {
@@ -28,17 +29,7 @@ export default function RoleBasedHeader() {
     return (
       <header className="h-16 flex-shrink-0 bg-slate-900/50 backdrop-blur-md border-b border-slate-700 flex items-center justify-between px-6 z-30">
         <div className="flex items-center h-full gap-12">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 text-primary">
-              <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" />
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-white text-lg font-bold leading-none tracking-tight">{t('header.mekongSalinityAI')}</h1>
-              <span className="text-slate-400 text-[10px] uppercase font-bold tracking-widest">{t('header.systemAdmin')}</span>
-            </div>
-          </div>
+          <Logo size="md" variant="dark" />
           <nav className="flex items-center h-full gap-1">
             {navItems.map((item) => (
               <Link
@@ -86,15 +77,7 @@ export default function RoleBasedHeader() {
     return (
       <header className="h-16 flex-shrink-0 bg-slate-900/50 backdrop-blur-md border-b border-slate-700 flex items-center justify-between px-6 z-30">
         <div className="flex items-center h-full gap-12">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 text-amber-400">
-              <Users className="w-8 h-8" />
-            </div>
-            <div>
-              <h1 className="text-white text-lg font-bold leading-none tracking-tight">{t('header.coopAdmin')}</h1>
-              <span className="text-amber-400 text-[10px] uppercase font-bold tracking-widest">{t('header.cooperativeManagement')}</span>
-            </div>
-          </div>
+          <Logo size="md" variant="dark" />
           <nav className="flex items-center h-full gap-1">
             {navItems.map((item) => (
               <Link
@@ -141,15 +124,7 @@ export default function RoleBasedHeader() {
     return (
       <header className="h-16 flex-shrink-0 bg-slate-900/50 backdrop-blur-md border-b border-slate-700 flex items-center justify-between px-6 z-30">
         <div className="flex items-center h-full gap-12">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 text-green-400">
-              <User className="w-8 h-8" />
-            </div>
-            <div>
-              <h1 className="text-white text-lg font-bold leading-none tracking-tight">{t('header.farmerPortal')}</h1>
-              <span className="text-green-400 text-[10px] uppercase font-bold tracking-widest">{t('header.hoSanXuat')}</span>
-            </div>
-          </div>
+          <Logo size="md" variant="dark" />
           <nav className="flex items-center h-full gap-1">
             {navItems.map((item) => (
               <Link

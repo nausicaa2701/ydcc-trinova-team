@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#gradient1)" />
+
+  <!-- Water/River Waves representing Mekong -->
+  <path d="M30 110 Q50 95 70 110 T110 110 T150 110 T170 110" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M30 125 Q50 110 70 125 T110 125 T150 125 T170 125" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M30 140 Q50 125 70 140 T110 140 T150 140 T170 140" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- Cooperative People/Hands Symbol -->
+  <g transform="translate(100, 70)">
+    <!-- Center leaf/sprout representing agriculture -->
+    <path d="M0 25 Q-8 10 0 -15 Q8 10 0 25" fill="white" opacity="0.95"/>
+    <path d="M0 -5 Q-20 -10 -25 -30 Q-5 -20 0 -5" fill="white" opacity="0.85"/>
+    <path d="M0 -5 Q20 -10 25 -30 Q5 -20 0 -5" fill="white" opacity="0.85"/>
+
+    <!-- Three people/dots representing cooperation -->
+    <circle cx="-35" cy="5" r="10" fill="white" opacity="0.9"/>
+    <circle cx="35" cy="5" r="10" fill="white" opacity="0.9"/>
+    <circle cx="0" cy="-40" r="10" fill="white" opacity="0.9"/>
+
+    <!-- Connecting lines for cooperation -->
+    <path d="M-25 5 Q0 -10 25 5" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M-30 0 Q-15 -25 0 -30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M30 0 Q15 -25 0 -30" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

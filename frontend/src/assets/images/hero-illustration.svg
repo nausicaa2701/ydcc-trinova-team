@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" fill="none">
+  <!-- Background -->
+  <rect width="600" height="450" rx="20" fill="#0F172A"/>
+
+  <!-- Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1E293B" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="450" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Map Base -->
+  <path d="M50 120 Q100 80 200 100 T350 90 T500 120 L550 200 Q530 280 480 320 T300 380 T120 340 Q60 300 50 220 Z" fill="#1E3A5F" stroke="#3B82F6" stroke-width="2"/>
+
+  <!-- River/Mekong -->
+  <path d="M100 150 Q150 180 180 200 T250 260 T320 300 T400 340" stroke="#60A5FA" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M120 160 Q170 190 200 210 T270 270 T340 310 T420 350" stroke="#3B82F6" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Salinity Zones -->
+  <ellipse cx="420" cy="280" rx="80" ry="60" fill="#EF4444" opacity="0.3"/>
+  <ellipse cx="420" cy="280" rx="50" ry="40" fill="#EF4444" opacity="0.5"/>
+  <ellipse cx="350" cy="240" rx="60" ry="45" fill="#F59E0B" opacity="0.3"/>
+  <ellipse cx="280" cy="200" rx="50" ry="35" fill="#10B981" opacity="0.3"/>
+
+  <!-- Farm Polygons -->
+  <polygon points="150,180 180,170 200,190 190,210 160,205" fill="#10B981" opacity="0.6" stroke="#10B981" stroke-width="2"/>
+  <polygon points="220,150 260,140 280,165 270,190 230,185" fill="#10B981" opacity="0.6" stroke="#10B981" stroke-width="2"/>
+  <polygon points="300,180 340,175 355,200 345,225 310,220" fill="#F59E0B" opacity="0.6" stroke="#F59E0B" stroke-width="2"/>
+  <polygon points="380,220 420,210 445,235 430,265 390,255" fill="#EF4444" opacity="0.6" stroke="#EF4444" stroke-width="2"/>
+
+  <!-- Station Markers -->
+  <g>
+    <circle cx="160" cy="190" r="8" fill="#10B981"/>
+    <circle cx="160" cy="190" r="12" stroke="#10B981" stroke-width="2" fill="none" opacity="0.5"/>
+  </g>
+  <g>
+    <circle cx="250" cy="165" r="8" fill="#10B981"/>
+    <circle cx="250" cy="165" r="12" stroke="#10B981" stroke-width="2" fill="none" opacity="0.5"/>
+  </g>
+  <g>
+    <circle cx="330" cy="200" r="8" fill="#F59E0B"/>
+    <circle cx="330" cy="200" r="12" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5"/>
+    <circle cx="330" cy="200" r="16" stroke="#F59E0B" stroke-width="1" fill="none" opacity="0.3">
+      <animate attributeName="r" values="16;22;16" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <g>
+    <circle cx="410" cy="245" r="8" fill="#EF4444"/>
+    <circle cx="410" cy="245" r="12" stroke="#EF4444" stroke-width="2" fill="none" opacity="0.5"/>
+    <circle cx="410" cy="245" r="16" stroke="#EF4444" stroke-width="1" fill="none" opacity="0.3">
+      <animate attributeName="r" values="16;24;16" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Data Panel -->
+  <rect x="420" y="50" width="160" height="120" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="440" y="75" fill="#94A3B8" font-size="11" font-family="system-ui">Độ mặn hiện tại</text>
+  <text x="440" y="100" fill="#EF4444" font-size="24" font-weight="bold" font-family="system-ui">4.2‰</text>
+  <rect x="435" y="115" width="130" height="6" rx="3" fill="#334155"/>
+  <rect x="435" y="115" width="90" height="6" rx="3" fill="#EF4444"/>
+  <text x="440" y="145" fill="#64748B" font-size="10" font-family="system-ui">Ngưỡng nguy hiểm: 4.0‰</text>
+
+  <!-- Legend -->
+  <rect x="50" y="380" width="180" height="55" rx="8" fill="#1E293B" stroke="#334155"/>
+  <circle cx="70" cy="400" r="6" fill="#10B981"/>
+  <text x="85" y="404" fill="#94A3B8" font-size="10" font-family="system-ui">An toàn &lt; 1‰</text>
+  <circle cx="70" cy="420" r="6" fill="#F59E0B"/>
+  <text x="85" y="424" fill="#94A3B8" font-size="10" font-family="system-ui">Cảnh báo 1-4‰</text>
+  <circle cx="160" cy="400" r="6" fill="#EF4444"/>
+  <text x="175" y="404" fill="#94A3B8" font-size="10" font-family="system-ui">Nguy hiểm &gt; 4‰</text>
+</svg>
