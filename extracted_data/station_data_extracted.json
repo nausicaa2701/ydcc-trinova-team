@@ -4,7 +4,7 @@
     "river_name": "Soài Rạp",
     "distance_km": 7.0,
     "smax_observed": 27.0,
-    "observed_period": "Smax thực đo từ\n21/03 - 31/03\n(‰)",
+    "observed_period": "Smax thực đo từ 21/03 - 31/03 (‰)",
     "smax_forecast": 27.3,
     "forecast_date": "07/04",
     "temperature": null,
@@ -14,14 +14,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.531538"
+    "extraction_timestamp": "2026-01-21T23:56:55.084796"
   },
   {
     "station_name": "Nhà Bè",
     "river_name": "Đồng Điền",
     "distance_km": 38.0,
     "smax_observed": 15.8,
-    "observed_period": "Smax thực đo từ\n21/03 - 31/03\n(‰)",
+    "observed_period": "Smax thực đo từ 21/03 - 31/03 (‰)",
     "smax_forecast": 16.8,
     "forecast_date": "08/04",
     "temperature": null,
@@ -31,14 +31,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.531546"
+    "extraction_timestamp": "2026-01-21T23:56:55.084803"
   },
   {
     "station_name": "Cát Lái",
     "river_name": "Sài Gòn",
     "distance_km": 58.0,
     "smax_observed": 9.9,
-    "observed_period": "Smax thực đo từ\n21/03 - 31/03\n(‰)",
+    "observed_period": "Smax thực đo từ 21/03 - 31/03 (‰)",
     "smax_forecast": 9.7,
     "forecast_date": "09/04",
     "temperature": null,
@@ -48,14 +48,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.531547"
+    "extraction_timestamp": "2026-01-21T23:56:55.084805"
   },
   {
     "station_name": "Long Đại",
     "river_name": "Đồng Nai",
     "distance_km": 80.0,
     "smax_observed": 2.8,
-    "observed_period": "Smax thực đo từ\n21/03 - 31/03\n(‰)",
+    "observed_period": "Smax thực đo từ 21/03 - 31/03 (‰)",
     "smax_forecast": 2.7,
     "forecast_date": "01/04",
     "temperature": null,
@@ -65,14 +65,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.531548"
+    "extraction_timestamp": "2026-01-21T23:56:55.084806"
   },
   {
     "station_name": "Lý Nhơn",
     "river_name": "Soài Rạp",
     "distance_km": 7.0,
     "smax_observed": 18.0,
-    "observed_period": "Smax thực đo từ\n11/01 - 20/01\n(‰)",
+    "observed_period": "Smax thực đo từ 11/01 - 20/01 (‰)",
     "smax_forecast": 18.9,
     "forecast_date": "31/01",
     "temperature": null,
@@ -82,14 +82,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.584601"
+    "extraction_timestamp": "2026-01-21T23:56:55.138410"
   },
   {
     "station_name": "Nhà Bè",
     "river_name": "Đồng Điền",
     "distance_km": 38.0,
     "smax_observed": 7.3,
-    "observed_period": "Smax thực đo từ\n11/01 - 20/01\n(‰)",
+    "observed_period": "Smax thực đo từ 11/01 - 20/01 (‰)",
     "smax_forecast": 8.6,
     "forecast_date": "31/01",
     "temperature": null,
@@ -99,14 +99,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.584607"
+    "extraction_timestamp": "2026-01-21T23:56:55.138416"
   },
   {
     "station_name": "Cát Lái",
     "river_name": "Sài Gòn",
     "distance_km": 58.0,
     "smax_observed": 5.1,
-    "observed_period": "Smax thực đo từ\n11/01 - 20/01\n(‰)",
+    "observed_period": "Smax thực đo từ 11/01 - 20/01 (‰)",
     "smax_forecast": 6.6,
     "forecast_date": "23/01",
     "temperature": null,
@@ -116,14 +116,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.584608"
+    "extraction_timestamp": "2026-01-21T23:56:55.138417"
   },
   {
     "station_name": "Long Đại",
     "river_name": "Đồng Nai",
     "distance_km": 80.0,
     "smax_observed": 0.0,
-    "observed_period": "Smax thực đo từ\n11/01 - 20/01\n(‰)",
+    "observed_period": "Smax thực đo từ 11/01 - 20/01 (‰)",
     "smax_forecast": 0.0,
     "forecast_date": "31/01",
     "temperature": null,
@@ -133,14 +133,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.584609"
+    "extraction_timestamp": "2026-01-21T23:56:55.138418"
   },
   {
     "station_name": "Lý Nhơn",
     "river_name": "Soài Rạp",
     "distance_km": 7.0,
     "smax_observed": 23.2,
-    "observed_period": "Smax thực đo từ\n01/03 - 10/03\n(‰)",
+    "observed_period": "Smax thực đo từ 01/03 - 10/03 (‰)",
     "smax_forecast": 24.1,
     "forecast_date": "12/03",
     "temperature": null,
@@ -150,14 +150,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.633860"
+    "extraction_timestamp": "2026-01-21T23:56:55.186900"
   },
   {
     "station_name": "Nhà Bè",
     "river_name": "Đồng Điền",
     "distance_km": 38.0,
     "smax_observed": 11.7,
-    "observed_period": "Smax thực đo từ\n01/03 - 10/03\n(‰)",
+    "observed_period": "Smax thực đo từ 01/03 - 10/03 (‰)",
     "smax_forecast": 12.3,
     "forecast_date": "12/03",
     "temperature": null,
@@ -167,14 +167,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.633868"
+    "extraction_timestamp": "2026-01-21T23:56:55.186905"
   },
   {
     "station_name": "Cát Lái",
     "river_name": "Sài Gòn",
     "distance_km": 58.0,
     "smax_observed": 6.9,
-    "observed_period": "Smax thực đo từ\n01/03 - 10/03\n(‰)",
+    "observed_period": "Smax thực đo từ 01/03 - 10/03 (‰)",
     "smax_forecast": 7.2,
     "forecast_date": "15/03",
     "temperature": null,
@@ -184,14 +184,14 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.633869"
+    "extraction_timestamp": "2026-01-21T23:56:55.186906"
   },
   {
     "station_name": "Long Đại",
     "river_name": "Đồng Nai",
     "distance_km": 80.0,
     "smax_observed": 1.5,
-    "observed_period": "Smax thực đo từ\n01/03 - 10/03\n(‰)",
+    "observed_period": "Smax thực đo từ 01/03 - 10/03 (‰)",
     "smax_forecast": 2.2,
     "forecast_date": "16/03",
     "temperature": null,
@@ -201,6 +201,6 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-21T23:41:21.633870"
+    "extraction_timestamp": "2026-01-21T23:56:55.186907"
   }
 ]

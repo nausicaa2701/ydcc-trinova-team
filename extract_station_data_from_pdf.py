@@ -344,7 +344,9 @@ def extract_stations_from_tables(tables: list) -> List[Dict]:
                     forecast_indices['distance'] = idx
                 elif 'smax' in header_lower and 'thực đo' in header_lower:
                     forecast_indices['smax_observed'] = idx
-                    observed_period = header_str
+                    # Normalize observed period header to a single clean line
+                    # e.g. "Smax thực đo từ\n01/03 - 10/03\n(‰)" -> "Smax thực đo từ 01/03 - 10/03 (‰)"
+                    observed_period = " ".join(header_str.split())
                 elif ('độ mặn' in header_lower and 'dự báo' in header_lower) or (
                     'smax' in header_lower and 'dự báo' in header_lower
                 ):
