@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LanguageSwitcher from './LanguageSwitcher'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -5,6 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 export default function LandingPage() {
   const navigate = useNavigate()
   const { t } = useLanguage()
+  const [isYearly, setIsYearly] = useState(false)
 
   return (
     <div className="w-full min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors overflow-y-auto">
@@ -231,6 +233,296 @@ export default function LandingPage() {
                   <span>{t('landing.frontendFeature2')}</span>
                 </li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="px-4 lg:px-10 py-24 bg-white dark:bg-slate-900/50" id="pricing">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col items-center text-center gap-4 mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+              {t('landing.pricingTitle')}
+            </div>
+            <h2 className="text-slate-900 dark:text-white text-3xl lg:text-4xl font-black leading-tight">
+              {t('landing.pricingSubtitle')}
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 text-lg max-w-[600px]">
+              {t('landing.pricingDescription')}
+            </p>
+
+            {/* Billing Toggle */}
+            <div className="flex items-center gap-4 mt-6 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-xl">
+              <button
+                onClick={() => setIsYearly(false)}
+                className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+                  !isYearly
+                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                }`}
+              >
+                {t('landing.monthly')}
+              </button>
+              <button
+                onClick={() => setIsYearly(true)}
+                className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${
+                  isYearly
+                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700'
+                }`}
+              >
+                {t('landing.yearly')}
+                <span className="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full">
+                  {t('landing.yearlyDiscount')}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            {/* Free Plan */}
+            <div className="bg-slate-50 dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col">
+              <div className="mb-6">
+                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2">
+                  {t('landing.planFree')}
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm">
+                  {t('landing.planFreeDesc')}
+                </p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-black text-slate-900 dark:text-white">
+                    {t('landing.planFreePrice')}
+                  </span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-white">₫</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-sm">
+                    {isYearly ? t('landing.perYear') : t('landing.perMonth')}
+                  </span>
+                </div>
+                <p className="text-xs text-primary font-bold mt-2 uppercase tracking-wider">
+                  {t('landing.free')}
+                </p>
+              </div>
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planFreeFeature1')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planFreeFeature2')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planFreeFeature3')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planFreeFeature4')}
+                </li>
+              </ul>
+              <button
+                onClick={() => navigate('/login')}
+                className="w-full py-4 rounded-xl border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-bold hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
+              >
+                {t('landing.getStarted')}
+              </button>
+            </div>
+
+            {/* Cooperative Plan - Popular */}
+            <div className="bg-primary p-8 rounded-3xl relative flex flex-col transform md:scale-105 shadow-2xl shadow-primary/30">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-amber-400 text-amber-900 text-xs font-black uppercase tracking-wider rounded-full">
+                {t('landing.popular')}
+              </div>
+              <div className="mb-6">
+                <h3 className="text-xl font-black text-white mb-2">
+                  {t('landing.planCoop')}
+                </h3>
+                <p className="text-white/70 text-sm">
+                  {t('landing.planCoopDesc')}
+                </p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-black text-white">
+                    {isYearly ? t('landing.planCoopPriceYearly') : t('landing.planCoopPrice')}
+                  </span>
+                  <span className="text-lg font-bold text-white">₫</span>
+                  <span className="text-white/70 text-sm">
+                    {isYearly ? t('landing.perYear') : t('landing.perMonth')}
+                  </span>
+                </div>
+                {isYearly && (
+                  <p className="text-xs text-white/80 mt-2">
+                    ≈ {t('landing.planCoopPrice')}₫{t('landing.perMonth')}
+                  </p>
+                )}
+              </div>
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature1')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature2')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature3')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature4')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature5')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature6')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-white/90">
+                  <svg className="w-5 h-5 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planCoopFeature7')}
+                </li>
+              </ul>
+              <button
+                onClick={() => navigate('/login')}
+                className="w-full py-4 rounded-xl bg-white text-primary font-bold hover:bg-slate-100 transition-all shadow-lg"
+              >
+                {t('landing.getStarted')}
+              </button>
+            </div>
+
+            {/* Enterprise Plan */}
+            <div className="bg-slate-50 dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col">
+              <div className="mb-6">
+                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2">
+                  {t('landing.planEnterprise')}
+                </h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm">
+                  {t('landing.planEnterpriseDesc')}
+                </p>
+              </div>
+              <div className="mb-8">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-black text-slate-900 dark:text-white">
+                    {isYearly ? t('landing.planEnterprisePriceYearly') : t('landing.planEnterprisePrice')}
+                  </span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-white">₫</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-sm">
+                    {isYearly ? t('landing.perYear') : t('landing.perMonth')}
+                  </span>
+                </div>
+                {isYearly && (
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
+                    ≈ {t('landing.planEnterprisePrice')}₫{t('landing.perMonth')}
+                  </p>
+                )}
+              </div>
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature1')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature2')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature3')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature4')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature5')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature6')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature7')}
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                  <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t('landing.planEnterpriseFeature8')}
+                </li>
+              </ul>
+              <button
+                onClick={() => navigate('/login')}
+                className="w-full py-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold hover:bg-slate-800 dark:hover:bg-slate-100 transition-all"
+              >
+                {t('landing.contactSales')}
+              </button>
+            </div>
+          </div>
+
+          {/* VAT Note & Guarantee */}
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-8 text-center">
+            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {t('landing.vatNote')}
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>
+                <strong className="text-slate-700 dark:text-slate-300">{t('landing.guaranteeTitle')}</strong>
+                {' - '}{t('landing.guaranteeDesc')}
+              </span>
             </div>
           </div>
         </div>
