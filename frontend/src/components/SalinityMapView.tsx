@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
-import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, fetchStations, getStationCoords, type Station } from '@/utils/api'
+import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, fetchStations, getStationCoords, type Station, type SalinityPrediction } from '@/utils/api'
 import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
@@ -36,6 +36,7 @@ export default function SalinityMapView() {
     showBoundaries,
     showRiskHeatmap,
     showFarms,
+    selectedFarm,
     setSelectedFarm,
     selectedCooperative,
     setSelectedCooperative,

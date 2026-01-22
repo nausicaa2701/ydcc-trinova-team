@@ -4,6 +4,7 @@ import { SaltIntrusionData, RiskSurface, SaltIntrusionBoundary } from '@/types'
 import { Farm, Cooperative } from '@/types'
 
 const AI_API_BASE_URL = import.meta.env.VITE_AI_API_BASE_URL || 'http://localhost:8001'
+const API_BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 
 // Salt Intrusion API
 export async function fetchSaltIntrusionData(
