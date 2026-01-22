@@ -39,6 +39,9 @@ interface AppState {
   // UI state
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
+  
+  decisionSupportViewMode: 'overview' | 'trend' | 'storage' | 'mitigation';
+  setDecisionSupportViewMode: (mode: 'overview' | 'trend' | 'storage' | 'mitigation') => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -71,5 +74,8 @@ export const useAppStore = create<AppState>((set) => ({
   
   sidebarOpen: true,
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
+  
+  decisionSupportViewMode: 'overview',
+  setDecisionSupportViewMode: (mode) => set({ decisionSupportViewMode: mode }),
 }));
 

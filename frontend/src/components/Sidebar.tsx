@@ -1,7 +1,7 @@
 import { useAppStore } from '@/store/useAppStore'
-import { mockFarms, mockCooperatives } from '@/data/mockFarms'
+import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { ProductionModel, RiskLevel } from '@/types'
-import { X, Filter, TrendingUp, MapPin } from 'lucide-react'
+import { X, Filter, TrendingUp, MapPin, Users } from 'lucide-react'
 
 export default function Sidebar() {
   const {
@@ -22,6 +22,9 @@ export default function Sidebar() {
     selectedFarm,
     setSelectedFarm,
   } = useAppStore()
+
+  const selectedCoopData = selectedCooperative ? getCooperativeById(selectedCooperative) : null
+  const coopFarms = selectedCooperative ? mockFarms.filter(f => f.cooperativeId === selectedCooperative) : []
 
   // Calculate filtered farms
   let filteredFarms = mockFarms
@@ -191,6 +194,81 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
+
+      {/* Selected Cooperative Info */}
+      {selectedCoopData && (
+        <div className="p-4 border-b border-gray-200 bg-indigo-50">
+          <div className="flex items-start justify-between mb-2">
+            <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              HTX Selected
+            </h3>
+            <button
+              onClick={() => setSelectedCooperative(null)}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="space-y-2 text-sm">
+            <p className="font-medium text-gray-900">{selectedCoopData.name}</p>
+            <p className="text-gray-600 flex items-center gap-1">
+              <MapPin className="w-3 h-3" />
+              {selectedCoopData.location}
+            </p>
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-gray-200">
+              <div>
+                <p className="text-xs text-gray-500">Total Farms</p>
+                <p className="font-semibold text-gray-900">{selectedCoopData.totalFarms}</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Total Area</p>
+                <p className="font-semibold text-gray-900">{selectedCoopData.totalArea} ha</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Avg Risk Score</p>
+                <p className={`font-semibold ${getRiskColor(selectedCoopData.averageRiskScore || 0).split(' ')[0]}`}>
+                  {selectedCoopData.averageRiskScore || 0}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Affected Farms</p>
+                <p className="font-semibold text-orange-600">{selectedCoopData.affectedFarms || 0}</p>
+              </div>
+            </div>
+            {coopFarms.length > 0 && (
+              <div className="pt-2 border-t border-gray-200">
+                <p className="text-xs text-gray-500 mb-1">Households ({coopFarms.length})</p>
+                <div className="max-h-32 overflow-y-auto space-y-1">
+                  {coopFarms.slice(0, 10).map(farm => (
+                    <div
+                      key={farm.id}
+                      onClick={() => {
+                        setSelectedFarm(farm)
+                        setSelectedCooperative(null)
+                      }}
+                      className="p-1.5 rounded bg-white hover:bg-gray-50 cursor-pointer border border-gray-200"
+                    >
+                      <p className="text-xs font-medium text-gray-900">{farm.name}</p>
+                      <div className="flex items-center justify-between mt-0.5">
+                        <span className="text-xs text-gray-500">{farm.area} ha</span>
+                        <span className={`px-1.5 py-0.5 rounded text-xs font-medium ${getRiskColor(farm.currentRiskScore || 0)}`}>
+                          {farm.currentRiskScore || 0}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                  {coopFarms.length > 10 && (
+                    <p className="text-xs text-gray-400 text-center mt-1">
+                      +{coopFarms.length - 10} more
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Selected Farm Info */}
       {selectedFarm && (

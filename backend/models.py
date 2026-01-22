@@ -33,6 +33,7 @@ class Cooperative(BaseModel):
     id: str
     name: str
     province: str
+    address: Optional[str] = None  # Full address (optional)
     center_lat: float
     center_lon: float
     status: str = "active"  # active, inactive

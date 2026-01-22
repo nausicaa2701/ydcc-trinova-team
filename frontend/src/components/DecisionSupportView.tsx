@@ -1,31 +1,71 @@
 import { useAppStore } from '@/store/useAppStore'
 import { Brain, TrendingUp, Droplet, Calendar, Download, AlertTriangle, Verified } from 'lucide-react'
-import { fetchSalinityPrediction, TIEN_GIANG_STATIONS } from '@/utils/api'
+import { 
+  fetchSalinityPrediction, 
+  fetchStations,
+  fetchTrendAnalysis,
+  fetchStoragePlanning,
+  fetchRiskMitigation,
+  type TrendAnalysis,
+  type StoragePlanning,
+  type RiskMitigation,
+  type Station
+} from '@/utils/api'
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import TrendAnalysisView from './TrendAnalysisView'
+import StoragePlanningView from './StoragePlanningView'
+import RiskMitigationView from './RiskMitigationView'
+
+type ViewMode = 'overview' | 'trend' | 'storage' | 'mitigation'
 
 export default function DecisionSupportView() {
   const { t } = useLanguage()
-  const { selectedDate } = useAppStore()
+  const { selectedDate, decisionSupportViewMode, setDecisionSupportViewMode } = useAppStore()
+  const viewMode = decisionSupportViewMode
   const [predictions, setPredictions] = useState<any>(null)
+  const [trendAnalysis, setTrendAnalysis] = useState<TrendAnalysis | null>(null)
+  const [storagePlanning, setStoragePlanning] = useState<StoragePlanning | null>(null)
+  const [riskMitigation, setRiskMitigation] = useState<RiskMitigation | null>(null)
   const [loading, setLoading] = useState(false)
+  const [stations, setStations] = useState<Station[]>([])
 
   useEffect(() => {
-    const loadPredictions = async () => {
+    const loadData = async () => {
       setLoading(true)
       try {
-        const pred = await fetchSalinityPrediction(30)
-        if (pred) {
-          setPredictions(pred)
-        }
+        const [stationsList, pred, trend, storage, mitigation] = await Promise.all([
+          fetchStations(),
+          fetchSalinityPrediction(30),
+          fetchTrendAnalysis(undefined, 30),
+          fetchStoragePlanning(undefined, 68.0, 1000.0, 50000.0, 30),
+          fetchRiskMitigation(undefined, 30)
+        ])
+        
+        setStations(stationsList)
+        if (pred) setPredictions(pred)
+        if (trend) setTrendAnalysis(trend)
+        if (storage) setStoragePlanning(storage)
+        if (mitigation) setRiskMitigation(mitigation)
       } catch (error) {
-        console.error('Error loading predictions:', error)
+        console.error('Error loading data:', error)
       } finally {
         setLoading(false)
       }
     }
-    loadPredictions()
+    loadData()
   }, [selectedDate])
+
+  // Render different views based on viewMode
+  if (viewMode === 'trend') {
+    return <TrendAnalysisView />
+  }
+  if (viewMode === 'storage') {
+    return <StoragePlanningView />
+  }
+  if (viewMode === 'mitigation') {
+    return <RiskMitigationView />
+  }
 
   return (
     <div className="flex flex-1 overflow-hidden">
@@ -35,22 +75,66 @@ export default function DecisionSupportView() {
           <p className="hidden lg:block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-4">
             {t('decisionSupport.aiTools')}
           </p>
-          <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors">
-            <Brain className="w-5 h-5" style={{ fill: 'currentColor' }} />
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setDecisionSupportViewMode('overview')
+            }}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
+              viewMode === 'overview'
+                ? 'bg-primary/10 text-primary'
+                : 'text-slate-500 hover:bg-slate-800'
+            }`}
+          >
+            <Brain className="w-5 h-5" style={viewMode === 'overview' ? { fill: 'currentColor' } : {}} />
             <span className="text-sm font-bold hidden lg:block">{t('decisionSupport.recommendationEngine')}</span>
-          </a>
-          <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-800 transition-colors">
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setDecisionSupportViewMode('trend')
+            }}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
+              viewMode === 'trend'
+                ? 'bg-primary/10 text-primary'
+                : 'text-slate-500 hover:bg-slate-800'
+            }`}
+          >
             <TrendingUp className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.trendAnalysis')}</span>
-          </a>
-          <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-800 transition-colors">
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setDecisionSupportViewMode('storage')
+            }}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
+              viewMode === 'storage'
+                ? 'bg-primary/10 text-primary'
+                : 'text-slate-500 hover:bg-slate-800'
+            }`}
+          >
             <Droplet className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.storagePlanning')}</span>
-          </a>
-          <a className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-500 hover:bg-slate-800 transition-colors">
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setDecisionSupportViewMode('mitigation')
+            }}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
+              viewMode === 'mitigation'
+                ? 'bg-primary/10 text-primary'
+                : 'text-slate-500 hover:bg-slate-800'
+            }`}
+          >
             <AlertTriangle className="w-5 h-5 text-red-500" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.riskMitigation')}</span>
-          </a>
+          </button>
         </nav>
         <div className="p-4 border-t border-slate-700">
           <div className="bg-primary/5 p-3 rounded-xl border border-primary/10">
@@ -59,7 +143,7 @@ export default function DecisionSupportView() {
               <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
             </div>
             <p className="text-[10px] font-bold text-slate-500 leading-tight hidden lg:block">
-              {t('decisionSupport.processingLiveSensorFeed', { count: TIEN_GIANG_STATIONS.length.toString() })}
+              {t('decisionSupport.processingLiveSensorFeed', { count: stations.length.toString() || '0' })}
             </p>
           </div>
         </div>
@@ -279,45 +363,170 @@ export default function DecisionSupportView() {
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <AlertTriangle className="w-5 h-5 text-red-500" />
-                        <span className="text-xs font-bold uppercase tracking-tight text-red-400">{t('decisionSupport.harvestDeadline')}</span>
+                  {riskMitigation?.stations && Object.values(riskMitigation.stations).map((station, idx) => {
+                    const harvestDeadline = station.harvest_deadline
+                    const safeWindow = station.safe_operational_window
+                    const urgentRec = station.recommendations.find(r => r.priority === 'urgent')
+                    
+                    return (
+                      <div key={idx}>
+                        {harvestDeadline?.deadline_date && (
+                          <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 mb-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <AlertTriangle className="w-5 h-5 text-red-500" />
+                                <span className="text-xs font-bold uppercase tracking-tight text-red-400">{t('decisionSupport.harvestDeadline')}</span>
+                              </div>
+                              <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase ${
+                                harvestDeadline.urgency === 'urgent' ? 'bg-red-500 text-white' :
+                                harvestDeadline.urgency === 'high' ? 'bg-orange-500 text-white' :
+                                'bg-yellow-500 text-white'
+                              }`}>{t('decisionSupport.urgent')}</span>
+                            </div>
+                            <p className="text-sm font-bold mb-1 text-white">
+                              {t('decisionSupport.completeBy')} {new Date(harvestDeadline.deadline_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            </p>
+                            <p className="text-xs text-slate-400 leading-relaxed">
+                              {harvestDeadline.message}
+                            </p>
+                          </div>
+                        )}
+                        
+                        {storagePlanning?.optimal_fill_date && (
+                          <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 mb-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <Droplet className="w-5 h-5 text-amber-500" />
+                                <span className="text-xs font-bold uppercase tracking-tight text-amber-400">{t('decisionSupport.storagePlanning')}</span>
+                              </div>
+                              <span className="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.active')}</span>
+                            </div>
+                            <p className="text-sm font-bold mb-1 text-white">
+                              {t('decisionSupport.fillReservoirsBy')} {new Date(storagePlanning.optimal_fill_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            </p>
+                            <p className="text-xs text-slate-400 leading-relaxed">
+                              {t('decisionSupport.lastSafeWindow')}
+                            </p>
+                          </div>
+                        )}
+                        
+                        {safeWindow && (
+                          <div className="p-4 rounded-xl border border-green-500/20 bg-green-500/5 mb-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-5 h-5 text-green-500" />
+                                <span className="text-xs font-bold uppercase tracking-tight text-green-400">{t('decisionSupport.optimalSowing')}</span>
+                              </div>
+                              <span className="text-[10px] font-black bg-green-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.nextSeason')}</span>
+                            </div>
+                            <p className="text-sm font-bold mb-1 text-white">
+                              {new Date(safeWindow.start_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - {new Date(safeWindow.end_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} {t('decisionSupport.window')}
+                            </p>
+                            <p className="text-xs text-slate-400 leading-relaxed">
+                              {t('decisionSupport.aiRainStartPredictions')}
+                            </p>
+                          </div>
+                        )}
+                        
+                        {station.recommendations.slice(0, 3).map((rec, recIdx) => {
+                          const getPriorityClasses = (priority: string) => {
+                            switch (priority) {
+                              case 'urgent':
+                                return {
+                                  border: 'border-red-500/20 bg-red-500/5',
+                                  icon: 'text-red-500',
+                                  text: 'text-red-400',
+                                  badge: 'bg-red-500 text-white'
+                                }
+                              case 'high':
+                                return {
+                                  border: 'border-orange-500/20 bg-orange-500/5',
+                                  icon: 'text-orange-500',
+                                  text: 'text-orange-400',
+                                  badge: 'bg-orange-500 text-white'
+                                }
+                              case 'medium':
+                                return {
+                                  border: 'border-amber-500/20 bg-amber-500/5',
+                                  icon: 'text-amber-500',
+                                  text: 'text-amber-400',
+                                  badge: 'bg-amber-500 text-white'
+                                }
+                              default:
+                                return {
+                                  border: 'border-green-500/20 bg-green-500/5',
+                                  icon: 'text-green-500',
+                                  text: 'text-green-400',
+                                  badge: 'bg-green-500 text-white'
+                                }
+                            }
+                          }
+                          const classes = getPriorityClasses(rec.priority)
+                          return (
+                            <div key={recIdx} className={`p-4 rounded-xl border ${classes.border} mb-4`}>
+                              <div className="flex items-center justify-between mb-3">
+                                <div className="flex items-center gap-2">
+                                  <AlertTriangle className={`w-5 h-5 ${classes.icon}`} />
+                                  <span className={`text-xs font-bold uppercase tracking-tight ${classes.text}`}>{rec.title}</span>
+                                </div>
+                                <span className={`text-[10px] font-black ${classes.badge} px-2 py-0.5 rounded uppercase`}>{rec.priority}</span>
+                              </div>
+                              <p className="text-sm font-bold mb-1 text-white">
+                                {rec.deadline ? `${t('decisionSupport.completeBy')} ${new Date(rec.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}` : rec.title}
+                              </p>
+                              <p className="text-xs text-slate-400 leading-relaxed">
+                                {rec.message}
+                              </p>
+                            </div>
+                          )
+                        })}
                       </div>
-                      <span className="text-[10px] font-black bg-red-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.urgent')}</span>
-                    </div>
-                    <p className="text-sm font-bold mb-1 text-white">{t('decisionSupport.completeBy')} April 10</p>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {t('decisionSupport.salinityProjected')}
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <Droplet className="w-5 h-5 text-amber-500" />
-                        <span className="text-xs font-bold uppercase tracking-tight text-amber-400">{t('decisionSupport.storagePlanning')}</span>
+                    )
+                  })}
+                  
+                  {(!riskMitigation || Object.keys(riskMitigation.stations).length === 0) && (
+                    <>
+                      <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-red-500" />
+                            <span className="text-xs font-bold uppercase tracking-tight text-red-400">{t('decisionSupport.harvestDeadline')}</span>
+                          </div>
+                          <span className="text-[10px] font-black bg-red-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.urgent')}</span>
+                        </div>
+                        <p className="text-sm font-bold mb-1 text-white">{t('decisionSupport.completeBy')} April 10</p>
+                        <p className="text-xs text-slate-400 leading-relaxed">
+                          {t('decisionSupport.salinityProjected')}
+                        </p>
                       </div>
-                      <span className="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.active')}</span>
-                    </div>
-                    <p className="text-sm font-bold mb-1 text-white">{t('decisionSupport.fillReservoirsBy')} March 20</p>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {t('decisionSupport.lastSafeWindow')}
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-xl border border-green-500/20 bg-green-500/5">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-green-500" />
-                        <span className="text-xs font-bold uppercase tracking-tight text-green-400">{t('decisionSupport.optimalSowing')}</span>
+                      <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <Droplet className="w-5 h-5 text-amber-500" />
+                            <span className="text-xs font-bold uppercase tracking-tight text-amber-400">{t('decisionSupport.storagePlanning')}</span>
+                          </div>
+                          <span className="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.active')}</span>
+                        </div>
+                        <p className="text-sm font-bold mb-1 text-white">{t('decisionSupport.fillReservoirsBy')} March 20</p>
+                        <p className="text-xs text-slate-400 leading-relaxed">
+                          {t('decisionSupport.lastSafeWindow')}
+                        </p>
                       </div>
-                      <span className="text-[10px] font-black bg-green-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.nextSeason')}</span>
-                    </div>
-                    <p className="text-sm font-bold mb-1 text-white">May 12 - May 18 {t('decisionSupport.window')}</p>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {t('decisionSupport.aiRainStartPredictions')}
-                    </p>
-                  </div>
+                      <div className="p-4 rounded-xl border border-green-500/20 bg-green-500/5">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-5 h-5 text-green-500" />
+                            <span className="text-xs font-bold uppercase tracking-tight text-green-400">{t('decisionSupport.optimalSowing')}</span>
+                          </div>
+                          <span className="text-[10px] font-black bg-green-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.nextSeason')}</span>
+                        </div>
+                        <p className="text-sm font-bold mb-1 text-white">May 12 - May 18 {t('decisionSupport.window')}</p>
+                        <p className="text-xs text-slate-400 leading-relaxed">
+                          {t('decisionSupport.aiRainStartPredictions')}
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
                 <button className="mt-6 w-full py-3 border-2 border-dashed border-slate-700 rounded-xl text-xs font-bold text-slate-400 hover:text-primary hover:border-primary transition-all flex items-center justify-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -334,22 +543,37 @@ export default function DecisionSupportView() {
                   <div>
                     <div className="flex justify-between text-xs font-bold mb-1">
                       <span className="text-slate-400">{t('decisionSupport.currentReservoirLevel')}</span>
-                      <span className="text-primary">68%</span>
+                      <span className="text-primary">
+                        {storagePlanning?.current_level_percent?.toFixed(0) || 68}%
+                      </span>
                     </div>
                     <div className="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
-                      <div className="bg-primary h-full w-[68%]"></div>
+                      <div 
+                        className="bg-primary h-full transition-all duration-300" 
+                        style={{ width: `${storagePlanning?.current_level_percent || 68}%` }}
+                      ></div>
                     </div>
                   </div>
                   <div className="bg-slate-900/50 p-4 rounded-xl">
                     <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">{t('decisionSupport.daysOfSupplyRemaining')}</p>
                     <div className="flex items-end gap-2">
-                      <span className="text-3xl font-black text-white">18</span>
+                      <span className="text-3xl font-black text-white">
+                        {storagePlanning?.days_of_supply || 18}
+                      </span>
                       <span className="text-xs text-slate-500 mb-1">{t('decisionSupport.days')}</span>
                     </div>
-                    <p className="text-[10px] text-red-500 font-bold mt-2 flex items-center gap-1">
-                      <AlertTriangle className="w-3 h-3" />
-                      {t('decisionSupport.shortfallExpectedBy')} April 4th
-                    </p>
+                    {storagePlanning?.shortfall_date && (
+                      <p className="text-[10px] text-red-500 font-bold mt-2 flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3" />
+                        {t('decisionSupport.shortfallExpectedBy')} {new Date(storagePlanning.shortfall_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
+                    )}
+                    {!storagePlanning?.shortfall_date && storagePlanning && (
+                      <p className="text-[10px] text-green-500 font-bold mt-2 flex items-center gap-1">
+                        <Verified className="w-3 h-3" />
+                        {t('decisionSupport.supplySufficient')}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

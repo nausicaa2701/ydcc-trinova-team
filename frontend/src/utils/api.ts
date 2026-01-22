@@ -1,4 +1,4 @@
-// API utility functions for Tiền Giang Salinity Forecasting
+// API utility functions for Salinity Forecasting
 
 import { SaltIntrusionData, RiskSurface, SaltIntrusionBoundary } from '@/types'
 import { Farm, Cooperative } from '@/types'
@@ -63,7 +63,7 @@ export async function fetchRiskSurfaceForDate(
     
     if (data.risk_scores) {
       const riskScores = Object.entries(data.risk_scores).map(([stationId, score]) => {
-        const stationCoords = getTiengiangStationCoords(stationId)
+        const stationCoords = getStationCoords(stationId)
         return {
           coordinates: [stationCoords.lon, stationCoords.lat] as [number, number],
           riskScore: score as number,
@@ -135,27 +135,62 @@ export async function fetchSalinityPrediction(
   }
 }
 
-// Tiền Giang Stations
-export interface TiengiangStation {
+// Stations (all stations from dataset)
+export interface Station {
   station_id: string
-  station_name: string
+  station_name?: string
   lat: number
   lon: number
   distance_to_sea_km: number
   elevation_m: number
+  province?: string
 }
 
-export const TIEN_GIANG_STATIONS: TiengiangStation[] = [
-  { station_id: 'TG01', station_name: 'MyTho', lat: 10.36, lon: 106.36, distance_to_sea_km: 60, elevation_m: 1.0 },
-  { station_id: 'TG02', station_name: 'CaiBe', lat: 10.41, lon: 105.97, distance_to_sea_km: 90, elevation_m: 1.2 },
-  { station_id: 'TG03', station_name: 'Cua_Tieu', lat: 10.27, lon: 106.74, distance_to_sea_km: 20, elevation_m: 0.8 },
-  { station_id: 'TG04', station_name: 'Cua_Dai', lat: 10.28, lon: 106.83, distance_to_sea_km: 10, elevation_m: 0.7 },
-  { station_id: 'TG05', station_name: 'ChoGao', lat: 10.40, lon: 106.74, distance_to_sea_km: 35, elevation_m: 0.9 },
-]
+// Legacy name for backward compatibility
+export type TiengiangStation = Station
+export const MONITORING_STATIONS: Station[] = [] // Will be loaded from API
+// Legacy alias
+export const TIEN_GIANG_STATIONS = MONITORING_STATIONS
 
-export function getTiengiangStationCoords(stationId: string): { lat: number; lon: number } {
-  const station = TIEN_GIANG_STATIONS.find(s => s.station_id === stationId)
-  return station ? { lat: station.lat, lon: station.lon } : { lat: 10.35, lon: 106.3 }
+// Cache for stations
+let stationsCache: Station[] | null = null
+
+export async function fetchStations(): Promise<Station[]> {
+  if (stationsCache && stationsCache.length > 0) {
+    return stationsCache
+  }
+  
+  try {
+    const response = await fetch(`${AI_API_BASE_URL}/stations`)
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    const data = await response.json()
+    stationsCache = (data.stations || []) as Station[]
+    return stationsCache
+  } catch (error) {
+    console.error('Error fetching stations:', error)
+    // Fallback to empty array
+    return []
+  }
+}
+
+export function getStationCoords(stationId: string): { lat: number; lon: number } {
+  // Legacy alias for backward compatibility
+  return getTiengiangStationCoords(stationId)
+}
+
+function getTiengiangStationCoords(stationId: string): { lat: number; lon: number } {
+  // Try to find in cache first
+  if (stationsCache) {
+    const station = stationsCache.find(s => s.station_id === stationId)
+    if (station) {
+      return { lat: station.lat, lon: station.lon }
+    }
+  }
+  // Fallback coordinates
+  // Default to TPHCM center if station not found
+  return { lat: 10.8, lon: 106.7 }
 }
 
 // Farm & Cooperative API
@@ -189,13 +224,40 @@ export async function fetchFarms(
 }
 
 export async function fetchCooperatives(): Promise<Cooperative[]> {
-  // TODO: Replace with actual API call
-  // const response = await fetch(`${API_BASE_URL}/cooperatives`)
-  // return response.json()
-  
-  // For now, return mock data
-  const { mockCooperatives } = await import('@/data/mockFarms')
-  return mockCooperatives
+  try {
+    const token = localStorage.getItem('auth_token')
+    const response = await fetch(`${API_BASE_URL}/coops`, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+    })
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch cooperatives')
+    }
+    
+    const data = await response.json()
+    // Transform backend data to match Cooperative interface
+    return data.map((coop: any) => ({
+      id: coop.id,
+      name: coop.name,
+      location: coop.address || coop.province || '',
+      totalFarms: 0, // Not provided by backend, will be calculated
+      totalArea: 0, // Not provided by backend, will be calculated
+      averageRiskScore: 0, // Not provided by backend
+      affectedFarms: 0, // Not provided by backend
+      center_lat: coop.center_lat,
+      center_lon: coop.center_lon,
+      address: coop.address,
+      province: coop.province,
+    }))
+  } catch (error) {
+    console.error('Error fetching cooperatives:', error)
+    // Fallback to mock data if API fails
+    const { mockCooperatives } = await import('@/data/mockFarms')
+    return mockCooperatives
+  }
 }
 
 export async function fetchFarmById(id: string): Promise<Farm | null> {
@@ -222,3 +284,156 @@ export async function fetchFarmRiskScore(
   return farm?.currentRiskScore || 0
 }
 
+// Trend Analysis API
+export interface TrendAnalysis {
+  date: string
+  analysis_period_days: number
+  trends: Record<string, {
+    trend: {
+      slope: number
+      trend_direction: 'increasing' | 'decreasing' | 'stable'
+      trend_strength: number
+      p_value: number
+    }
+    seasonal: {
+      monthly_average: Record<number, number>
+      peak_month: number | null
+      low_month: number | null
+      seasonal_range: number
+    }
+    forecast: {
+      forecast_values: number[]
+      confidence_upper: number[]
+      confidence_lower: number[]
+      slope: number
+      r_squared: number
+    }
+    comparison: {
+      change_percent: number
+      change_absolute: number
+      is_worse: boolean
+    }
+  }>
+}
+
+export async function fetchTrendAnalysis(
+  stationId?: string,
+  days: number = 30
+): Promise<TrendAnalysis | null> {
+  try {
+    const params = new URLSearchParams()
+    if (stationId) params.append('station_id', stationId)
+    params.append('days', days.toString())
+    
+    const response = await fetch(`${AI_API_BASE_URL}/trend?${params}`)
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching trend analysis:', error)
+    return null
+  }
+}
+
+// Storage Planning API
+export interface StoragePlanning {
+  date: string
+  current_level_percent: number
+  days_of_supply: number
+  shortfall_date: string | null
+  safe_window_days: number
+  optimal_fill_date: string | null
+  storage_requirements: {
+    required_capacity_m3: number
+    critical_period_days: number
+    recommended_fill_date: string | null
+    buffer_days: number
+  }
+  recommendations: Array<{
+    priority: 'urgent' | 'high' | 'medium' | 'low'
+    action: string
+    message: string
+    deadline: string | null
+  }>
+}
+
+export async function fetchStoragePlanning(
+  stationId?: string,
+  currentLevelPercent: number = 68.0,
+  dailyConsumptionM3: number = 1000.0,
+  totalCapacityM3: number = 50000.0,
+  horizonDays: number = 30
+): Promise<StoragePlanning | null> {
+  try {
+    const params = new URLSearchParams()
+    if (stationId) params.append('station_id', stationId)
+    params.append('current_level_percent', currentLevelPercent.toString())
+    params.append('daily_consumption_m3', dailyConsumptionM3.toString())
+    params.append('total_capacity_m3', totalCapacityM3.toString())
+    params.append('horizon_days', horizonDays.toString())
+    
+    const response = await fetch(`${AI_API_BASE_URL}/storage?${params}`)
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching storage planning:', error)
+    return null
+  }
+}
+
+// Risk Mitigation API
+export interface MitigationRecommendation {
+  priority: 'urgent' | 'high' | 'medium' | 'low'
+  category: 'harvest' | 'storage' | 'mitigation' | 'planning'
+  action: string
+  title: string
+  message: string
+  deadline: string | null
+  icon?: string
+}
+
+export interface StationMitigation {
+  current_salinity: number
+  risk_score: number
+  recommendations: MitigationRecommendation[]
+  harvest_deadline: {
+    deadline_date: string | null
+    urgency: 'urgent' | 'high' | 'medium' | 'low'
+    days_until_critical: number
+    message: string
+  } | null
+  safe_operational_window: {
+    start_date: string
+    end_date: string
+    duration_days: number
+  } | null
+}
+
+export interface RiskMitigation {
+  date: string
+  horizon_days: number
+  stations: Record<string, StationMitigation>
+}
+
+export async function fetchRiskMitigation(
+  stationId?: string,
+  horizonDays: number = 30
+): Promise<RiskMitigation | null> {
+  try {
+    const params = new URLSearchParams()
+    if (stationId) params.append('station_id', stationId)
+    params.append('horizon_days', horizonDays.toString())
+    
+    const response = await fetch(`${AI_API_BASE_URL}/mitigation?${params}`)
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching risk mitigation:', error)
+    return null
+  }
+}

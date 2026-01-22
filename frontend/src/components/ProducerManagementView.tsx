@@ -62,7 +62,7 @@ export default function ProducerManagementView() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-xl font-bold text-white">{t('producerManagement.title')}</h1>
-              <p className="text-xs text-slate-400 mt-0.5">{t('producerManagement.tiengiangProvince')}</p>
+              <p className="text-xs text-slate-400 mt-0.5">{t('producerManagement.province')}</p>
             </div>
             <span className="text-xs font-semibold text-slate-400 bg-slate-800 px-2.5 py-1 rounded-full border border-slate-700">
               {mockFarms.length} {t('producerManagement.registered')}
@@ -113,7 +113,7 @@ export default function ProducerManagementView() {
             </button>
             <button className="flex items-center gap-1.5 rounded-lg bg-primary/20 text-primary border border-primary/30 px-3 py-1.5 text-xs font-medium">
               <Filter className="w-4 h-4" />
-              Tiền Giang
+              TP. Hồ Chí Minh
             </button>
           </div>
         </div>

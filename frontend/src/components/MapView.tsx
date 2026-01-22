@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
 import { getBoundariesForDate, getRiskSurfaceForDate } from '@/data/mockSaltIntrusion'
-import { mockFarms } from '@/data/mockFarms'
+import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
+import { useAuth } from '@/contexts/AuthContext'
+import { apiRequest } from '@/utils/apiClient'
 import TimeSlider from './TimeSlider'
 import { AlertCircle } from 'lucide-react'
 
@@ -17,10 +19,12 @@ if (mapboxToken && mapboxToken !== 'your_mapbox_token_here' && mapboxToken.start
 }
 
 export default function MapView() {
+  const { user } = useAuth()
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [mapError, setMapError] = useState<string | null>(null)
+  const [cooperativeData, setCooperativeData] = useState<any>(null)
   
   const {
     selectedDate,
@@ -29,7 +33,118 @@ export default function MapView() {
     showFarms,
     selectedFarm,
     setSelectedFarm,
+    selectedCooperative,
+    setSelectedCooperative,
   } = useAppStore()
+
+  // Calculate map center and bounds based on user role
+  const getMapConfig = () => {
+    // Default: TPHCM center (for SYSTEM_ADMIN or no user)
+    let center: [number, number] = [106.7, 10.8]
+    let zoom = 10
+    let bounds: [[number, number], [number, number]] = [
+      [106.3, 10.3], // Southwest
+      [107.2, 11.2], // Northeast
+    ]
+
+    if (!user) {
+      return { center, zoom, bounds }
+    }
+
+    if (user.role === 'COOP_ADMIN' && user.coop_id) {
+      // Focus on cooperative location
+      if (cooperativeData) {
+        center = [cooperativeData.center_lon, cooperativeData.center_lat]
+        zoom = 12
+        const latOffset = 0.05
+        const lonOffset = 0.05
+        bounds = [
+          [center[0] - lonOffset, center[1] - latOffset],
+          [center[0] + lonOffset, center[1] + latOffset],
+        ]
+      } else {
+        const coop = getCooperativeById(user.coop_id)
+        if (coop) {
+          const districtCoords: Record<string, [number, number]> = {
+            'Quận 9': [106.8099, 10.8422],
+            'Thủ Đức': [106.7637, 10.8497],
+            'Bình Chánh': [106.6067, 10.6994],
+            'Quận 8': [106.629, 10.74],
+            'Củ Chi': [106.4967, 11.1572],
+            'Cần Giờ': [106.9547, 10.4114],
+            'Quận 12': [106.6544, 10.8639],
+          }
+          const district = coop.location.split(',')[0].trim()
+          const coords = districtCoords[district] || [106.7, 10.8]
+          center = [coords[0], coords[1]]
+          zoom = 12
+          const latOffset = 0.05
+          const lonOffset = 0.05
+          bounds = [
+            [center[0] - lonOffset, center[1] - latOffset],
+            [center[0] + lonOffset, center[1] + latOffset],
+          ]
+        }
+      }
+    } else if (user.role === 'FARMER' && user.coop_id) {
+      // Focus on farmer's farm location
+      const userFarms = mockFarms.filter(f => f.cooperativeId === user.coop_id)
+      if (userFarms.length > 0) {
+        const farm = userFarms[0]
+        const coords = farm.location.coordinates[0][0]
+        center = [coords[0], coords[1]]
+        zoom = 13
+        const latOffset = 0.02
+        const lonOffset = 0.02
+        bounds = [
+          [center[0] - lonOffset, center[1] - latOffset],
+          [center[0] + lonOffset, center[1] + latOffset],
+        ]
+      }
+    }
+
+    return { center, zoom, bounds }
+  }
+
+  // Fetch cooperative data for COOP_ADMIN
+  useEffect(() => {
+    if (user?.role === 'COOP_ADMIN' && user.coop_id) {
+      const fetchCoopData = async () => {
+        try {
+          const response = await apiRequest(`/coops/${user.coop_id}`)
+          if (response.ok) {
+            const data = await response.json()
+            setCooperativeData(data)
+            // Update map view when cooperative data is loaded
+            if (map.current && mapLoaded) {
+              const mapConfig = getMapConfig()
+              map.current.flyTo({
+                center: mapConfig.center,
+                zoom: mapConfig.zoom,
+              })
+              map.current.setMaxBounds(mapConfig.bounds)
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching cooperative data:', error)
+        }
+      }
+      fetchCoopData()
+    }
+  }, [user, mapLoaded])
+
+  // Update map view when user or cooperative data changes
+  useEffect(() => {
+    if (map.current && mapLoaded) {
+      const mapConfig = getMapConfig()
+      map.current.flyTo({
+        center: mapConfig.center,
+        zoom: mapConfig.zoom,
+        duration: 1000,
+      })
+      map.current.setMaxBounds(mapConfig.bounds)
+    }
+  }, [user, cooperativeData, mapLoaded])
 
   // Initialize map
   useEffect(() => {
@@ -50,19 +165,28 @@ export default function MapView() {
     }
 
     try {
-      // Tiền Giang center: [106.3, 10.35]
+      const mapConfig = getMapConfig()
+      // TP. Hồ Chí Minh center: [106.7, 10.8] (default, adjusted by role)
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: [106.3, 10.35], // Tiền Giang center
-        zoom: 10, // Closer zoom for Tiền Giang
-        maxBounds: [
-          [105.5, 10.0], // Southwest
-          [107.0, 10.7], // Northeast
-        ] as [[number, number], [number, number]],
+        center: mapConfig.center,
+        zoom: mapConfig.zoom,
+        maxBounds: mapConfig.bounds,
       })
 
       map.current.on('load', () => {
+        setMapLoaded(true)
+        // Update map view based on role after load
+        const mapConfig = getMapConfig()
+        if (map.current) {
+          map.current.flyTo({
+            center: mapConfig.center,
+            zoom: mapConfig.zoom,
+          })
+          map.current.setMaxBounds(mapConfig.bounds)
+        }
+        
         // Add river layer styling
         if (map.current) {
           // Style water features (rivers, streams) in blue
@@ -228,9 +352,18 @@ export default function MapView() {
     }
 
     if (showFarms) {
+      // Filter farms based on user role
+      let farmsToShow = mockFarms
+      if (user?.role === 'COOP_ADMIN' && user.coop_id) {
+        farmsToShow = mockFarms.filter(f => f.cooperativeId === user.coop_id)
+      } else if (user?.role === 'FARMER' && user.coop_id) {
+        farmsToShow = mockFarms.filter(f => f.cooperativeId === user.coop_id)
+      }
+      // SYSTEM_ADMIN sees all farms
+
       const farmsGeoJSON = {
         type: 'FeatureCollection' as const,
-        features: mockFarms.map(farm => ({
+        features: farmsToShow.map(farm => ({
           type: 'Feature' as const,
           geometry: farm.location,
           properties: {
@@ -284,6 +417,7 @@ export default function MapView() {
           const farm = mockFarms.find(f => f.id === props.id)
           if (farm) {
             setSelectedFarm(farm)
+            setSelectedCooperative(null) // Clear cooperative selection when farm is selected
             
             // Fly to farm
             const coordinates = e.lngLat
@@ -308,7 +442,117 @@ export default function MapView() {
         }
       })
     }
-  }, [showFarms, mapLoaded, setSelectedFarm])
+
+    // Add cooperative markers (only for SYSTEM_ADMIN)
+    if (user?.role === 'SYSTEM_ADMIN' && map.current && mapLoaded) {
+      // Remove existing cooperative source if it exists
+      if (map.current.getSource('cooperatives')) {
+        map.current.removeLayer('cooperatives-circles')
+        map.current.removeLayer('cooperatives-labels')
+        map.current.removeSource('cooperatives')
+      }
+
+      // District coordinates for TPHCM
+      const DISTRICT_COORDS: Record<string, [number, number]> = {
+        'Quận 9': [106.8099, 10.8422],
+        'Thủ Đức': [106.7637, 10.8497],
+        'Bình Chánh': [106.6067, 10.6994],
+        'Quận 8': [106.629, 10.74],
+        'Củ Chi': [106.4967, 11.1572],
+        'Cần Giờ': [106.9547, 10.4114],
+        'Quận 12': [106.6544, 10.8639],
+      }
+
+      const cooperativesGeoJSON = {
+        type: 'FeatureCollection' as const,
+        features: mockCooperatives.map(coop => {
+          const district = coop.location.split(',')[0].trim()
+          const coords = DISTRICT_COORDS[district] || [106.7, 10.8]
+          return {
+            type: 'Feature' as const,
+            geometry: {
+              type: 'Point' as const,
+              coordinates: coords,
+            },
+            properties: {
+              id: coop.id,
+              name: coop.name,
+              location: coop.location,
+              totalFarms: coop.totalFarms,
+              totalArea: coop.totalArea,
+              averageRiskScore: coop.averageRiskScore || 0,
+              affectedFarms: coop.affectedFarms || 0,
+            },
+          }
+        }),
+      }
+
+      map.current.addSource('cooperatives', {
+        type: 'geojson',
+        data: cooperativesGeoJSON,
+      })
+
+      // Add cooperative circles
+      map.current.addLayer({
+        id: 'cooperatives-circles',
+        type: 'circle',
+        source: 'cooperatives',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#3b82f6',
+          'circle-stroke-width': 3,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.8,
+        },
+      })
+
+      // Add cooperative labels
+      map.current.addLayer({
+        id: 'cooperatives-labels',
+        type: 'symbol',
+        source: 'cooperatives',
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+          'text-offset': [0, 2.5],
+          'text-anchor': 'top',
+          'text-size': 11,
+          'text-max-width': 15,
+        },
+        paint: {
+          'text-color': '#1e40af',
+          'text-halo-color': '#ffffff',
+          'text-halo-width': 2,
+        },
+      })
+
+      // Add click handler for cooperatives
+      map.current.on('click', 'cooperatives-circles', (e) => {
+        if (e.features && e.features[0]) {
+          const props = e.features[0].properties
+          const coop = getCooperativeById(props.id)
+          if (coop && map.current) {
+            setSelectedCooperative(coop.id)
+            setSelectedFarm(null) // Clear farm selection when cooperative is selected
+            const coordinates = e.lngLat
+            map.current.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 12 })
+          }
+        }
+      })
+
+      // Change cursor on hover
+      map.current.on('mouseenter', 'cooperatives-circles', () => {
+        if (map.current) {
+          map.current.getCanvas().style.cursor = 'pointer'
+        }
+      })
+      map.current.on('mouseleave', 'cooperatives-circles', () => {
+        if (map.current) {
+          map.current.getCanvas().style.cursor = ''
+        }
+      })
+    }
+  }, [showFarms, mapLoaded, setSelectedFarm, setSelectedCooperative, user])
 
   // Highlight selected farm
   useEffect(() => {
@@ -353,9 +597,10 @@ export default function MapView() {
 
     // Center on selected farm
     const coordinates = selectedFarm.location.coordinates[0][0]
+    const mapConfig = getMapConfig()
     map.current.flyTo({
       center: [coordinates[0], coordinates[1]],
-      zoom: 12,
+      zoom: Math.max(14, mapConfig.zoom + 2), // At least zoom 14, or role-based zoom + 2
     })
   }, [selectedFarm, mapLoaded])
 

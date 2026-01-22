@@ -7,18 +7,23 @@ from typing import Tuple, List, Optional
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
-TIEN_GIANG_STATIONS = ['TG01', 'TG02', 'TG03', 'TG04', 'TG05']
+def get_all_stations(data_path: str) -> List[str]:
+    """Get all unique station IDs from dataset."""
+    df = pd.read_csv(data_path)
+    return sorted(df['station_id'].unique().tolist())
 
 
-def load_tiengiang_data(data_path: str) -> pd.DataFrame:
-    """Load and filter data for Tiền Giang stations."""
+def load_tiengiang_data(data_path: str, station_ids: Optional[List[str]] = None) -> pd.DataFrame:
+    """Load data for specified stations (or all stations if None)."""
     df = pd.read_csv(data_path)
     df['date'] = pd.to_datetime(df['date'])
     
-    tiengiang_df = df[df['station_id'].isin(TIEN_GIANG_STATIONS)].copy()
-    tiengiang_df = tiengiang_df.sort_values(['station_id', 'date']).reset_index(drop=True)
+    if station_ids is not None:
+        df = df[df['station_id'].isin(station_ids)].copy()
     
-    return tiengiang_df
+    df = df.sort_values(['station_id', 'date']).reset_index(drop=True)
+    
+    return df
 
 
 def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -104,9 +109,10 @@ def prepare_station_data(
 def prepare_multi_station_data(
     df: pd.DataFrame,
     seq_length: int = 30,
-    horizon: int = 7
+    horizon: int = 7,
+    station_ids: Optional[List[str]] = None
 ) -> Tuple[np.ndarray, np.ndarray, dict]:
-    """Prepare data for all Tiền Giang stations (spatio-temporal)."""
+    """Prepare data for all specified stations (spatio-temporal)."""
     feature_cols = [
         'salinity_ppt', 'discharge_TC_m3s', 'tide_vungtau_m',
         'rainfall_mm', 'water_level_m', 'nino34_anom',
@@ -117,8 +123,13 @@ def prepare_multi_station_data(
     all_X, all_y = [], []
     scalers = {}
     
-    for station_id in TIEN_GIANG_STATIONS:
+    if station_ids is None:
+        station_ids = sorted(df['station_id'].unique().tolist())
+    
+    for station_id in station_ids:
         station_df = df[df['station_id'] == station_id].copy()
+        if len(station_df) == 0:
+            continue
         station_df = station_df.sort_values('date')
         
         feature_data = station_df[feature_cols].values
@@ -131,6 +142,9 @@ def prepare_multi_station_data(
         all_X.append(X)
         all_y.append(y)
         scalers[station_id] = scaler
+    
+    if len(all_X) == 0:
+        return np.array([]), np.array([]), {}
     
     X_combined = np.concatenate(all_X, axis=0)
     y_combined = np.concatenate(all_y, axis=0)

@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
-import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, TIEN_GIANG_STATIONS, getTiengiangStationCoords } from '@/utils/api'
-import { mockFarms } from '@/data/mockFarms'
-import { Plus, Minus, Navigation, Layers, Play, Pause, TrendingUp, Droplet, Brain, Download } from 'lucide-react'
+import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, fetchStations, getStationCoords, type Station } from '@/utils/api'
+import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
+import { useAuth } from '@/contexts/AuthContext'
+import { apiRequest } from '@/utils/apiClient'
+import { fetchCooperatives } from '@/utils/api'
+import { Plus, Minus, Navigation, Layers, Play, Pause, TrendingUp, Droplet, Brain, Download, X, Users, MapPin } from 'lucide-react'
 import { AlertCircle } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -14,14 +17,18 @@ if (mapboxToken && mapboxToken !== 'your_mapbox_token_here' && mapboxToken.start
 
 export default function SalinityMapView() {
   const { t } = useLanguage()
+  const { user } = useAuth()
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [mapError, setMapError] = useState<string | null>(null)
+  const [stations, setStations] = useState<Station[]>([])
   const [isPlaying, setIsPlaying] = useState(false)
   const [forecastHorizon, setForecastHorizon] = useState(7) // 1-30 days
   const [predictions, setPredictions] = useState<any>(null)
   const [loading, setLoading] = useState(false)
+  const [cooperativeData, setCooperativeData] = useState<any>(null)
+  const [cooperatives, setCooperatives] = useState<any[]>([])
   
   const {
     selectedDate,
@@ -31,7 +38,142 @@ export default function SalinityMapView() {
     showFarms,
     selectedFarm,
     setSelectedFarm,
+    selectedCooperative,
+    setSelectedCooperative,
   } = useAppStore()
+
+  // Calculate map center and bounds based on user role
+  const getMapConfig = () => {
+    // Default: TPHCM center (for SYSTEM_ADMIN or no user)
+    let center: [number, number] = [106.7, 10.8]
+    let zoom = 10
+    let bounds: [[number, number], [number, number]] = [
+      [106.3, 10.3], // Southwest
+      [107.2, 11.2], // Northeast
+    ]
+
+    if (!user) {
+      return { center, zoom, bounds }
+    }
+
+    if (user.role === 'COOP_ADMIN' && user.coop_id) {
+      // Focus on cooperative location
+      if (cooperativeData) {
+        center = [cooperativeData.center_lon, cooperativeData.center_lat]
+        zoom = 12 // Closer zoom for HTX
+        // Smaller bounds around HTX
+        const latOffset = 0.05
+        const lonOffset = 0.05
+        bounds = [
+          [center[0] - lonOffset, center[1] - latOffset],
+          [center[0] + lonOffset, center[1] + latOffset],
+        ]
+      } else {
+        // Try to get from mock data
+        const coop = getCooperativeById(user.coop_id)
+        if (coop) {
+          // Extract coordinates from location string or use district coords
+          const districtCoords: Record<string, [number, number]> = {
+            'Quận 9': [106.8099, 10.8422],
+            'Thủ Đức': [106.7637, 10.8497],
+            'Bình Chánh': [106.6067, 10.6994],
+            'Quận 8': [106.629, 10.74],
+            'Củ Chi': [106.4967, 11.1572],
+            'Cần Giờ': [106.9547, 10.4114],
+            'Quận 12': [106.6544, 10.8639],
+          }
+          const district = coop.location.split(',')[0].trim()
+          const coords = districtCoords[district] || [106.7, 10.8]
+          center = [coords[0], coords[1]]
+          zoom = 12
+          const latOffset = 0.05
+          const lonOffset = 0.05
+          bounds = [
+            [center[0] - lonOffset, center[1] - latOffset],
+            [center[0] + lonOffset, center[1] + latOffset],
+          ]
+        }
+      }
+    } else if (user.role === 'FARMER' && user.coop_id) {
+      // Focus on farmer's farm location
+      const userFarms = mockFarms.filter(f => f.cooperativeId === user.coop_id)
+      if (userFarms.length > 0) {
+        // Use first farm's center
+        const farm = userFarms[0]
+        const coords = farm.location.coordinates[0][0]
+        center = [coords[0], coords[1]]
+        zoom = 13 // Very close zoom for individual farm
+        const latOffset = 0.02
+        const lonOffset = 0.02
+        bounds = [
+          [center[0] - lonOffset, center[1] - latOffset],
+          [center[0] + lonOffset, center[1] + latOffset],
+        ]
+      }
+    }
+
+    return { center, zoom, bounds }
+  }
+
+  // Fetch cooperatives for SYSTEM_ADMIN
+  useEffect(() => {
+    if (user?.role === 'SYSTEM_ADMIN') {
+      const loadCooperatives = async () => {
+        try {
+          const data = await fetchCooperatives()
+          setCooperatives(data)
+        } catch (error) {
+          console.error('Error fetching cooperatives:', error)
+          // Fallback to mock data if API fails
+          setCooperatives(mockCooperatives)
+        }
+      }
+      loadCooperatives()
+    } else {
+      // Clear cooperatives if not SYSTEM_ADMIN
+      setCooperatives([])
+    }
+  }, [user])
+
+  // Fetch cooperative data for COOP_ADMIN
+  useEffect(() => {
+    if (user?.role === 'COOP_ADMIN' && user.coop_id) {
+      const fetchCoopData = async () => {
+        try {
+          const response = await apiRequest(`/coops/${user.coop_id}`)
+          if (response.ok) {
+            const data = await response.json()
+            setCooperativeData(data)
+            // Update map view when cooperative data is loaded
+            if (map.current && mapLoaded) {
+              const mapConfig = getMapConfig()
+              map.current.flyTo({
+                center: mapConfig.center,
+                zoom: mapConfig.zoom,
+              })
+              map.current.setMaxBounds(mapConfig.bounds)
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching cooperative data:', error)
+        }
+      }
+      fetchCoopData()
+    }
+  }, [user, mapLoaded])
+
+  // Update map view when user or cooperative data changes
+  useEffect(() => {
+    if (map.current && mapLoaded) {
+      const mapConfig = getMapConfig()
+      map.current.flyTo({
+        center: mapConfig.center,
+        zoom: mapConfig.zoom,
+        duration: 1000,
+      })
+      map.current.setMaxBounds(mapConfig.bounds)
+    }
+  }, [user, cooperativeData, mapLoaded])
 
   // Initialize map
   useEffect(() => {
@@ -43,21 +185,28 @@ export default function SalinityMapView() {
     }
 
     try {
-      // Tiền Giang center: [106.3, 10.35]
+      const mapConfig = getMapConfig()
+      // TP. Hồ Chí Minh center: [106.7, 10.8] (default)
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: [106.3, 10.35], // Tiền Giang center
-        zoom: 10, // Closer zoom for Tiền Giang
-        maxBounds: [
-          [105.5, 10.0], // Southwest
-          [107.0, 10.7], // Northeast
-        ] as [[number, number], [number, number]],
+        center: mapConfig.center,
+        zoom: mapConfig.zoom,
+        maxBounds: mapConfig.bounds,
       })
 
       map.current.on('load', () => {
         setMapLoaded(true)
         setMapError(null)
+        // Update map view based on role after load
+        const mapConfig = getMapConfig()
+        if (map.current) {
+          map.current.flyTo({
+            center: mapConfig.center,
+            zoom: mapConfig.zoom,
+          })
+          map.current.setMaxBounds(mapConfig.bounds)
+        }
       })
 
       map.current.on('error', (e: any) => {
@@ -83,7 +232,7 @@ export default function SalinityMapView() {
     if (!map.current || !mapLoaded) return
 
     const currentMap = map.current
-    if (!currentMap) return
+    if (!currentMap || !currentMap.isStyleLoaded()) return
 
     const loadBoundaries = async () => {
       try {
@@ -105,56 +254,79 @@ export default function SalinityMapView() {
           }
         })
 
-        // Add Tiền Giang stations
-        const stationsGeoJSON = {
-          type: 'FeatureCollection' as const,
-          features: TIEN_GIANG_STATIONS.map(station => ({
-            type: 'Feature' as const,
-            geometry: { type: 'Point' as const, coordinates: [station.lon, station.lat] },
-            properties: {
-              station_id: station.station_id,
-              station_name: station.station_name,
-              distance_to_sea_km: station.distance_to_sea_km,
-            },
-          })),
+        // Remove existing station layers and source
+        try {
+          if (currentMap.getLayer('tiengiang-stations-labels')) {
+            currentMap.removeLayer('tiengiang-stations-labels')
+          }
+          if (currentMap.getLayer('tiengiang-stations-circles')) {
+            currentMap.removeLayer('tiengiang-stations-circles')
+          }
+          if (currentMap.getSource('tiengiang-stations')) {
+            currentMap.removeSource('tiengiang-stations')
+          }
+        } catch (err) {
+          // Ignore errors if layers/source don't exist
+          console.warn('Error removing station layers:', err)
         }
 
-        currentMap.addSource('tiengiang-stations', {
-          type: 'geojson',
-          data: stationsGeoJSON,
-        })
+        // Add stations
+        if (stations.length > 0) {
+          const stationsGeoJSON = {
+            type: 'FeatureCollection' as const,
+            features: stations.map(station => ({
+              type: 'Feature' as const,
+              geometry: { type: 'Point' as const, coordinates: [station.lon, station.lat] },
+              properties: {
+                station_id: station.station_id,
+                station_name: station.station_name || station.station_id,
+                distance_to_sea_km: station.distance_to_sea_km,
+              },
+            })),
+          }
 
-        currentMap.addLayer({
-          id: 'tiengiang-stations-circles',
-          type: 'circle',
-          source: 'tiengiang-stations',
-          paint: {
-            'circle-radius': 6,
-            'circle-color': '#1392ec',
-            'circle-stroke-width': 2,
-            'circle-stroke-color': '#ffffff',
-            'circle-opacity': 0.8,
-          },
-        })
+          try {
+            currentMap.addSource('tiengiang-stations', {
+              type: 'geojson',
+              data: stationsGeoJSON,
+            })
 
-        // Add station labels
-        currentMap.addLayer({
-          id: 'tiengiang-stations-labels',
-          type: 'symbol',
-          source: 'tiengiang-stations',
-          layout: {
-            'text-field': ['get', 'station_name'],
-            'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-            'text-offset': [0, 1.5],
-            'text-anchor': 'top',
-            'text-size': 11,
-          },
-          paint: {
-            'text-color': '#ffffff',
-            'text-halo-color': '#000000',
-            'text-halo-width': 2,
-          },
-        })
+            // Add station circles layer
+            currentMap.addLayer({
+              id: 'tiengiang-stations-circles',
+              type: 'circle',
+              source: 'tiengiang-stations',
+              paint: {
+                'circle-radius': 6,
+                'circle-color': '#1392ec',
+                'circle-stroke-width': 2,
+                'circle-stroke-color': '#ffffff',
+                'circle-opacity': 0.8,
+              },
+            })
+
+            // Add station labels
+            currentMap.addLayer({
+              id: 'tiengiang-stations-labels',
+              type: 'symbol',
+              source: 'tiengiang-stations',
+              layout: {
+                'text-field': ['get', 'station_name'],
+                'text-font': ['DIN Pro Regular', 'Arial Unicode MS Regular'],
+                'text-offset': [0, 1.5],
+                'text-anchor': 'top',
+                'text-size': 11,
+              },
+              paint: {
+                'text-color': '#ffffff',
+                'text-halo-color': '#000000',
+                'text-halo-width': 2,
+              },
+            })
+          } catch (err) {
+            console.error('Error adding station source/layers:', err)
+          }
+        }
 
         if (showBoundaries && currentMap) {
           const boundary1 = boundaries.find(b => b.salinity === 1)
@@ -236,14 +408,160 @@ export default function SalinityMapView() {
           })
 
           currentMap.on('click', 'farms-fill', (e) => {
+            e.preventDefault()
             if (e.features && e.features[0]) {
               const props = e.features[0].properties
+              console.log('Clicked farm:', props)
               const farm = mockFarms.find(f => f.id === props.id)
               if (farm && map.current) {
+                console.log('Setting selected farm:', farm.id)
                 setSelectedFarm(farm)
+                setSelectedCooperative(null) // Clear cooperative selection when farm is selected
                 const coordinates = e.lngLat
                 map.current.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 12 })
               }
+            }
+          })
+        }
+
+        // Add cooperative markers (only for SYSTEM_ADMIN)
+        if (user?.role === 'SYSTEM_ADMIN' && currentMap && currentMap.isStyleLoaded() && cooperatives.length > 0) {
+          // Remove existing cooperative source if it exists
+          try {
+            if (currentMap.getLayer('cooperatives-labels')) {
+              currentMap.removeLayer('cooperatives-labels')
+            }
+            if (currentMap.getLayer('cooperatives-circles')) {
+              currentMap.removeLayer('cooperatives-circles')
+            }
+            if (currentMap.getSource('cooperatives')) {
+              currentMap.removeSource('cooperatives')
+            }
+          } catch (err) {
+            // Ignore errors if layer/source doesn't exist
+            console.warn('Error removing cooperative layers:', err)
+          }
+
+          const cooperativesGeoJSON = {
+            type: 'FeatureCollection' as const,
+            features: cooperatives.map(coop => {
+              // Use center_lat and center_lon from API, or fallback to district coords
+              let coords: [number, number] = [coop.center_lon || 106.7, coop.center_lat || 10.8]
+              
+              // If no coordinates in API, try to extract from address or location
+              if (!coop.center_lat || !coop.center_lon) {
+                const DISTRICT_COORDS: Record<string, [number, number]> = {
+                  'Quận 9': [106.8099, 10.8422],
+                  'Thủ Đức': [106.7637, 10.8497],
+                  'Bình Chánh': [106.6067, 10.6994],
+                  'Quận 8': [106.629, 10.74],
+                  'Củ Chi': [106.4967, 11.1572],
+                  'Cần Giờ': [106.9547, 10.4114],
+                  'Quận 12': [106.6544, 10.8639],
+                }
+                const location = coop.address || coop.province || ''
+                const district = location.split(',')[0].trim()
+                coords = DISTRICT_COORDS[district] || [106.7, 10.8]
+              }
+              
+              return {
+                type: 'Feature' as const,
+                geometry: {
+                  type: 'Point' as const,
+                  coordinates: coords,
+                },
+                properties: {
+                  id: coop.id,
+                  name: coop.name,
+                  location: coop.address || coop.province || '',
+                  totalFarms: coop.totalFarms || 0,
+                  totalArea: coop.totalArea || 0,
+                  averageRiskScore: coop.averageRiskScore || 0,
+                  affectedFarms: coop.affectedFarms || 0,
+                },
+              }
+            }),
+          }
+
+          try {
+            currentMap.addSource('cooperatives', {
+              type: 'geojson',
+              data: cooperativesGeoJSON,
+            })
+
+            // Add cooperative circles
+            currentMap.addLayer({
+              id: 'cooperatives-circles',
+              type: 'circle',
+              source: 'cooperatives',
+              paint: {
+                'circle-radius': 10,
+                'circle-color': '#3b82f6',
+                'circle-stroke-width': 3,
+                'circle-stroke-color': '#ffffff',
+                'circle-opacity': 0.8,
+              },
+            })
+          } catch (err) {
+            console.error('Error adding cooperative source/layer:', err)
+            return // Exit early if we can't add the source
+          }
+
+          // Add cooperative labels
+          try {
+            currentMap.addLayer({
+              id: 'cooperatives-labels',
+              type: 'symbol',
+              source: 'cooperatives',
+              layout: {
+                'text-field': ['get', 'name'],
+                'text-font': ['DIN Pro Regular', 'Arial Unicode MS Regular'],
+                'text-offset': [0, 2.5],
+                'text-anchor': 'top',
+                'text-size': 11,
+                'text-max-width': 15,
+              },
+              paint: {
+                'text-color': '#1e40af',
+                'text-halo-color': '#ffffff',
+                'text-halo-width': 2,
+              },
+            })
+          } catch (err) {
+            console.warn('Error adding cooperative labels layer:', err)
+          }
+
+          // Remove existing event handlers to avoid duplicates
+          currentMap.off('click', 'cooperatives-circles')
+          currentMap.off('mouseenter', 'cooperatives-circles')
+          currentMap.off('mouseleave', 'cooperatives-circles')
+
+          // Add click handler for cooperatives
+          currentMap.on('click', 'cooperatives-circles', (e) => {
+            if (e.features && e.features[0]) {
+              const props = e.features[0].properties
+              console.log('Clicked cooperative:', props)
+              // Try to find in cooperatives from API first, then fallback to mock
+              const coop = cooperatives.find(c => c.id === props.id) || getCooperativeById(props.id)
+              if (coop && map.current) {
+                console.log('Setting selected cooperative:', coop.id)
+                setSelectedCooperative(coop.id)
+                setSelectedFarm(null) // Clear farm selection when cooperative is selected
+                const coordinates = e.lngLat
+                map.current.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 12 })
+              }
+            }
+          })
+
+          // Change cursor on hover
+          currentMap.on('mouseenter', 'cooperatives-circles', () => {
+            if (currentMap) {
+              currentMap.getCanvas().style.cursor = 'pointer'
+            }
+          })
+          currentMap.on('mouseleave', 'cooperatives-circles', () => {
+            if (currentMap) {
+              currentMap.getCanvas().style.cursor = ''
             }
           })
         }
@@ -282,7 +600,7 @@ export default function SalinityMapView() {
     }
 
     loadBoundaries()
-  }, [selectedDate, showBoundaries, showRiskHeatmap, showFarms, mapLoaded, setSelectedFarm, forecastHorizon])
+  }, [selectedDate, showBoundaries, showRiskHeatmap, showFarms, mapLoaded, setSelectedFarm, setSelectedCooperative, forecastHorizon, stations, user, cooperatives])
 
   const handleZoom = (direction: 'in' | 'out') => {
     if (map.current) {
@@ -293,7 +611,8 @@ export default function SalinityMapView() {
 
   const handleLocate = () => {
     if (map.current) {
-      map.current.flyTo({ center: [106.3, 10.35], zoom: 10 }) // Tiền Giang center
+      const mapConfig = getMapConfig()
+      map.current.flyTo({ center: mapConfig.center, zoom: mapConfig.zoom })
     }
   }
 
@@ -491,6 +810,125 @@ export default function SalinityMapView() {
 
       {/* Sidebar */}
       <aside className="w-96 bg-slate-900 border-l border-slate-700 overflow-y-auto p-5 space-y-6 flex flex-col shrink-0">
+        {/* Selected Cooperative Info */}
+        {selectedCooperative && (() => {
+          // Try to find in cooperatives from API first, then fallback to mock
+          const coop = cooperatives.find(c => c.id === selectedCooperative) || getCooperativeById(selectedCooperative)
+          if (!coop) return null
+          const coopFarms = mockFarms.filter(f => f.cooperativeId === selectedCooperative)
+          const getRiskColor = (risk: number) => {
+            if (risk >= 75) return 'text-red-500 bg-red-500/20'
+            if (risk >= 50) return 'text-yellow-500 bg-yellow-500/20'
+            if (risk >= 25) return 'text-orange-500 bg-orange-500/20'
+            return 'text-green-500 bg-green-500/20'
+          }
+          return (
+            <div className="p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/30 mb-4">
+              <div className="flex items-start justify-between mb-3">
+                <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                  <Users className="w-4 h-4" />
+                  HTX Selected
+                </h3>
+                <button
+                  onClick={() => setSelectedCooperative(null)}
+                  className="text-slate-400 hover:text-white"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="space-y-2 text-sm">
+                <p className="font-bold text-white">{coop.name}</p>
+                <p className="text-slate-300 flex items-center gap-1">
+                  <MapPin className="w-3 h-3" />
+                  {coop.location}
+                </p>
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-700">
+                  <div>
+                    <p className="text-xs text-slate-400">Total Farms</p>
+                    <p className="font-bold text-white">{coop.totalFarms}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Total Area</p>
+                    <p className="font-bold text-white">{coop.totalArea} ha</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Avg Risk Score</p>
+                    <p className={`font-bold ${getRiskColor(coop.averageRiskScore || 0).split(' ')[0]}`}>
+                      {coop.averageRiskScore || 0}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Affected Farms</p>
+                    <p className="font-bold text-orange-500">{coop.affectedFarms || 0}</p>
+                  </div>
+                </div>
+                {coopFarms.length > 0 && (
+                  <div className="pt-2 border-t border-slate-700">
+                    <p className="text-xs text-slate-400 mb-2">Households ({coopFarms.length})</p>
+                    <div className="max-h-40 overflow-y-auto space-y-1">
+                      {coopFarms.slice(0, 10).map(farm => (
+                        <div
+                          key={farm.id}
+                          onClick={() => {
+                            setSelectedFarm(farm)
+                            setSelectedCooperative(null)
+                          }}
+                          className="p-2 rounded bg-slate-800 hover:bg-slate-700 cursor-pointer border border-slate-700"
+                        >
+                          <p className="text-xs font-medium text-white">{farm.name}</p>
+                          <div className="flex items-center justify-between mt-1">
+                            <span className="text-xs text-slate-400">{farm.area} ha</span>
+                            <span className={`px-1.5 py-0.5 rounded text-xs font-medium ${getRiskColor(farm.currentRiskScore || 0)}`}>
+                              {farm.currentRiskScore || 0}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                      {coopFarms.length > 10 && (
+                        <p className="text-xs text-slate-400 text-center mt-1">
+                          +{coopFarms.length - 10} more
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+        })()}
+
+        {/* Selected Farm Info */}
+        {selectedFarm && (
+          <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 mb-4">
+            <div className="flex items-start justify-between mb-3">
+              <h3 className="text-sm font-bold text-white">Selected Farm</h3>
+              <button
+                onClick={() => setSelectedFarm(null)}
+                className="text-slate-400 hover:text-white"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="space-y-1 text-sm">
+              <p className="font-bold text-white">{selectedFarm.name}</p>
+              <p className="text-slate-300">{selectedFarm.cooperativeName}</p>
+              <p className="text-slate-300">Area: {selectedFarm.area} ha</p>
+              <p className="text-slate-300">Model: {selectedFarm.productionModel}</p>
+              <div className="flex items-center gap-2 mt-2">
+                <span className="text-slate-300">Risk:</span>
+                <span className={`px-2 py-1 rounded text-xs font-medium ${
+                  (selectedFarm.currentRiskScore || 0) >= 75 ? 'text-red-500 bg-red-500/20' :
+                  (selectedFarm.currentRiskScore || 0) >= 50 ? 'text-yellow-500 bg-yellow-500/20' :
+                  (selectedFarm.currentRiskScore || 0) >= 25 ? 'text-orange-500 bg-orange-500/20' :
+                  'text-green-500 bg-green-500/20'
+                }`}>
+                  {selectedFarm.currentRiskScore || 0} - {selectedFarm.riskLevel?.toUpperCase()}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-white">{t('map.regionalAnalysis')}</h3>
@@ -525,11 +963,11 @@ export default function SalinityMapView() {
             </div>
           </div>
           
-          {/* Tiền Giang Stations */}
+          {/* Monitoring Stations */}
           <div className="space-y-3">
-            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">{t('map.tiengiangStations')}</h4>
+            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">{t('map.monitoringStations')}</h4>
             <div className="space-y-2">
-              {TIEN_GIANG_STATIONS.map(station => {
+              {stations.map(station => {
                 const stationPred = predictions?.predictions?.[station.station_id]
                 const stationRisk = predictions?.risk_scores?.[station.station_id] || 0
                 const currentSalinity = stationPred?.[0] || 0

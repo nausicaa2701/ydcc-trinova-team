@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
 import { apiRequest } from '@/utils/apiClient'
-import { Plus, Edit, Trash2, MapPin, Settings } from 'lucide-react'
+import { Plus, Edit, Trash2, MapPin, Settings, Search, Loader } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Cooperative {
   id: string
   name: string
   province: string
+  address?: string
   center_lat: number
   center_lon: number
   status: string
@@ -23,11 +24,24 @@ export default function AdminCoopsManagement() {
   const [showConfigModal, setShowConfigModal] = useState(false)
   const [configCoop, setConfigCoop] = useState<Cooperative | null>(null)
   const [configJson, setConfigJson] = useState('')
-  const [formData, setFormData] = useState({ name: '', province: 'Tiền Giang', center_lat: 10.35, center_lon: 106.3, status: 'active', config: {} })
+  const [formData, setFormData] = useState({ name: '', province: 'TP. Hồ Chí Minh', address: '', center_lat: 10.8, center_lon: 106.7, status: 'active', config: {} })
+  const [geocoding, setGeocoding] = useState({ loading: false, error: '' })
 
   useEffect(() => {
     loadCoops()
   }, [])
+
+  // Auto reverse geocode when editing a coop with coordinates but no address
+  useEffect(() => {
+    if (editingCoop && !formData.address && formData.center_lat && formData.center_lon) {
+      // Only reverse geocode if we have valid coordinates but no address
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
+      if (mapboxToken && mapboxToken !== 'your_mapbox_token_here') {
+        reverseGeocode(formData.center_lat, formData.center_lon)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editingCoop])
 
   const loadCoops = async () => {
     try {
@@ -49,6 +63,7 @@ export default function AdminCoopsManagement() {
       const endpoint = editingCoop ? `/coops/${editingCoop.id}` : '/coops'
       const method = editingCoop ? 'PUT' : 'POST'
       
+      // Include address in submit data (backend now supports it)
       const response = await apiRequest(endpoint, {
         method,
         body: JSON.stringify(formData),
@@ -57,7 +72,8 @@ export default function AdminCoopsManagement() {
       if (response.ok) {
         setShowModal(false)
         setEditingCoop(null)
-        setFormData({ name: '', province: '', center_lat: 10.35, center_lon: 106.3, status: 'active', config: {} })
+        setFormData({ name: '', province: 'TP. Hồ Chí Minh', address: '', center_lat: 10.8, center_lon: 106.7, status: 'active', config: {} })
+        setGeocoding({ loading: false, error: '' })
         loadCoops()
       }
     } catch (error) {
@@ -75,6 +91,72 @@ export default function AdminCoopsManagement() {
       }
     } catch (error) {
       console.error('Error deleting cooperative:', error)
+    }
+  }
+
+  const geocodeAddress = async (address: string) => {
+    if (!address.trim()) {
+      setGeocoding({ loading: false, error: '' })
+      return
+    }
+
+    setGeocoding({ loading: true, error: '' })
+    
+    try {
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
+      if (!mapboxToken || mapboxToken === 'your_mapbox_token_here') {
+        setGeocoding({ loading: false, error: 'Mapbox token not configured' })
+        return
+      }
+
+      // Use Mapbox Geocoding API
+      const query = encodeURIComponent(`${address}, ${formData.province}, Vietnam`)
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxToken}&country=VN&limit=1`
+      
+      const response = await fetch(url)
+      const data = await response.json()
+
+      if (data.features && data.features.length > 0) {
+        const [lon, lat] = data.features[0].center
+        setFormData({ ...formData, address: address, center_lat: lat, center_lon: lon })
+        setGeocoding({ loading: false, error: '' })
+      } else {
+        setGeocoding({ loading: false, error: 'Không tìm thấy địa chỉ. Vui lòng nhập tọa độ thủ công.' })
+      }
+    } catch (error) {
+      console.error('Geocoding error:', error)
+      setGeocoding({ loading: false, error: 'Lỗi khi tìm kiếm địa chỉ. Vui lòng nhập tọa độ thủ công.' })
+    }
+  }
+
+  const reverseGeocode = async (lat: number, lon: number) => {
+    if (!lat || !lon) return
+
+    setGeocoding({ loading: true, error: '' })
+    
+    try {
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
+      if (!mapboxToken || mapboxToken === 'your_mapbox_token_here') {
+        setGeocoding({ loading: false, error: '' })
+        return
+      }
+
+      // Use Mapbox Reverse Geocoding API
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lon},${lat}.json?access_token=${mapboxToken}&country=VN&limit=1`
+      
+      const response = await fetch(url)
+      const data = await response.json()
+
+      if (data.features && data.features.length > 0) {
+        const address = data.features[0].place_name
+        // Remove "Vietnam" from the end if present
+        const cleanAddress = address.replace(/, Vietnam$/, '')
+        setFormData({ ...formData, address: cleanAddress })
+        setGeocoding({ loading: false, error: '' })
+      }
+    } catch (error) {
+      console.error('Reverse geocoding error:', error)
+      setGeocoding({ loading: false, error: '' })
     }
   }
 
@@ -115,7 +197,8 @@ export default function AdminCoopsManagement() {
             <button
               onClick={() => {
                 setEditingCoop(null)
-                setFormData({ name: '', province: 'Tiền Giang', center_lat: 10.35, center_lon: 106.3, status: 'active', config: {} })
+                setFormData({ name: '', province: 'TP. Hồ Chí Minh', address: '', center_lat: 10.8, center_lon: 106.7, status: 'active', config: {} })
+        setGeocoding({ loading: false, error: '' })
                 setShowModal(true)
               }}
               className="px-4 py-2 bg-primary text-white rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2"
@@ -176,11 +259,13 @@ export default function AdminCoopsManagement() {
                               setFormData({
                                 name: coop.name,
                                 province: coop.province,
+                                address: coop.address || '', // Load address from backend
                                 center_lat: coop.center_lat,
                                 center_lon: coop.center_lon,
                                 status: coop.status,
                                 config: coop.config,
                               })
+                              setGeocoding({ loading: false, error: '' })
                               setShowModal(true)
                             }}
                             className="p-2 text-slate-400 hover:text-blue-400 transition-colors"
@@ -234,25 +319,98 @@ export default function AdminCoopsManagement() {
                   required
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Địa chỉ <span className="text-slate-500 text-xs">(tùy chọn - sẽ tự động tìm tọa độ)</span>
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    onBlur={() => {
+                      if (formData.address.trim()) {
+                        geocodeAddress(formData.address)
+                      }
+                    }}
+                    placeholder="Ví dụ: Số 7 Đỗ Xuân Hợp, phường Phước Long B, Quận 9"
+                    className="flex-1 rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => geocodeAddress(formData.address)}
+                    disabled={geocoding.loading || !formData.address.trim()}
+                    className="px-4 py-2 bg-primary text-white rounded-lg font-bold hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {geocoding.loading ? (
+                      <>
+                        <Loader className="w-4 h-4 animate-spin" />
+                        Đang tìm...
+                      </>
+                    ) : (
+                      <>
+                        <Search className="w-4 h-4" />
+                        Tìm
+                      </>
+                    )}
+                  </button>
+                </div>
+                {geocoding.error && (
+                  <p className="mt-1 text-xs text-red-400">{geocoding.error}</p>
+                )}
+                {!geocoding.error && formData.address && !geocoding.loading && (
+                  <p className="mt-1 text-xs text-green-400">✓ Đã tìm thấy tọa độ</p>
+                )}
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">{t('admin.latitude')}</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('admin.latitude')} <span className="text-slate-500 text-xs">(tự động điền)</span>
+                  </label>
                   <input
                     type="number"
                     step="0.0001"
                     value={formData.center_lat}
-                    onChange={(e) => setFormData({ ...formData, center_lat: parseFloat(e.target.value) })}
+                    onChange={(e) => {
+                      const lat = parseFloat(e.target.value) || 0
+                      setFormData({ ...formData, center_lat: lat })
+                      // Auto reverse geocode if address is empty
+                      if (!formData.address && lat && formData.center_lon) {
+                        reverseGeocode(lat, formData.center_lon)
+                      }
+                    }}
+                    onBlur={() => {
+                      // Reverse geocode when blur if address is empty
+                      if (!formData.address && formData.center_lat && formData.center_lon) {
+                        reverseGeocode(formData.center_lat, formData.center_lon)
+                      }
+                    }}
                     className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">{t('admin.longitude')}</label>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('admin.longitude')} <span className="text-slate-500 text-xs">(tự động điền)</span>
+                  </label>
                   <input
                     type="number"
                     step="0.0001"
                     value={formData.center_lon}
-                    onChange={(e) => setFormData({ ...formData, center_lon: parseFloat(e.target.value) })}
+                    onChange={(e) => {
+                      const lon = parseFloat(e.target.value) || 0
+                      setFormData({ ...formData, center_lon: lon })
+                      // Auto reverse geocode if address is empty
+                      if (!formData.address && formData.center_lat && lon) {
+                        reverseGeocode(formData.center_lat, lon)
+                      }
+                    }}
+                    onBlur={() => {
+                      // Reverse geocode when blur if address is empty
+                      if (!formData.address && formData.center_lat && formData.center_lon) {
+                        reverseGeocode(formData.center_lat, formData.center_lon)
+                      }
+                    }}
                     className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
                     required
                   />
@@ -270,7 +428,8 @@ export default function AdminCoopsManagement() {
                   onClick={() => {
                     setShowModal(false)
                     setEditingCoop(null)
-                    setFormData({ name: '', province: 'Tiền Giang', center_lat: 10.35, center_lon: 106.3, status: 'active', config: {} })
+                    setFormData({ name: '', province: 'TP. Hồ Chí Minh', address: '', center_lat: 10.8, center_lon: 106.7, status: 'active', config: {} })
+        setGeocoding({ loading: false, error: '' })
                   }}
                   className="px-4 py-2 bg-slate-700 text-white rounded-lg font-bold hover:bg-slate-600 transition-all"
                 >

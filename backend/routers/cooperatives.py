@@ -20,6 +20,7 @@ router = APIRouter(prefix="/coops", tags=["cooperatives"])
 class CooperativeCreate(BaseModel):
     name: str
     province: str
+    address: Optional[str] = None
     center_lat: float
     center_lon: float
     status: str = "active"
@@ -29,6 +30,7 @@ class CooperativeCreate(BaseModel):
 class CooperativeUpdate(BaseModel):
     name: Optional[str] = None
     province: Optional[str] = None
+    address: Optional[str] = None
     center_lat: Optional[float] = None
     center_lon: Optional[float] = None
     status: Optional[str] = None
@@ -57,6 +59,7 @@ async def create_cooperative(
         id=coop_id,
         name=coop.name,
         province=coop.province,
+        address=coop.address,
         center_lat=coop.center_lat,
         center_lon=coop.center_lon,
         status=coop.status,

@@ -39,7 +39,9 @@ export default function LanguageSwitcher() {
           {languages.map((lang) => (
             <button
               key={lang.code}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
                 setLanguage(lang.code)
                 setIsOpen(false)
               }}
