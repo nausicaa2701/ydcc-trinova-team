@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   # Frontend service
   frontend:
@@ -5,17 +7,15 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: mekong-farm-frontend
+    ports:
+      - "80:80"
     environment:
-      - VITE_API_URL=https://api.trinova.it.com
+      - VITE_API_URL=http://backend:8000
       - VITE_MAPBOX_TOKEN=${VITE_MAPBOX_TOKEN}
-      - VIRTUAL_HOST=trinova.it.com
-      - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=trinova.it.com
-      - LETSENCRYPT_EMAIL=trungnguyen.19972707@gmail.com
     depends_on:
       - backend
     networks:
-      - web
+      - mekong-network
     restart: unless-stopped
 
   # Backend service
@@ -27,20 +27,19 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - VIRTUAL_HOST=api.trinova.it.com
-      - VIRTUAL_PORT=8000
-      - LETSENCRYPT_HOST=api.trinova.it.com
-      - LETSENCRYPT_EMAIL=trungnguyen.19972707@gmail.com
+      - DATABASE_URL=${DATABASE_URL:-sqlite:///./test.db}
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
     volumes:
       - ./backend:/app/backend
       - ./dataset:/app/dataset
     networks:
-      - web
+      - mekong-network
     restart: unless-stopped
 
 networks:
-  web:
-    external: true
+  mekong-network:
+    driver: bridge
 
 # Usage:
 # 1. Create .env file with required variables:

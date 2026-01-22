@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
-import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, TIEN_GIANG_STATIONS, getTiengiangStationCoords } from '@/utils/api'
+import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, TIEN_GIANG_STATIONS } from '@/utils/api'
+import type { SalinityPrediction } from '@/utils/api'
 import { mockFarms } from '@/data/mockFarms'
 import { Plus, Minus, Navigation, Layers, Play, Pause, TrendingUp, Droplet, Brain, Download } from 'lucide-react'
 import { AlertCircle } from 'lucide-react'
@@ -20,7 +21,7 @@ export default function SalinityMapView() {
   const [mapError, setMapError] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [forecastHorizon, setForecastHorizon] = useState(7) // 1-30 days
-  const [predictions, setPredictions] = useState<any>(null)
+  const [predictions, setPredictions] = useState<SalinityPrediction | null>(null)
   const [loading, setLoading] = useState(false)
   
   const {
@@ -29,7 +30,6 @@ export default function SalinityMapView() {
     showBoundaries,
     showRiskHeatmap,
     showFarms,
-    selectedFarm,
     setSelectedFarm,
   } = useAppStore()
 
@@ -236,14 +236,14 @@ export default function SalinityMapView() {
           })
 
           currentMap.on('click', 'farms-fill', (e) => {
-            if (e.features && e.features[0]) {
-              const props = e.features[0].properties
-              const farm = mockFarms.find(f => f.id === props.id)
-              if (farm && map.current) {
-                setSelectedFarm(farm)
-                const coordinates = e.lngLat
-                map.current.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 12 })
-              }
+            const props = e.features?.[0]?.properties as { id?: string } | undefined
+            if (!props?.id) return
+
+            const farm = mockFarms.find(f => f.id === props.id)
+            if (farm && map.current) {
+              setSelectedFarm(farm)
+              const coordinates = e.lngLat
+              map.current.flyTo({ center: [coordinates.lng, coordinates.lat], zoom: 12 })
             }
           })
         }
@@ -322,7 +322,6 @@ export default function SalinityMapView() {
   }, [forecastHorizon])
 
   const today = new Date()
-  const maxDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000)
   const selectedDateObj = new Date(selectedDate)
   const daysFromToday = Math.floor((selectedDateObj.getTime() - today.getTime()) / (24 * 60 * 60 * 1000))
 
@@ -582,7 +581,7 @@ export default function SalinityMapView() {
         <div className="p-5 rounded-xl bg-primary/10 border border-primary/30 space-y-4">
           <div className="flex items-center gap-2 text-primary">
             <Brain className="w-5 h-5" />
-            <h4 className="text-sm font-bold uppercase tracking-wider">{t('map.aiForecast', { days: forecastHorizon })}</h4>
+            <h4 className="text-sm font-bold uppercase tracking-wider">{t('map.aiForecast', { days: String(forecastHorizon) })}</h4>
           </div>
           {predictions?.predictions ? (
             <div className="h-28 flex items-end justify-between gap-1 px-2">

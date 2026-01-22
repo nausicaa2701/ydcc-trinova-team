@@ -1,6 +1,5 @@
 import RoleBasedHeader from '@/components/RoleBasedHeader'
 import DecisionSupportView from '@/components/DecisionSupportView'
-import SalinityMapView from '@/components/SalinityMapView'
 
 /** System Admin Dashboard - Reuses existing DecisionSupportView and SalinityMapView */
 export default function AdminDashboard() {

@@ -11,7 +11,6 @@ export default function TimeSlider() {
   const maxDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000)
   
   const todayStr = today.toISOString().split('T')[0]
-  const maxDateStr = maxDate.toISOString().split('T')[0]
   
   const selectedDateObj = new Date(selectedDate)
   const daysFromToday = Math.floor((selectedDateObj.getTime() - today.getTime()) / (24 * 60 * 60 * 1000))

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Farm, Cooperative, RiskLevel, ProductionModel } from '@/types';
+import { Farm, RiskLevel, ProductionModel } from '@/types';
 
 export type ActiveTab = 'salinity-map' | 'producers-coops' | 'decision-support';
 
