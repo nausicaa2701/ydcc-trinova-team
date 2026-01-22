@@ -25,7 +25,7 @@ export default function SalinityMapView() {
   const [stations, setStations] = useState<Station[]>([])
   const [isPlaying, setIsPlaying] = useState(false)
   const [forecastHorizon, setForecastHorizon] = useState(7) // 1-30 days
-  const [predictions, setPredictions] = useState<any>(null)
+  const [predictions, setPredictions] = useState<SalinityPrediction | null>(null)
   const [loading, setLoading] = useState(false)
   const [cooperativeData, setCooperativeData] = useState<any>(null)
   const [cooperatives, setCooperatives] = useState<any[]>([])
@@ -36,7 +36,6 @@ export default function SalinityMapView() {
     showBoundaries,
     showRiskHeatmap,
     showFarms,
-    selectedFarm,
     setSelectedFarm,
     selectedCooperative,
     setSelectedCooperative,
@@ -641,7 +640,6 @@ export default function SalinityMapView() {
   }, [forecastHorizon])
 
   const today = new Date()
-  const maxDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000)
   const selectedDateObj = new Date(selectedDate)
   const daysFromToday = Math.floor((selectedDateObj.getTime() - today.getTime()) / (24 * 60 * 60 * 1000))
 
@@ -1020,7 +1018,7 @@ export default function SalinityMapView() {
         <div className="p-5 rounded-xl bg-primary/10 border border-primary/30 space-y-4">
           <div className="flex items-center gap-2 text-primary">
             <Brain className="w-5 h-5" />
-            <h4 className="text-sm font-bold uppercase tracking-wider">{t('map.aiForecast', { days: forecastHorizon })}</h4>
+            <h4 className="text-sm font-bold uppercase tracking-wider">{t('map.aiForecast', { days: String(forecastHorizon) })}</h4>
           </div>
           {predictions?.predictions ? (
             <div className="h-28 flex items-end justify-between gap-1 px-2">

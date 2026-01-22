@@ -3,13 +3,12 @@
 import { SaltIntrusionData, RiskSurface, SaltIntrusionBoundary } from '@/types'
 import { Farm, Cooperative } from '@/types'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 const AI_API_BASE_URL = import.meta.env.VITE_AI_API_BASE_URL || 'http://localhost:8001'
 
 // Salt Intrusion API
 export async function fetchSaltIntrusionData(
-  startDate: string,
-  endDate: string
+  _startDate: string,
+  _endDate: string
 ): Promise<SaltIntrusionData> {
   // TODO: Replace with actual API call
   // const response = await fetch(`${API_BASE_URL}/salt-intrusion?start_date=${startDate}&end_date=${endDate}`)
@@ -272,7 +271,7 @@ export async function fetchFarmById(id: string): Promise<Farm | null> {
 
 export async function fetchFarmRiskScore(
   farmId: string,
-  date: string
+  _date: string
 ): Promise<number> {
   // TODO: Replace with actual API call
   // const response = await fetch(`${API_BASE_URL}/farms/${farmId}/risk?date=${date}`)

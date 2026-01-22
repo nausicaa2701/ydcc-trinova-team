@@ -139,7 +139,6 @@ export default function ProducerManagementView() {
           ) : (
             filteredFarms.slice(0, 20).map((farm) => {
             const riskBadge = getRiskBadge(farm.riskLevel)
-            const Icon = riskBadge.icon
             return (
               <div
                 key={farm.id}
