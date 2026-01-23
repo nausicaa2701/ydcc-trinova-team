@@ -1,0 +1,920 @@
+﻿station,river,high_tides,low_tides,source_file
+Vũng Tàu,Biển Đông,"[{'level_m': 3.23, 'time': '17:45'}, {'level_m': 3.71, 'time': '03:15'}]","[{'level_m': 2.91, 'time': '21:45'}]",HCMC_TVHN_20250929.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.15, 'time': '20:00'}, {'level_m': 1.33, 'time': '06:00'}]","[{'level_m': 0.39, 'time': '01:00'}]",HCMC_TVHN_20250929.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.86, 'time': '20:30'}, {'level_m': 1.07, 'time': '06:30'}]","[{'level_m': -0.07, 'time': '01:00'}]",HCMC_TVHN_20250929.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.76, 'time': '23:00'}, {'level_m': 0.85, 'time': '08:50'}]","[{'level_m': 0.58, 'time': '04:00'}]",HCMC_TVHN_20250929.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.39, 'time': '21:00'}, {'level_m': 1.57, 'time': '06:30'}]","[{'level_m': 0.12, 'time': '02:00'}]",HCMC_TVHN_20250929.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.18, 'time': '21:25'}, {'level_m': 1.42, 'time': '07:30'}]","[{'level_m': 0.18, 'time': '02:00'}]",HCMC_TVHN_20250929.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.25, 'time': '00:30'}, {'level_m': 1.29, 'time': '11:30'}]","[{'level_m': 0.52, 'time': '06:30'}]",HCMC_TVHN_20250929.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.97, 'time': '20:00'}, {'level_m': 1.24, 'time': '06:30'}]","[{'level_m': -0.29, 'time': '00:30'}]",HCMC_TVHN_20250929.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.95, 'time': '19:30'}, {'level_m': 1.24, 'time': '05:00'}]","[{'level_m': -0.32, 'time': '00:00'}]",HCMC_TVHN_20250929.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.19, 'time': '19:15'}, {'level_m': 3.48, 'time': '02:45'}]","[{'level_m': 3.05, 'time': '22:45'}]",HCMC_TVHN_20250930.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.1, 'time': '20:30'}, {'level_m': 1.13, 'time': '05:30'}]","[{'level_m': 0.62, 'time': '01:00'}]",HCMC_TVHN_20250930.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.74, 'time': '20:30'}, {'level_m': 0.86, 'time': '05:30'}]","[{'level_m': 0.24, 'time': '01:00'}]",HCMC_TVHN_20250930.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.26, 'time': '21:30'}, {'level_m': 1.19, 'time': '06:30'}]","[{'level_m': 0.31, 'time': '02:00'}]",HCMC_TVHN_20250930.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.03, 'time': '22:45'}, {'level_m': 1.18, 'time': '07:10'}]","[{'level_m': 0.5, 'time': '02:15'}]",HCMC_TVHN_20250930.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.15, 'time': '01:30'}, {'level_m': 1.13, 'time': '10:30'}]","[{'level_m': 0.54, 'time': '06:30'}]",HCMC_TVHN_20250930.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.83, 'time': '21:00'}, {'level_m': 0.93, 'time': '05:30'}]","[{'level_m': 0.14, 'time': '01:00'}]",HCMC_TVHN_20250930.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.78, 'time': '20:00'}, {'level_m': 0.9, 'time': '05:00'}]","[{'level_m': 0.16, 'time': '00:00'}]",HCMC_TVHN_20250930.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.11, 'time': '23:00'}, {'level_m': 1.13, 'time': '05:30'}]","[{'level_m': 0.74, 'time': '01:30'}]",HCMC_TVHN_20251001.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '23:30'}, {'level_m': 0.84, 'time': '06:00'}]","[{'level_m': 0.37, 'time': '01:30'}]",HCMC_TVHN_20251001.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.78, 'time': '00:10'}, {'level_m': 0.82, 'time': '09:10'}]","[{'level_m': 0.68, 'time': '04:10'}]",HCMC_TVHN_20251001.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.23, 'time': '23:30'}, {'level_m': 1.21, 'time': '06:30'}]","[{'level_m': 0.58, 'time': '02:30'}]",HCMC_TVHN_20251001.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.02, 'time': '02:30'}, {'level_m': 1.12, 'time': '11:00'}]","[{'level_m': 0.55, 'time': '07:00'}]",HCMC_TVHN_20251001.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.92, 'time': '23:00'}, {'level_m': 0.94, 'time': '06:00'}]","[{'level_m': 0.31, 'time': '01:00'}]",HCMC_TVHN_20251001.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.86, 'time': '23:00'}, {'level_m': 0.92, 'time': '06:00'}]","[{'level_m': 0.33, 'time': '00:30'}]",HCMC_TVHN_20251001.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.77, 'time': '02:50'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251002.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.1, 'time': '01:00'}, {'level_m': 0.98, 'time': '07:10'}]","[{'level_m': 0.88, 'time': '04:35'}]",HCMC_TVHN_20251002.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.14, 'time': '04:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251002.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.54, 'time': '00:15'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.2, 'time': '02:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.91, 'time': '02:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '05:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.32, 'time': '01:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.24, 'time': '03:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.17, 'time': '07:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.05, 'time': '02:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.05, 'time': '01:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251003.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.65, 'time': '00:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251004.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.34, 'time': '02:00'}, {'level_m': 0.81, 'time': '12:00'}]","[{'level_m': 0.67, 'time': '09:00'}]",HCMC_TVHN_20251004.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.12, 'time': '02:00'}, {'level_m': 0.53, 'time': '12:00'}]","[{'level_m': 0.34, 'time': '09:30'}]",HCMC_TVHN_20251004.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.86, 'time': '05:10'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251004.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.59, 'time': '05:30'}, {'level_m': 0.8, 'time': '13:00'}]","[{'level_m': 0.55, 'time': '10:00'}]",HCMC_TVHN_20251004.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.4, 'time': '04:00'}, {'level_m': 0.76, 'time': '13:30'}]","[{'level_m': 0.59, 'time': '10:35'}]",HCMC_TVHN_20251004.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.6, 'time': '09:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251004.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.24, 'time': '02:30'}, {'level_m': 0.5, 'time': '12:30'}]","[{'level_m': 0.22, 'time': '09:00'}]",HCMC_TVHN_20251004.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.24, 'time': '01:00'}, {'level_m': 0.46, 'time': '11:00'}]","[{'level_m': 0.22, 'time': '08:00'}]",HCMC_TVHN_20251004.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.83, 'time': '00:30'}, {'level_m': 3.49, 'time': '12:15'}]","[{'level_m': 2.46, 'time': '07:00'}]",HCMC_TVHN_20251006.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.41, 'time': '02:30'}, {'level_m': 1.22, 'time': '14:00'}]","[{'level_m': 0.26, 'time': '09:30'}]",HCMC_TVHN_20251006.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.2, 'time': '03:00'}, {'level_m': 1.01, 'time': '14:30'}]","[{'level_m': -0.14, 'time': '09:30'}]",HCMC_TVHN_20251006.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.83, 'time': '05:50'}, {'level_m': 0.78, 'time': '17:00'}]","[{'level_m': 0.42, 'time': '12:10'}]",HCMC_TVHN_20251006.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.73, 'time': '03:00'}, {'level_m': 1.42, 'time': '15:00'}]","[{'level_m': 0.07, 'time': '10:30'}]",HCMC_TVHN_20251006.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.45, 'time': '04:40'}, {'level_m': 1.25, 'time': '15:45'}]","[{'level_m': 0.09, 'time': '10:40'}]",HCMC_TVHN_20251006.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '09:00'}, {'level_m': 1.21, 'time': '19:30'}]","[{'level_m': 0.42, 'time': '15:00'}]",HCMC_TVHN_20251006.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.29, 'time': '03:00'}, {'level_m': 1.06, 'time': '14:00'}]","[{'level_m': -0.43, 'time': '09:00'}]",HCMC_TVHN_20251006.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.32, 'time': '02:00'}, {'level_m': 1.06, 'time': '13:00'}]","[{'level_m': -0.49, 'time': '08:00'}]",HCMC_TVHN_20251006.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.82, 'time': '01:00'}, {'level_m': 3.81, 'time': '13:00'}]","[{'level_m': 1.85, 'time': '07:15'}]",HCMC_TVHN_20251007.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.46, 'time': '03:30'}, {'level_m': 1.48, 'time': '15:30'}]","[{'level_m': 0.0, 'time': '10:30'}]",HCMC_TVHN_20251007.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.27, 'time': '03:30'}, {'level_m': 1.28, 'time': '15:30'}]","[{'level_m': -0.48, 'time': '10:30'}]",HCMC_TVHN_20251007.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '06:10'}, {'level_m': 0.83, 'time': '17:40'}]","[{'level_m': 0.45, 'time': '13:00'}]",HCMC_TVHN_20251007.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.81, 'time': '04:00'}, {'level_m': 1.8, 'time': '16:00'}]","[{'level_m': -0.29, 'time': '11:00'}]",HCMC_TVHN_20251007.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.43, 'time': '05:00'}, {'level_m': 1.48, 'time': '16:50'}]","[{'level_m': -0.27, 'time': '11:15'}]",HCMC_TVHN_20251007.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.24, 'time': '09:00'}, {'level_m': 1.28, 'time': '20:30'}]","[{'level_m': 0.23, 'time': '15:30'}]",HCMC_TVHN_20251007.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.33, 'time': '03:30'}, {'level_m': 1.36, 'time': '15:30'}]","[{'level_m': -0.9, 'time': '09:30'}]",HCMC_TVHN_20251007.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.39, 'time': '02:30'}, {'level_m': 1.42, 'time': '14:30'}]","[{'level_m': -1.07, 'time': '09:00'}]",HCMC_TVHN_20251007.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.97, 'time': '01:15'}, {'level_m': 3.96, 'time': '13:30'}]","[{'level_m': 1.38, 'time': '07:45'}]",HCMC_TVHN_20251008.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.55, 'time': '04:00'}, {'level_m': 1.55, 'time': '16:30'}]","[{'level_m': -0.08, 'time': '11:30'}]",HCMC_TVHN_20251008.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.32, 'time': '04:00'}, {'level_m': 1.32, 'time': '16:00'}]","[{'level_m': -0.63, 'time': '11:30'}]",HCMC_TVHN_20251008.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.82, 'time': '06:40'}, {'level_m': 0.88, 'time': '18:50'}]","[{'level_m': 0.47, 'time': '14:00'}]",HCMC_TVHN_20251008.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.89, 'time': '05:00'}, {'level_m': 1.9, 'time': '17:00'}]","[{'level_m': -0.54, 'time': '12:00'}]",HCMC_TVHN_20251008.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.55, 'time': '05:30'}, {'level_m': 1.55, 'time': '17:45'}]","[{'level_m': -0.43, 'time': '12:05'}]",HCMC_TVHN_20251008.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '09:30'}, {'level_m': 1.3, 'time': '22:00'}]","[{'level_m': 0.22, 'time': '16:30'}]",HCMC_TVHN_20251008.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.47, 'time': '04:00'}, {'level_m': 1.44, 'time': '16:00'}]","[{'level_m': -1.28, 'time': '10:30'}]",HCMC_TVHN_20251008.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.5, 'time': '03:00'}, {'level_m': 1.5, 'time': '15:30'}]","[{'level_m': -1.44, 'time': '10:00'}]",HCMC_TVHN_20251008.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.0, 'time': '00:45'}, {'level_m': 4.14, 'time': '14:30'}]","[{'level_m': 1.05, 'time': '09:00'}]",HCMC_TVHN_20251009.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.58, 'time': '05:00'}, {'level_m': 1.72, 'time': '18:00'}]","[{'level_m': -0.08, 'time': '12:00'}]",HCMC_TVHN_20251009.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.32, 'time': '04:30'}, {'level_m': 1.36, 'time': '16:30'}]","[{'level_m': -0.71, 'time': '12:30'}]",HCMC_TVHN_20251009.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.89, 'time': '07:30'}, {'level_m': 0.94, 'time': '20:50'}]","[{'level_m': 0.46, 'time': '15:10'}]",HCMC_TVHN_20251009.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.9, 'time': '05:30'}, {'level_m': 2.03, 'time': '18:00'}]","[{'level_m': -0.7, 'time': '12:30'}]",HCMC_TVHN_20251009.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.59, 'time': '06:10'}, {'level_m': 1.67, 'time': '19:00'}]","[{'level_m': -0.58, 'time': '13:00'}]",HCMC_TVHN_20251009.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '10:00'}, {'level_m': 1.42, 'time': '22:30'}]","[{'level_m': 0.22, 'time': '17:30'}]",HCMC_TVHN_20251009.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.52, 'time': '04:30'}, {'level_m': 1.62, 'time': '17:30'}]","[{'level_m': -1.56, 'time': '11:30'}]",HCMC_TVHN_20251009.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.54, 'time': '04:00'}, {'level_m': 1.67, 'time': '16:00'}]","[{'level_m': -1.7, 'time': '10:30'}]",HCMC_TVHN_20251009.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.05, 'time': '02:15'}, {'level_m': 4.19, 'time': '15:15'}]","[{'level_m': 0.72, 'time': '09:45'}]",HCMC_TVHN_20251010.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.69, 'time': '05:30'}, {'level_m': 1.78, 'time': '18:30'}]","[{'level_m': -0.1, 'time': '12:30'}]",HCMC_TVHN_20251010.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.44, 'time': '04:30'}, {'level_m': 1.52, 'time': '17:30'}]","[{'level_m': -0.79, 'time': '12:30'}]",HCMC_TVHN_20251010.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.98, 'time': '07:40'}, {'level_m': 1.01, 'time': '20:30'}]","[{'level_m': 0.56, 'time': '15:40'}]",HCMC_TVHN_20251010.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.94, 'time': '06:00'}, {'level_m': 2.04, 'time': '19:00'}]","[{'level_m': -0.8, 'time': '13:30'}]",HCMC_TVHN_20251010.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.63, 'time': '06:30'}, {'level_m': 1.69, 'time': '19:40'}]","[{'level_m': -0.62, 'time': '13:40'}]",HCMC_TVHN_20251010.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.37, 'time': '10:30'}, {'level_m': 1.4, 'time': '23:30'}]","[{'level_m': 0.24, 'time': '18:00'}]",HCMC_TVHN_20251010.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.56, 'time': '05:00'}, {'level_m': 1.64, 'time': '18:00'}]","[{'level_m': -1.61, 'time': '12:30'}]",HCMC_TVHN_20251010.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.59, 'time': '04:00'}, {'level_m': 1.68, 'time': '17:00'}]","[{'level_m': -1.94, 'time': '11:30'}]",HCMC_TVHN_20251010.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.08, 'time': '02:45'}, {'level_m': 4.01, 'time': '16:00'}]","[{'level_m': 0.48, 'time': '10:00'}]",HCMC_TVHN_20251011.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.7, 'time': '05:30'}, {'level_m': 1.76, 'time': '19:30'}]","[{'level_m': -0.13, 'time': '13:30'}]",HCMC_TVHN_20251011.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.48, 'time': '05:00'}, {'level_m': 1.49, 'time': '18:30'}]","[{'level_m': -0.88, 'time': '13:30'}]",HCMC_TVHN_20251011.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.04, 'time': '08:00'}, {'level_m': 1.06, 'time': '21:30'}]","[{'level_m': 0.62, 'time': '16:40'}]",HCMC_TVHN_20251011.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.96, 'time': '06:30'}, {'level_m': 1.95, 'time': '19:30'}]","[{'level_m': -0.81, 'time': '14:00'}]",HCMC_TVHN_20251011.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.65, 'time': '06:55'}, {'level_m': 1.63, 'time': '20:30'}]","[{'level_m': -0.69, 'time': '14:20'}]",HCMC_TVHN_20251011.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.39, 'time': '11:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.2, 'time': '18:30'}]",HCMC_TVHN_20251011.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.58, 'time': '05:30'}, {'level_m': 1.54, 'time': '19:00'}]","[{'level_m': -1.71, 'time': '13:00'}]",HCMC_TVHN_20251011.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '04:00'}, {'level_m': 1.58, 'time': '18:00'}]","[{'level_m': -2.1, 'time': '12:30'}]",HCMC_TVHN_20251011.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.97, 'time': '03:15'}, {'level_m': 3.82, 'time': '17:00'}]","[{'level_m': 0.37, 'time': '10:30'}]",HCMC_TVHN_20251012.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.67, 'time': '05:30'}, {'level_m': 1.69, 'time': '19:30'}]","[{'level_m': -0.12, 'time': '14:00'}]",HCMC_TVHN_20251012.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.41, 'time': '05:30'}, {'level_m': 1.41, 'time': '19:30'}]","[{'level_m': -0.93, 'time': '14:30'}]",HCMC_TVHN_20251012.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.07, 'time': '08:00'}, {'level_m': 1.06, 'time': '22:20'}]","[{'level_m': 0.67, 'time': '17:00'}]",HCMC_TVHN_20251012.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.88, 'time': '06:30'}, {'level_m': 1.83, 'time': '20:30'}]","[{'level_m': -0.95, 'time': '15:00'}]",HCMC_TVHN_20251012.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.61, 'time': '07:00'}, {'level_m': 1.52, 'time': '21:25'}]","[{'level_m': -0.83, 'time': '15:20'}]",HCMC_TVHN_20251012.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.36, 'time': '11:30'}, {'level_m': 1.35, 'time': '00:30'}]","[{'level_m': 0.12, 'time': '20:00'}]",HCMC_TVHN_20251012.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.52, 'time': '05:30'}, {'level_m': 1.45, 'time': '20:00'}]","[{'level_m': -1.86, 'time': '13:30'}]",HCMC_TVHN_20251012.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.5, 'time': '05:00'}, {'level_m': 1.46, 'time': '19:00'}]","[{'level_m': -2.25, 'time': '13:00'}]",HCMC_TVHN_20251012.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.87, 'time': '03:30'}, {'level_m': 3.63, 'time': '18:45'}]","[{'level_m': 0.57, 'time': '12:00'}]",HCMC_TVHN_20251013.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.52, 'time': '05:30'}, {'level_m': 1.55, 'time': '20:30'}]","[{'level_m': -0.13, 'time': '14:30'}]",HCMC_TVHN_20251013.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.33, 'time': '06:00'}, {'level_m': 1.28, 'time': '20:30'}]","[{'level_m': -0.9, 'time': '15:00'}]",HCMC_TVHN_20251013.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.06, 'time': '08:20'}, {'level_m': 1.0, 'time': '23:10'}]","[{'level_m': 0.63, 'time': '18:10'}]",HCMC_TVHN_20251013.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.44, 'time': '06:30'}, {'level_m': 1.68, 'time': '21:00'}]","[{'level_m': -1.13, 'time': '15:30'}]",HCMC_TVHN_20251013.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.53, 'time': '07:30'}, {'level_m': 1.41, 'time': '22:15'}]","[{'level_m': -0.9, 'time': '16:00'}]",HCMC_TVHN_20251013.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.34, 'time': '11:30'}, {'level_m': 1.31, 'time': '01:30'}]","[{'level_m': 0.12, 'time': '20:30'}]",HCMC_TVHN_20251013.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.42, 'time': '06:00'}, {'level_m': 1.31, 'time': '20:30'}]","[{'level_m': -1.8, 'time': '14:00'}]",HCMC_TVHN_20251013.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.39, 'time': '05:00'}, {'level_m': 1.3, 'time': '20:00'}]","[{'level_m': -2.2, 'time': '13:30'}]",HCMC_TVHN_20251013.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.72, 'time': '04:00'}, {'level_m': 3.57, 'time': '19:45'}]","[{'level_m': 0.85, 'time': '12:30'}]",HCMC_TVHN_20251014.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.4, 'time': '06:00'}, {'level_m': 1.5, 'time': '22:00'}]","[{'level_m': -0.07, 'time': '15:30'}]",HCMC_TVHN_20251014.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.17, 'time': '06:00'}, {'level_m': 1.21, 'time': '21:30'}]","[{'level_m': -0.82, 'time': '16:00'}]",HCMC_TVHN_20251014.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.99, 'time': '09:20'}, {'level_m': None, 'time': None}]","[{'level_m': 0.65, 'time': '19:20'}]",HCMC_TVHN_20251014.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.43, 'time': '07:00'}, {'level_m': 1.61, 'time': '22:30'}]","[{'level_m': -0.98, 'time': '16:30'}]",HCMC_TVHN_20251014.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.42, 'time': '07:50'}, {'level_m': 1.35, 'time': '23:40'}]","[{'level_m': -0.93, 'time': '16:55'}]",HCMC_TVHN_20251014.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '11:30'}, {'level_m': 1.3, 'time': '02:00'}]","[{'level_m': -0.14, 'time': '21:30'}]",HCMC_TVHN_20251014.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.25, 'time': '06:30'}, {'level_m': 1.27, 'time': '22:00'}]","[{'level_m': -1.77, 'time': '15:00'}]",HCMC_TVHN_20251014.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.2, 'time': '05:30'}, {'level_m': 1.22, 'time': '21:00'}]","[{'level_m': -2.0, 'time': '13:30'}]",HCMC_TVHN_20251014.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.21, 'time': '07:30'}, {'level_m': None, 'time': None}]","[{'level_m': -0.02, 'time': '17:00'}]",HCMC_TVHN_20251015.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.97, 'time': '07:30'}, {'level_m': 1.23, 'time': '23:30'}]","[{'level_m': -0.73, 'time': '17:00'}]",HCMC_TVHN_20251015.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.09, 'time': '08:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.85, 'time': '17:30'}]",HCMC_TVHN_20251015.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.16, 'time': '08:00'}, {'level_m': None, 'time': None}]","[{'level_m': -1.07, 'time': '17:45'}]",HCMC_TVHN_20251015.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.0, 'time': '12:00'}, {'level_m': 1.28, 'time': '03:30'}]","[{'level_m': -0.39, 'time': '22:00'}]",HCMC_TVHN_20251015.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.97, 'time': '07:00'}, {'level_m': None, 'time': None}]","[{'level_m': -1.73, 'time': '16:00'}]",HCMC_TVHN_20251015.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.94, 'time': '06:00'}, {'level_m': 1.26, 'time': '23:00'}]","[{'level_m': -1.83, 'time': '15:00'}]",HCMC_TVHN_20251015.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.04, 'time': '12:00'}, {'level_m': 1.58, 'time': '00:30'}]","[{'level_m': 0.15, 'time': '19:30'}]",HCMC_TVHN_20251017.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.73, 'time': '11:30'}, {'level_m': 1.31, 'time': '01:00'}]","[{'level_m': -0.48, 'time': '19:30'}]",HCMC_TVHN_20251017.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 0.88, 'time': '12:00'}, {'level_m': 1.7, 'time': '01:30'}]","[{'level_m': -0.61, 'time': '20:00'}]",HCMC_TVHN_20251017.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 0.87, 'time': '12:30'}, {'level_m': 1.51, 'time': '03:00'}]","[{'level_m': -0.7, 'time': '20:10'}]",HCMC_TVHN_20251017.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.68, 'time': '11:00'}, {'level_m': 1.42, 'time': '01:00'}]","[{'level_m': -1.2, 'time': '18:30'}]",HCMC_TVHN_20251017.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.64, 'time': '10:30'}, {'level_m': 1.38, 'time': '01:00'}]","[{'level_m': -1.24, 'time': '17:30'}]",HCMC_TVHN_20251017.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.36, 'time': '10:00'}, {'level_m': 3.94, 'time': '00:00'}]","[{'level_m': 1.68, 'time': '17:45'}]",HCMC_TVHN_20251018.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.17, 'time': '12:30'}, {'level_m': 1.64, 'time': '02:00'}]","[{'level_m': 0.19, 'time': '21:30'}]",HCMC_TVHN_20251018.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.9, 'time': '12:30'}, {'level_m': 1.36, 'time': '02:00'}]","[{'level_m': -0.41, 'time': '20:30'}]",HCMC_TVHN_20251018.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.12, 'time': '13:30'}, {'level_m': 1.81, 'time': '03:00'}]","[{'level_m': -0.64, 'time': '21:00'}]",HCMC_TVHN_20251018.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.09, 'time': '14:20'}, {'level_m': 1.58, 'time': '03:50'}]","[{'level_m': -0.48, 'time': '21:25'}]",HCMC_TVHN_20251018.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.13, 'time': '18:00'}, {'level_m': 1.4, 'time': '08:30'}]","[{'level_m': 0.06, 'time': '00:30'}]",HCMC_TVHN_20251018.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.88, 'time': '12:30'}, {'level_m': 1.52, 'time': '02:00'}]","[{'level_m': -1.14, 'time': '19:30'}]",HCMC_TVHN_20251018.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.83, 'time': '12:30'}, {'level_m': 1.5, 'time': '01:00'}]","[{'level_m': -1.17, 'time': '19:00'}]",HCMC_TVHN_20251018.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.54, 'time': '11:30'}, {'level_m': 3.93, 'time': '00:00'}]","[{'level_m': 1.78, 'time': '18:00'}]",HCMC_TVHN_20251019.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.46, 'time': '13:30'}, {'level_m': 1.65, 'time': '02:30'}]","[{'level_m': 0.24, 'time': '21:30'}]",HCMC_TVHN_20251019.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.15, 'time': '13:30'}, {'level_m': 1.41, 'time': '02:30'}]","[{'level_m': -0.35, 'time': '21:00'}]",HCMC_TVHN_20251019.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.98, 'time': '16:20'}, {'level_m': 1.03, 'time': '05:30'}]","[{'level_m': 0.72, 'time': '20:00'}]",HCMC_TVHN_20251019.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.48, 'time': '14:30'}, {'level_m': 1.8, 'time': '03:00'}]","[{'level_m': -0.57, 'time': '22:00'}]",HCMC_TVHN_20251019.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.35, 'time': '15:20'}, {'level_m': 1.6, 'time': '04:15'}]","[{'level_m': -0.29, 'time': '22:15'}]",HCMC_TVHN_20251019.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.32, 'time': '19:30'}, {'level_m': 1.39, 'time': '09:00'}]","[{'level_m': 0.32, 'time': '01:30'}]",HCMC_TVHN_20251019.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.16, 'time': '13:30'}, {'level_m': 1.5, 'time': '02:30'}]","[{'level_m': -1.06, 'time': '20:30'}]",HCMC_TVHN_20251019.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.11, 'time': '13:00'}, {'level_m': 1.48, 'time': '01:30'}]","[{'level_m': -1.1, 'time': '19:30'}]",HCMC_TVHN_20251019.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.7, 'time': '13:00'}, {'level_m': 3.95, 'time': '00:30'}]","[{'level_m': 1.89, 'time': '19:15'}]",HCMC_TVHN_20251020.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.53, 'time': '14:30'}, {'level_m': 1.67, 'time': '03:00'}]","[{'level_m': 0.27, 'time': '22:00'}]",HCMC_TVHN_20251020.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.27, 'time': '15:00'}, {'level_m': 1.43, 'time': '03:00'}]","[{'level_m': -0.31, 'time': '22:00'}]",HCMC_TVHN_20251020.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.02, 'time': '18:20'}, {'level_m': 1.0, 'time': '05:50'}]","[{'level_m': 0.52, 'time': '19:20'}]",HCMC_TVHN_20251020.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.58, 'time': '16:00'}, {'level_m': 1.83, 'time': '04:00'}]","[{'level_m': -0.37, 'time': '22:30'}]",HCMC_TVHN_20251020.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.47, 'time': '16:50'}, {'level_m': 1.62, 'time': '04:40'}]","[{'level_m': -0.04, 'time': '23:00'}]",HCMC_TVHN_20251020.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.39, 'time': '21:00'}, {'level_m': 1.41, 'time': '09:30'}]","[{'level_m': 0.65, 'time': '03:30'}]",HCMC_TVHN_20251020.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.3, 'time': '15:00'}, {'level_m': 1.51, 'time': '03:00'}]","[{'level_m': -0.97, 'time': '21:00'}]",HCMC_TVHN_20251020.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.28, 'time': '15:00'}, {'level_m': 1.5, 'time': '02:00'}]","[{'level_m': -1.02, 'time': '19:30'}]",HCMC_TVHN_20251020.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.99, 'time': '13:30'}, {'level_m': 4.06, 'time': '00:45'}]","[{'level_m': 2.13, 'time': '19:45'}]",HCMC_TVHN_20251021.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.69, 'time': '16:00'}, {'level_m': 1.71, 'time': '03:00'}]","[{'level_m': 0.37, 'time': '23:00'}]",HCMC_TVHN_20251021.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.46, 'time': '16:00'}, {'level_m': 1.48, 'time': '03:30'}]","[{'level_m': -0.19, 'time': '22:30'}]",HCMC_TVHN_20251021.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.05, 'time': '18:50'}, {'level_m': 1.04, 'time': '06:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251021.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.86, 'time': '17:00'}, {'level_m': 1.84, 'time': '04:00'}]","[{'level_m': -0.21, 'time': '23:30'}]",HCMC_TVHN_20251021.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.61, 'time': '17:30'}, {'level_m': 1.71, 'time': '05:00'}]","[{'level_m': 0.09, 'time': '23:45'}]",HCMC_TVHN_20251021.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.41, 'time': '22:00'}, {'level_m': 1.44, 'time': '10:00'}]","[{'level_m': 0.64, 'time': '04:00'}]",HCMC_TVHN_20251021.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.49, 'time': '16:00'}, {'level_m': 1.59, 'time': '03:30'}]","[{'level_m': -0.64, 'time': '22:00'}]",HCMC_TVHN_20251021.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.49, 'time': '15:00'}, {'level_m': 1.56, 'time': '03:00'}]","[{'level_m': -0.78, 'time': '21:00'}]",HCMC_TVHN_20251021.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.07, 'time': '14:15'}, {'level_m': 4.09, 'time': '01:30'}]","[{'level_m': 2.31, 'time': '19:45'}]",HCMC_TVHN_20251022.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.77, 'time': '16:30'}, {'level_m': 1.75, 'time': '03:30'}]","[{'level_m': 0.54, 'time': '23:30'}]",HCMC_TVHN_20251022.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.55, 'time': '16:30'}, {'level_m': 1.53, 'time': '04:00'}]","[{'level_m': -0.02, 'time': '23:00'}]",HCMC_TVHN_20251022.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.08, 'time': '19:00'}, {'level_m': 1.07, 'time': '06:50'}]","[{'level_m': 0.84, 'time': '01:50'}]",HCMC_TVHN_20251022.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.94, 'time': '18:00'}, {'level_m': 1.84, 'time': '04:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251022.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.66, 'time': '18:10'}, {'level_m': 1.68, 'time': '06:20'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251022.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.43, 'time': '23:00'}, {'level_m': 1.43, 'time': '10:00'}]","[{'level_m': 0.73, 'time': '04:30'}]",HCMC_TVHN_20251022.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.58, 'time': '16:30'}, {'level_m': 1.6, 'time': '04:00'}]","[{'level_m': -0.46, 'time': '22:30'}]",HCMC_TVHN_20251022.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '16:00'}, {'level_m': 1.6, 'time': '03:00'}]","[{'level_m': -0.57, 'time': '21:30'}]",HCMC_TVHN_20251022.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.17, 'time': '15:00'}, {'level_m': 4.05, 'time': '01:15'}]","[{'level_m': 2.63, 'time': '20:45'}]",HCMC_TVHN_20251023.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.82, 'time': '17:30'}, {'level_m': 1.72, 'time': '04:00'}]","[{'level_m': 0.7, 'time': '23:30'}]",HCMC_TVHN_20251023.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.6, 'time': '17:00'}, {'level_m': 1.51, 'time': '04:00'}]","[{'level_m': 0.17, 'time': '23:30'}]",HCMC_TVHN_20251023.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.1, 'time': '21:30'}, {'level_m': 1.09, 'time': '07:30'}]","[{'level_m': 0.88, 'time': '02:00'}]",HCMC_TVHN_20251023.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.02, 'time': '18:30'}, {'level_m': 1.91, 'time': '05:00'}]","[{'level_m': -0.03, 'time': '00:00'}]",HCMC_TVHN_20251023.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.75, 'time': '19:00'}, {'level_m': 1.66, 'time': '05:40'}]","[{'level_m': 0.38, 'time': '00:05'}]",HCMC_TVHN_20251023.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.52, 'time': '23:30'}, {'level_m': 1.43, 'time': '10:00'}]","[{'level_m': 0.84, 'time': '04:30'}]",HCMC_TVHN_20251023.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.67, 'time': '17:30'}, {'level_m': 1.6, 'time': '04:30'}]","[{'level_m': 0.02, 'time': '23:00'}]",HCMC_TVHN_20251023.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.7, 'time': '16:00'}, {'level_m': 1.58, 'time': '03:00'}]","[{'level_m': -0.24, 'time': '22:00'}]",HCMC_TVHN_20251023.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.18, 'time': '15:00'}, {'level_m': 4.16, 'time': '02:00'}]","[{'level_m': 3.02, 'time': '21:15'}]",HCMC_TVHN_20251024.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.84, 'time': '17:30'}, {'level_m': 1.81, 'time': '06:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251024.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.63, 'time': '18:00'}, {'level_m': 1.59, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251024.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.16, 'time': '22:30'}, {'level_m': 1.14, 'time': '08:10'}]","[{'level_m': 0.99, 'time': '02:40'}]",HCMC_TVHN_20251024.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.11, 'time': '19:00'}, {'level_m': 2.01, 'time': '05:30'}]","[{'level_m': 0.19, 'time': '01:00'}]",HCMC_TVHN_20251024.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.86, 'time': '19:00'}, {'level_m': 1.79, 'time': '05:55'}]","[{'level_m': 0.39, 'time': '02:00'}]",HCMC_TVHN_20251024.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.77, 'time': '18:00'}, {'level_m': 1.67, 'time': '04:30'}]","[{'level_m': 0.28, 'time': '23:30'}]",HCMC_TVHN_20251024.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.78, 'time': '17:30'}, {'level_m': 1.64, 'time': '03:00'}]","[{'level_m': 0.18, 'time': '23:00'}]",HCMC_TVHN_20251024.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.2, 'time': '15:30'}, {'level_m': 4.11, 'time': '02:00'}]","[{'level_m': 3.19, 'time': '21:30'}]",HCMC_TVHN_20251025.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.85, 'time': '19:00'}, {'level_m': 1.76, 'time': '04:00'}]","[{'level_m': 0.87, 'time': '00:00'}]",HCMC_TVHN_20251025.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.65, 'time': '18:00'}, {'level_m': 1.57, 'time': '04:30'}]","[{'level_m': 0.43, 'time': '00:00'}]",HCMC_TVHN_20251025.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.08, 'time': '19:30'}, {'level_m': 1.97, 'time': '06:00'}]","[{'level_m': 0.73, 'time': '01:00'}]",HCMC_TVHN_20251025.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.87, 'time': '20:00'}, {'level_m': 1.79, 'time': '06:10'}]","[{'level_m': 0.81, 'time': '01:15'}]",HCMC_TVHN_20251025.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.65, 'time': '01:00'}, {'level_m': 1.61, 'time': '11:00'}]","[{'level_m': 1.32, 'time': '06:00'}]",HCMC_TVHN_20251025.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.77, 'time': '18:30'}, {'level_m': 1.67, 'time': '05:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251025.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.77, 'time': '18:00'}, {'level_m': 1.62, 'time': '04:30'}]","[{'level_m': 0.36, 'time': '23:00'}]",HCMC_TVHN_20251025.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.08, 'time': '16:45'}, {'level_m': 4.02, 'time': '02:15'}]","[{'level_m': 3.25, 'time': '22:00'}]",HCMC_TVHN_20251026.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.81, 'time': '19:00'}, {'level_m': 1.73, 'time': '04:00'}]","[{'level_m': 0.18, 'time': '01:00'}]",HCMC_TVHN_20251026.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.6, 'time': '19:00'}, {'level_m': 1.5, 'time': '04:30'}]","[{'level_m': 0.55, 'time': '00:00'}]",HCMC_TVHN_20251026.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.23, 'time': '00:10'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251026.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.98, 'time': '20:00'}, {'level_m': 1.83, 'time': '06:00'}]","[{'level_m': 0.83, 'time': '01:30'}]",HCMC_TVHN_20251026.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.78, 'time': '20:30'}, {'level_m': 1.72, 'time': '06:20'}]","[{'level_m': 0.91, 'time': '01:35'}]",HCMC_TVHN_20251026.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.72, 'time': '01:30'}, {'level_m': 1.62, 'time': '11:00'}]","[{'level_m': 1.45, 'time': '07:00'}]",HCMC_TVHN_20251026.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.68, 'time': '19:00'}, {'level_m': 1.55, 'time': '05:00'}]","[{'level_m': 0.4, 'time': '00:00'}]",HCMC_TVHN_20251026.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.65, 'time': '18:00'}, {'level_m': 1.5, 'time': '04:30'}]","[{'level_m': 0.46, 'time': '23:30'}]",HCMC_TVHN_20251026.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.87, 'time': '17:45'}, {'level_m': 3.93, 'time': '03:00'}]","[{'level_m': 3.42, 'time': '22:15'}]",HCMC_TVHN_20251027.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.71, 'time': '19:30'}, {'level_m': 1.67, 'time': '03:30'}]","[{'level_m': 0.18, 'time': '01:00'}]",HCMC_TVHN_20251027.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.47, 'time': '19:00'}, {'level_m': 1.41, 'time': '05:00'}]","[{'level_m': 0.15, 'time': '01:00'}]",HCMC_TVHN_20251027.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.24, 'time': '00:20'}, {'level_m': 1.24, 'time': '09:50'}]","[{'level_m': 1.18, 'time': '05:00'}]",HCMC_TVHN_20251027.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.81, 'time': '20:00'}, {'level_m': 1.66, 'time': '06:00'}]","[{'level_m': 0.8, 'time': '02:00'}]",HCMC_TVHN_20251027.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.68, 'time': '21:30'}, {'level_m': 1.59, 'time': '06:40'}]","[{'level_m': 0.96, 'time': '01:50'}]",HCMC_TVHN_20251027.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.67, 'time': '01:30'}, {'level_m': 2.18, 'time': '12:00'}]","[{'level_m': 1.43, 'time': '07:15'}]",HCMC_TVHN_20251027.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.49, 'time': '20:00'}, {'level_m': 1.43, 'time': '05:30'}]","[{'level_m': 0.49, 'time': '00:30'}]",HCMC_TVHN_20251027.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.45, 'time': '19:00'}, {'level_m': 1.38, 'time': '04:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251027.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.77, 'time': '18:45'}, {'level_m': 3.89, 'time': '02:45'}]","[{'level_m': 3.5, 'time': '22:45'}]",HCMC_TVHN_20251028.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.65, 'time': '20:00'}, {'level_m': 1.63, 'time': '04:30'}]","[{'level_m': 1.19, 'time': '01:00'}]",HCMC_TVHN_20251028.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.4, 'time': '20:00'}, {'level_m': 1.37, 'time': '05:30'}]","[{'level_m': 0.81, 'time': '01:00'}]",HCMC_TVHN_20251028.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.25, 'time': '00:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251028.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.67, 'time': '21:00'}, {'level_m': 1.59, 'time': '06:30'}]","[{'level_m': 0.84, 'time': '02:30'}]",HCMC_TVHN_20251028.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.58, 'time': '22:00'}, {'level_m': 1.55, 'time': '06:55'}]","[{'level_m': 1.03, 'time': '02:25'}]",HCMC_TVHN_20251028.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.73, 'time': '04:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251028.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.4, 'time': '20:30'}, {'level_m': 1.37, 'time': '05:30'}]","[{'level_m': 0.62, 'time': '01:00'}]",HCMC_TVHN_20251028.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.34, 'time': '20:00'}, {'level_m': 1.32, 'time': '05:00'}]","[{'level_m': 0.67, 'time': '00:00'}]",HCMC_TVHN_20251028.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.73, 'time': '20:00'}, {'level_m': 3.78, 'time': '02:45'}]","[{'level_m': 3.56, 'time': '23:15'}]",HCMC_TVHN_20251029.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.57, 'time': '21:00'}, {'level_m': 1.52, 'time': '05:00'}]","[{'level_m': 1.21, 'time': '01:30'}]",HCMC_TVHN_20251029.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.34, 'time': '21:00'}, {'level_m': 1.26, 'time': '05:30'}]","[{'level_m': 0.86, 'time': '01:30'}]",HCMC_TVHN_20251029.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.22, 'time': '01:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251029.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.61, 'time': '21:30'}, {'level_m': 1.44, 'time': '07:00'}]","[{'level_m': 0.87, 'time': '02:30'}]",HCMC_TVHN_20251029.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.55, 'time': '23:10'}, {'level_m': 1.44, 'time': '07:00'}]","[{'level_m': 1.06, 'time': '02:40'}]",HCMC_TVHN_20251029.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.6, 'time': '05:30'}, {'level_m': 2.63, 'time': '23:00'}]","[{'level_m': 2.34, 'time': '09:00'}]",HCMC_TVHN_20251029.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.33, 'time': '22:00'}, {'level_m': 1.23, 'time': '06:00'}]","[{'level_m': 0.7, 'time': '01:30'}]",HCMC_TVHN_20251029.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.28, 'time': '21:00'}, {'level_m': 1.18, 'time': '05:00'}]","[{'level_m': 0.76, 'time': '00:00'}]",HCMC_TVHN_20251029.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.83, 'time': '21:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251030.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.62, 'time': '21:00'}, {'level_m': 1.43, 'time': '06:00'}]","[{'level_m': 1.28, 'time': '02:00'}]",HCMC_TVHN_20251030.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.35, 'time': '22:30'}, {'level_m': 1.38, 'time': '05:00'}]","[{'level_m': 0.93, 'time': '02:00'}]",HCMC_TVHN_20251030.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.21, 'time': '03:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251030.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.64, 'time': '23:00'}, {'level_m': 1.27, 'time': '07:30'}]","[{'level_m': 0.97, 'time': '03:30'}]",HCMC_TVHN_20251030.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.62, 'time': '13:00'}, {'level_m': None, 'time': None}]","[{'level_m': 2.48, 'time': '07:05'}]",HCMC_TVHN_20251030.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.38, 'time': '22:30'}, {'level_m': 1.09, 'time': '06:00'}]","[{'level_m': 0.8, 'time': '02:00'}]",HCMC_TVHN_20251030.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.34, 'time': '22:30'}, {'level_m': 1.06, 'time': '06:00'}]","[{'level_m': 0.85, 'time': '01:00'}]",HCMC_TVHN_20251030.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.79, 'time': '22:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251031.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.19, 'time': '05:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251031.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.56, 'time': '00:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251031.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.82, 'time': '23:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251101.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.65, 'time': '00:00'}, {'level_m': 1.16, 'time': '10:00'}]","[{'level_m': 0.99, 'time': '07:00'}]",HCMC_TVHN_20251101.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.36, 'time': '00:30'}, {'level_m': 0.75, 'time': '10:00'}]","[{'level_m': 0.65, 'time': '07:00'}]",HCMC_TVHN_20251101.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.16, 'time': '04:50'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251101.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.65, 'time': '01:00'}, {'level_m': 0.81, 'time': '11:00'}]","[{'level_m': 0.66, 'time': '08:00'}]",HCMC_TVHN_20251101.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.54, 'time': '01:50'}, {'level_m': 0.84, 'time': '10:55'}]","[{'level_m': 0.78, 'time': '08:40'}]",HCMC_TVHN_20251101.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.62, 'time': '12:00'}, {'level_m': None, 'time': None}]","[{'level_m': 2.23, 'time': '17:00'}]",HCMC_TVHN_20251101.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.38, 'time': '00:30'}, {'level_m': 0.56, 'time': '09:30'}]","[{'level_m': 0.44, 'time': '07:00'}]",HCMC_TVHN_20251101.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.32, 'time': '00:00'}, {'level_m': 0.6, 'time': '09:00'}]","[{'level_m': 0.48, 'time': '06:00'}]",HCMC_TVHN_20251101.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.92, 'time': '23:30'}, {'level_m': 3.23, 'time': '09:00'}]","[{'level_m': 0.93, 'time': '19:45'}]",HCMC_TVHN_20251102.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.69, 'time': '01:00'}, {'level_m': 1.2, 'time': '12:00'}]","[{'level_m': 0.9, 'time': '08:00'}]",HCMC_TVHN_20251102.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.13, 'time': '05:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251102.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.7, 'time': '02:00'}, {'level_m': 0.98, 'time': '12:30'}]","[{'level_m': 0.34, 'time': '09:00'}]",HCMC_TVHN_20251102.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.57, 'time': '02:45'}, {'level_m': 1.02, 'time': '13:00'}]","[{'level_m': 0.55, 'time': '09:35'}]",HCMC_TVHN_20251102.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.6, 'time': '19:10'}, {'level_m': None, 'time': None}]","[{'level_m': 2.28, 'time': '12:00'}]",HCMC_TVHN_20251102.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.42, 'time': '00:30'}, {'level_m': 0.72, 'time': '11:30'}]","[{'level_m': 0.1, 'time': '07:30'}]",HCMC_TVHN_20251102.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.36, 'time': '00:00'}, {'level_m': 0.7, 'time': '11:00'}]","[{'level_m': 0.12, 'time': '07:00'}]",HCMC_TVHN_20251102.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.97, 'time': '23:45'}, {'level_m': 3.48, 'time': '11:00'}]","[{'level_m': 0.93, 'time': '19:45'}]",HCMC_TVHN_20251103.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.73, 'time': '01:00'}, {'level_m': 1.41, 'time': '13:30'}]","[{'level_m': 0.75, 'time': '08:30'}]",HCMC_TVHN_20251103.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.43, 'time': '01:30'}, {'level_m': 1.09, 'time': '13:00'}]","[{'level_m': 0.17, 'time': '08:30'}]",HCMC_TVHN_20251103.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.14, 'time': '06:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251103.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.77, 'time': '02:00'}, {'level_m': 1.36, 'time': '13:30'}]","[{'level_m': 0.1, 'time': '09:30'}]",HCMC_TVHN_20251103.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.7, 'time': '03:25'}, {'level_m': 1.33, 'time': '14:30'}]","[{'level_m': 0.36, 'time': '10:00'}]",HCMC_TVHN_20251103.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.69, 'time': '21:30'}, {'level_m': 2.71, 'time': '10:30'}]","[{'level_m': 2.44, 'time': '18:00'}]",HCMC_TVHN_20251103.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.49, 'time': '02:00'}, {'level_m': 1.06, 'time': '13:00'}]","[{'level_m': -0.18, 'time': '08:00'}]",HCMC_TVHN_20251103.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.45, 'time': '00:30'}, {'level_m': 1.02, 'time': '12:00'}]","[{'level_m': -0.26, 'time': '07:00'}]",HCMC_TVHN_20251103.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.73, 'time': '02:00'}, {'level_m': 1.67, 'time': '14:00'}]","[{'level_m': 0.52, 'time': '09:30'}]",HCMC_TVHN_20251104.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.46, 'time': '01:30'}, {'level_m': 1.37, 'time': '14:00'}]","[{'level_m': -0.1, 'time': '09:30'}]",HCMC_TVHN_20251104.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.12, 'time': '06:30'}, {'level_m': 1.12, 'time': '18:00'}]","[{'level_m': -0.12, 'time': '02:10'}]",HCMC_TVHN_20251104.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.81, 'time': '03:00'}, {'level_m': 1.73, 'time': '15:00'}]","[{'level_m': -0.12, 'time': '10:30'}]",HCMC_TVHN_20251104.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.73, 'time': '03:50'}, {'level_m': 1.62, 'time': '15:25'}]","[{'level_m': 0.17, 'time': '10:30'}]",HCMC_TVHN_20251104.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.53, 'time': '02:30'}, {'level_m': 1.39, 'time': '14:00'}]","[{'level_m': -0.62, 'time': '09:00'}]",HCMC_TVHN_20251104.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.47, 'time': '01:00'}, {'level_m': 1.34, 'time': '13:30'}]","[{'level_m': -0.8, 'time': '08:00'}]",HCMC_TVHN_20251104.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.08, 'time': '00:00'}, {'level_m': 4.01, 'time': '12:30'}]","[{'level_m': 1.6, 'time': '07:15'}]",HCMC_TVHN_20251105.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.82, 'time': '02:30'}, {'level_m': 1.82, 'time': '15:00'}]","[{'level_m': 0.37, 'time': '10:30'}]",HCMC_TVHN_20251105.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.57, 'time': '02:00'}, {'level_m': 1.56, 'time': '14:30'}]","[{'level_m': -0.3, 'time': '10:00'}]",HCMC_TVHN_20251105.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.16, 'time': '06:30'}, {'level_m': 1.18, 'time': '19:20'}]","[{'level_m': 1.02, 'time': '13:40'}]",HCMC_TVHN_20251105.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.93, 'time': '03:30'}, {'level_m': 1.9, 'time': '16:00'}]","[{'level_m': -0.39, 'time': '11:00'}]",HCMC_TVHN_20251105.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.79, 'time': '04:00'}, {'level_m': 1.72, 'time': '17:00'}]","[{'level_m': -0.09, 'time': '11:20'}]",HCMC_TVHN_20251105.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.2, 'time': '00:00'}, {'level_m': None, 'time': None}]","[{'level_m': 1.71, 'time': '16:00'}]",HCMC_TVHN_20251105.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.61, 'time': '03:00'}, {'level_m': 1.55, 'time': '15:30'}]","[{'level_m': -0.98, 'time': '09:30'}]",HCMC_TVHN_20251105.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '01:30'}, {'level_m': 1.54, 'time': '14:30'}]","[{'level_m': -1.18, 'time': '08:30'}]",HCMC_TVHN_20251105.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.15, 'time': '00:30'}, {'level_m': 4.26, 'time': '13:30'}]","[{'level_m': 1.1, 'time': '07:45'}]",HCMC_TVHN_20251106.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.86, 'time': '03:30'}, {'level_m': 1.88, 'time': '16:00'}]","[{'level_m': 0.35, 'time': '11:30'}]",HCMC_TVHN_20251106.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.6, 'time': '03:00'}, {'level_m': 1.61, 'time': '16:00'}]","[{'level_m': -0.36, 'time': '11:00'}]",HCMC_TVHN_20251106.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.22, 'time': '07:20'}, {'level_m': 1.25, 'time': '21:00'}]","[{'level_m': 1.08, 'time': '14:10'}]",HCMC_TVHN_20251106.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.02, 'time': '04:00'}, {'level_m': 2.1, 'time': '17:00'}]","[{'level_m': -0.4, 'time': '12:00'}]",HCMC_TVHN_20251106.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.86, 'time': '04:30'}, {'level_m': 1.85, 'time': '18:00'}]","[{'level_m': -0.08, 'time': '11:55'}]",HCMC_TVHN_20251106.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.56, 'time': '03:00'}, {'level_m': None, 'time': None}]","[{'level_m': 1.34, 'time': '17:00'}]",HCMC_TVHN_20251106.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.7, 'time': '03:30'}, {'level_m': 1.75, 'time': '16:30'}]","[{'level_m': -1.16, 'time': '10:00'}]",HCMC_TVHN_20251106.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.68, 'time': '02:30'}, {'level_m': 1.75, 'time': '16:00'}]","[{'level_m': -1.57, 'time': '09:00'}]",HCMC_TVHN_20251106.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.3, 'time': '01:00'}, {'level_m': 4.29, 'time': '14:45'}]","[{'level_m': 0.73, 'time': '08:30'}]",HCMC_TVHN_20251107.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.87, 'time': '03:30'}, {'level_m': 1.9, 'time': '17:00'}]","[{'level_m': 0.29, 'time': '12:00'}]",HCMC_TVHN_20251107.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.63, 'time': '03:30'}, {'level_m': 1.65, 'time': '16:30'}]","[{'level_m': -0.44, 'time': '11:30'}]",HCMC_TVHN_20251107.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.3, 'time': '08:20'}, {'level_m': 1.33, 'time': '22:10'}]","[{'level_m': 1.17, 'time': '15:30'}]",HCMC_TVHN_20251107.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.08, 'time': '04:30'}, {'level_m': 2.07, 'time': '18:00'}]","[{'level_m': -0.45, 'time': '12:30'}]",HCMC_TVHN_20251107.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.88, 'time': '05:15'}, {'level_m': 1.86, 'time': '19:00'}]","[{'level_m': -0.15, 'time': '12:50'}]",HCMC_TVHN_20251107.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.64, 'time': '02:00'}, {'level_m': None, 'time': None}]","[{'level_m': 2.06, 'time': '17:30'}]",HCMC_TVHN_20251107.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.78, 'time': '04:00'}, {'level_m': 1.74, 'time': '17:00'}]","[{'level_m': -1.36, 'time': '11:00'}]",HCMC_TVHN_20251107.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.77, 'time': '03:00'}, {'level_m': 1.77, 'time': '16:00'}]","[{'level_m': -1.8, 'time': '10:00'}]",HCMC_TVHN_20251107.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.2, 'time': '01:45'}, {'level_m': 4.25, 'time': '15:15'}]","[{'level_m': 0.33, 'time': '08:45'}]",HCMC_TVHN_20251108.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.85, 'time': '03:30'}, {'level_m': 1.88, 'time': '18:00'}]","[{'level_m': 0.18, 'time': '13:00'}]",HCMC_TVHN_20251108.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.61, 'time': '03:39'}, {'level_m': 1.65, 'time': '17:30'}]","[{'level_m': -0.55, 'time': '12:30'}]",HCMC_TVHN_20251108.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.34, 'time': '09:00'}, {'level_m': 1.36, 'time': '23:10'}]","[{'level_m': 1.2, 'time': '16:10'}]",HCMC_TVHN_20251108.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.0, 'time': '05:00'}, {'level_m': 2.07, 'time': '19:00'}]","[{'level_m': -0.81, 'time': '13:00'}]",HCMC_TVHN_20251108.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.83, 'time': '05:30'}, {'level_m': 1.86, 'time': '19:30'}]","[{'level_m': -0.39, 'time': '13:40'}]",HCMC_TVHN_20251108.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.68, 'time': '04:00'}, {'level_m': 1.73, 'time': '18:00'}]","[{'level_m': -1.72, 'time': '11:30'}]",HCMC_TVHN_20251108.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.7, 'time': '03:00'}, {'level_m': 1.76, 'time': '17:00'}]","[{'level_m': -2.1, 'time': '11:00'}]",HCMC_TVHN_20251108.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.16, 'time': '01:45'}, {'level_m': 4.09, 'time': '16:00'}]","[{'level_m': 0.33, 'time': '09:30'}]",HCMC_TVHN_20251109.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.85, 'time': '04:00'}, {'level_m': 1.92, 'time': '19:00'}]","[{'level_m': 0.23, 'time': '14:00'}]",HCMC_TVHN_20251109.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.61, 'time': '04:00'}, {'level_m': 1.59, 'time': '18:30'}]","[{'level_m': -0.54, 'time': '13:30'}]",HCMC_TVHN_20251109.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.38, 'time': '09:10'}, {'level_m': 1.35, 'time': '10:00'}]","[{'level_m': 1.21, 'time': '17:30'}]",HCMC_TVHN_20251109.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.95, 'time': '05:30'}, {'level_m': 2.03, 'time': '19:30'}]","[{'level_m': -0.86, 'time': '14:00'}]",HCMC_TVHN_20251109.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.82, 'time': '06:00'}, {'level_m': 1.77, 'time': '20:30'}]","[{'level_m': -0.52, 'time': '14:15'}]",HCMC_TVHN_20251109.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.18, 'time': '12:30'}, {'level_m': 2.7, 'time': '01:30'}]","[{'level_m': 2.12, 'time': '19:10'}]",HCMC_TVHN_20251109.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.66, 'time': '04:30'}, {'level_m': 1.67, 'time': '19:00'}]","[{'level_m': -1.75, 'time': '12:30'}]",HCMC_TVHN_20251109.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.66, 'time': '03:30'}, {'level_m': 1.7, 'time': '18:00'}]","[{'level_m': -2.14, 'time': '12:00'}]",HCMC_TVHN_20251109.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.02, 'time': '02:00'}, {'level_m': 4.0, 'time': '17:15'}]","[{'level_m': 0.4, 'time': '10:45'}]",HCMC_TVHN_20251110.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.82, 'time': '05:00'}, {'level_m': 1.87, 'time': '19:30'}]","[{'level_m': 0.19, 'time': '14:30'}]",HCMC_TVHN_20251110.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.52, 'time': '04:30'}, {'level_m': 1.54, 'time': '19:00'}]","[{'level_m': -0.67, 'time': '14:00'}]",HCMC_TVHN_20251110.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.35, 'time': '09:50'}, {'level_m': 1.35, 'time': '01:00'}]","[{'level_m': 1.19, 'time': '19:20'}]",HCMC_TVHN_20251110.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.79, 'time': '07:00'}, {'level_m': 1.97, 'time': '20:30'}]","[{'level_m': -0.89, 'time': '14:30'}]",HCMC_TVHN_20251110.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.71, 'time': '06:30'}, {'level_m': 1.72, 'time': '21:30'}]","[{'level_m': -0.62, 'time': '15:10'}]",HCMC_TVHN_20251110.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.69, 'time': '01:00'}, {'level_m': None, 'time': None}]","[{'level_m': 2.34, 'time': '19:15'}]",HCMC_TVHN_20251110.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.57, 'time': '05:00'}, {'level_m': 1.62, 'time': '20:00'}]","[{'level_m': -1.8, 'time': '13:30'}]",HCMC_TVHN_20251110.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.56, 'time': '04:30'}, {'level_m': 1.6, 'time': '19:00'}]","[{'level_m': -2.18, 'time': '12:30'}]",HCMC_TVHN_20251110.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.06, 'time': '02:45'}, {'level_m': 3.93, 'time': '18:45'}]","[{'level_m': 0.79, 'time': '11:15'}]",HCMC_TVHN_20251111.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.78, 'time': '05:30'}, {'level_m': 1.8, 'time': '20:30'}]","[{'level_m': 0.23, 'time': '15:00'}]",HCMC_TVHN_20251111.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.44, 'time': '05:00'}, {'level_m': 1.38, 'time': '16:00'}]","[{'level_m': -0.4, 'time': '10:30'}]",HCMC_TVHN_20251111.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.77, 'time': '07:00'}, {'level_m': 1.89, 'time': '21:00'}]","[{'level_m': -0.75, 'time': '15:00'}]",HCMC_TVHN_20251111.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.66, 'time': '07:00'}, {'level_m': 1.67, 'time': '22:30'}]","[{'level_m': -0.57, 'time': '15:55'}]",HCMC_TVHN_20251111.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.57, 'time': '01:00'}, {'level_m': 2.57, 'time': '14:00'}]","[{'level_m': 2.29, 'time': '20:30'}]",HCMC_TVHN_20251111.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.52, 'time': '06:00'}, {'level_m': 1.55, 'time': '21:00'}]","[{'level_m': -1.62, 'time': '14:00'}]",HCMC_TVHN_20251111.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.54, 'time': '05:00'}, {'level_m': 1.52, 'time': '20:00'}]","[{'level_m': -1.97, 'time': '12:30'}]",HCMC_TVHN_20251111.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.94, 'time': '03:15'}, {'level_m': 3.85, 'time': '20:00'}]","[{'level_m': 1.01, 'time': '12:00'}]",HCMC_TVHN_20251112.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.66, 'time': '06:30'}, {'level_m': 1.71, 'time': '22:00'}]","[{'level_m': 0.25, 'time': '16:00'}]",HCMC_TVHN_20251112.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.38, 'time': '05:00'}, {'level_m': 1.41, 'time': '21:30'}]","[{'level_m': -0.57, 'time': '15:30'}]",HCMC_TVHN_20251112.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.66, 'time': '08:00'}, {'level_m': 1.86, 'time': '23:00'}]","[{'level_m': -0.52, 'time': '16:00'}]",HCMC_TVHN_20251112.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.57, 'time': '07:30'}, {'level_m': 1.63, 'time': '23:30'}]","[{'level_m': -0.57, 'time': '16:30'}]",HCMC_TVHN_20251112.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.68, 'time': '01:00'}, {'level_m': 2.63, 'time': '17:00'}]","[{'level_m': 2.36, 'time': '20:00'}]",HCMC_TVHN_20251112.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.37, 'time': '06:30'}, {'level_m': 1.49, 'time': '22:00'}]","[{'level_m': -1.56, 'time': '14:30'}]",HCMC_TVHN_20251112.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.35, 'time': '05:30'}, {'level_m': 1.46, 'time': '21:00'}]","[{'level_m': -1.82, 'time': '13:30'}]",HCMC_TVHN_20251112.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.6, 'time': '05:00'}, {'level_m': 3.89, 'time': '21:00'}]","[{'level_m': 1.24, 'time': '13:15'}]",HCMC_TVHN_20251113.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.4, 'time': '07:30'}, {'level_m': 1.73, 'time': '23:00'}]","[{'level_m': 0.28, 'time': '16:30'}]",HCMC_TVHN_20251113.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.03, 'time': '07:00'}, {'level_m': 1.42, 'time': '23:00'}]","[{'level_m': -0.49, 'time': '16:00'}]",HCMC_TVHN_20251113.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.4, 'time': '08:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.4, 'time': '17:00'}]",HCMC_TVHN_20251113.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.32, 'time': '08:40'}, {'level_m': None, 'time': None}]","[{'level_m': -0.61, 'time': '17:20'}]",HCMC_TVHN_20251113.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.64, 'time': '03:30'}, {'level_m': None, 'time': None}]","[{'level_m': 2.1, 'time': '22:30'}]",HCMC_TVHN_20251113.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.1, 'time': '07:30'}, {'level_m': 1.53, 'time': '23:30'}]","[{'level_m': -1.42, 'time': '15:30'}]",HCMC_TVHN_20251113.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.08, 'time': '07:00'}, {'level_m': 1.52, 'time': '22:30'}]","[{'level_m': -1.58, 'time': '15:00'}]",HCMC_TVHN_20251113.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.41, 'time': '06:00'}, {'level_m': 4.06, 'time': '22:15'}]","[{'level_m': 1.73, 'time': '15:00'}]",HCMC_TVHN_20251114.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.29, 'time': '09:30'}, {'level_m': None, 'time': None}]","[{'level_m': 0.4, 'time': '17:30'}]",HCMC_TVHN_20251114.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.88, 'time': '09:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.32, 'time': '17:00'}]",HCMC_TVHN_20251114.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.09, 'time': '10:00'}, {'level_m': 1.83, 'time': '00:00'}]","[{'level_m': -0.39, 'time': '18:00'}]",HCMC_TVHN_20251114.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.04, 'time': '10:30'}, {'level_m': 1.65, 'time': '01:00'}]","[{'level_m': -0.46, 'time': '18:25'}]",HCMC_TVHN_20251114.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.36, 'time': '09:00'}, {'level_m': None, 'time': None}]","[{'level_m': 2.04, 'time': '23:00'}]",HCMC_TVHN_20251114.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.84, 'time': '09:00'}, {'level_m': None, 'time': None}]","[{'level_m': -1.04, 'time': '16:30'}]",HCMC_TVHN_20251114.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.78, 'time': '08:00'}, {'level_m': None, 'time': None}]","[{'level_m': -1.08, 'time': '15:30'}]",HCMC_TVHN_20251114.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.44, 'time': '08:45'}, {'level_m': 4.09, 'time': '22:45'}]","[{'level_m': 2.27, 'time': '15:45'}]",HCMC_TVHN_20251115.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.32, 'time': '11:00'}, {'level_m': 1.83, 'time': '00:30'}]","[{'level_m': 0.58, 'time': '18:30'}]",HCMC_TVHN_20251115.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.94, 'time': '11:00'}, {'level_m': 1.5, 'time': '00:00'}]","[{'level_m': -0.05, 'time': '18:00'}]",HCMC_TVHN_20251115.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.2, 'time': '12:00'}, {'level_m': 1.93, 'time': '01:00'}]","[{'level_m': -0.1, 'time': '19:30'}]",HCMC_TVHN_20251115.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.16, 'time': '12:30'}, {'level_m': 1.73, 'time': '02:00'}]","[{'level_m': -0.03, 'time': '19:30'}]",HCMC_TVHN_20251115.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.34, 'time': '08:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251115.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.92, 'time': '11:00'}, {'level_m': 1.64, 'time': '01:00'}]","[{'level_m': -0.6, 'time': '17:30'}]",HCMC_TVHN_20251115.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.88, 'time': '10:00'}, {'level_m': 1.63, 'time': '00:00'}]","[{'level_m': -0.6, 'time': '16:30'}]",HCMC_TVHN_20251115.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.46, 'time': '10:45'}, {'level_m': 4.04, 'time': '23:00'}]","[{'level_m': 2.44, 'time': '16:45'}]",HCMC_TVHN_20251116.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.37, 'time': '13:00'}, {'level_m': 1.82, 'time': '00:30'}]","[{'level_m': 0.63, 'time': '19:30'}]",HCMC_TVHN_20251116.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.98, 'time': '13:00'}, {'level_m': 1.49, 'time': '00:30'}]","[{'level_m': 0.02, 'time': '19:00'}]",HCMC_TVHN_20251116.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.18, 'time': '14:00'}, {'level_m': 1.91, 'time': '01:30'}]","[{'level_m': -0.16, 'time': '20:00'}]",HCMC_TVHN_20251116.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.21, 'time': '14:20'}, {'level_m': 1.72, 'time': '02:40'}]","[{'level_m': 0.12, 'time': '20:25'}]",HCMC_TVHN_20251116.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.75, 'time': '08:00'}, {'level_m': 1.39, 'time': '18:00'}]","[{'level_m': 1.04, 'time': '00:00'}]",HCMC_TVHN_20251116.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.0, 'time': '13:00'}, {'level_m': 1.63, 'time': '01:30'}]","[{'level_m': -0.42, 'time': '18:30'}]",HCMC_TVHN_20251116.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.94, 'time': '12:00'}, {'level_m': 1.61, 'time': '00:00'}]","[{'level_m': -0.45, 'time': '17:30'}]",HCMC_TVHN_20251116.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.53, 'time': '11:30'}, {'level_m': 3.96, 'time': '23:30'}]","[{'level_m': 2.55, 'time': '17:30'}]",HCMC_TVHN_20251117.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.45, 'time': '14:30'}, {'level_m': 1.75, 'time': '01:30'}]","[{'level_m': 0.64, 'time': '21:00'}]",HCMC_TVHN_20251117.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.13, 'time': '14:00'}, {'level_m': 1.43, 'time': '01:30'}]","[{'level_m': 0.08, 'time': '20:00'}]",HCMC_TVHN_20251117.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.98, 'time': '17:30'}, {'level_m': 1.05, 'time': '05:30'}]","[{'level_m': 0.85, 'time': '23:30'}]",HCMC_TVHN_20251117.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.35, 'time': '15:00'}, {'level_m': 1.79, 'time': '02:00'}]","[{'level_m': -0.1, 'time': '21:00'}]",HCMC_TVHN_20251117.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.33, 'time': '15:30'}, {'level_m': 1.67, 'time': '03:10'}]","[{'level_m': 0.2, 'time': '21:35'}]",HCMC_TVHN_20251117.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.6, 'time': '07:30'}, {'level_m': 1.37, 'time': '19:15'}]","[{'level_m': 0.86, 'time': '01:00'}]",HCMC_TVHN_20251117.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.14, 'time': '14:00'}, {'level_m': 1.56, 'time': '01:30'}]","[{'level_m': -0.27, 'time': '20:00'}]",HCMC_TVHN_20251117.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.12, 'time': '13:00'}, {'level_m': 1.54, 'time': '01:00'}]","[{'level_m': -0.36, 'time': '19:00'}]",HCMC_TVHN_20251117.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.63, 'time': '13:00'}, {'level_m': 3.98, 'time': '23:45'}]","[{'level_m': 2.74, 'time': '18:00'}]",HCMC_TVHN_20251118.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.52, 'time': '14:30'}, {'level_m': 1.69, 'time': '02:00'}]","[{'level_m': 0.72, 'time': '21:00'}]",HCMC_TVHN_20251118.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.21, 'time': '14:30'}, {'level_m': 1.39, 'time': '02:00'}]","[{'level_m': 0.23, 'time': '21:30'}]",HCMC_TVHN_20251118.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.98, 'time': '18:10'}, {'level_m': 1.01, 'time': '05:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251118.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.52, 'time': '15:30'}, {'level_m': 1.73, 'time': '03:00'}]","[{'level_m': 0.05, 'time': '22:00'}]",HCMC_TVHN_20251118.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.44, 'time': '16:35'}, {'level_m': 1.62, 'time': '03:40'}]","[{'level_m': 0.37, 'time': '22:00'}]",HCMC_TVHN_20251118.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.46, 'time': '08:00'}, {'level_m': 1.28, 'time': '20:30'}]","[{'level_m': 0.76, 'time': '01:00'}]",HCMC_TVHN_20251118.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.25, 'time': '15:00'}, {'level_m': 1.49, 'time': '02:00'}]","[{'level_m': -0.03, 'time': '20:30'}]",HCMC_TVHN_20251118.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.22, 'time': '14:00'}, {'level_m': 1.46, 'time': '01:30'}]","[{'level_m': -0.08, 'time': '19:30'}]",HCMC_TVHN_20251118.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.92, 'time': '13:45'}, {'level_m': None, 'time': None}]","[{'level_m': 2.94, 'time': '19:15'}]",HCMC_TVHN_20251119.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.69, 'time': '16:00'}, {'level_m': 1.65, 'time': '02:30'}]","[{'level_m': 0.77, 'time': '22:00'}]",HCMC_TVHN_20251119.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.42, 'time': '15:30'}, {'level_m': 1.39, 'time': '02:30'}]","[{'level_m': 0.3, 'time': '21:30'}]",HCMC_TVHN_20251119.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.0, 'time': '18:20'}, {'level_m': 0.99, 'time': '05:30'}]","[{'level_m': 0.82, 'time': '00:10'}]",HCMC_TVHN_20251119.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.76, 'time': '16:30'}, {'level_m': 1.72, 'time': '03:00'}]","[{'level_m': 0.31, 'time': '23:00'}]",HCMC_TVHN_20251119.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.63, 'time': '17:50'}, {'level_m': 1.63, 'time': '04:00'}]","[{'level_m': 0.6, 'time': '23:00'}]",HCMC_TVHN_20251119.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.37, 'time': '08:00'}, {'level_m': 1.38, 'time': '22:00'}]","[{'level_m': 0.42, 'time': '02:30'}]",HCMC_TVHN_20251119.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.5, 'time': '16:00'}, {'level_m': 1.49, 'time': '03:00'}]","[{'level_m': 0.19, 'time': '21:00'}]",HCMC_TVHN_20251119.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.49, 'time': '15:00'}, {'level_m': 1.48, 'time': '02:00'}]","[{'level_m': 0.48, 'time': '20:00'}]",HCMC_TVHN_20251119.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.97, 'time': '14:30'}, {'level_m': 4.05, 'time': '00:00'}]","[{'level_m': 3.04, 'time': '19:30'}]",HCMC_TVHN_20251120.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.72, 'time': '16:00'}, {'level_m': 1.7, 'time': '02:30'}]","[{'level_m': 0.8, 'time': '22:00'}]",HCMC_TVHN_20251120.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.46, 'time': '16:00'}, {'level_m': 1.43, 'time': '02:00'}]","[{'level_m': 0.39, 'time': '22:00'}]",HCMC_TVHN_20251120.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.04, 'time': '18:40'}, {'level_m': 1.0, 'time': '05:30'}]","[{'level_m': 0.83, 'time': '00:30'}]",HCMC_TVHN_20251120.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.82, 'time': '17:00'}, {'level_m': 1.77, 'time': '03:30'}]","[{'level_m': 0.45, 'time': '23:30'}]",HCMC_TVHN_20251120.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.66, 'time': '18:20'}, {'level_m': 1.66, 'time': '04:20'}]","[{'level_m': 0.68, 'time': '23:25'}]",HCMC_TVHN_20251120.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.4, 'time': '08:30'}, {'level_m': 1.39, 'time': '22:30'}]","[{'level_m': 0.69, 'time': '03:30'}]",HCMC_TVHN_20251120.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.55, 'time': '17:00'}, {'level_m': 1.53, 'time': '03:00'}]","[{'level_m': 0.18, 'time': '22:00'}]",HCMC_TVHN_20251120.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.52, 'time': '15:00'}, {'level_m': 1.46, 'time': '01:00'}]","[{'level_m': 0.2, 'time': '21:00'}]",HCMC_TVHN_20251120.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.13, 'time': '14:15'}, {'level_m': 4.03, 'time': '00:45'}]","[{'level_m': 3.29, 'time': '20:15'}]",HCMC_TVHN_20251121.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.77, 'time': '16:30'}, {'level_m': 1.67, 'time': '02:30'}]","[{'level_m': 0.95, 'time': '23:00'}]",HCMC_TVHN_20251121.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.54, 'time': '16:30'}, {'level_m': 1.43, 'time': '02:30'}]","[{'level_m': 0.58, 'time': '22:30'}]",HCMC_TVHN_20251121.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.05, 'time': '20:00'}, {'level_m': 1.06, 'time': '06:50'}]","[{'level_m': 0.9, 'time': '01:00'}]",HCMC_TVHN_20251121.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.92, 'time': '18:00'}, {'level_m': 1.73, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251121.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.72, 'time': '19:00'}, {'level_m': 1.65, 'time': '04:40'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251121.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.4, 'time': '09:00'}, {'level_m': 1.41, 'time': '23:30'}]","[{'level_m': 0.75, 'time': '03:30'}]",HCMC_TVHN_20251121.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.64, 'time': '17:00'}, {'level_m': 1.52, 'time': '03:00'}]","[{'level_m': 0.48, 'time': '23:00'}]",HCMC_TVHN_20251121.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.64, 'time': '16:00'}, {'level_m': 1.52, 'time': '02:00'}]","[{'level_m': 0.5, 'time': '22:00'}]",HCMC_TVHN_20251121.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.19, 'time': '16:00'}, {'level_m': 4.13, 'time': '01:15'}]","[{'level_m': 3.52, 'time': '20:30'}]",HCMC_TVHN_20251123.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.83, 'time': '18:30'}, {'level_m': 1.7, 'time': '03:30'}]","[{'level_m': 1.07, 'time': '23:30'}]",HCMC_TVHN_20251123.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.57, 'time': '18:00'}, {'level_m': 1.44, 'time': '04:00'}]","[{'level_m': 0.74, 'time': '23:30'}]",HCMC_TVHN_20251123.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.07, 'time': '22:00'}, {'level_m': 1.09, 'time': '07:50'}]","[{'level_m': 0.97, 'time': '02:30'}]",HCMC_TVHN_20251123.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.99, 'time': '19:30'}, {'level_m': 1.74, 'time': '05:00'}]","[{'level_m': 0.88, 'time': '01:00'}]",HCMC_TVHN_20251123.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.77, 'time': '20:20'}, {'level_m': 1.68, 'time': '05:20'}]","[{'level_m': 1.06, 'time': '00:45'}]",HCMC_TVHN_20251123.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.53, 'time': '09:00'}, {'level_m': 1.56, 'time': '01:00'}]","[{'level_m': 1.29, 'time': '05:30'}]",HCMC_TVHN_20251123.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.69, 'time': '19:00'}, {'level_m': 1.54, 'time': '04:00'}]","[{'level_m': 0.74, 'time': '23:00'}]",HCMC_TVHN_20251123.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.7, 'time': '18:00'}, {'level_m': 1.52, 'time': '03:00'}]","[{'level_m': 0.73, 'time': '22:30'}]",HCMC_TVHN_20251123.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.05, 'time': '16:45'}, {'level_m': 4.16, 'time': '01:15'}]","[{'level_m': 3.56, 'time': '21:00'}]",HCMC_TVHN_20251124.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.73, 'time': '19:00'}, {'level_m': 1.73, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251124.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.48, 'time': '19:00'}, {'level_m': 1.5, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251124.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.08, 'time': '22:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251124.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.9, 'time': '20:00'}, {'level_m': 1.82, 'time': '05:00'}]","[{'level_m': 0.93, 'time': '00:30'}]",HCMC_TVHN_20251124.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.72, 'time': '21:00'}, {'level_m': 1.72, 'time': '05:40'}]","[{'level_m': 1.06, 'time': '00:40'}]",HCMC_TVHN_20251124.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.51, 'time': '09:30'}, {'level_m': 1.49, 'time': '01:00'}]","[{'level_m': 1.18, 'time': '05:30'}]",HCMC_TVHN_20251124.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.61, 'time': '20:00'}, {'level_m': 1.58, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251124.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '19:00'}, {'level_m': 1.58, 'time': '03:30'}]","[{'level_m': 0.82, 'time': '23:00'}]",HCMC_TVHN_20251124.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.01, 'time': '17:30'}, {'level_m': 4.08, 'time': '02:00'}]","[{'level_m': 3.61, 'time': '22:00'}]",HCMC_TVHN_20251125.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.7, 'time': '19:30'}, {'level_m': 1.66, 'time': '04:00'}]","[{'level_m': 1.13, 'time': '00:00'}]",HCMC_TVHN_20251125.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.47, 'time': '19:30'}, {'level_m': 1.41, 'time': '04:30'}]","[{'level_m': 0.78, 'time': '00:00'}]",HCMC_TVHN_20251125.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.9, 'time': '20:30'}, {'level_m': 1.74, 'time': '05:30'}]","[{'level_m': 0.97, 'time': '01:30'}]",HCMC_TVHN_20251125.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.75, 'time': '21:40'}, {'level_m': 1.65, 'time': '06:00'}]","[{'level_m': 1.09, 'time': '01:20'}]",HCMC_TVHN_20251125.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.48, 'time': '10:30'}, {'level_m': 1.48, 'time': '02:00'}]","[{'level_m': 1.18, 'time': '06:30'}]",HCMC_TVHN_20251125.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.61, 'time': '20:00'}, {'level_m': 1.5, 'time': '05:00'}]","[{'level_m': 0.77, 'time': '00:00'}]",HCMC_TVHN_20251125.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '19:00'}, {'level_m': 1.48, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251125.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.02, 'time': '18:45'}, {'level_m': 3.99, 'time': '02:00'}]","[{'level_m': 3.75, 'time': '22:30'}]",HCMC_TVHN_20251126.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.71, 'time': '20:00'}, {'level_m': 1.59, 'time': '05:00'}]","[{'level_m': 1.18, 'time': '01:30'}]",HCMC_TVHN_20251126.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.44, 'time': '20:00'}, {'level_m': 1.34, 'time': '05:30'}]","[{'level_m': 0.83, 'time': '01:00'}]",HCMC_TVHN_20251126.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.08, 'time': '01:00'}, {'level_m': 1.1, 'time': '09:00'}]","[{'level_m': 1.02, 'time': '04:30'}]",HCMC_TVHN_20251126.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.83, 'time': '21:00'}, {'level_m': 1.63, 'time': '06:30'}]","[{'level_m': 1.0, 'time': '03:00'}]",HCMC_TVHN_20251126.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.72, 'time': '22:20'}, {'level_m': 1.61, 'time': '06:40'}]","[{'level_m': 1.17, 'time': '02:35'}]",HCMC_TVHN_20251126.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.42, 'time': '17:00'}, {'level_m': 2.49, 'time': '04:30'}]","[{'level_m': 2.19, 'time': '08:00'}]",HCMC_TVHN_20251126.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.59, 'time': '21:00'}, {'level_m': 1.41, 'time': '06:00'}]","[{'level_m': 0.84, 'time': '01:00'}]",HCMC_TVHN_20251126.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.58, 'time': '20:00'}, {'level_m': 1.39, 'time': '05:00'}]","[{'level_m': 0.89, 'time': '00:30'}]",HCMC_TVHN_20251126.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.96, 'time': '20:00'}, {'level_m': 3.84, 'time': '04:00'}]","[{'level_m': 3.67, 'time': '00:45'}]",HCMC_TVHN_20251128.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.63, 'time': '21:30'}, {'level_m': 1.46, 'time': '06:00'}]","[{'level_m': 1.25, 'time': '02:00'}]",HCMC_TVHN_20251128.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.37, 'time': '21:30'}, {'level_m': 1.16, 'time': '06:00'}]","[{'level_m': 0.9, 'time': '02:30'}]",HCMC_TVHN_20251128.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.99, 'time': '01:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251128.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.78, 'time': '23:00'}, {'level_m': 1.39, 'time': '08:00'}]","[{'level_m': 1.03, 'time': '04:00'}]",HCMC_TVHN_20251128.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.62, 'time': '23:40'}, {'level_m': 1.42, 'time': '08:00'}]","[{'level_m': 1.17, 'time': '04:30'}]",HCMC_TVHN_20251128.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.43, 'time': '07:30'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251128.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.47, 'time': '22:00'}, {'level_m': 1.23, 'time': '07:00'}]","[{'level_m': 0.88, 'time': '03:00'}]",HCMC_TVHN_20251128.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.45, 'time': '21:00'}, {'level_m': 1.18, 'time': '06:00'}]","[{'level_m': 0.96, 'time': '02:00'}]",HCMC_TVHN_20251128.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.04, 'time': '20:30'}, {'level_m': 3.64, 'time': '04:30'}]","[{'level_m': 3.48, 'time': '02:30'}]",HCMC_TVHN_20251129.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.67, 'time': '23:00'}, {'level_m': 1.3, 'time': '07:30'}]","[{'level_m': 1.12, 'time': '04:30'}]",HCMC_TVHN_20251129.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.38, 'time': '22:30'}, {'level_m': 0.98, 'time': '07:30'}]","[{'level_m': 0.75, 'time': '04:30'}]",HCMC_TVHN_20251129.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.0, 'time': '01:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251129.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.84, 'time': '07:00'}, {'level_m': None, 'time': None}]","[{'level_m': 1.11, 'time': '15:30'}]",HCMC_TVHN_20251129.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.53, 'time': '23:00'}, {'level_m': 1.0, 'time': '08:00'}]","[{'level_m': 0.7, 'time': '04:00'}]",HCMC_TVHN_20251129.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.5, 'time': '23:00'}, {'level_m': 1.02, 'time': '07:00'}]","[{'level_m': 0.75, 'time': '03:30'}]",HCMC_TVHN_20251129.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.98, 'time': '21:30'}, {'level_m': 3.44, 'time': '06:45'}]","[{'level_m': 2.8, 'time': '04:30'}]",HCMC_TVHN_20251130.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.63, 'time': '23:30'}, {'level_m': 1.2, 'time': '09:30'}]","[{'level_m': 0.91, 'time': '06:00'}]",HCMC_TVHN_20251130.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.97, 'time': '02:00'}, {'level_m': 0.45, 'time': '07:30'}]","[{'level_m': -0.12, 'time': '02:10'}]",HCMC_TVHN_20251130.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.83, 'time': '00:00'}, {'level_m': 1.05, 'time': '10:30'}]","[{'level_m': 0.6, 'time': '07:00'}]",HCMC_TVHN_20251130.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.65, 'time': '01:00'}, {'level_m': 1.07, 'time': '10:30'}]","[{'level_m': 0.76, 'time': '07:00'}]",HCMC_TVHN_20251130.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 2.2, 'time': '08:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251130.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.45, 'time': '23:30'}, {'level_m': 0.81, 'time': '08:30'}]","[{'level_m': 0.43, 'time': '05:00'}]",HCMC_TVHN_20251130.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.0, 'time': '22:00'}, {'level_m': 3.36, 'time': '08:30'}]","[{'level_m': 2.8, 'time': '04:30'}]",HCMC_TVHN_20251201.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.33, 'time': '00:00'}, {'level_m': 0.86, 'time': '11:00'}]","[{'level_m': 0.09, 'time': '06:30'}]",HCMC_TVHN_20251201.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.9, 'time': '02:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251201.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.77, 'time': '00:30'}, {'level_m': 1.15, 'time': '12:00'}]","[{'level_m': 0.16, 'time': '08:00'}]",HCMC_TVHN_20251201.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.59, 'time': '01:30'}, {'level_m': 1.07, 'time': '12:15'}]","[{'level_m': 0.38, 'time': '08:00'}]",HCMC_TVHN_20251201.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.65, 'time': '06:30'}, {'level_m': 1.17, 'time': '16:00'}]","[{'level_m': 0.9, 'time': '13:00'}]",HCMC_TVHN_20251201.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.47, 'time': '00:00'}, {'level_m': 0.9, 'time': '11:00'}]","[{'level_m': 0.0, 'time': '06:00'}]",HCMC_TVHN_20251201.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.04, 'time': '22:45'}, {'level_m': 3.39, 'time': '10:45'}]","[{'level_m': 2.33, 'time': '05:00'}]",HCMC_TVHN_20251202.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.69, 'time': '00:00'}, {'level_m': 1.26, 'time': '13:00'}]","[{'level_m': 0.4, 'time': '08:00'}]",HCMC_TVHN_20251202.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.36, 'time': '00:00'}, {'level_m': 0.92, 'time': '13:00'}]","[{'level_m': -0.2, 'time': '07:30'}]",HCMC_TVHN_20251202.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.83, 'time': '03:30'}, {'level_m': 0.72, 'time': '15:50'}]","[{'level_m': 0.53, 'time': '11:00'}]",HCMC_TVHN_20251202.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.82, 'time': '01:00'}, {'level_m': 1.23, 'time': '13:30'}]","[{'level_m': -0.25, 'time': '09:00'}]",HCMC_TVHN_20251202.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.59, 'time': '02:00'}, {'level_m': 1.18, 'time': '14:20'}]","[{'level_m': 0.08, 'time': '09:00'}]",HCMC_TVHN_20251202.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.43, 'time': '06:30'}, {'level_m': 1.24, 'time': '18:30'}]","[{'level_m': 0.65, 'time': '14:00'}]",HCMC_TVHN_20251202.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.49, 'time': '01:00'}, {'level_m': 1.02, 'time': '13:00'}]","[{'level_m': -0.48, 'time': '07:00'}]",HCMC_TVHN_20251202.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.48, 'time': '00:00'}, {'level_m': 0.96, 'time': '12:00'}]","[{'level_m': -0.55, 'time': '06:30'}]",HCMC_TVHN_20251202.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.01, 'time': '22:30'}, {'level_m': 3.66, 'time': '12:00'}]","[{'level_m': 1.73, 'time': '05:45'}]",HCMC_TVHN_20251203.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.66, 'time': '01:00'}, {'level_m': 1.49, 'time': '14:00'}]","[{'level_m': 0.17, 'time': '09:00'}]",HCMC_TVHN_20251203.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.35, 'time': '01:00'}, {'level_m': 1.14, 'time': '14:00'}]","[{'level_m': -0.51, 'time': '08:30'}]",HCMC_TVHN_20251203.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.78, 'time': '04:00'}, {'level_m': 0.73, 'time': '16:50'}]","[{'level_m': 0.4, 'time': '11:40'}]",HCMC_TVHN_20251203.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.79, 'time': '02:00'}, {'level_m': 1.53, 'time': '15:00'}]","[{'level_m': -0.68, 'time': '09:30'}]",HCMC_TVHN_20251203.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.63, 'time': '02:40'}, {'level_m': 1.4, 'time': '15:30'}]","[{'level_m': -0.24, 'time': '09:50'}]",HCMC_TVHN_20251203.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.44, 'time': '07:30'}, {'level_m': 1.34, 'time': '20:00'}]","[{'level_m': 0.59, 'time': '15:00'}]",HCMC_TVHN_20251203.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.54, 'time': '01:00'}, {'level_m': 1.3, 'time': '14:00'}]","[{'level_m': -1.04, 'time': '08:00'}]",HCMC_TVHN_20251203.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.53, 'time': '00:30'}, {'level_m': 1.25, 'time': '13:30'}]","[{'level_m': -1.17, 'time': '07:30'}]",HCMC_TVHN_20251203.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.07, 'time': '23:15'}, {'level_m': 3.88, 'time': '12:30'}]","[{'level_m': 1.12, 'time': '06:30'}]",HCMC_TVHN_20251204.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.66, 'time': '01:30'}, {'level_m': 1.62, 'time': '15:30'}]","[{'level_m': 0.0, 'time': '12:00'}]",HCMC_TVHN_20251204.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.34, 'time': '01:00'}, {'level_m': 1.29, 'time': '15:00'}]","[{'level_m': -0.75, 'time': '09:30'}]",HCMC_TVHN_20251204.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.76, 'time': '04:00'}, {'level_m': 0.77, 'time': '17:50'}]","[{'level_m': 0.37, 'time': '12:20'}]",HCMC_TVHN_20251204.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.78, 'time': '02:00'}, {'level_m': 1.88, 'time': '16:00'}]","[{'level_m': -1.03, 'time': '10:30'}]",HCMC_TVHN_20251204.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.62, 'time': '03:00'}, {'level_m': 1.56, 'time': '17:00'}]","[{'level_m': -0.52, 'time': '10:45'}]",HCMC_TVHN_20251204.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.44, 'time': '07:30'}, {'level_m': 1.37, 'time': '21:00'}]","[{'level_m': 0.36, 'time': '15:30'}]",HCMC_TVHN_20251204.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.52, 'time': '02:00'}, {'level_m': 1.47, 'time': '15:00'}]","[{'level_m': -1.42, 'time': '09:00'}]",HCMC_TVHN_20251204.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.5, 'time': '01:00'}, {'level_m': 1.44, 'time': '15:00'}]","[{'level_m': -1.65, 'time': '08:30'}]",HCMC_TVHN_20251204.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.62, 'time': '02:00'}, {'level_m': 1.54, 'time': '16:30'}]","[{'level_m': -0.25, 'time': '11:30'}]",HCMC_TVHN_20251205.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.29, 'time': '02:00'}, {'level_m': 1.3, 'time': '16:00'}]","[{'level_m': -0.89, 'time': '10:30'}]",HCMC_TVHN_20251205.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.8, 'time': '04:50'}, {'level_m': 0.81, 'time': '19:50'}]","[{'level_m': 0.37, 'time': '13:30'}]",HCMC_TVHN_20251205.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.72, 'time': '03:30'}, {'level_m': 1.91, 'time': '17:30'}]","[{'level_m': -1.33, 'time': '11:00'}]",HCMC_TVHN_20251205.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.69, 'time': '03:40'}, {'level_m': 1.65, 'time': '18:00'}]","[{'level_m': -0.68, 'time': '11:30'}]",HCMC_TVHN_20251205.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.42, 'time': '08:00'}, {'level_m': 1.46, 'time': '22:30'}]","[{'level_m': 0.34, 'time': '16:00'}]",HCMC_TVHN_20251205.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.56, 'time': '03:00'}, {'level_m': 1.53, 'time': '16:00'}]","[{'level_m': -1.64, 'time': '10:00'}]",HCMC_TVHN_20251205.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.54, 'time': '02:00'}, {'level_m': 1.57, 'time': '16:00'}]","[{'level_m': -1.96, 'time': '09:00'}]",HCMC_TVHN_20251205.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.19, 'time': '00:00'}, {'level_m': 4.16, 'time': '14:45'}]","[{'level_m': 0.45, 'time': '07:45'}]",HCMC_TVHN_20251206.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.62, 'time': '03:30'}, {'level_m': 1.62, 'time': '18:00'}]","[{'level_m': -0.25, 'time': '12:30'}]",HCMC_TVHN_20251206.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.4, 'time': '02:30'}, {'level_m': 1.39, 'time': '17:00'}]","[{'level_m': -0.9, 'time': '11:30'}]",HCMC_TVHN_20251206.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.88, 'time': '05:30'}, {'level_m': 0.89, 'time': '20:30'}]","[{'level_m': 0.44, 'time': '14:00'}]",HCMC_TVHN_20251206.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.02, 'time': '04:00'}, {'level_m': 1.98, 'time': '18:30'}]","[{'level_m': -1.37, 'time': '12:00'}]",HCMC_TVHN_20251206.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.81, 'time': '04:00'}, {'level_m': 1.75, 'time': '19:10'}]","[{'level_m': -0.6, 'time': '12:20'}]",HCMC_TVHN_20251206.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.6, 'time': '09:00'}, {'level_m': 1.52, 'time': '23:30'}]","[{'level_m': 0.59, 'time': '17:00'}]",HCMC_TVHN_20251206.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.67, 'time': '03:00'}, {'level_m': 1.63, 'time': '17:00'}]","[{'level_m': -1.75, 'time': '11:00'}]",HCMC_TVHN_20251206.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.69, 'time': '02:30'}, {'level_m': 1.67, 'time': '17:00'}]","[{'level_m': -2.06, 'time': '10:00'}]",HCMC_TVHN_20251206.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.25, 'time': '00:30'}, {'level_m': 4.24, 'time': '15:30'}]","[{'level_m': 0.43, 'time': '08:30'}]",HCMC_TVHN_20251207.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.55, 'time': '04:30'}, {'level_m': 1.64, 'time': '18:00'}]","[{'level_m': -0.25, 'time': '13:00'}]",HCMC_TVHN_20251207.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.4, 'time': '02:00'}, {'level_m': 1.55, 'time': '17:00'}]","[{'level_m': -0.89, 'time': '12:30'}]",HCMC_TVHN_20251207.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.93, 'time': '06:40'}, {'level_m': 0.98, 'time': '21:00'}]","[{'level_m': 0.55, 'time': '15:10'}]",HCMC_TVHN_20251207.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.99, 'time': '05:00'}, {'level_m': 2.02, 'time': '20:00'}]","[{'level_m': -1.47, 'time': '13:00'}]",HCMC_TVHN_20251207.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.81, 'time': '05:00'}, {'level_m': 1.79, 'time': '20:30'}]","[{'level_m': -0.59, 'time': '13:15'}]",HCMC_TVHN_20251207.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.59, 'time': '09:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.55, 'time': '17:30'}]",HCMC_TVHN_20251207.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.69, 'time': '03:00'}, {'level_m': 1.68, 'time': '19:00'}]","[{'level_m': -1.8, 'time': '11:00'}]",HCMC_TVHN_20251207.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.69, 'time': '02:30'}, {'level_m': 1.73, 'time': '17:30'}]","[{'level_m': -2.05, 'time': '11:00'}]",HCMC_TVHN_20251207.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.35, 'time': '01:15'}, {'level_m': 4.14, 'time': '16:45'}]","[{'level_m': 0.49, 'time': '09:30'}]",HCMC_TVHN_20251208.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.57, 'time': '04:30'}, {'level_m': 1.71, 'time': '19:30'}]","[{'level_m': -0.1, 'time': '14:00'}]",HCMC_TVHN_20251208.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.56, 'time': '04:00'}, {'level_m': 1.38, 'time': '16:00'}]","[{'level_m': -0.85, 'time': '13:00'}]",HCMC_TVHN_20251208.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.01, 'time': '07:00'}, {'level_m': None, 'time': None}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251208.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 2.0, 'time': '05:30'}, {'level_m': 1.95, 'time': '20:30'}]","[{'level_m': -1.52, 'time': '14:00'}]",HCMC_TVHN_20251208.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.87, 'time': '05:30'}, {'level_m': 1.76, 'time': '21:10'}]","[{'level_m': -0.45, 'time': '14:00'}]",HCMC_TVHN_20251208.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.62, 'time': '10:00'}, {'level_m': 1.53, 'time': '01:30'}]","[{'level_m': 0.59, 'time': '18:30'}]",HCMC_TVHN_20251208.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.71, 'time': '04:00'}, {'level_m': 1.63, 'time': '20:00'}]","[{'level_m': -1.72, 'time': '12:00'}]",HCMC_TVHN_20251208.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.75, 'time': '03:00'}, {'level_m': 1.64, 'time': '19:00'}]","[{'level_m': -2.06, 'time': '12:00'}]",HCMC_TVHN_20251208.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.3, 'time': '01:30'}, {'level_m': 4.09, 'time': '17:15'}]","[{'level_m': 0.56, 'time': '10:30'}]",HCMC_TVHN_20251209.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.7, 'time': '05:30'}, {'level_m': 1.7, 'time': '19:30'}]","[{'level_m': -0.09, 'time': '14:30'}]",HCMC_TVHN_20251209.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.5, 'time': '04:30'}, {'level_m': 1.45, 'time': '19:30'}]","[{'level_m': -0.96, 'time': '13:30'}]",HCMC_TVHN_20251209.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.02, 'time': '08:00'}, {'level_m': 1.02, 'time': '22:10'}]","[{'level_m': 0.63, 'time': '16:40'}]",HCMC_TVHN_20251209.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.92, 'time': '06:30'}, {'level_m': 1.89, 'time': '21:00'}]","[{'level_m': -1.53, 'time': '14:30'}]",HCMC_TVHN_20251209.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.8, 'time': '06:20'}, {'level_m': 1.68, 'time': '21:35'}]","[{'level_m': -0.63, 'time': '14:45'}]",HCMC_TVHN_20251209.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.58, 'time': '10:30'}, {'level_m': 1.51, 'time': '02:00'}]","[{'level_m': 0.51, 'time': '19:00'}]",HCMC_TVHN_20251209.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.65, 'time': '05:00'}, {'level_m': 1.57, 'time': '20:00'}]","[{'level_m': -1.82, 'time': '13:00'}]",HCMC_TVHN_20251209.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.66, 'time': '04:30'}, {'level_m': 1.6, 'time': '19:30'}]","[{'level_m': -2.05, 'time': '12:30'}]",HCMC_TVHN_20251209.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.2, 'time': '03:15'}, {'level_m': 4.0, 'time': '18:30'}]","[{'level_m': 0.93, 'time': '11:00'}]",HCMC_TVHN_20251210.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.67, 'time': '05:30'}, {'level_m': 1.67, 'time': '20:30'}]","[{'level_m': 0.0, 'time': '12:30'}]",HCMC_TVHN_20251210.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.44, 'time': '05:30'}, {'level_m': 1.4, 'time': '20:30'}]","[{'level_m': -0.77, 'time': '14:30'}]",HCMC_TVHN_20251210.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.03, 'time': '08:50'}, {'level_m': 0.97, 'time': '23:30'}]","[{'level_m': 0.63, 'time': '17:40'}]",HCMC_TVHN_20251210.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.86, 'time': '07:00'}, {'level_m': 1.85, 'time': '21:30'}]","[{'level_m': -1.13, 'time': '15:00'}]",HCMC_TVHN_20251210.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.74, 'time': '07:00'}, {'level_m': 1.67, 'time': '22:30'}]","[{'level_m': -0.53, 'time': '15:30'}]",HCMC_TVHN_20251210.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.54, 'time': '11:30'}, {'level_m': 1.46, 'time': '02:30'}]","[{'level_m': 0.46, 'time': '20:00'}]",HCMC_TVHN_20251210.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.6, 'time': '06:00'}, {'level_m': 1.54, 'time': '21:00'}]","[{'level_m': -1.58, 'time': '14:00'}]",HCMC_TVHN_20251210.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '05:00'}, {'level_m': 1.54, 'time': '20:00'}]","[{'level_m': -1.81, 'time': '12:30'}]",HCMC_TVHN_20251210.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.97, 'time': '03:45'}, {'level_m': 3.97, 'time': '18:45'}]","[{'level_m': 1.18, 'time': '12:00'}]",HCMC_TVHN_20251211.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.55, 'time': '06:00'}, {'level_m': 1.68, 'time': '21:30'}]","[{'level_m': 0.01, 'time': '16:00'}]",HCMC_TVHN_20251211.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.26, 'time': '06:30'}, {'level_m': 1.4, 'time': '21:00'}]","[{'level_m': -0.74, 'time': '15:00'}]",HCMC_TVHN_20251211.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.96, 'time': '09:10'}, {'level_m': 0.98, 'time': '10:00'}]","[{'level_m': 0.59, 'time': '18:10'}]",HCMC_TVHN_20251211.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.61, 'time': '07:30'}, {'level_m': 1.83, 'time': '22:00'}]","[{'level_m': -1.12, 'time': '15:30'}]",HCMC_TVHN_20251211.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.54, 'time': '08:00'}, {'level_m': 1.65, 'time': '23:10'}]","[{'level_m': -0.63, 'time': '16:05'}]",HCMC_TVHN_20251211.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.41, 'time': '11:30'}, {'level_m': 1.44, 'time': '03:00'}]","[{'level_m': 0.28, 'time': '20:30'}]",HCMC_TVHN_20251211.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.37, 'time': '07:00'}, {'level_m': 1.51, 'time': '21:00'}]","[{'level_m': -1.56, 'time': '14:00'}]",HCMC_TVHN_20251211.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.35, 'time': '06:00'}, {'level_m': 1.53, 'time': '20:30'}]","[{'level_m': -1.7, 'time': '13:00'}]",HCMC_TVHN_20251211.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.71, 'time': '04:45'}, {'level_m': 3.9, 'time': '20:15'}]","[{'level_m': 1.57, 'time': '12:15'}]",HCMC_TVHN_20251212.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.39, 'time': '07:30'}, {'level_m': 1.63, 'time': '22:00'}]","[{'level_m': 0.15, 'time': '16:30'}]",HCMC_TVHN_20251212.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.07, 'time': '07:30'}, {'level_m': 1.35, 'time': '22:00'}]","[{'level_m': -0.56, 'time': '15:00'}]",HCMC_TVHN_20251212.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.93, 'time': '10:50'}, {'level_m': 0.98, 'time': '00:10'}]","[{'level_m': 0.6, 'time': '18:40'}]",HCMC_TVHN_20251212.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.36, 'time': '08:30'}, {'level_m': 1.79, 'time': '22:30'}]","[{'level_m': -0.91, 'time': '16:00'}]",HCMC_TVHN_20251212.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.34, 'time': '09:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.48, 'time': '16:40'}]",HCMC_TVHN_20251212.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.31, 'time': '12:30'}, {'level_m': 1.42, 'time': '03:30'}]","[{'level_m': 0.11, 'time': '21:30'}]",HCMC_TVHN_20251212.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.16, 'time': '08:00'}, {'level_m': 1.5, 'time': '22:00'}]","[{'level_m': -1.26, 'time': '15:00'}]",HCMC_TVHN_20251212.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.12, 'time': '07:00'}, {'level_m': 1.49, 'time': '22:00'}]","[{'level_m': -1.23, 'time': '14:00'}]",HCMC_TVHN_20251212.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.37, 'time': '06:00'}, {'level_m': 3.93, 'time': '21:00'}]","[{'level_m': 1.96, 'time': '13:00'}]",HCMC_TVHN_20251213.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.17, 'time': '08:30'}, {'level_m': 1.59, 'time': '22:30'}]","[{'level_m': 0.22, 'time': '16:30'}]",HCMC_TVHN_20251213.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.84, 'time': '08:30'}, {'level_m': 1.34, 'time': '23:00'}]","[{'level_m': -0.41, 'time': '15:30'}]",HCMC_TVHN_20251213.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '11:40'}, {'level_m': 0.96, 'time': '01:20'}]","[{'level_m': 0.53, 'time': '19:30'}]",HCMC_TVHN_20251213.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.04, 'time': '09:00'}, {'level_m': 1.75, 'time': '23:30'}]","[{'level_m': -0.73, 'time': '16:00'}]",HCMC_TVHN_20251213.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.07, 'time': '10:00'}, {'level_m': 1.61, 'time': '00:00'}]","[{'level_m': -0.37, 'time': '17:10'}]",HCMC_TVHN_20251213.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.07, 'time': '13:30'}, {'level_m': 1.38, 'time': '04:30'}]","[{'level_m': -0.06, 'time': '21:30'}]",HCMC_TVHN_20251213.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.83, 'time': '09:00'}, {'level_m': 1.5, 'time': '23:00'}]","[{'level_m': -1.02, 'time': '15:00'}]",HCMC_TVHN_20251213.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.83, 'time': '08:00'}, {'level_m': 1.48, 'time': '22:30'}]","[{'level_m': -0.8, 'time': '14:30'}]",HCMC_TVHN_20251213.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.21, 'time': '07:45'}, {'level_m': 3.92, 'time': '21:15'}]","[{'level_m': 2.37, 'time': '13:45'}]",HCMC_TVHN_20251214.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.08, 'time': '10:00'}, {'level_m': 1.56, 'time': '23:30'}]","[{'level_m': 0.37, 'time': '17:00'}]",HCMC_TVHN_20251214.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.74, 'time': '10:00'}, {'level_m': 1.29, 'time': '23:30'}]","[{'level_m': -0.16, 'time': '16:30'}]",HCMC_TVHN_20251214.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.7, 'time': '13:00'}, {'level_m': 0.78, 'time': '02:30'}]","[{'level_m': 0.48, 'time': '20:00'}]",HCMC_TVHN_20251214.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.0, 'time': '11:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.35, 'time': '17:00'}]",HCMC_TVHN_20251214.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 0.95, 'time': '11:20'}, {'level_m': 1.58, 'time': '01:00'}]","[{'level_m': -0.05, 'time': '17:30'}]",HCMC_TVHN_20251214.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 0.98, 'time': '15:30'}, {'level_m': 1.36, 'time': '05:00'}]","[{'level_m': 0.09, 'time': '22:30'}]",HCMC_TVHN_20251214.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.78, 'time': '10:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.55, 'time': '16:00'}]",HCMC_TVHN_20251214.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.73, 'time': '09:30'}, {'level_m': 1.35, 'time': '22:30'}]","[{'level_m': -0.43, 'time': '15:00'}]",HCMC_TVHN_20251214.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.14, 'time': '10:00'}, {'level_m': 3.86, 'time': '21:30'}]","[{'level_m': 2.86, 'time': '15:00'}]",HCMC_TVHN_20251215.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.01, 'time': '12:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.7, 'time': '17:30'}]",HCMC_TVHN_20251215.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.7, 'time': '12:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.29, 'time': '17:00'}]",HCMC_TVHN_20251215.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.61, 'time': '15:00'}, {'level_m': 0.82, 'time': '03:10'}]","[{'level_m': 0.47, 'time': '21:00'}]",HCMC_TVHN_20251215.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 0.83, 'time': '13:00'}, {'level_m': 1.72, 'time': '00:00'}]","[{'level_m': 0.14, 'time': '17:30'}]",HCMC_TVHN_20251215.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 0.94, 'time': '13:30'}, {'level_m': 1.57, 'time': '01:25'}]","[{'level_m': 0.45, 'time': '19:10'}]",HCMC_TVHN_20251215.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 0.98, 'time': '17:00'}, {'level_m': 1.36, 'time': '05:30'}]","[{'level_m': 0.39, 'time': '23:00'}]",HCMC_TVHN_20251215.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.72, 'time': '12:00'}, {'level_m': 1.48, 'time': '00:00'}]","[{'level_m': 0.24, 'time': '17:00'}]",HCMC_TVHN_20251215.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.67, 'time': '11:00'}, {'level_m': 1.38, 'time': '23:00'}]","[{'level_m': 0.22, 'time': '16:00'}]",HCMC_TVHN_20251215.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.31, 'time': '12:00'}, {'level_m': 3.8, 'time': '22:15'}]","[{'level_m': 3.06, 'time': '16:45'}]",HCMC_TVHN_20251216.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.17, 'time': '14:00'}, {'level_m': 1.52, 'time': '00:30'}]","[{'level_m': 0.78, 'time': '19:30'}]",HCMC_TVHN_20251216.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.86, 'time': '14:00'}, {'level_m': 1.24, 'time': '00:30'}]","[{'level_m': 0.44, 'time': '19:00'}]",HCMC_TVHN_20251216.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.68, 'time': '17:10'}, {'level_m': 0.77, 'time': '03:30'}]","[{'level_m': 0.5, 'time': '22:10'}]",HCMC_TVHN_20251216.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.05, 'time': '15:00'}, {'level_m': 1.6, 'time': '01:00'}]","[{'level_m': 0.32, 'time': '20:00'}]",HCMC_TVHN_20251216.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.09, 'time': '15:30'}, {'level_m': 1.51, 'time': '01:50'}]","[{'level_m': 0.64, 'time': '20:30'}]",HCMC_TVHN_20251216.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.12, 'time': '19:30'}, {'level_m': 1.33, 'time': '05:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251216.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.84, 'time': '14:00'}, {'level_m': 1.41, 'time': '00:00'}]","[{'level_m': 0.37, 'time': '19:00'}]",HCMC_TVHN_20251216.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.88, 'time': '13:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.38, 'time': '18:30'}]",HCMC_TVHN_20251216.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.62, 'time': '13:15'}, {'level_m': 3.8, 'time': '23:00'}]","[{'level_m': 3.2, 'time': '17:15'}]",HCMC_TVHN_20251217.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.36, 'time': '14:30'}, {'level_m': 1.42, 'time': '01:00'}]","[{'level_m': 0.83, 'time': '20:00'}]",HCMC_TVHN_20251217.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.09, 'time': '15:00'}, {'level_m': 1.22, 'time': '01:00'}]","[{'level_m': 0.52, 'time': '20:00'}]",HCMC_TVHN_20251217.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.77, 'time': '18:40'}, {'level_m': 0.8, 'time': '04:10'}]","[{'level_m': 0.56, 'time': '23:00'}]",HCMC_TVHN_20251217.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.39, 'time': '16:00'}, {'level_m': 1.44, 'time': '02:00'}]","[{'level_m': 0.4, 'time': '21:30'}]",HCMC_TVHN_20251217.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.34, 'time': '17:00'}, {'level_m': 1.43, 'time': '02:25'}]","[{'level_m': 0.79, 'time': '21:35'}]",HCMC_TVHN_20251217.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.26, 'time': '20:30'}, {'level_m': 1.3, 'time': '06:00'}]","[{'level_m': 0.58, 'time': '01:00'}]",HCMC_TVHN_20251217.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.18, 'time': '15:00'}, {'level_m': 1.33, 'time': '01:00'}]","[{'level_m': 0.55, 'time': '20:00'}]",HCMC_TVHN_20251217.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.18, 'time': '14:30'}, {'level_m': 1.3, 'time': '00:00'}]","[{'level_m': 0.5, 'time': '19:30'}]",HCMC_TVHN_20251217.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.69, 'time': '14:30'}, {'level_m': 3.83, 'time': '23:00'}]","[{'level_m': 3.36, 'time': '19:15'}]",HCMC_TVHN_20251218.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.35, 'time': '16:00'}, {'level_m': 1.38, 'time': '01:30'}]","[{'level_m': 0.93, 'time': '20:30'}]",HCMC_TVHN_20251218.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.11, 'time': '16:00'}, {'level_m': 1.14, 'time': '01:00'}]","[{'level_m': 0.69, 'time': '21:00'}]",HCMC_TVHN_20251218.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.83, 'time': '19:20'}, {'level_m': 0.83, 'time': '04:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251218.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.44, 'time': '17:00'}, {'level_m': 1.4, 'time': '02:00'}]","[{'level_m': 0.57, 'time': '22:00'}]",HCMC_TVHN_20251218.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.38, 'time': '18:00'}, {'level_m': 1.43, 'time': '02:40'}]","[{'level_m': 0.93, 'time': '22:30'}]",HCMC_TVHN_20251218.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.28, 'time': '22:00'}, {'level_m': 1.31, 'time': '06:00'}]","[{'level_m': 0.77, 'time': '02:00'}]",HCMC_TVHN_20251218.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.23, 'time': '16:00'}, {'level_m': 1.3, 'time': '01:00'}]","[{'level_m': 0.7, 'time': '21:00'}]",HCMC_TVHN_20251218.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.22, 'time': '15:30'}, {'level_m': 1.25, 'time': '00:30'}]","[{'level_m': 0.69, 'time': '20:00'}]",HCMC_TVHN_20251218.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.8, 'time': '14:30'}, {'level_m': None, 'time': None}]","[{'level_m': 3.39, 'time': '18:45'}]",HCMC_TVHN_20251219.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.41, 'time': '16:30'}, {'level_m': 1.38, 'time': '01:30'}]","[{'level_m': 0.89, 'time': '21:30'}]",HCMC_TVHN_20251219.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.2, 'time': '16:30'}, {'level_m': 1.17, 'time': '02:00'}]","[{'level_m': 0.65, 'time': '21:30'}]",HCMC_TVHN_20251219.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.83, 'time': '20:20'}, {'level_m': 0.9, 'time': '05:00'}]","[{'level_m': 0.68, 'time': '00:10'}]",HCMC_TVHN_20251219.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.6, 'time': '18:00'}, {'level_m': 1.41, 'time': '02:30'}]","[{'level_m': 0.6, 'time': '23:00'}]",HCMC_TVHN_20251219.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.46, 'time': '18:45'}, {'level_m': 1.43, 'time': '03:00'}]","[{'level_m': 0.95, 'time': '23:00'}]",HCMC_TVHN_20251219.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '22:30'}, {'level_m': 1.32, 'time': '06:30'}]","[{'level_m': 0.86, 'time': '03:00'}]",HCMC_TVHN_20251219.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.31, 'time': '17:00'}, {'level_m': 1.3, 'time': '02:00'}]","[{'level_m': 0.71, 'time': '22:00'}]",HCMC_TVHN_20251219.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.33, 'time': '15:00'}, {'level_m': 1.28, 'time': '00:30'}]","[{'level_m': 0.68, 'time': '21:00'}]",HCMC_TVHN_20251219.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.83, 'time': '15:15'}, {'level_m': 3.93, 'time': '00:15'}]","[{'level_m': 3.33, 'time': '20:00'}]",HCMC_TVHN_20251221.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.42, 'time': '17:30'}, {'level_m': 1.41, 'time': '02:30'}]","[{'level_m': 0.78, 'time': '22:30'}]",HCMC_TVHN_20251221.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.22, 'time': '17:30'}, {'level_m': 1.23, 'time': '03:00'}]","[{'level_m': 0.59, 'time': '22:30'}]",HCMC_TVHN_20251221.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.85, 'time': '21:00'}, {'level_m': 0.91, 'time': '06:10'}]","[{'level_m': 0.63, 'time': '01:00'}]",HCMC_TVHN_20251221.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.68, 'time': '18:30'}, {'level_m': 1.53, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251221.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.47, 'time': '19:20'}, {'level_m': 1.53, 'time': '04:20'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251221.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.29, 'time': '23:30'}, {'level_m': 1.34, 'time': '08:00'}]","[{'level_m': 0.86, 'time': '04:00'}]",HCMC_TVHN_20251221.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.36, 'time': '18:00'}, {'level_m': 1.39, 'time': '03:00'}]","[{'level_m': 0.62, 'time': '23:00'}]",HCMC_TVHN_20251221.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.37, 'time': '17:00'}, {'level_m': 1.36, 'time': '02:00'}]","[{'level_m': 0.61, 'time': '22:00'}]",HCMC_TVHN_20251221.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.93, 'time': '16:00'}, {'level_m': 3.89, 'time': '01:00'}]","[{'level_m': 3.34, 'time': '21:00'}]",HCMC_TVHN_20251222.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.48, 'time': '18:00'}, {'level_m': 1.35, 'time': '03:30'}]","[{'level_m': 0.81, 'time': '23:30'}]",HCMC_TVHN_20251222.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.28, 'time': '18:00'}, {'level_m': 1.21, 'time': '03:30'}]","[{'level_m': 0.59, 'time': '23:30'}]",HCMC_TVHN_20251222.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.88, 'time': '22:10'}, {'level_m': 0.92, 'time': '06:50'}]","[{'level_m': 0.63, 'time': '01:30'}]",HCMC_TVHN_20251222.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.77, 'time': '20:00'}, {'level_m': 1.49, 'time': '04:30'}]","[{'level_m': 0.49, 'time': '00:00'}]",HCMC_TVHN_20251222.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.52, 'time': '20:15'}, {'level_m': 1.49, 'time': '04:45'}]","[{'level_m': 0.88, 'time': '00:00'}]",HCMC_TVHN_20251222.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.46, 'time': '19:00'}, {'level_m': 1.34, 'time': '03:00'}]","[{'level_m': 0.66, 'time': '23:00'}]",HCMC_TVHN_20251222.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.46, 'time': '18:00'}, {'level_m': 1.3, 'time': '03:00'}]","[{'level_m': 0.61, 'time': '22:30'}]",HCMC_TVHN_20251222.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.91, 'time': '16:30'}, {'level_m': 4.01, 'time': '01:15'}]","[{'level_m': 3.37, 'time': '21:15'}]",HCMC_TVHN_20251223.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.49, 'time': '19:00'}, {'level_m': 1.44, 'time': '03:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251223.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.3, 'time': '19:00'}, {'level_m': 1.26, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251223.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.9, 'time': '22:50'}, {'level_m': 0.94, 'time': '07:10'}]","[{'level_m': 0.65, 'time': '02:30'}]",HCMC_TVHN_20251223.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.7, 'time': '20:30'}, {'level_m': 1.56, 'time': '05:00'}]","[{'level_m': 0.03, 'time': '02:00'}]",HCMC_TVHN_20251223.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.57, 'time': '20:45'}, {'level_m': 1.55, 'time': '05:25'}]","[{'level_m': 0.88, 'time': '01:00'}]",HCMC_TVHN_20251223.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.33, 'time': '00:00'}, {'level_m': 1.36, 'time': '09:00'}]","[{'level_m': 0.87, 'time': '05:00'}]",HCMC_TVHN_20251223.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.47, 'time': '19:00'}, {'level_m': 1.44, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251223.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.48, 'time': '18:00'}, {'level_m': 1.41, 'time': '03:00'}]","[{'level_m': 0.64, 'time': '23:00'}]",HCMC_TVHN_20251223.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.86, 'time': '17:15'}, {'level_m': 3.94, 'time': '01:30'}]","[{'level_m': 3.21, 'time': '22:00'}]",HCMC_TVHN_20251224.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.46, 'time': '19:30'}, {'level_m': 1.4, 'time': '04:00'}]","[{'level_m': 0.83, 'time': '00:00'}]",HCMC_TVHN_20251224.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.24, 'time': '19:30'}, {'level_m': 1.22, 'time': '04:30'}]","[{'level_m': 0.61, 'time': '00:00'}]",HCMC_TVHN_20251224.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.86, 'time': '23:20'}, {'level_m': 0.95, 'time': '07:30'}]","[{'level_m': 0.67, 'time': '03:00'}]",HCMC_TVHN_20251224.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.74, 'time': '20:30'}, {'level_m': 1.51, 'time': '06:00'}]","[{'level_m': 0.53, 'time': '01:30'}]",HCMC_TVHN_20251224.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.47, 'time': '21:10'}, {'level_m': 1.54, 'time': '06:00'}]","[{'level_m': 0.94, 'time': '01:25'}]",HCMC_TVHN_20251224.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.33, 'time': '00:30'}, {'level_m': 1.35, 'time': '10:00'}]","[{'level_m': 0.89, 'time': '05:30'}]",HCMC_TVHN_20251224.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.44, 'time': '20:00'}, {'level_m': 1.38, 'time': '05:00'}]","[{'level_m': 0.66, 'time': '00:00'}]",HCMC_TVHN_20251224.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.42, 'time': '19:00'}, {'level_m': 1.34, 'time': '03:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20251224.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.81, 'time': '17:30'}, {'level_m': 3.83, 'time': '02:15'}]","[{'level_m': 3.14, 'time': '23:00'}]",HCMC_TVHN_20251225.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.41, 'time': '19:30'}, {'level_m': 1.36, 'time': '05:30'}]","[{'level_m': 0.72, 'time': '01:00'}]",HCMC_TVHN_20251225.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.19, 'time': '19:30'}, {'level_m': 1.14, 'time': '05:00'}]","[{'level_m': 0.15, 'time': '01:00'}]",HCMC_TVHN_20251225.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '23:30'}, {'level_m': 0.88, 'time': '08:20'}]","[{'level_m': 0.59, 'time': '03:50'}]",HCMC_TVHN_20251225.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.67, 'time': '20:30'}, {'level_m': 1.44, 'time': '06:30'}]","[{'level_m': 0.27, 'time': '02:30'}]",HCMC_TVHN_20251225.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.42, 'time': '21:40'}, {'level_m': 1.41, 'time': '06:40'}]","[{'level_m': 0.68, 'time': '02:00'}]",HCMC_TVHN_20251225.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.32, 'time': '01:30'}, {'level_m': 1.29, 'time': '14:00'}]","[{'level_m': 0.76, 'time': '07:00'}]",HCMC_TVHN_20251225.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.4, 'time': '20:00'}, {'level_m': 1.32, 'time': '05:00'}]","[{'level_m': 0.46, 'time': '01:00'}]",HCMC_TVHN_20251225.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.38, 'time': '19:00'}, {'level_m': 1.28, 'time': '04:00'}]","[{'level_m': 0.42, 'time': '00:00'}]",HCMC_TVHN_20251225.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.85, 'time': '18:15'}, {'level_m': 3.75, 'time': '03:30'}]","[{'level_m': 3.19, 'time': '23:30'}]",HCMC_TVHN_20251226.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.4, 'time': '20:00'}, {'level_m': 1.28, 'time': '06:00'}]","[{'level_m': 0.69, 'time': '01:30'}]",HCMC_TVHN_20251226.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.21, 'time': '20:30'}, {'level_m': 1.06, 'time': '06:00'}]","[{'level_m': 0.42, 'time': '01:00'}]",HCMC_TVHN_20251226.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.66, 'time': '21:30'}, {'level_m': 1.37, 'time': '07:30'}]","[{'level_m': 0.23, 'time': '02:30'}]",HCMC_TVHN_20251226.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.56, 'time': '22:15'}, {'level_m': 1.32, 'time': '07:00'}]","[{'level_m': 0.64, 'time': '02:40'}]",HCMC_TVHN_20251226.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.24, 'time': '01:00'}, {'level_m': 1.25, 'time': '11:30'}]","[{'level_m': 0.71, 'time': '07:30'}]",HCMC_TVHN_20251226.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.45, 'time': '21:00'}, {'level_m': 1.25, 'time': '06:00'}]","[{'level_m': 0.4, 'time': '01:00'}]",HCMC_TVHN_20251226.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.41, 'time': '19:30'}, {'level_m': 1.18, 'time': '05:00'}]","[{'level_m': 0.38, 'time': '00:30'}]",HCMC_TVHN_20251226.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.84, 'time': '20:00'}, {'level_m': 3.65, 'time': '05:00'}]","[{'level_m': 3.08, 'time': '00:45'}]",HCMC_TVHN_20251228.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.46, 'time': '22:00'}, {'level_m': 1.28, 'time': '07:30'}]","[{'level_m': 0.69, 'time': '03:00'}]",HCMC_TVHN_20251228.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.24, 'time': '22:00'}, {'level_m': 1.02, 'time': '07:30'}]","[{'level_m': 0.38, 'time': '03:30'}]",HCMC_TVHN_20251228.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.91, 'time': '01:20'}, {'level_m': 0.88, 'time': '10:40'}]","[{'level_m': 0.6, 'time': '06:30'}]",HCMC_TVHN_20251228.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.7, 'time': '23:00'}, {'level_m': 1.28, 'time': '09:00'}]","[{'level_m': 0.18, 'time': '04:00'}]",HCMC_TVHN_20251228.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.52, 'time': '23:30'}, {'level_m': 1.38, 'time': '09:00'}]","[{'level_m': 0.66, 'time': '04:40'}]",HCMC_TVHN_20251228.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.34, 'time': '03:30'}, {'level_m': 1.18, 'time': '12:30'}]","[{'level_m': 0.64, 'time': '09:00'}]",HCMC_TVHN_20251228.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.44, 'time': '22:00'}, {'level_m': 1.16, 'time': '08:00'}]","[{'level_m': 0.34, 'time': '03:00'}]",HCMC_TVHN_20251228.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.4, 'time': '21:00'}, {'level_m': 1.1, 'time': '07:00'}]","[{'level_m': 0.3, 'time': '02:00'}]",HCMC_TVHN_20251228.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.85, 'time': '21:00'}, {'level_m': 3.13, 'time': '09:00'}]","[{'level_m': 2.43, 'time': '03:30'}]",HCMC_TVHN_20251230.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.21, 'time': '23:00'}, {'level_m': 0.64, 'time': '11:00'}]","[{'level_m': -0.17, 'time': '05:30'}]",HCMC_TVHN_20251230.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.84, 'time': '02:30'}, {'level_m': 0.57, 'time': '14:10'}]","[{'level_m': 0.34, 'time': '09:50'}]",HCMC_TVHN_20251230.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.5, 'time': '00:10'}, {'level_m': 0.9, 'time': '12:15'}]","[{'level_m': 0.04, 'time': '07:00'}]",HCMC_TVHN_20251230.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '04:30'}, {'level_m': 0.87, 'time': '16:00'}]","[{'level_m': 0.14, 'time': '12:00'}]",HCMC_TVHN_20251230.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.44, 'time': '23:00'}, {'level_m': 0.69, 'time': '11:00'}]","[{'level_m': -0.37, 'time': '05:00'}]",HCMC_TVHN_20251230.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.4, 'time': '22:00'}, {'level_m': 0.67, 'time': '10:00'}]","[{'level_m': -0.41, 'time': '04:30'}]",HCMC_TVHN_20251230.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.84, 'time': '21:00'}, {'level_m': 3.25, 'time': '11:00'}]","[{'level_m': 1.99, 'time': '04:30'}]",HCMC_TVHN_20251231.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.44, 'time': '00:00'}, {'level_m': 1.04, 'time': '13:00'}]","[{'level_m': 0.07, 'time': '07:30'}]",HCMC_TVHN_20251231.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.79, 'time': '03:30'}, {'level_m': 0.59, 'time': '16:40'}]","[{'level_m': 0.23, 'time': '11:00'}]",HCMC_TVHN_20251231.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.68, 'time': '00:00'}, {'level_m': 1.0, 'time': '13:30'}]","[{'level_m': -0.79, 'time': '07:30'}]",HCMC_TVHN_20251231.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.52, 'time': '01:00'}, {'level_m': 1.02, 'time': '14:00'}]","[{'level_m': -0.22, 'time': '08:20'}]",HCMC_TVHN_20251231.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '04:30'}, {'level_m': 1.0, 'time': '18:00'}]","[{'level_m': 0.1, 'time': '13:30'}]",HCMC_TVHN_20251231.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.34, 'time': '23:00'}, {'level_m': 0.81, 'time': '12:00'}]","[{'level_m': -0.9, 'time': '05:30'}]",HCMC_TVHN_20251231.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.93, 'time': '22:00'}, {'level_m': 3.54, 'time': '12:45'}]","[{'level_m': 1.49, 'time': '05:30'}]",HCMC_TVHN_20260101.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.37, 'time': '00:00'}, {'level_m': 1.21, 'time': '14:30'}]","[{'level_m': -0.15, 'time': '08:30'}]",HCMC_TVHN_20260101.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.15, 'time': '00:00'}, {'level_m': 0.95, 'time': '14:30'}]","[{'level_m': -0.76, 'time': '08:00'}]",HCMC_TVHN_20260101.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.85, 'time': '03:50'}, {'level_m': 0.71, 'time': '18:20'}]","[{'level_m': 0.19, 'time': '11:40'}]",HCMC_TVHN_20260101.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.56, 'time': '00:30'}, {'level_m': 1.27, 'time': '15:00'}]","[{'level_m': -1.33, 'time': '08:30'}]",HCMC_TVHN_20260101.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.47, 'time': '01:00'}, {'level_m': 1.22, 'time': '16:00'}]","[{'level_m': -0.58, 'time': '09:20'}]",HCMC_TVHN_20260101.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.3, 'time': '05:00'}, {'level_m': None, 'time': None}]","[{'level_m': -0.11, 'time': '14:00'}]",HCMC_TVHN_20260101.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.36, 'time': '00:00'}, {'level_m': 1.02, 'time': '14:00'}]","[{'level_m': -1.26, 'time': '07:00'}]",HCMC_TVHN_20260101.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.97, 'time': '22:45'}, {'level_m': 3.74, 'time': '13:15'}]","[{'level_m': 1.04, 'time': '06:00'}]",HCMC_TVHN_20260102.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.44, 'time': '00:30'}, {'level_m': 1.3, 'time': '13:30'}]","[{'level_m': -0.23, 'time': '10:00'}]",HCMC_TVHN_20260102.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.24, 'time': '00:30'}, {'level_m': 1.07, 'time': '15:30'}]","[{'level_m': -0.85, 'time': '09:30'}]",HCMC_TVHN_20260102.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.93, 'time': '04:20'}, {'level_m': 0.7, 'time': '20:00'}]","[{'level_m': 0.17, 'time': '13:00'}]",HCMC_TVHN_20260102.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.54, 'time': '01:00'}, {'level_m': 1.35, 'time': '17:00'}]","[{'level_m': -1.53, 'time': '10:00'}]",HCMC_TVHN_20260102.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.54, 'time': '02:00'}, {'level_m': 1.42, 'time': '17:00'}]","[{'level_m': -0.73, 'time': '10:20'}]",HCMC_TVHN_20260102.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.33, 'time': '06:00'}, {'level_m': 1.22, 'time': '21:30'}]","[{'level_m': -0.14, 'time': '14:30'}]",HCMC_TVHN_20260102.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.42, 'time': '00:00'}, {'level_m': 1.22, 'time': '16:00'}]","[{'level_m': -1.52, 'time': '09:00'}]",HCMC_TVHN_20260102.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.4, 'time': '00:00'}, {'level_m': 1.26, 'time': '14:30'}]","[{'level_m': -1.77, 'time': '08:00'}]",HCMC_TVHN_20260102.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.14, 'time': '23:45'}, {'level_m': 3.93, 'time': '14:30'}]","[{'level_m': 0.65, 'time': '06:45'}]",HCMC_TVHN_20260103.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.43, 'time': '01:30'}, {'level_m': 1.39, 'time': '16:30'}]","[{'level_m': -0.35, 'time': '11:30'}]",HCMC_TVHN_20260103.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.26, 'time': '01:30'}, {'level_m': 1.2, 'time': '17:00'}]","[{'level_m': -0.97, 'time': '10:30'}]",HCMC_TVHN_20260103.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.91, 'time': '05:00'}, {'level_m': '*', 'time': '*'}]","[{'level_m': 0.1, 'time': '13:40'}]",HCMC_TVHN_20260103.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.58, 'time': '02:30'}, {'level_m': 1.59, 'time': '18:00'}]","[{'level_m': -1.68, 'time': '11:00'}]",HCMC_TVHN_20260103.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.57, 'time': '02:50'}, {'level_m': 1.52, 'time': '19:00'}]","[{'level_m': -0.91, 'time': '11:15'}]",HCMC_TVHN_20260103.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.33, 'time': '07:30'}, {'level_m': 1.32, 'time': '23:30'}]","[{'level_m': -0.15, 'time': '16:00'}]",HCMC_TVHN_20260103.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.45, 'time': '01:00'}, {'level_m': 1.38, 'time': '17:00'}]","[{'level_m': -1.79, 'time': '10:00'}]",HCMC_TVHN_20260103.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.44, 'time': '00:30'}, {'level_m': 1.42, 'time': '16:00'}]","[{'level_m': -2.03, 'time': '08:30'}]",HCMC_TVHN_20260103.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.51, 'time': '02:30'}, {'level_m': 1.45, 'time': '17:30'}]","[{'level_m': -0.34, 'time': '12:00'}]",HCMC_TVHN_20260104.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.37, 'time': '02:30'}, {'level_m': 1.28, 'time': '17:00'}]","[{'level_m': -1.02, 'time': '11:00'}]",HCMC_TVHN_20260104.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.97, 'time': '05:30'}, {'level_m': 0.85, 'time': '22:00'}]","[{'level_m': 0.21, 'time': '14:20'}]",HCMC_TVHN_20260104.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.49, 'time': '04:00'}, {'level_m': 1.7, 'time': '18:30'}]","[{'level_m': -1.72, 'time': '11:30'}]",HCMC_TVHN_20260104.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.7, 'time': '03:35'}, {'level_m': 1.59, 'time': '19:10'}]","[{'level_m': -0.82, 'time': '12:05'}]",HCMC_TVHN_20260104.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.41, 'time': '08:00'}, {'level_m': 1.04, 'time': '23:30'}]","[{'level_m': -0.02, 'time': '17:00'}]",HCMC_TVHN_20260104.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.58, 'time': '02:00'}, {'level_m': 1.45, 'time': '18:00'}]","[{'level_m': -1.86, 'time': '10:00'}]",HCMC_TVHN_20260104.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.55, 'time': '01:00'}, {'level_m': 1.47, 'time': '16:20'}]","[{'level_m': -2.1, 'time': '09:30'}]",HCMC_TVHN_20260104.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.2, 'time': '00:30'}, {'level_m': 4.01, 'time': '15:30'}]","[{'level_m': 0.34, 'time': '08:30'}]",HCMC_TVHN_20260105.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.57, 'time': '03:30'}, {'level_m': 1.51, 'time': '18:00'}]","[{'level_m': -0.39, 'time': '13:30'}]",HCMC_TVHN_20260105.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.41, 'time': '03:00'}, {'level_m': 1.32, 'time': '18:00'}]","[{'level_m': -1.04, 'time': '12:30'}]",HCMC_TVHN_20260105.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.02, 'time': '06:40'}, {'level_m': 0.89, 'time': '22:50'}]","[{'level_m': 0.25, 'time': '15:40'}]",HCMC_TVHN_20260105.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.76, 'time': '04:00'}, {'level_m': 1.81, 'time': '20:00'}]","[{'level_m': -1.77, 'time': '13:00'}]",HCMC_TVHN_20260105.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.74, 'time': '04:30'}, {'level_m': 1.6, 'time': '20:00'}]","[{'level_m': -0.88, 'time': '13:15'}]",HCMC_TVHN_20260105.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.43, 'time': '08:30'}, {'level_m': None, 'time': None}]","[{'level_m': -0.01, 'time': '17:30'}]",HCMC_TVHN_20260105.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.63, 'time': '03:00'}, {'level_m': 1.5, 'time': '19:00'}]","[{'level_m': -1.92, 'time': '11:00'}]",HCMC_TVHN_20260105.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.62, 'time': '02:00'}, {'level_m': 1.51, 'time': '17:00'}]","[{'level_m': -2.18, 'time': '10:30'}]",HCMC_TVHN_20260105.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.2, 'time': '01:15'}, {'level_m': 4.0, 'time': '16:15'}]","[{'level_m': 0.47, 'time': '09:00'}]",HCMC_TVHN_20260106.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.55, 'time': '04:00'}, {'level_m': 1.53, 'time': '19:00'}]","[{'level_m': -0.39, 'time': '14:00'}]",HCMC_TVHN_20260106.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.42, 'time': '04:00'}, {'level_m': 1.32, 'time': '19:00'}]","[{'level_m': -1.01, 'time': '13:00'}]",HCMC_TVHN_20260106.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.03, 'time': '07:20'}, {'level_m': 0.89, 'time': '23:10'}]","[{'level_m': 0.26, 'time': '16:30'}]",HCMC_TVHN_20260106.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.76, 'time': '05:00'}, {'level_m': 1.8, 'time': '20:00'}]","[{'level_m': -1.68, 'time': '14:00'}]",HCMC_TVHN_20260106.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.74, 'time': '05:25'}, {'level_m': 1.6, 'time': '20:45'}]","[{'level_m': -0.8, 'time': '14:00'}]",HCMC_TVHN_20260106.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.42, 'time': '09:30'}, {'level_m': 1.34, 'time': '00:30'}]","[{'level_m': 0.01, 'time': '18:30'}]",HCMC_TVHN_20260106.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.59, 'time': '04:00'}, {'level_m': 1.52, 'time': '19:00'}]","[{'level_m': -1.87, 'time': '12:00'}]",HCMC_TVHN_20260106.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.58, 'time': '03:00'}, {'level_m': 1.5, 'time': '18:00'}]","[{'level_m': -2.1, 'time': '11:30'}]",HCMC_TVHN_20260106.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.19, 'time': '02:00'}, {'level_m': 4.06, 'time': '17:00'}]","[{'level_m': 0.73, 'time': '10:00'}]",HCMC_TVHN_20260107.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.62, 'time': '04:30'}, {'level_m': 1.58, 'time': '19:30'}]","[{'level_m': -0.31, 'time': '14:30'}]",HCMC_TVHN_20260107.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.44, 'time': '04:30'}, {'level_m': 1.39, 'time': '19:30'}]","[{'level_m': -0.9, 'time': '13:30'}]",HCMC_TVHN_20260107.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.04, 'time': '08:20'}, {'level_m': 0.95, 'time': '23:50'}]","[{'level_m': 0.31, 'time': '16:40'}]",HCMC_TVHN_20260107.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.8, 'time': '06:00'}, {'level_m': 1.8, 'time': '20:00'}]","[{'level_m': -1.55, 'time': '14:00'}]",HCMC_TVHN_20260107.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.74, 'time': '06:30'}, {'level_m': 1.6, 'time': '21:25'}]","[{'level_m': -0.67, 'time': '14:35'}]",HCMC_TVHN_20260107.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.42, 'time': '10:30'}, {'level_m': 1.32, 'time': '01:00'}]","[{'level_m': 0.1, 'time': '19:00'}]",HCMC_TVHN_20260107.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.62, 'time': '05:00'}, {'level_m': 1.58, 'time': '20:00'}]","[{'level_m': -1.68, 'time': '13:00'}]",HCMC_TVHN_20260107.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '04:00'}, {'level_m': 1.58, 'time': '19:00'}]","[{'level_m': -1.86, 'time': '12:00'}]",HCMC_TVHN_20260107.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.2, 'time': '03:00'}, {'level_m': 4.05, 'time': '17:30'}]","[{'level_m': 1.1, 'time': '10:30'}]",HCMC_TVHN_20260108.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.62, 'time': '06:00'}, {'level_m': 1.6, 'time': '20:30'}]","[{'level_m': -0.05, 'time': '15:30'}]",HCMC_TVHN_20260108.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.44, 'time': '05:30'}, {'level_m': 1.41, 'time': '20:00'}]","[{'level_m': -0.61, 'time': '14:00'}]",HCMC_TVHN_20260108.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.06, 'time': '08:10'}, {'level_m': 0.97, 'time': '00:30'}]","[{'level_m': 0.41, 'time': '17:20'}]",HCMC_TVHN_20260108.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.81, 'time': '07:00'}, {'level_m': 1.84, 'time': '22:00'}]","[{'level_m': -1.29, 'time': '14:30'}]",HCMC_TVHN_20260108.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.72, 'time': '07:15'}, {'level_m': 1.68, 'time': '22:00'}]","[{'level_m': -0.41, 'time': '15:00'}]",HCMC_TVHN_20260108.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.39, 'time': '11:30'}, {'level_m': 1.37, 'time': '01:30'}]","[{'level_m': 0.23, 'time': '19:30'}]",HCMC_TVHN_20260108.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.62, 'time': '06:00'}, {'level_m': 1.6, 'time': '20:00'}]","[{'level_m': -1.4, 'time': '13:00'}]",HCMC_TVHN_20260108.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.6, 'time': '05:00'}, {'level_m': 1.58, 'time': '19:00'}]","[{'level_m': -1.57, 'time': '12:30'}]",HCMC_TVHN_20260108.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 4.06, 'time': '04:00'}, {'level_m': 3.98, 'time': '18:00'}]","[{'level_m': 1.33, 'time': '11:15'}]",HCMC_TVHN_20260109.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.55, 'time': '07:00'}, {'level_m': 1.54, 'time': '21:00'}]","[{'level_m': -0.04, 'time': '15:00'}]",HCMC_TVHN_20260109.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.36, 'time': '06:30'}, {'level_m': 1.34, 'time': '20:30'}]","[{'level_m': -0.61, 'time': '14:30'}]",HCMC_TVHN_20260109.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 1.01, 'time': '09:40'}, {'level_m': 0.97, 'time': '00:30'}]","[{'level_m': 0.36, 'time': '17:30'}]",HCMC_TVHN_20260109.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.67, 'time': '08:00'}, {'level_m': 1.78, 'time': '21:00'}]","[{'level_m': -1.22, 'time': '15:00'}]",HCMC_TVHN_20260109.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.64, 'time': '08:00'}, {'level_m': 1.62, 'time': '22:00'}]","[{'level_m': -0.36, 'time': '15:30'}]",HCMC_TVHN_20260109.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.39, 'time': '12:00'}, {'level_m': 1.38, 'time': '02:00'}]","[{'level_m': 0.18, 'time': '19:30'}]",HCMC_TVHN_20260109.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.53, 'time': '07:00'}, {'level_m': 1.52, 'time': '21:00'}]","[{'level_m': -1.24, 'time': '14:00'}]",HCMC_TVHN_20260109.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.5, 'time': '06:00'}, {'level_m': 1.52, 'time': '20:00'}]","[{'level_m': -1.38, 'time': '13:00'}]",HCMC_TVHN_20260109.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.68, 'time': '05:00'}, {'level_m': 3.85, 'time': '18:45'}]","[{'level_m': 1.72, 'time': '12:00'}]",HCMC_TVHN_20260110.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.31, 'time': '07:30'}, {'level_m': 1.47, 'time': '21:30'}]","[{'level_m': -0.02, 'time': '15:30'}]",HCMC_TVHN_20260110.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.05, 'time': '07:00'}, {'level_m': 1.23, 'time': '21:00'}]","[{'level_m': -0.57, 'time': '14:30'}]",HCMC_TVHN_20260110.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.85, 'time': '10:30'}, {'level_m': 0.96, 'time': '00:20'}]","[{'level_m': 0.26, 'time': '18:00'}]",HCMC_TVHN_20260110.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.37, 'time': '08:30'}, {'level_m': None, 'time': None}]","[{'level_m': -1.11, 'time': '15:00'}]",HCMC_TVHN_20260110.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.36, 'time': '08:40'}, {'level_m': 1.49, 'time': '22:40'}]","[{'level_m': -0.42, 'time': '15:55'}]",HCMC_TVHN_20260110.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.25, 'time': '12:30'}, {'level_m': 1.37, 'time': '02:00'}]","[{'level_m': -0.02, 'time': '20:30'}]",HCMC_TVHN_20260110.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.22, 'time': '07:00'}, {'level_m': 1.42, 'time': '21:00'}]","[{'level_m': -1.02, 'time': '14:00'}]",HCMC_TVHN_20260110.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.16, 'time': '07:00'}, {'level_m': 1.4, 'time': '20:00'}]","[{'level_m': -1.17, 'time': '13:30'}]",HCMC_TVHN_20260110.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.37, 'time': '06:00'}, {'level_m': 3.8, 'time': '19:15'}]","[{'level_m': 2.01, 'time': '12:00'}]",HCMC_TVHN_20260111.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.09, 'time': '08:30'}, {'level_m': 1.37, 'time': '22:00'}]","[{'level_m': 0.04, 'time': '15:00'}]",HCMC_TVHN_20260111.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '08:30'}, {'level_m': 1.12, 'time': '21:30'}]","[{'level_m': -0.48, 'time': '14:30'}]",HCMC_TVHN_20260111.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.7, 'time': '11:20'}, {'level_m': 0.86, 'time': '01:00'}]","[{'level_m': 0.18, 'time': '18:20'}]",HCMC_TVHN_20260111.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.15, 'time': '09:30'}, {'level_m': 1.56, 'time': '22:00'}]","[{'level_m': -0.85, 'time': '15:30'}]",HCMC_TVHN_20260111.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.08, 'time': '09:35'}, {'level_m': 1.41, 'time': '23:00'}]","[{'level_m': -0.36, 'time': '16:10'}]",HCMC_TVHN_20260111.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.05, 'time': '13:30'}, {'level_m': 1.3, 'time': '03:00'}]","[{'level_m': -0.11, 'time': '20:30'}]",HCMC_TVHN_20260111.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.89, 'time': '08:00'}, {'level_m': 1.33, 'time': '21:00'}]","[{'level_m': -0.88, 'time': '14:00'}]",HCMC_TVHN_20260111.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.88, 'time': '07:30'}, {'level_m': 1.32, 'time': '20:30'}]","[{'level_m': -0.91, 'time': '13:30'}]",HCMC_TVHN_20260111.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.2, 'time': '07:15'}, {'level_m': 3.72, 'time': '19:30'}]","[{'level_m': 2.45, 'time': '13:15'}]",HCMC_TVHN_20260112.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 0.94, 'time': '10:00'}, {'level_m': 1.29, 'time': '22:00'}]","[{'level_m': 0.22, 'time': '16:00'}]",HCMC_TVHN_20260112.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.64, 'time': '09:30'}, {'level_m': 1.04, 'time': '22:00'}]","[{'level_m': -0.19, 'time': '15:30'}]",HCMC_TVHN_20260112.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.54, 'time': '13:00'}, {'level_m': 0.77, 'time': '01:20'}]","[{'level_m': 0.14, 'time': '18:50'}]",HCMC_TVHN_20260112.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 0.88, 'time': '10:30'}, {'level_m': 1.59, 'time': '22:30'}]","[{'level_m': -0.46, 'time': '16:00'}]",HCMC_TVHN_20260112.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 0.89, 'time': '11:00'}, {'level_m': 1.37, 'time': '23:35'}]","[{'level_m': -0.04, 'time': '16:55'}]",HCMC_TVHN_20260112.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 0.88, 'time': '15:00'}, {'level_m': 1.24, 'time': '03:00'}]","[{'level_m': -0.02, 'time': '21:00'}]",HCMC_TVHN_20260112.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.7, 'time': '09:00'}, {'level_m': 1.28, 'time': '22:00'}]","[{'level_m': -0.38, 'time': '15:00'}]",HCMC_TVHN_20260112.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.69, 'time': '09:00'}, {'level_m': 1.26, 'time': '21:00'}]","[{'level_m': -0.34, 'time': '14:30'}]",HCMC_TVHN_20260112.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.1, 'time': '09:15'}, {'level_m': 3.7, 'time': '20:00'}]","[{'level_m': 2.84, 'time': '13:15'}]",HCMC_TVHN_20260113.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 0.9, 'time': '11:30'}, {'level_m': 1.29, 'time': '23:00'}]","[{'level_m': 0.52, 'time': '16:00'}]",HCMC_TVHN_20260113.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.6, 'time': '11:00'}, {'level_m': 1.04, 'time': '23:00'}]","[{'level_m': 0.15, 'time': '16:00'}]",HCMC_TVHN_20260113.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.43, 'time': '15:00'}, {'level_m': 0.68, 'time': '02:30'}]","[{'level_m': 0.24, 'time': '19:10'}]",HCMC_TVHN_20260113.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 0.84, 'time': '12:00'}, {'level_m': 1.45, 'time': '23:00'}]","[{'level_m': 0.03, 'time': '17:00'}]",HCMC_TVHN_20260113.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 0.87, 'time': '13:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.44, 'time': '17:15'}]",HCMC_TVHN_20260113.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 0.86, 'time': '17:00'}, {'level_m': 1.23, 'time': '04:00'}]","[{'level_m': 0.31, 'time': '21:30'}]",HCMC_TVHN_20260113.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.63, 'time': '11:00'}, {'level_m': 1.26, 'time': '23:00'}]","[{'level_m': 0.1, 'time': '16:00'}]",HCMC_TVHN_20260113.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.64, 'time': '10:00'}, {'level_m': 1.22, 'time': '22:00'}]","[{'level_m': 0.14, 'time': '15:00'}]",HCMC_TVHN_20260113.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 0.98, 'time': '14:00'}, {'level_m': 1.24, 'time': '23:00'}]","[{'level_m': 0.81, 'time': '17:30'}]",HCMC_TVHN_20260114.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.7, 'time': '14:00'}, {'level_m': 0.98, 'time': '23:00'}]","[{'level_m': 0.52, 'time': '17:30'}]",HCMC_TVHN_20260114.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.46, 'time': '18:30'}, {'level_m': 0.71, 'time': '03:50'}]","[{'level_m': 0.52, 'time': '19:20'}]",HCMC_TVHN_20260114.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 0.97, 'time': '14:30'}, {'level_m': 1.24, 'time': '23:00'}]","[{'level_m': 0.53, 'time': '19:30'}]",HCMC_TVHN_20260114.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.0, 'time': '15:30'}, {'level_m': 1.39, 'time': '00:10'}]","[{'level_m': 0.88, 'time': '19:05'}]",HCMC_TVHN_20260114.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.0, 'time': '18:30'}, {'level_m': 1.25, 'time': '04:00'}]","[{'level_m': 0.61, 'time': '23:30'}]",HCMC_TVHN_20260114.pdf
+Phú An,Sài Gòn,"[{'level_m': 0.72, 'time': '14:00'}, {'level_m': 1.13, 'time': '23:00'}]","[{'level_m': 0.54, 'time': '17:00'}]",HCMC_TVHN_20260114.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 0.75, 'time': '13:00'}, {'level_m': 1.09, 'time': '22:00'}]","[{'level_m': 0.56, 'time': '16:00'}]",HCMC_TVHN_20260114.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.61, 'time': '14:00'}, {'level_m': 3.7, 'time': '21:45'}]","[{'level_m': 3.41, 'time': '17:45'}]",HCMC_TVHN_20260116.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.18, 'time': '17:00'}, {'level_m': 1.18, 'time': '00:00'}]","[{'level_m': 0.96, 'time': '20:00'}]",HCMC_TVHN_20260116.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.98, 'time': '17:00'}, {'level_m': 0.96, 'time': '00:00'}]","[{'level_m': 0.74, 'time': '20:00'}]",HCMC_TVHN_20260116.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.38, 'time': '17:30'}, {'level_m': 1.1, 'time': '00:00'}]","[{'level_m': 0.67, 'time': '22:00'}]",HCMC_TVHN_20260116.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.31, 'time': '18:00'}, {'level_m': 1.26, 'time': '01:00'}]","[{'level_m': 1.07, 'time': '22:00'}]",HCMC_TVHN_20260116.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.2, 'time': '22:00'}, {'level_m': 1.16, 'time': '05:00'}]","[{'level_m': 0.87, 'time': '01:30'}]",HCMC_TVHN_20260116.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.14, 'time': '16:00'}, {'level_m': 1.08, 'time': '00:00'}]","[{'level_m': 0.81, 'time': '20:00'}]",HCMC_TVHN_20260116.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.13, 'time': '16:00'}, {'level_m': None, 'time': None}]","[{'level_m': 0.78, 'time': '19:00'}]",HCMC_TVHN_20260116.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.62, 'time': '14:00'}, {'level_m': 3.68, 'time': '22:45'}]","[{'level_m': 3.34, 'time': '18:30'}]",HCMC_TVHN_20260117.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.18, 'time': '17:00'}, {'level_m': 1.25, 'time': '01:00'}]","[{'level_m': 0.82, 'time': '20:30'}]",HCMC_TVHN_20260117.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 0.99, 'time': '16:30'}, {'level_m': 1.06, 'time': '00:30'}]","[{'level_m': 0.61, 'time': '20:30'}]",HCMC_TVHN_20260117.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.39, 'time': '17:30'}, {'level_m': 1.22, 'time': '01:30'}]","[{'level_m': 0.52, 'time': '22:00'}]",HCMC_TVHN_20260117.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.31, 'time': '18:20'}, {'level_m': 1.34, 'time': '01:50'}]","[{'level_m': 0.93, 'time': '22:40'}]",HCMC_TVHN_20260117.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.19, 'time': '22:30'}, {'level_m': 1.22, 'time': '05:30'}]","[{'level_m': 0.91, 'time': '02:30'}]",HCMC_TVHN_20260117.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.13, 'time': '17:00'}, {'level_m': 1.15, 'time': '01:00'}]","[{'level_m': 0.66, 'time': '21:00'}]",HCMC_TVHN_20260117.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.14, 'time': '16:00'}, {'level_m': 1.13, 'time': '00:00'}]","[{'level_m': 0.66, 'time': '20:00'}]",HCMC_TVHN_20260117.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.7, 'time': '15:00'}, {'level_m': 3.69, 'time': '23:45'}]","[{'level_m': 3.2, 'time': '19:15'}]",HCMC_TVHN_20260118.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.22, 'time': '17:00'}, {'level_m': 1.19, 'time': '02:00'}]","[{'level_m': 0.71, 'time': '21:30'}]",HCMC_TVHN_20260118.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.05, 'time': '17:00'}, {'level_m': 1.03, 'time': '01:30'}]","[{'level_m': 0.48, 'time': '21:30'}]",HCMC_TVHN_20260118.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.63, 'time': '21:30'}, {'level_m': 0.84, 'time': '05:20'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20260118.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.48, 'time': '18:00'}, {'level_m': 1.26, 'time': '03:00'}]","[{'level_m': 0.43, 'time': '23:00'}]",HCMC_TVHN_20260118.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.33, 'time': '19:00'}, {'level_m': 1.31, 'time': '02:50'}]","[{'level_m': 0.81, 'time': '23:00'}]",HCMC_TVHN_20260118.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.18, 'time': '23:00'}, {'level_m': 1.2, 'time': '06:30'}]","[{'level_m': 0.77, 'time': '03:00'}]",HCMC_TVHN_20260118.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.22, 'time': '17:00'}, {'level_m': 1.14, 'time': '01:00'}]","[{'level_m': 0.53, 'time': '22:00'}]",HCMC_TVHN_20260118.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.23, 'time': '16:00'}, {'level_m': 1.12, 'time': '01:00'}]","[{'level_m': 0.5, 'time': '21:00'}]",HCMC_TVHN_20260118.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.79, 'time': '15:30'}, {'level_m': 3.83, 'time': '00:45'}]","[{'level_m': 3.07, 'time': '20:30'}]",HCMC_TVHN_20260120.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.26, 'time': '18:30'}, {'level_m': 1.3, 'time': '03:00'}]","[{'level_m': 0.55, 'time': '23:00'}]",HCMC_TVHN_20260120.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.12, 'time': '18:00'}, {'level_m': 1.18, 'time': '03:00'}]","[{'level_m': 0.32, 'time': '23:00'}]",HCMC_TVHN_20260120.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.69, 'time': '22:10'}, {'level_m': 0.84, 'time': '06:50'}]","[{'level_m': 0.47, 'time': '01:20'}]",HCMC_TVHN_20260120.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.48, 'time': '18:30'}, {'level_m': 1.46, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20260120.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.39, 'time': '19:40'}, {'level_m': 1.48, 'time': '04:40'}]","[{'level_m': 0.73, 'time': '00:00'}]",HCMC_TVHN_20260120.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.18, 'time': '00:00'}, {'level_m': 1.29, 'time': '08:30'}]","[{'level_m': 0.64, 'time': '04:00'}]",HCMC_TVHN_20260120.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.31, 'time': '18:00'}, {'level_m': 1.34, 'time': '03:00'}]","[{'level_m': 0.28, 'time': '23:00'}]",HCMC_TVHN_20260120.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.32, 'time': '17:30'}, {'level_m': 1.32, 'time': '02:30'}]","[{'level_m': 0.3, 'time': '22:00'}]",HCMC_TVHN_20260120.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.79, 'time': '16:00'}, {'level_m': 3.84, 'time': '01:30'}]","[{'level_m': 2.97, 'time': '21:15'}]",HCMC_TVHN_20260121.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.26, 'time': '19:00'}, {'level_m': 1.29, 'time': '04:00'}]","[{'level_m': 0.5, 'time': '23:30'}]",HCMC_TVHN_20260121.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.13, 'time': '19:00'}, {'level_m': 1.17, 'time': '04:00'}]","[{'level_m': 0.24, 'time': '23:30'}]",HCMC_TVHN_20260121.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.7, 'time': '22:40'}, {'level_m': 0.84, 'time': '07:20'}]","[{'level_m': 0.45, 'time': '01:50'}]",HCMC_TVHN_20260121.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.65, 'time': '20:00'}, {'level_m': 1.47, 'time': '05:00'}]","[{'level_m': 0.24, 'time': '00:30'}]",HCMC_TVHN_20260121.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.39, 'time': '20:20'}, {'level_m': 1.48, 'time': '05:20'}]","[{'level_m': 0.61, 'time': '00:20'}]",HCMC_TVHN_20260121.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.21, 'time': '00:00'}, {'level_m': 1.29, 'time': '09:00'}]","[{'level_m': 0.58, 'time': '04:30'}]",HCMC_TVHN_20260121.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.33, 'time': '19:00'}, {'level_m': 1.34, 'time': '04:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20260121.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.33, 'time': '18:00'}, {'level_m': 1.32, 'time': '03:00'}]","[{'level_m': 0.2, 'time': '23:00'}]",HCMC_TVHN_20260121.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.88, 'time': '16:30'}, {'level_m': 3.93, 'time': '02:00'}]","[{'level_m': 2.92, 'time': '22:00'}]",HCMC_TVHN_20260122.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.34, 'time': '19:30'}, {'level_m': 1.36, 'time': '04:30'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20260122.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.19, 'time': '19:30'}, {'level_m': 1.25, 'time': '05:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20260122.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.74, 'time': '23:10'}, {'level_m': 0.84, 'time': '08:10'}]","[{'level_m': 0.41, 'time': '02:50'}]",HCMC_TVHN_20260122.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.68, 'time': '20:30'}, {'level_m': 1.59, 'time': '06:00'}]","[{'level_m': 0.18, 'time': '01:00'}]",HCMC_TVHN_20260122.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.45, 'time': '20:50'}, {'level_m': 1.52, 'time': '06:10'}]","[{'level_m': 0.5, 'time': '01:10'}]",HCMC_TVHN_20260122.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.22, 'time': '00:30'}, {'level_m': 1.32, 'time': '10:00'}]","[{'level_m': 0.55, 'time': '05:00'}]",HCMC_TVHN_20260122.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.4, 'time': '19:00'}, {'level_m': 1.43, 'time': '05:00'}]","[{'level_m': 0.18, 'time': '00:00'}]",HCMC_TVHN_20260122.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.4, 'time': '18:00'}, {'level_m': 1.4, 'time': '04:00'}]","[{'level_m': 0.18, 'time': '23:30'}]",HCMC_TVHN_20260122.pdf
+Vũng Tàu,Biển Đông,"[{'level_m': 3.87, 'time': '17:00'}, {'level_m': 3.96, 'time': '03:00'}]","[{'level_m': 2.8, 'time': '22:30'}]",HCMC_TVHN_20260123.pdf
+Tân An,Vàm Cỏ Tây,"[{'level_m': 1.35, 'time': '20:00'}, {'level_m': 1.29, 'time': '04:00'}]","[{'level_m': 0.44, 'time': '00:00'}]",HCMC_TVHN_20260123.pdf
+Bến Lức,Vàm Cỏ Đông,"[{'level_m': 1.19, 'time': '20:00'}, {'level_m': 1.21, 'time': '05:30'}]","[{'level_m': 0.15, 'time': '00:30'}]",HCMC_TVHN_20260123.pdf
+Gò Dầu Hạ,Vàm Cỏ Đông,"[{'level_m': 0.81, 'time': '23:40'}, {'level_m': 0.88, 'time': '09:00'}]","[{'level_m': 0.42, 'time': '05:20'}]",HCMC_TVHN_20260123.pdf
+Biên Hòa,Đồng Nai,"[{'level_m': 1.71, 'time': '20:30'}, {'level_m': 1.59, 'time': '07:00'}]","[{'level_m': 0.11, 'time': '02:00'}]",HCMC_TVHN_20260123.pdf
+Thủ Dầu Một,Sài Gòn,"[{'level_m': 1.47, 'time': '21:10'}, {'level_m': 1.52, 'time': '07:00'}]","[{'level_m': 0.47, 'time': '01:45'}]",HCMC_TVHN_20260123.pdf
+Dầu Tiếng,Sài Gòn,"[{'level_m': 1.25, 'time': '01:00'}, {'level_m': 1.32, 'time': '11:00'}]","[{'level_m': 0.54, 'time': '06:00'}]",HCMC_TVHN_20260123.pdf
+Phú An,Sài Gòn,"[{'level_m': 1.38, 'time': '20:00'}, {'level_m': 1.43, 'time': '06:00'}]","[{'level_m': 0.14, 'time': '00:00'}]",HCMC_TVHN_20260123.pdf
+Nhà Bè,Đồng Điền,"[{'level_m': 1.41, 'time': '18:30'}, {'level_m': 1.4, 'time': '05:00'}]","[{'level_m': None, 'time': None}]",HCMC_TVHN_20260123.pdf

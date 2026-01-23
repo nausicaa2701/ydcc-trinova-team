@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
-import { Bell, Send, Save } from 'lucide-react'
+import { Bell, PaperPlaneTilt, FloppyDisk } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface AlertConfig {
@@ -119,7 +119,7 @@ export default function CoopAlertsConfig() {
               disabled={testing}
               className="px-4 py-2 bg-amber-500 text-white rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2 disabled:opacity-50"
             >
-              <Send className="w-5 h-5" />
+              <PaperPlaneTilt className="w-5 h-5" />
               {testing ? t('coop.sending') : t('coop.testZaloNotification')}
             </button>
           </div>
@@ -173,7 +173,7 @@ export default function CoopAlertsConfig() {
                 disabled={saving}
                 className="px-6 py-2 bg-primary text-white rounded-lg font-bold hover:brightness-110 transition-all flex items-center gap-2 disabled:opacity-50"
               >
-                <Save className="w-5 h-5" />
+                <FloppyDisk className="w-5 h-5" />
                 {saving ? t('coop.saving') : t('coop.saveConfiguration')}
               </button>
             </div>

@@ -32,7 +32,10 @@ app.add_middleware(
 )
 
 MODELS_DIR = Path(__file__).parent.parent / 'models'
-DATA_PATH = Path(__file__).parent.parent.parent / 'dataset' / 'mekong_delta_salinity_stations.csv'
+# Try to use real dataset first, fallback to mock dataset
+DATA_PATH = Path(__file__).parent.parent.parent / 'dataset' / 'station_data_daily.csv'
+if not DATA_PATH.exists():
+    DATA_PATH = Path(__file__).parent.parent.parent / 'dataset' / 'mekong_delta_salinity_stations.csv'
 
 models_cache = {}
 scalers_cache = {}
@@ -44,21 +47,46 @@ def load_models():
     """Load all models into cache."""
     global models_cache, scalers_cache, risk_models_cache
     
+    # Find LSTM model (h7 or h16)
     lstm_path = list(MODELS_DIR.glob('lstm_*_h7*.ckpt'))
+    if not lstm_path:
+        lstm_path = list(MODELS_DIR.glob('lstm_*_h*.ckpt'))
+    
+    # Find GRU model (h30, h18, or h16)
     gru_path = list(MODELS_DIR.glob('gru_*_h30*.ckpt'))
+    if not gru_path:
+        gru_path = list(MODELS_DIR.glob('gru_*_h18*.ckpt'))
+    if not gru_path:
+        gru_path = list(MODELS_DIR.glob('gru_*_h16*.ckpt'))
+    if not gru_path:
+        gru_path = list(MODELS_DIR.glob('gru_*_h*.ckpt'))
     
     if lstm_path:
         models_cache['lstm'] = LSTMModel.load_from_checkpoint(str(lstm_path[0]))
         models_cache['lstm'].eval()
-        scaler_path = MODELS_DIR / f"lstm_{lstm_path[0].stem.split('_')[1]}_h7_scaler.pkl"
-        if scaler_path.exists():
+        # Try to find scaler (could be h7, h16, etc.)
+        scaler_path = MODELS_DIR / f"lstm_multi_h7_scaler.pkl"
+        if not scaler_path.exists():
+            # Try to find any lstm scaler
+            scaler_path = list(MODELS_DIR.glob('lstm_*_scaler.pkl'))
+            scaler_path = scaler_path[0] if scaler_path else None
+        if scaler_path and Path(scaler_path).exists():
             scalers_cache['lstm'] = joblib.load(scaler_path)
     
     if gru_path:
         models_cache['gru'] = GRUModel.load_from_checkpoint(str(gru_path[0]))
         models_cache['gru'].eval()
-        scaler_path = MODELS_DIR / f"gru_{gru_path[0].stem.split('_')[1]}_h30_scaler.pkl"
-        if scaler_path.exists():
+        # Try to find scaler (could be h30, h18, h16, etc.)
+        scaler_path = MODELS_DIR / f"gru_multi_h30_scaler.pkl"
+        if not scaler_path.exists():
+            scaler_path = MODELS_DIR / f"gru_multi_h18_scaler.pkl"
+        if not scaler_path.exists():
+            scaler_path = MODELS_DIR / f"gru_multi_h16_scaler.pkl"
+        if not scaler_path.exists():
+            # Try to find any gru scaler
+            scaler_path = list(MODELS_DIR.glob('gru_*_scaler.pkl'))
+            scaler_path = scaler_path[0] if scaler_path else None
+        if scaler_path and Path(scaler_path).exists():
             scalers_cache['gru'] = joblib.load(scaler_path)
     
     risk_lr_path = MODELS_DIR / 'risk_logistic_regression.pkl'

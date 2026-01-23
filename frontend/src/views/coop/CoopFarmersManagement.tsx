@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
-import { Plus, Edit, Trash2, Phone, User } from 'lucide-react'
+import { Plus, PencilSimple, Trash, Phone, User } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Farmer {
@@ -150,14 +150,14 @@ export default function CoopFarmersManagement() {
                             className="p-2 text-slate-400 hover:text-blue-400 transition-colors"
                             title="Edit"
                           >
-                            <Edit className="w-4 h-4" />
+                            <PencilSimple className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(farmer.id)}
                             className="p-2 text-slate-400 hover:text-red-400 transition-colors"
                             title="Delete"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash className="w-4 h-4" />
                           </button>
                         </div>
                       </td>

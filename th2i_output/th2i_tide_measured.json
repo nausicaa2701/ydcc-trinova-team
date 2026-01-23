@@ -1,0 +1,184 @@
+{
+  "records": [
+    {
+      "station": "Vũng Tàu",
+      "river": "Biển Đông",
+      "high_tides": [
+        {
+          "level_m": 3.87,
+          "time": "17:00"
+        },
+        {
+          "level_m": 3.96,
+          "time": "03:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 2.8,
+          "time": "22:30"
+        }
+      ]
+    },
+    {
+      "station": "Tân An",
+      "river": "Vàm Cỏ Tây",
+      "high_tides": [
+        {
+          "level_m": 1.35,
+          "time": "20:00"
+        },
+        {
+          "level_m": 1.29,
+          "time": "04:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.44,
+          "time": "00:00"
+        }
+      ]
+    },
+    {
+      "station": "Bến Lức",
+      "river": "Vàm Cỏ Đông",
+      "high_tides": [
+        {
+          "level_m": 1.19,
+          "time": "20:00"
+        },
+        {
+          "level_m": 1.21,
+          "time": "05:30"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.15,
+          "time": "00:30"
+        }
+      ]
+    },
+    {
+      "station": "Gò Dầu Hạ",
+      "river": "Vàm Cỏ Đông",
+      "high_tides": [
+        {
+          "level_m": 0.81,
+          "time": "23:40"
+        },
+        {
+          "level_m": 0.88,
+          "time": "09:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.42,
+          "time": "05:20"
+        }
+      ]
+    },
+    {
+      "station": "Biên Hòa",
+      "river": "Đồng Nai",
+      "high_tides": [
+        {
+          "level_m": 1.71,
+          "time": "20:30"
+        },
+        {
+          "level_m": 1.59,
+          "time": "07:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.11,
+          "time": "02:00"
+        }
+      ]
+    },
+    {
+      "station": "Thủ Dầu Một",
+      "river": "Sài Gòn",
+      "high_tides": [
+        {
+          "level_m": 1.47,
+          "time": "21:10"
+        },
+        {
+          "level_m": 1.52,
+          "time": "07:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.47,
+          "time": "01:45"
+        }
+      ]
+    },
+    {
+      "station": "Dầu Tiếng",
+      "river": "Sài Gòn",
+      "high_tides": [
+        {
+          "level_m": 1.25,
+          "time": "01:00"
+        },
+        {
+          "level_m": 1.32,
+          "time": "11:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.54,
+          "time": "06:00"
+        }
+      ]
+    },
+    {
+      "station": "Phú An",
+      "river": "Sài Gòn",
+      "high_tides": [
+        {
+          "level_m": 1.38,
+          "time": "20:00"
+        },
+        {
+          "level_m": 1.43,
+          "time": "06:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": 0.14,
+          "time": "00:00"
+        }
+      ]
+    },
+    {
+      "station": "Nhà Bè",
+      "river": "Đồng Điền",
+      "high_tides": [
+        {
+          "level_m": 1.41,
+          "time": "18:30"
+        },
+        {
+          "level_m": 1.4,
+          "time": "05:00"
+        }
+      ],
+      "low_tides": [
+        {
+          "level_m": null,
+          "time": null
+        }
+      ]
+    }
+  ]
+}

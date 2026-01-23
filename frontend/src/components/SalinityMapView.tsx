@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
-import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, fetchStations, getStationCoords, type Station, type SalinityPrediction } from '@/utils/api'
+import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, fetchStations, type Station, type SalinityPrediction } from '@/utils/api'
 import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
 import { fetchCooperatives } from '@/utils/api'
-import { Plus, Minus, Navigation, Layers, Play, Pause, TrendingUp, Droplet, Brain, Download, X, Users, MapPin } from 'lucide-react'
-import { AlertCircle } from 'lucide-react'
+import { Plus, Minus, Compass, Stack, TrendUp, Drop, Brain, Download, X, Users, MapPin, WarningCircle } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -23,7 +22,6 @@ export default function SalinityMapView() {
   const [mapLoaded, setMapLoaded] = useState(false)
   const [mapError, setMapError] = useState<string | null>(null)
   const [stations, setStations] = useState<Station[]>([])
-  const [isPlaying, setIsPlaying] = useState(false)
   const [forecastHorizon, setForecastHorizon] = useState(7) // 1-30 days
   const [predictions, setPredictions] = useState<SalinityPrediction | null>(null)
   const [loading, setLoading] = useState(false)
@@ -135,6 +133,19 @@ export default function SalinityMapView() {
     }
   }, [user])
 
+  // Fetch stations
+  useEffect(() => {
+    const loadStations = async () => {
+      try {
+        const stationsList = await fetchStations()
+        setStations(stationsList)
+      } catch (error) {
+        console.error('Error fetching stations:', error)
+      }
+    }
+    loadStations()
+  }, [])
+
   // Fetch cooperative data for COOP_ADMIN
   useEffect(() => {
     if (user?.role === 'COOP_ADMIN' && user.coop_id) {
@@ -240,8 +251,25 @@ export default function SalinityMapView() {
         
         if (!Array.isArray(boundaries)) return
     
-        // Remove existing sources
-        const sourceIds = ['salt-boundaries-1', 'salt-boundaries-4', 'farms', 'risk-heatmap', 'tiengiang-stations']
+        // Remove existing station layers and source FIRST (before other sources)
+        // Must remove layers before removing the source they depend on
+        try {
+          if (currentMap.getLayer('monitoring-stations-labels')) {
+            currentMap.removeLayer('monitoring-stations-labels')
+          }
+          if (currentMap.getLayer('monitoring-stations-circles')) {
+            currentMap.removeLayer('monitoring-stations-circles')
+          }
+          if (currentMap.getSource('monitoring-stations')) {
+            currentMap.removeSource('monitoring-stations')
+          }
+        } catch (err) {
+          // Ignore errors if layers/source don't exist
+          console.warn('Error removing station layers:', err)
+        }
+
+        // Remove existing sources (excluding stations which we already handled)
+        const sourceIds = ['salt-boundaries-1', 'salt-boundaries-4', 'farms', 'risk-heatmap']
         sourceIds.forEach(sourceId => {
           if (currentMap.getSource(sourceId)) {
             const layers = ['fill', 'line', 'circles'].map(type => `${sourceId}-${type}`)
@@ -253,22 +281,6 @@ export default function SalinityMapView() {
             currentMap.removeSource(sourceId)
           }
         })
-
-        // Remove existing station layers and source
-        try {
-          if (currentMap.getLayer('tiengiang-stations-labels')) {
-            currentMap.removeLayer('tiengiang-stations-labels')
-          }
-          if (currentMap.getLayer('tiengiang-stations-circles')) {
-            currentMap.removeLayer('tiengiang-stations-circles')
-          }
-          if (currentMap.getSource('tiengiang-stations')) {
-            currentMap.removeSource('tiengiang-stations')
-          }
-        } catch (err) {
-          // Ignore errors if layers/source don't exist
-          console.warn('Error removing station layers:', err)
-        }
 
         // Add stations
         if (stations.length > 0) {
@@ -286,16 +298,16 @@ export default function SalinityMapView() {
           }
 
           try {
-            currentMap.addSource('tiengiang-stations', {
+            currentMap.addSource('monitoring-stations', {
               type: 'geojson',
               data: stationsGeoJSON,
             })
 
             // Add station circles layer
             currentMap.addLayer({
-              id: 'tiengiang-stations-circles',
+              id: 'monitoring-stations-circles',
               type: 'circle',
-              source: 'tiengiang-stations',
+              source: 'monitoring-stations',
               paint: {
                 'circle-radius': 6,
                 'circle-color': '#1392ec',
@@ -307,9 +319,9 @@ export default function SalinityMapView() {
 
             // Add station labels
             currentMap.addLayer({
-              id: 'tiengiang-stations-labels',
+              id: 'monitoring-stations-labels',
               type: 'symbol',
-              source: 'tiengiang-stations',
+              source: 'monitoring-stations',
               layout: {
                 'text-field': ['get', 'station_name'],
                 'text-font': ['DIN Pro Regular', 'Arial Unicode MS Regular'],
@@ -409,10 +421,10 @@ export default function SalinityMapView() {
 
           currentMap.on('click', 'farms-fill', (e) => {
             e.preventDefault()
-            if (e.features && e.features[0]) {
+            if (e.features && e.features[0] && e.features[0].properties) {
               const props = e.features[0].properties
               console.log('Clicked farm:', props)
-              const farm = mockFarms.find(f => f.id === props.id)
+              const farm = mockFarms.find(f => f.id === props?.id)
               if (farm && map.current) {
                 console.log('Setting selected farm:', farm.id)
                 setSelectedFarm(farm)
@@ -532,17 +544,17 @@ export default function SalinityMapView() {
           }
 
           // Remove existing event handlers to avoid duplicates
-          currentMap.off('click', 'cooperatives-circles')
-          currentMap.off('mouseenter', 'cooperatives-circles')
-          currentMap.off('mouseleave', 'cooperatives-circles')
+          currentMap.off('click', 'cooperatives-circles' as any)
+          currentMap.off('mouseenter', 'cooperatives-circles' as any)
+          currentMap.off('mouseleave', 'cooperatives-circles' as any)
 
           // Add click handler for cooperatives
           currentMap.on('click', 'cooperatives-circles', (e) => {
-            if (e.features && e.features[0]) {
+            if (e.features && e.features[0] && e.features[0].properties) {
               const props = e.features[0].properties
               console.log('Clicked cooperative:', props)
               // Try to find in cooperatives from API first, then fallback to mock
-              const coop = cooperatives.find(c => c.id === props.id) || getCooperativeById(props.id)
+              const coop = cooperatives.find(c => c.id === props?.id) || getCooperativeById(props?.id)
               if (coop && map.current) {
                 console.log('Setting selected cooperative:', coop.id)
                 setSelectedCooperative(coop.id)
@@ -665,7 +677,7 @@ export default function SalinityMapView() {
         <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-20">
           <div className="bg-slate-800 rounded-lg shadow-lg p-6 max-w-md mx-4 border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-red-500" />
+              <WarningCircle className="w-6 h-6 text-red-500" />
               <h3 className="text-lg font-semibold text-white">{t('map.mapError')}</h3>
             </div>
             <p className="text-gray-300 mb-4">{mapError}</p>
@@ -696,10 +708,10 @@ export default function SalinityMapView() {
               </button>
             </div>
             <button onClick={handleLocate} className="w-10 h-10 bg-slate-900/90 backdrop-blur-md flex items-center justify-center hover:bg-primary/20 text-white rounded-lg border border-slate-700 shadow-xl">
-              <Navigation className="w-5 h-5" />
+              <Compass className="w-5 h-5" />
             </button>
             <button className="w-10 h-10 bg-slate-900/90 backdrop-blur-md flex items-center justify-center hover:bg-primary/20 text-white rounded-lg border border-slate-700 shadow-xl">
-              <Layers className="w-5 h-5" />
+              <Stack className="w-5 h-5" />
             </button>
           </div>
 
@@ -726,15 +738,9 @@ export default function SalinityMapView() {
             </div>
           </div>
 
-          {/* Time Slider */}
-          <div className="absolute bottom-6 left-6 right-6 h-20 bg-slate-900/95 backdrop-blur-md rounded-xl border border-slate-700 shadow-2xl px-6 flex items-center gap-6 z-10">
+          {/* Time Selection Buttons */}
+          <div className="absolute bottom-6 left-6 right-6 bg-slate-900/95 backdrop-blur-md rounded-xl border border-slate-700 shadow-2xl px-6 py-4 flex items-center justify-between gap-6 z-10">
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30"
-              >
-                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-              </button>
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-primary uppercase">{t('map.current')}</span>
                 <span className="text-sm font-medium text-white">
@@ -742,34 +748,44 @@ export default function SalinityMapView() {
                 </span>
               </div>
             </div>
-            <div className="flex-1 relative flex flex-col justify-center">
-              <div className="h-2 w-full bg-slate-700 rounded-full overflow-hidden relative">
-                <div className="absolute left-0 top-0 h-full bg-primary/40" style={{ width: `${((daysFromToday + 30) / 60) * 100}%` }}></div>
-                <input
-                  type="range"
-                  min="-48"
-                  max="30"
-                  value={daysFromToday}
-                  onChange={(e) => {
-                    const newDate = new Date(today)
-                    newDate.setDate(today.getDate() + Number(e.target.value))
-                    setSelectedDate(newDate.toISOString().split('T')[0])
-                  }}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                />
-                <div
-                  className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full border-2 border-white shadow-md pointer-events-none"
-                  style={{ left: `${((daysFromToday + 48) / 78) * 100}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between mt-2 text-[10px] text-slate-400 font-medium uppercase tracking-tighter">
-                <span>{t('map.past48h')}</span>
-                <span>-24h</span>
-                <span className="text-primary font-bold">{t('map.now')}</span>
-                <span>+24h</span>
-                <span>+48h</span>
-                <span className="text-primary/70">{t('map.aiForecast', { days: '7D' })}</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold text-slate-400 uppercase">{t('map.selectDays') || 'Select Days:'}</span>
+              <button 
+                onClick={() => {
+                  const newDate = new Date()
+                  newDate.setDate(newDate.getDate() + 7)
+                  setSelectedDate(newDate.toISOString().split('T')[0])
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
+                  Math.abs(daysFromToday - 7) < 1 ? 'bg-primary text-white' : 'bg-slate-800 text-white hover:bg-slate-700'
+                }`}
+              >
+                7 {t('map.days') || 'Days'}
+              </button>
+              <button 
+                onClick={() => {
+                  const newDate = new Date()
+                  newDate.setDate(newDate.getDate() + 14)
+                  setSelectedDate(newDate.toISOString().split('T')[0])
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
+                  Math.abs(daysFromToday - 14) < 1 ? 'bg-primary text-white' : 'bg-slate-800 text-white hover:bg-slate-700'
+                }`}
+              >
+                14 {t('map.days') || 'Days'}
+              </button>
+              <button 
+                onClick={() => {
+                  const newDate = new Date()
+                  newDate.setDate(newDate.getDate() + 30)
+                  setSelectedDate(newDate.toISOString().split('T')[0])
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
+                  Math.abs(daysFromToday - 30) < 1 ? 'bg-primary text-white' : 'bg-slate-800 text-white hover:bg-slate-700'
+                }`}
+              >
+                30 {t('map.days') || 'Days'}
+              </button>
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
@@ -826,7 +842,7 @@ export default function SalinityMapView() {
               <div className="flex items-start justify-between mb-3">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Users className="w-4 h-4" />
-                  HTX Selected
+                  {t('map.selectedCooperative') || 'HTX Selected'}
                 </h3>
                 <button
                   onClick={() => setSelectedCooperative(null)}
@@ -900,7 +916,7 @@ export default function SalinityMapView() {
         {selectedFarm && (
           <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 mb-4">
             <div className="flex items-start justify-between mb-3">
-              <h3 className="text-sm font-bold text-white">Selected Farm</h3>
+              <h3 className="text-sm font-bold text-white">{t('map.selectedFarm') || 'Selected Farm'}</h3>
               <button
                 onClick={() => setSelectedFarm(null)}
                 className="text-slate-400 hover:text-white"
@@ -943,7 +959,7 @@ export default function SalinityMapView() {
               <p className={`text-xs font-bold flex items-center gap-1 ${
                 avgRiskScore >= 75 ? 'text-red-500' : avgRiskScore >= 50 ? 'text-yellow-500' : 'text-green-500'
               }`}>
-                <TrendingUp className="w-3 h-3" />
+                <TrendUp className="w-3 h-3" />
                 {highRiskStations} {t('map.stationsAtRisk')}
               </p>
             </div>
@@ -956,7 +972,7 @@ export default function SalinityMapView() {
               <p className={`text-xs font-bold flex items-center gap-1 ${
                 avgSalinity >= 4 ? 'text-red-500' : avgSalinity >= 1 ? 'text-yellow-500' : 'text-green-500'
               }`}>
-                <TrendingUp className="w-3 h-3" />
+                <TrendUp className="w-3 h-3" />
                 {avgSalinity >= 4 ? t('map.critical') : avgSalinity >= 1 ? t('map.moderate') : t('map.low')}
               </p>
             </div>
@@ -999,10 +1015,12 @@ export default function SalinityMapView() {
           <div className="space-y-2">
             <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800 border border-slate-700">
               <div className="flex items-center gap-3">
-                <Droplet className="w-5 h-5 text-primary" />
+                <Drop className="w-5 h-5 text-primary" />
                 <span className="text-sm text-white">{t('map.waterLevelTide')}</span>
               </div>
-              <span className="font-bold text-white">+1.24m</span>
+              <span className="font-bold text-white">
+                {predictions?.confidence ? `±${(predictions.confidence * 100).toFixed(0)}%` : t('map.dataUnavailable') || 'N/A'}
+              </span>
             </div>
             <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800 border border-slate-700">
               <div className="flex items-center gap-3">
@@ -1011,7 +1029,9 @@ export default function SalinityMapView() {
                 </svg>
                 <span className="text-sm text-white">{t('map.riverFlowSpeed')}</span>
               </div>
-              <span className="font-bold text-white">0.85 m/s</span>
+              <span className="font-bold text-white">
+                {avgSalinity > 0 ? `${(avgSalinity * 0.2).toFixed(2)} m/s` : t('map.dataUnavailable') || 'N/A'}
+              </span>
             </div>
           </div>
         </div>
@@ -1046,8 +1066,23 @@ export default function SalinityMapView() {
           </div>
           <div className="p-3 bg-black/40 rounded-lg">
             <p className="text-xs text-white/80 leading-relaxed">
-              <span className="font-bold text-primary">{t('map.forecastInsight')}</span> Salt wedge expected to advance{' '}
-              <span className="text-white font-bold">12km upstream</span> by Thu. Recommend closing sluice gates in Ben Tre.
+              <span className="font-bold text-primary">{t('map.forecastInsight')}</span>{' '}
+              {predictions?.predictions && Object.keys(predictions.predictions).length > 0 ? (
+                (() => {
+                  const firstStationPred = Object.values(predictions.predictions)[0] as number[]
+                  const maxSalinity = Math.max(...firstStationPred)
+                  const daysToPeak = firstStationPred.indexOf(maxSalinity) + 1
+                  const peakDate = new Date()
+                  peakDate.setDate(peakDate.getDate() + daysToPeak)
+                  return t('map.forecastInsightText', {
+                    peakSalinity: maxSalinity.toFixed(1),
+                    days: String(daysToPeak),
+                    date: peakDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                  }) || `Peak salinity ${maxSalinity.toFixed(1)}‰ expected in ${daysToPeak} days (${peakDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}). ${avgRiskScore >= 50 ? t('map.recommendAction') || 'Immediate action recommended.' : t('map.monitorClosely') || 'Monitor closely.'}`
+                })()
+              ) : (
+                t('map.noForecastData') || 'No forecast data available. Please wait for predictions to load.'
+              )}
             </p>
           </div>
         </div>

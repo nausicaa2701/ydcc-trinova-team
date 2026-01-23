@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
-import { Map, Users, BarChart3, Settings, LogOut, User } from 'lucide-react'
+import { MapTrifold, Users, ChartBar, Gear, SignOut, User } from '@phosphor-icons/react'
 import LanguageSwitcher from './LanguageSwitcher'
 import Logo from './Logo'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -21,9 +21,9 @@ export default function RoleBasedHeader() {
   // System Admin navigation
   if (user.role === 'SYSTEM_ADMIN') {
     const navItems = [
-      { path: '/admin/dashboard', label: t('navigation.dashboard'), icon: <BarChart3 className="w-5 h-5" /> },
+      { path: '/admin/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/admin/coops', label: t('navigation.htxManagement'), icon: <Users className="w-5 h-5" /> },
-      { path: '/admin/map', label: t('navigation.mapView'), icon: <Map className="w-5 h-5" /> },
+      { path: '/admin/map', label: t('navigation.mapView'), icon: <MapTrifold className="w-5 h-5" /> },
     ]
 
     return (
@@ -58,7 +58,7 @@ export default function RoleBasedHeader() {
             className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition-colors border border-slate-700"
             title={t('common.logout')}
           >
-            <LogOut className="w-5 h-5" />
+            <SignOut className="w-5 h-5" />
           </button>
         </div>
       </header>
@@ -68,10 +68,10 @@ export default function RoleBasedHeader() {
   // HTX Admin navigation
   if (user.role === 'COOP_ADMIN') {
     const navItems = [
-      { path: '/coop/dashboard', label: t('navigation.dashboard'), icon: <BarChart3 className="w-5 h-5" /> },
+      { path: '/coop/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/coop/farmers', label: t('navigation.farmers'), icon: <Users className="w-5 h-5" /> },
-      { path: '/coop/alerts', label: t('navigation.alerts'), icon: <Settings className="w-5 h-5" /> },
-      { path: '/coop/map', label: t('navigation.map'), icon: <Map className="w-5 h-5" /> },
+      { path: '/coop/alerts', label: t('navigation.alerts'), icon: <Gear className="w-5 h-5" /> },
+      { path: '/coop/map', label: t('navigation.map'), icon: <MapTrifold className="w-5 h-5" /> },
     ]
 
     return (
@@ -106,7 +106,7 @@ export default function RoleBasedHeader() {
             className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition-colors border border-slate-700"
             title={t('common.logout')}
           >
-            <LogOut className="w-5 h-5" />
+            <SignOut className="w-5 h-5" />
           </button>
         </div>
       </header>
@@ -116,8 +116,8 @@ export default function RoleBasedHeader() {
   // Farmer navigation
   if (user.role === 'FARMER') {
     const navItems = [
-      { path: '/farmer/dashboard', label: t('navigation.dashboard'), icon: <BarChart3 className="w-5 h-5" /> },
-      { path: '/farmer/map', label: t('navigation.map'), icon: <Map className="w-5 h-5" /> },
+      { path: '/farmer/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
+      { path: '/farmer/map', label: t('navigation.map'), icon: <MapTrifold className="w-5 h-5" /> },
       { path: '/farmer/profile', label: t('navigation.profile'), icon: <User className="w-5 h-5" /> },
     ]
 
@@ -153,7 +153,7 @@ export default function RoleBasedHeader() {
             className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition-colors border border-slate-700"
             title={t('common.logout')}
           >
-            <LogOut className="w-5 h-5" />
+            <SignOut className="w-5 h-5" />
           </button>
         </div>
       </header>

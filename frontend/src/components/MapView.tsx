@@ -6,7 +6,7 @@ import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarm
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
 import TimeSlider from './TimeSlider'
-import { AlertCircle } from 'lucide-react'
+import { WarningCircle } from '@phosphor-icons/react'
 
 // Set Mapbox token
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -33,7 +33,6 @@ export default function MapView() {
     showFarms,
     selectedFarm,
     setSelectedFarm,
-    selectedCooperative,
     setSelectedCooperative,
   } = useAppStore()
 
@@ -528,9 +527,9 @@ export default function MapView() {
 
       // Add click handler for cooperatives
       map.current.on('click', 'cooperatives-circles', (e) => {
-        if (e.features && e.features[0]) {
+        if (e.features && e.features[0] && e.features[0].properties) {
           const props = e.features[0].properties
-          const coop = getCooperativeById(props.id)
+          const coop = getCooperativeById(props?.id)
           if (coop && map.current) {
             setSelectedCooperative(coop.id)
             setSelectedFarm(null) // Clear farm selection when cooperative is selected
@@ -672,7 +671,7 @@ export default function MapView() {
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-md mx-4">
             <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-red-500" />
+              <WarningCircle className="w-6 h-6 text-red-500" />
               <h3 className="text-lg font-semibold text-gray-900">Map Error</h3>
             </div>
             <p className="text-gray-700 mb-4">{mapError}</p>

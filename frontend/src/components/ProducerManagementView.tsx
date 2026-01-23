@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAppStore } from '@/store/useAppStore'
 import { mockFarms, mockCooperatives } from '@/data/mockFarms'
-import { Search, CheckCircle, AlertTriangle, AlertCircle, Filter, MapPin, User, Users, Radio } from 'lucide-react'
+import { MagnifyingGlass, CheckCircle, Warning, WarningCircle, Funnel, MapPin, User, Users, RadioButton } from '@phosphor-icons/react'
 import MapView from './MapView'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -29,11 +29,11 @@ export default function ProducerManagementView() {
   const getRiskBadge = (level: string | undefined) => {
     switch (level) {
       case 'critical':
-        return { bg: 'bg-rose-500', text: 'text-white', label: 'Critical', icon: AlertCircle }
+        return { bg: 'bg-rose-500', text: 'text-white', label: 'Critical', icon: WarningCircle }
       case 'high':
-        return { bg: 'bg-amber-500/20', text: 'text-amber-500', label: 'Warning', icon: AlertTriangle }
+        return { bg: 'bg-amber-500/20', text: 'text-amber-500', label: 'Warning', icon: Warning }
       case 'medium':
-        return { bg: 'bg-yellow-500/20', text: 'text-yellow-500', label: 'Warning', icon: AlertTriangle }
+        return { bg: 'bg-yellow-500/20', text: 'text-yellow-500', label: 'Warning', icon: Warning }
       default:
         return { bg: 'bg-emerald-500/20', text: 'text-emerald-500', label: 'Safe', icon: CheckCircle }
     }
@@ -69,7 +69,7 @@ export default function ProducerManagementView() {
             </span>
           </div>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
+            <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5" />
             <input
               className="w-full rounded-lg border-slate-700 bg-slate-800/50 pl-10 pr-4 py-2 text-sm text-white placeholder:text-slate-500 focus:ring-1 focus:ring-primary focus:border-primary"
               placeholder={t('producerManagement.searchPlaceholder')}
@@ -97,7 +97,7 @@ export default function ProducerManagementView() {
                   : 'bg-slate-800 text-white hover:bg-slate-700 border-transparent'
               }`}
             >
-              <AlertTriangle className="w-4 h-4 text-amber-500" />
+              <Warning className="w-4 h-4 text-amber-500" />
               {t('producerManagement.warning')}
             </button>
             <button
@@ -108,11 +108,11 @@ export default function ProducerManagementView() {
                   : 'bg-slate-800 text-white hover:bg-slate-700 border-transparent'
               }`}
             >
-              <AlertCircle className="w-4 h-4 text-rose-500" />
+              <WarningCircle className="w-4 h-4 text-rose-500" />
               {t('producerManagement.critical')}
             </button>
             <button className="flex items-center gap-1.5 rounded-lg bg-primary/20 text-primary border border-primary/30 px-3 py-1.5 text-xs font-medium">
-              <Filter className="w-4 h-4" />
+              <Funnel className="w-4 h-4" />
               TP. Hồ Chí Minh
             </button>
           </div>
@@ -206,8 +206,14 @@ export default function ProducerManagementView() {
           }))}
         </div>
         <div className="p-4 border-t border-slate-700">
-          <button className="w-full rounded-lg bg-primary py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
-            <Radio className="w-5 h-5" />
+          <button 
+            onClick={() => {
+              // TODO: Implement broadcast alert functionality
+              alert(t('producerManagement.broadcastAlertToRegion') + ' - Feature coming soon')
+            }}
+            className="w-full rounded-lg bg-primary py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+          >
+            <RadioButton className="w-5 h-5" />
             {t('producerManagement.broadcastAlertToRegion')}
           </button>
         </div>
@@ -245,10 +251,22 @@ export default function ProducerManagementView() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <button className="flex-1 rounded-lg bg-slate-800 border border-slate-700 py-2 text-xs font-bold text-white hover:bg-slate-700 transition-all">
+                <button 
+                  onClick={() => {
+                    // TODO: Implement view details functionality
+                    console.log('View details for farm:', selectedFarm.id)
+                  }}
+                  className="flex-1 rounded-lg bg-slate-800 border border-slate-700 py-2 text-xs font-bold text-white hover:bg-slate-700 transition-all"
+                >
                   {t('producerManagement.viewDetails')}
                 </button>
-                <button className="flex-1 rounded-lg bg-primary py-2 text-xs font-bold text-white hover:bg-primary/90 transition-all">
+                <button 
+                  onClick={() => {
+                    // TODO: Implement notify producer functionality
+                    alert(t('producerManagement.notifyProducer') + ' - Feature coming soon')
+                  }}
+                  className="flex-1 rounded-lg bg-primary py-2 text-xs font-bold text-white hover:bg-primary/90 transition-all"
+                >
                   {t('producerManagement.notifyProducer')}
                 </button>
               </div>

@@ -90,6 +90,16 @@ ydcc-trinova-team/
 - **Python** 3.10+
 - **Mapbox Access Token** ([Get one here](https://account.mapbox.com/access-tokens/))
 
+### Running All Services
+
+**Important:** You need to run **three separate services** in **three different terminal windows**:
+
+1. **Terminal 1**: Main Backend API (Port 8000) - See [Backend API Setup](#2-backend-api-setup-port-8000)
+2. **Terminal 2**: AI API Server (Port 8001) - See [AI API Setup](#3-ai-api-setup-port-8001)
+3. **Terminal 3**: Frontend (Port 5173) - See [Frontend Setup](#1-frontend-setup)
+
+Each service must be running for the application to work properly.
+
 ### 1. Frontend Setup
 
 ```bash
@@ -109,7 +119,9 @@ npm run dev
 
 Frontend will be available at `http://localhost:5173`
 
-### 2. Backend Setup
+### 2. Backend API Setup (Port 8000)
+
+The main backend API handles authentication, cooperatives, farmers, and alerts.
 
 ```bash
 # Navigate to project root
@@ -123,36 +135,29 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r backend/requirements.txt
 
 # Run backend server
-./backend/run.sh
-# Or manually:
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+**Or use the provided script:**
+```bash
+./backend/run.sh
 ```
 
 Backend will be available at:
 - API: `http://localhost:8000`
 - API Docs: `http://localhost:8000/docs`
 
-### 3. AI API Setup
+### 3. AI API Setup (Port 8001)
 
-#### Option 1: Using Script (Recommended)
-
-```bash
-cd tiengiang-salinity-forecasting
-./run_api.sh
-```
-
-#### Option 2: Manual Setup
+The AI API handles salinity forecasting, risk scoring, and decision support.
 
 ```bash
+# Navigate to AI API directory
 cd tiengiang-salinity-forecasting
 
 # Create virtual environment if not exists
-if [ ! -d "venv" ]; then
-    python3 -m venv venv
-fi
-
-# Activate venv
+python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
@@ -161,6 +166,12 @@ pip install -r requirements.txt
 # Run server (IMPORTANT: must run from tiengiang-salinity-forecasting directory)
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 python3 -m uvicorn api.main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+**Or use the provided script:**
+```bash
+cd tiengiang-salinity-forecasting
+./run_api.sh
 ```
 
 AI API will be available at:
@@ -172,6 +183,7 @@ AI API will be available at:
 - Must run from `tiengiang-salinity-forecasting` directory
 - Ensure `PYTHONPATH` is set correctly
 - If you encounter `ModuleNotFoundError: No module named 'api'`, check your current directory
+- Ensure trained models exist in `models/` directory. If missing, train them first (see Training Models section)
 
 ### 4. Default Admin Account
 
@@ -319,51 +331,185 @@ The script will:
 
 ## AI Models
 
+### Training Models
+
+Before using the AI API, you need to train the models using the real dataset:
+
+```bash
+cd tiengiang-salinity-forecasting
+source venv/bin/activate
+
+# Train all models (LSTM, GRU, Risk)
+python3 train.py --data ../dataset/station_data_daily.csv --model all --epochs 50
+
+# Or train specific models
+python3 train.py --data ../dataset/station_data_daily.csv --model lstm --epochs 50
+python3 train.py --data ../dataset/station_data_daily.csv --model gru --epochs 50
+python3 train.py --data ../dataset/station_data_daily.csv --model risk
+```
+
+**Trained models will be saved to:**
+- `tiengiang-salinity-forecasting/models/lstm_multi_h7_*.ckpt`
+- `tiengiang-salinity-forecasting/models/gru_multi_h16_*.ckpt`
+- `tiengiang-salinity-forecasting/models/risk_*.pkl`
+
 ### Forecasting Models
 - **LSTM** (Short-term: 1-7 days)
   - Architecture: 2-layer LSTM, hidden_size=128
   - Input: 30-day sequence
   - Output: 7-day forecast
   - Use case: High-accuracy short-term predictions
+  - Model file: `models/lstm_multi_h7_*.ckpt`
 
 - **GRU** (Long-term: 7-30 days)
   - Architecture: 2-layer GRU, hidden_size=128
-  - Input: 60-day sequence
-  - Output: 30-day forecast
+  - Input: 60-day sequence (auto-adjusted to available data)
+  - Output: 16-30 day forecast (depends on data availability)
   - Use case: Efficient long-term predictions
+  - Model file: `models/gru_multi_h16_*.ckpt` or `models/gru_multi_h30_*.ckpt`
 
 ### Risk Scoring Models
 - **Logistic Regression**: Baseline, interpretable
 - **Random Forest**: Accuracy ~97.6%
 - **Gradient Boosting**: Accuracy ~97.9%
+- Model files: `models/risk_*.pkl`
+
+### Dataset
+
+The models are trained on real data extracted from PDF reports:
+- **Dataset**: `dataset/station_data_daily.csv` (244 daily records)
+- **Stations**: HCM01 (Nhà Bè), HCM02 (Cát Lái), HCM03 (Lý Nhơn), HCM04 (Long Đại)
+- **Date Range**: 2024-01-11 to 2026-01-20
 
 ## Development
 
-### Running All Services
+### Running Services
 
-Start each service in separate terminals:
+The system consists of three separate services that need to be running simultaneously. Start each service in a **separate terminal window**.
 
-**Terminal 1 - Backend:**
+#### Terminal 1: Main Backend API (Port 8000)
+
+This handles authentication, cooperatives, farmers, and alerts management.
+
+```bash
+# Navigate to project root
+cd /path/to/ydcc-trinova-team
+
+# Create and activate virtual environment (if not exists)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r backend/requirements.txt
+
+# Run backend server
+export PYTHONPATH="$(pwd):$PYTHONPATH"
+python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+**Or use the provided script:**
 ```bash
 ./backend/run.sh
 ```
 
-**Terminal 2 - AI API:**
+**Backend API will be available at:**
+- API: `http://localhost:8000`
+- API Docs: `http://localhost:8000/docs`
+
+#### Terminal 2: AI API Server (Port 8001)
+
+This handles salinity forecasting, risk scoring, and decision support endpoints.
+
+```bash
+# Navigate to AI API directory
+cd tiengiang-salinity-forecasting
+
+# Create and activate virtual environment (if not exists)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run AI API server
+# IMPORTANT: Must run from tiengiang-salinity-forecasting directory
+export PYTHONPATH="$(pwd):$PYTHONPATH"
+python3 -m uvicorn api.main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+**Or use the provided script:**
 ```bash
 cd tiengiang-salinity-forecasting
 ./run_api.sh
 ```
 
-**Terminal 3 - Frontend:**
+**AI API will be available at:**
+- API: `http://localhost:8001`
+- API Docs: `http://localhost:8001/docs`
+- Health Check: `http://localhost:8001/health`
+
+**Note:** Ensure trained models exist in `tiengiang-salinity-forecasting/models/` directory. If models are missing, train them first:
 ```bash
+cd tiengiang-salinity-forecasting
+source venv/bin/activate
+python3 train.py --data ../dataset/station_data_daily.csv --model all --epochs 50
+```
+
+#### Terminal 3: Frontend (Port 5173)
+
+The React frontend application.
+
+```bash
+# Navigate to frontend directory
 cd frontend
+
+# Install dependencies (first time only)
+npm install
+
+# Create .env file if not exists
+cat > .env << EOF
+VITE_MAPBOX_TOKEN=your_mapbox_token_here
+VITE_API_BASE_URL=http://localhost:8000
+VITE_AI_API_BASE_URL=http://localhost:8001
+EOF
+
+# Start development server
 npm run dev
 ```
+
+**Frontend will be available at:**
+- Application: `http://localhost:5173`
+
+### Service URLs Summary
+
+| Service | Port | URL | Docs |
+|---------|------|-----|------|
+| Main Backend API | 8000 | http://localhost:8000 | http://localhost:8000/docs |
+| AI API Server | 8001 | http://localhost:8001 | http://localhost:8001/docs |
+| Frontend | 5173 | http://localhost:5173 | - |
+
+### Quick Test Commands
+
+**Test Main Backend API:**
+```bash
+curl http://localhost:8000/
+curl http://localhost:8000/docs
+```
+
+**Test AI API:**
+```bash
+curl http://localhost:8001/health
+curl http://localhost:8001/stations
+curl -X POST http://localhost:8001/predict -H "Content-Type: application/json" -d '{"horizon_days": 7}'
+```
+
+**Test Frontend:**
+Open browser and navigate to `http://localhost:5173`
 
 ### Environment Variables
 
 **Frontend (.env):**
-```
+```bash
 VITE_MAPBOX_TOKEN=your_mapbox_token_here
 VITE_API_BASE_URL=http://localhost:8000
 VITE_AI_API_BASE_URL=http://localhost:8001
@@ -372,6 +518,38 @@ VITE_AI_API_BASE_URL=http://localhost:8001
 **Backend:**
 - Uses in-memory database by default
 - JWT secret key can be configured in `backend/auth.py`
+
+**AI API:**
+- Automatically loads models from `tiengiang-salinity-forecasting/models/`
+- Uses dataset from `dataset/station_data_daily.csv` (falls back to mock dataset if not found)
+
+### Troubleshooting Services
+
+**Port already in use:**
+```bash
+# Check which process is using the port
+lsof -i :8000  # Main Backend
+lsof -i :8001  # AI API
+lsof -i :5173  # Frontend
+
+# Kill the process if needed
+kill -9 <PID>
+```
+
+**Backend API not responding:**
+- Ensure virtual environment is activated
+- Check that `PYTHONPATH` is set correctly
+- Verify dependencies are installed: `pip install -r backend/requirements.txt`
+
+**AI API not loading models:**
+- Ensure models exist in `tiengiang-salinity-forecasting/models/`
+- Train models if missing: `python3 train.py --data ../dataset/station_data_daily.csv --model all`
+- Check dataset path: `dataset/station_data_daily.csv`
+
+**Frontend connection errors:**
+- Verify both backend services are running (ports 8000 and 8001)
+- Check `.env` file has correct API URLs
+- Check browser console for detailed error messages
 
 ## Docker Deployment
 

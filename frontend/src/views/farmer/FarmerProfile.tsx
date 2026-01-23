@@ -2,7 +2,7 @@ import { useState } from 'react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
-import { User, Phone, Key, Save } from 'lucide-react'
+import { User, Phone, Key, FloppyDisk } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function FarmerProfile() {
@@ -143,7 +143,7 @@ export default function FarmerProfile() {
                 disabled={saving}
                 className="w-full px-4 py-2 bg-primary text-white rounded-lg font-bold hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                <Save className="w-5 h-5" />
+                <FloppyDisk className="w-5 h-5" />
                 {saving ? t('farmer.changing') : t('farmer.changePasswordButton')}
               </button>
             </form>

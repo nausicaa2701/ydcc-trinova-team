@@ -13,7 +13,8 @@ export default {
         'nav-bg': '#16222c',
       },
       fontFamily: {
-        display: ['Inter', 'sans-serif'],
+        sans: ['Montserrat', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
       },
     },
   },

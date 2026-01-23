@@ -1,5 +1,5 @@
 import { useAppStore } from '@/store/useAppStore'
-import { Brain, TrendingUp, Droplet, Calendar, Download, AlertTriangle, Verified } from 'lucide-react'
+import { Brain, TrendUp, Drop, Calendar, Download, Warning, CheckCircle } from '@phosphor-icons/react'
 import { 
   fetchSalinityPrediction, 
   fetchStations,
@@ -21,10 +21,11 @@ type ViewMode = 'overview' | 'trend' | 'storage' | 'mitigation'
 
 export default function DecisionSupportView() {
   const { t } = useLanguage()
-  const { selectedDate, decisionSupportViewMode, setDecisionSupportViewMode } = useAppStore()
-  const viewMode = decisionSupportViewMode
+  const selectedDate = useAppStore((s) => s.selectedDate)
+  const viewMode: ViewMode = useAppStore((s) => s.decisionSupportViewMode)
+  const setDecisionSupportViewMode = useAppStore((s) => s.setDecisionSupportViewMode)
   const [predictions, setPredictions] = useState<any>(null)
-  const [trendAnalysis, setTrendAnalysis] = useState<TrendAnalysis | null>(null)
+  const [, setTrendAnalysis] = useState<TrendAnalysis | null>(null)
   const [storagePlanning, setStoragePlanning] = useState<StoragePlanning | null>(null)
   const [riskMitigation, setRiskMitigation] = useState<RiskMitigation | null>(null)
   const [loading, setLoading] = useState(false)
@@ -96,13 +97,9 @@ export default function DecisionSupportView() {
               e.stopPropagation()
               setDecisionSupportViewMode('trend')
             }}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
-              viewMode === 'trend'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
-            }`}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left text-slate-500 hover:bg-slate-800"
           >
-            <TrendingUp className="w-5 h-5" />
+            <TrendUp className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.trendAnalysis')}</span>
           </button>
           <button
@@ -111,13 +108,9 @@ export default function DecisionSupportView() {
               e.stopPropagation()
               setDecisionSupportViewMode('storage')
             }}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
-              viewMode === 'storage'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
-            }`}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left text-slate-500 hover:bg-slate-800"
           >
-            <Droplet className="w-5 h-5" />
+            <Drop className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.storagePlanning')}</span>
           </button>
           <button
@@ -126,13 +119,9 @@ export default function DecisionSupportView() {
               e.stopPropagation()
               setDecisionSupportViewMode('mitigation')
             }}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
-              viewMode === 'mitigation'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
-            }`}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left text-slate-500 hover:bg-slate-800"
           >
-            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <Warning className="w-5 h-5 text-red-500" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.riskMitigation')}</span>
           </button>
         </nav>
@@ -171,7 +160,7 @@ export default function DecisionSupportView() {
                   {t('decisionSupport.sync')} {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                 </span>
                 <span className="px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-xs font-bold border border-green-500/30 flex items-center gap-1">
-                  <Verified className="w-3 h-3" />
+                  <CheckCircle className="w-3 h-3" />
                   {t('decisionSupport.aiConfidence')} {predictions?.confidence ? Math.round(predictions.confidence * 100) : 85}%
                 </span>
               </div>
@@ -366,7 +355,6 @@ export default function DecisionSupportView() {
                   {riskMitigation?.stations && Object.values(riskMitigation.stations).map((station, idx) => {
                     const harvestDeadline = station.harvest_deadline
                     const safeWindow = station.safe_operational_window
-                    const urgentRec = station.recommendations.find(r => r.priority === 'urgent')
                     
                     return (
                       <div key={idx}>
@@ -374,7 +362,7 @@ export default function DecisionSupportView() {
                           <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 mb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center gap-2">
-                                <AlertTriangle className="w-5 h-5 text-red-500" />
+                                <Warning className="w-5 h-5 text-red-500" />
                                 <span className="text-xs font-bold uppercase tracking-tight text-red-400">{t('decisionSupport.harvestDeadline')}</span>
                               </div>
                               <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase ${
@@ -396,7 +384,7 @@ export default function DecisionSupportView() {
                           <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5 mb-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center gap-2">
-                                <Droplet className="w-5 h-5 text-amber-500" />
+                                <Drop className="w-5 h-5 text-amber-500" />
                                 <span className="text-xs font-bold uppercase tracking-tight text-amber-400">{t('decisionSupport.storagePlanning')}</span>
                               </div>
                               <span className="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.active')}</span>
@@ -466,7 +454,7 @@ export default function DecisionSupportView() {
                             <div key={recIdx} className={`p-4 rounded-xl border ${classes.border} mb-4`}>
                               <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2">
-                                  <AlertTriangle className={`w-5 h-5 ${classes.icon}`} />
+                                  <Warning className={`w-5 h-5 ${classes.icon}`} />
                                   <span className={`text-xs font-bold uppercase tracking-tight ${classes.text}`}>{rec.title}</span>
                                 </div>
                                 <span className={`text-[10px] font-black ${classes.badge} px-2 py-0.5 rounded uppercase`}>{rec.priority}</span>
@@ -489,7 +477,7 @@ export default function DecisionSupportView() {
                       <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
-                            <AlertTriangle className="w-5 h-5 text-red-500" />
+                            <Warning className="w-5 h-5 text-red-500" />
                             <span className="text-xs font-bold uppercase tracking-tight text-red-400">{t('decisionSupport.harvestDeadline')}</span>
                           </div>
                           <span className="text-[10px] font-black bg-red-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.urgent')}</span>
@@ -502,7 +490,7 @@ export default function DecisionSupportView() {
                       <div className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-2">
-                            <Droplet className="w-5 h-5 text-amber-500" />
+                            <Drop className="w-5 h-5 text-amber-500" />
                             <span className="text-xs font-bold uppercase tracking-tight text-amber-400">{t('decisionSupport.storagePlanning')}</span>
                           </div>
                           <span className="text-[10px] font-black bg-amber-500 text-white px-2 py-0.5 rounded uppercase">{t('decisionSupport.active')}</span>
@@ -564,13 +552,13 @@ export default function DecisionSupportView() {
                     </div>
                     {storagePlanning?.shortfall_date && (
                       <p className="text-[10px] text-red-500 font-bold mt-2 flex items-center gap-1">
-                        <AlertTriangle className="w-3 h-3" />
+                        <Warning className="w-3 h-3" />
                         {t('decisionSupport.shortfallExpectedBy')} {new Date(storagePlanning.shortfall_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </p>
                     )}
                     {!storagePlanning?.shortfall_date && storagePlanning && (
                       <p className="text-[10px] text-green-500 font-bold mt-2 flex items-center gap-1">
-                        <Verified className="w-3 h-3" />
+                        <CheckCircle className="w-3 h-3" />
                         {t('decisionSupport.supplySufficient')}
                       </p>
                     )}

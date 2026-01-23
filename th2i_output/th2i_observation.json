@@ -1,0 +1,64 @@
+{
+  "records": [
+    {
+      "station": "Mạc Đĩnh Chi",
+      "rain_mm": null,
+      "reservoir": "Trị An",
+      "river": "Đồng Nai",
+      "basin": "Đồng Nai",
+      "water_level_m": 61.8,
+      "inflow_m3s": 135.0,
+      "turbine_flow_m3s": 139.0,
+      "discharge_m3s": 0.0,
+      "note": ""
+    },
+    {
+      "station": "Tân Sơn Hòa",
+      "rain_mm": null,
+      "reservoir": "Thác Mơ",
+      "river": "Bé",
+      "basin": "Đồng Nai",
+      "water_level_m": 215.82,
+      "inflow_m3s": 17.0,
+      "turbine_flow_m3s": 91.0,
+      "discharge_m3s": 0.0,
+      "note": ""
+    },
+    {
+      "station": "Nhà Bè",
+      "rain_mm": null,
+      "reservoir": "Sr.P.Miêng",
+      "river": "Bé",
+      "basin": "Đồng Nai",
+      "water_level_m": 71.27,
+      "inflow_m3s": 65.0,
+      "turbine_flow_m3s": 72.0,
+      "discharge_m3s": 0.0,
+      "note": ""
+    },
+    {
+      "station": "Vũng Tàu",
+      "rain_mm": null,
+      "reservoir": "Dầu Tiếng",
+      "river": "Sài Gòn",
+      "basin": "TPHCM",
+      "water_level_m": 23.01,
+      "inflow_m3s": 136.0,
+      "turbine_flow_m3s": null,
+      "discharge_m3s": 23.0,
+      "note": ""
+    },
+    {
+      "station": "Thủ Dầu I",
+      "rain_mm": null,
+      "reservoir": "Sông Ray",
+      "river": "Ray",
+      "basin": "TPHCM",
+      "water_level_m": 69.03,
+      "inflow_m3s": 0.0,
+      "turbine_flow_m3s": 9.0,
+      "discharge_m3s": 0.0,
+      "note": ""
+    }
+  ]
+}

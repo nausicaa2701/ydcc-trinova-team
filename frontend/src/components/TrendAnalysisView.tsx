@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { TrendingUp, TrendingDown, Minus, Calendar, BarChart3, AlertCircle, Brain, Droplet, AlertTriangle } from 'lucide-react'
+import { TrendUp, TrendDown, Minus, Brain, Drop, Warning } from '@phosphor-icons/react'
 import { fetchTrendAnalysis, fetchStations, type TrendAnalysis, type Station } from '@/utils/api'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAppStore } from '@/store/useAppStore'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart, BarChart, Bar } from 'recharts'
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart, BarChart, Bar } from 'recharts'
 
 type ViewMode = 'daily' | 'seasonal'
 
@@ -71,9 +71,9 @@ export default function TrendAnalysisView() {
   const getTrendIcon = () => {
     if (!trend) return <Minus className="w-5 h-5" />
     if (trend.trend_direction === 'increasing') {
-      return <TrendingUp className="w-5 h-5 text-red-500" />
+      return <TrendUp className="w-5 h-5 text-red-500" />
     } else if (trend.trend_direction === 'decreasing') {
-      return <TrendingDown className="w-5 h-5 text-green-500" />
+      return <TrendDown className="w-5 h-5 text-green-500" />
     }
     return <Minus className="w-5 h-5 text-slate-400" />
   }
@@ -91,7 +91,7 @@ export default function TrendAnalysisView() {
       <aside className="w-20 lg:w-64 flex-shrink-0 border-r border-slate-700 bg-slate-900 flex flex-col hidden sm:flex">
         <nav className="flex-1 px-4 space-y-2 mt-8">
           <p className="hidden lg:block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-4">
-            AI Tools
+            {t('decisionSupport.aiTools')}
           </p>
           <button
             onClick={(e) => {
@@ -120,7 +120,7 @@ export default function TrendAnalysisView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <TrendingUp className="w-5 h-5" />
+            <TrendUp className="w-5 h-5" />
             <span className="text-sm font-bold hidden lg:block">{t('decisionSupport.trendAnalysis')}</span>
           </button>
           <button
@@ -135,7 +135,7 @@ export default function TrendAnalysisView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <Droplet className="w-5 h-5" />
+            <Drop className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.storagePlanning')}</span>
           </button>
           <button
@@ -150,7 +150,7 @@ export default function TrendAnalysisView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <Warning className="w-5 h-5 text-red-500" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.riskMitigation')}</span>
           </button>
         </nav>
@@ -159,16 +159,16 @@ export default function TrendAnalysisView() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-6 h-6 text-primary" />
-            <h1 className="text-3xl font-black text-white">Trend Analysis</h1>
+            <TrendUp className="w-6 h-6 text-primary" />
+            <h1 className="text-3xl font-black text-white">{t('decisionSupport.trendAnalysis')}</h1>
           </div>
-          <p className="text-slate-400">Long-term salinity trend analysis and forecasting</p>
+          <p className="text-slate-400">{t('decisionSupport.trendAnalysisDescription')}</p>
         </div>
 
         {/* Controls */}
         <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 mb-6 flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2">
-            <label className="text-sm font-bold text-slate-400">Station:</label>
+            <label className="text-sm font-bold text-slate-400">{t('decisionSupport.station')}:</label>
             <select
               value={selectedStation}
               onChange={(e) => setSelectedStation(e.target.value)}
@@ -183,15 +183,15 @@ export default function TrendAnalysisView() {
             </select>
           </div>
           <div className="flex items-center gap-2">
-            <label className="text-sm font-bold text-slate-400">Period:</label>
+            <label className="text-sm font-bold text-slate-400">{t('decisionSupport.period')}:</label>
             <select
               value={analysisDays}
               onChange={(e) => setAnalysisDays(parseInt(e.target.value))}
               className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm font-bold"
             >
-              <option value={7}>7 days</option>
-              <option value={30}>30 days</option>
-              <option value={90}>90 days</option>
+              <option value={7}>{t('decisionSupport.days7')}</option>
+              <option value={30}>{t('decisionSupport.days30')}</option>
+              <option value={90}>{t('decisionSupport.days90')}</option>
             </select>
           </div>
           <div className="flex items-center gap-2 ml-auto">
@@ -203,7 +203,7 @@ export default function TrendAnalysisView() {
                   : 'bg-slate-700 text-slate-400 hover:text-white'
               }`}
             >
-              Daily Outlook
+              {t('decisionSupport.dailyOutlook')}
             </button>
             <button
               onClick={() => setViewMode('seasonal')}
@@ -213,25 +213,25 @@ export default function TrendAnalysisView() {
                   : 'bg-slate-700 text-slate-400 hover:text-white'
               }`}
             >
-              Seasonal
+              {t('decisionSupport.seasonal')}
             </button>
           </div>
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center h-96">
-            <div className="text-slate-400">Loading trend analysis...</div>
+            <div className="text-slate-400">{t('decisionSupport.loadingTrendAnalysis')}</div>
           </div>
         ) : !trendData ? (
           <div className="flex items-center justify-center h-96">
-            <div className="text-red-500">Failed to load trend data</div>
+            <div className="text-red-500">{t('decisionSupport.failedToLoadTrendData')}</div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Chart */}
             <div className="lg:col-span-2 bg-slate-800 border border-slate-700 rounded-xl p-6">
               <h3 className="text-lg font-bold text-white mb-6">
-                {viewMode === 'daily' ? 'Forecast Trend' : 'Seasonal Pattern'}
+                {viewMode === 'daily' ? t('decisionSupport.forecastTrend') : t('decisionSupport.seasonalPattern')}
               </h3>
               {viewMode === 'daily' ? (
                 <ResponsiveContainer width="100%" height={400}>
@@ -321,10 +321,7 @@ export default function TrendAnalysisView() {
                     </div>
                   </div>
                   <div className="text-xs text-slate-400">
-                    Current: {comparison?.current_average?.toFixed(2) || '0'}‰
-                  </div>
-                  <div className="text-xs text-slate-400">
-                    Previous: {comparison?.previous_average?.toFixed(2) || '0'}‰
+                    Change: {comparison?.change_absolute?.toFixed(2) || '0'}‰ ({comparison?.change_percent?.toFixed(1) || '0'}%)
                   </div>
                 </div>
               </div>
@@ -332,22 +329,22 @@ export default function TrendAnalysisView() {
               {/* Seasonal Info */}
               {seasonal && (
                 <div className="bg-slate-800 border border-slate-700 rounded-xl p-6">
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-4">Seasonal Pattern</h4>
+                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-4">{t('decisionSupport.seasonalPattern')}</h4>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-xs text-slate-400">Peak Month</span>
+                      <span className="text-xs text-slate-400">{t('decisionSupport.peakMonth')}</span>
                       <span className="text-sm font-bold text-red-500">
                         {seasonal.peak_month ? new Date(2000, seasonal.peak_month - 1).toLocaleDateString('en-US', { month: 'long' }) : 'N/A'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-slate-400">Low Month</span>
+                      <span className="text-xs text-slate-400">{t('decisionSupport.lowMonth')}</span>
                       <span className="text-sm font-bold text-green-500">
                         {seasonal.low_month ? new Date(2000, seasonal.low_month - 1).toLocaleDateString('en-US', { month: 'long' }) : 'N/A'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-xs text-slate-400">Range</span>
+                      <span className="text-xs text-slate-400">{t('decisionSupport.range')}</span>
                       <span className="text-sm font-bold text-white">
                         {seasonal.seasonal_range?.toFixed(2) || '0'}‰
                       </span>

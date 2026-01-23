@@ -248,7 +248,7 @@ const DISTRICT_COORDS: Record<string, [number, number]> = {
 };
 
 // Generate farms for each cooperative in TPHCM
-mockCooperatives.forEach((coop, coopIndex) => {
+mockCooperatives.forEach((coop) => {
   const farmsPerCoop = coop.totalFarms;
   
   // Extract district from location (format: "Quận/Huyện, TP. Hồ Chí Minh")

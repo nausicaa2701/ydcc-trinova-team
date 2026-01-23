@@ -1,4 +1,4 @@
-import { Map, Users, BarChart3 } from 'lucide-react'
+import { MapTrifold, Users, ChartBar } from '@phosphor-icons/react'
 import { useAppStore, ActiveTab } from '@/store/useAppStore'
 import Logo from './Logo'
 
@@ -6,9 +6,9 @@ export default function Header() {
   const { activeTab, setActiveTab } = useAppStore()
 
   const tabs: { id: ActiveTab; label: string; icon: React.ReactNode }[] = [
-    { id: 'salinity-map', label: 'Salinity Map', icon: <Map className="w-5 h-5" /> },
+    { id: 'salinity-map', label: 'Salinity Map', icon: <MapTrifold className="w-5 h-5" /> },
     { id: 'producers-coops', label: 'Producers & Co-ops', icon: <Users className="w-5 h-5" /> },
-    { id: 'decision-support', label: 'Decision Support', icon: <BarChart3 className="w-5 h-5" /> },
+    { id: 'decision-support', label: 'Decision Support', icon: <ChartBar className="w-5 h-5" /> },
   ]
 
   return (

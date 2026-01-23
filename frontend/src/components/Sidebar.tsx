@@ -1,7 +1,8 @@
 import { useAppStore } from '@/store/useAppStore'
 import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { ProductionModel, RiskLevel } from '@/types'
-import { X, Filter, TrendingUp, MapPin, Users } from 'lucide-react'
+import { X, Funnel, TrendUp, MapPin, Users } from '@phosphor-icons/react'
+
 
 export default function Sidebar() {
   const {
@@ -108,7 +109,7 @@ export default function Sidebar() {
       {/* Filters */}
       <div className="p-4 border-b border-gray-200 overflow-y-auto">
         <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-          <Filter className="w-4 h-4" />
+          <Funnel className="w-4 h-4" />
           Filters
         </h3>
         
@@ -170,7 +171,7 @@ export default function Sidebar() {
       {/* Statistics */}
       <div className="p-4 border-b border-gray-200">
         <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-          <TrendingUp className="w-4 h-4" />
+          <TrendUp className="w-4 h-4" />
           Statistics
         </h3>
         <div className="space-y-2">

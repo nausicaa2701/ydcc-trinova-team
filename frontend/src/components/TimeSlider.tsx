@@ -1,5 +1,5 @@
 import { useAppStore } from '@/store/useAppStore'
-import { Play, Pause } from 'lucide-react'
+import { Play, Pause } from '@phosphor-icons/react'
 import { useState, useEffect, useRef } from 'react'
 
 export default function TimeSlider() {

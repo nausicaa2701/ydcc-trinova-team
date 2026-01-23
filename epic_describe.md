@@ -98,25 +98,25 @@ AI layer là **lõi trí tuệ độc lập**, không chứa logic nghiệp vụ
 
 ### 4.3 Acceptance Criteria – AI Layer
 
-#### ✅ Data & Preprocessing
+####  Data & Preprocessing
 
 * [ ] Ingest được dữ liệu mặn, mực nước, lưu lượng, mưa, triều
 * [ ] Hỗ trợ dữ liệu không gian (GIS)
 * [ ] Dữ liệu được đồng bộ theo thời gian và không gian
 
-#### ✅ Prediction
+####  Prediction
 
 * [ ] Dự báo được ranh mặn 1‰ và 4‰
 * [ ] Hỗ trợ horizon tối thiểu 7 ngày, tối đa 30 ngày
 * [ ] Áp dụng spatio-temporal modeling
 
-#### ✅ Risk Scoring
+####  Risk Scoring
 
 * [ ] Sinh risk score (0–100)
 * [ ] Risk score phản ánh cường độ + thời gian phơi nhiễm mặn
 * [ ] Có thể truy vấn theo thời gian và khu vực
 
-#### ✅ API Output
+####  API Output
 
 * [ ] API trả về:
 
@@ -163,7 +163,7 @@ Chức năng:
 
 ### 5.3 Acceptance Criteria – Hộ / HTX
 
-#### ✅ Data Model
+####  Data Model
 
 * [ ] Mỗi HTX có ID, tên, địa bàn
 * [ ] Mỗi hộ có:
@@ -174,7 +174,7 @@ Chức năng:
   * Diện tích
   * Mô hình sản xuất
 
-#### ✅ AI Integration
+####  AI Integration
 
 * [ ] Gán được risk score cho từng hộ
 * [ ] Risk score tính dựa trên:
@@ -183,7 +183,7 @@ Chức năng:
   * Kết quả AI
 * [ ] Truy vấn được risk theo hộ / HTX / thời gian
 
-#### ✅ Aggregation
+####  Aggregation
 
 * [ ] Tổng hợp:
 
@@ -231,24 +231,24 @@ FE **không xử lý AI logic, không xử lý alert**.
 
 ### 6.3 Acceptance Criteria – FE
 
-#### ✅ Core UI
+####  Core UI
 
 * [ ] Dashboard web responsive
 * [ ] Tách rõ map view, risk view, farm view
 
-#### ✅ Map Visualization
+####  Map Visualization
 
 * [ ] Hiển thị ranh mặn 1‰, 4‰
 * [ ] Heatmap mặn theo thời gian
 * [ ] Time slider cho forecast
 
-#### ✅ Hộ / HTX Interaction
+####  Hộ / HTX Interaction
 
 * [ ] Hiển thị polygon hộ
 * [ ] Click hộ → xem thông tin + risk
 * [ ] Filter theo HTX, mô hình sản xuất, mức rủi ro
 
-#### ✅ Data Handling
+####  Data Handling
 
 * [ ] Consume AI API
 * [ ] Loading & error state rõ ràng
@@ -257,9 +257,9 @@ FE **không xử lý AI logic, không xử lý alert**.
 
 ## 7. Out of Scope (Explicit)
 
-* ❌ Alert rule engine
-* ❌ Notification channels
-  👉 Được xử lý bên ngoài bằng **n8n** thông qua API
+*  Alert rule engine
+*  Notification channels
+ Được xử lý bên ngoài bằng **n8n** thông qua API
 
 ---
 

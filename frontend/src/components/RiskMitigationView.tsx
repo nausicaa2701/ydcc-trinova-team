@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { AlertTriangle, Calendar, Shield, CheckCircle, Clock, Droplet, TrendingUp, Brain } from 'lucide-react'
+import { Warning, Calendar, Shield, CheckCircle, Clock, Drop, TrendUp, Brain } from '@phosphor-icons/react'
 import { fetchRiskMitigation, fetchStations, type RiskMitigation, type Station } from '@/utils/api'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAppStore } from '@/store/useAppStore'
@@ -98,7 +98,7 @@ export default function RiskMitigationView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <TrendingUp className="w-5 h-5" />
+            <TrendUp className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.trendAnalysis')}</span>
           </button>
           <button
@@ -113,7 +113,7 @@ export default function RiskMitigationView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <Droplet className="w-5 h-5" />
+            <Drop className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.storagePlanning')}</span>
           </button>
           <button
@@ -128,7 +128,7 @@ export default function RiskMitigationView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <Warning className="w-5 h-5 text-red-500" />
             <span className="text-sm font-bold hidden lg:block">{t('decisionSupport.riskMitigation')}</span>
           </button>
         </nav>
@@ -146,7 +146,7 @@ export default function RiskMitigationView() {
         {/* Controls */}
         <div className="bg-slate-800 border border-slate-700 rounded-xl p-4 mb-6 flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2">
-            <label className="text-sm font-bold text-slate-400">Station:</label>
+            <label className="text-sm font-bold text-slate-400">{t('decisionSupport.station')}:</label>
             <select
               value={selectedStation}
               onChange={(e) => setSelectedStation(e.target.value)}
@@ -214,7 +214,7 @@ export default function RiskMitigationView() {
                 <div className={`bg-slate-800 border rounded-xl p-6 ${getPriorityColor(stationData.harvest_deadline.urgency).border}`}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <AlertTriangle className={`w-6 h-6 ${getPriorityColor(stationData.harvest_deadline.urgency).icon}`} />
+                      <Warning className={`w-6 h-6 ${getPriorityColor(stationData.harvest_deadline.urgency).icon}`} />
                       <h3 className="text-lg font-bold text-white">Harvest Deadline</h3>
                     </div>
                     <span className={`text-xs font-black px-3 py-1 rounded uppercase ${getPriorityColor(stationData.harvest_deadline.urgency).badge} text-white`}>
@@ -252,9 +252,9 @@ export default function RiskMitigationView() {
                       const getIcon = () => {
                         switch (rec.category) {
                           case 'harvest':
-                            return <AlertTriangle className={`w-5 h-5 ${colors.icon}`} />
+                            return <Warning className={`w-5 h-5 ${colors.icon}`} />
                           case 'storage':
-                            return <Droplet className={`w-5 h-5 ${colors.icon}`} />
+                            return <Drop className={`w-5 h-5 ${colors.icon}`} />
                           case 'planning':
                             return <Calendar className={`w-5 h-5 ${colors.icon}`} />
                           default:

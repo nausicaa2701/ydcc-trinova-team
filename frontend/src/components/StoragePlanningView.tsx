@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Droplet, Calendar, AlertTriangle, TrendingDown, CheckCircle, Brain, TrendingUp } from 'lucide-react'
+import { Drop, Calendar, Warning, CheckCircle, Brain, TrendUp } from '@phosphor-icons/react'
 import { fetchStoragePlanning, fetchStations, type StoragePlanning, type Station } from '@/utils/api'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAppStore } from '@/store/useAppStore'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
+import { Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 export default function StoragePlanningView() {
   const { t } = useLanguage()
@@ -28,7 +28,7 @@ export default function StoragePlanningView() {
   const [currentLevel, setCurrentLevel] = useState(68.0)
   const [dailyConsumption, setDailyConsumption] = useState(1000.0)
   const [totalCapacity, setTotalCapacity] = useState(50000.0)
-  const [horizonDays, setHorizonDays] = useState(30)
+  const [horizonDays] = useState(30)
 
   useEffect(() => {
     const loadStorageData = async () => {
@@ -109,7 +109,7 @@ export default function StoragePlanningView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <TrendingUp className="w-5 h-5" />
+            <TrendUp className="w-5 h-5" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.trendAnalysis')}</span>
           </button>
           <button
@@ -124,7 +124,7 @@ export default function StoragePlanningView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <Droplet className="w-5 h-5" />
+            <Drop className="w-5 h-5" />
             <span className="text-sm font-bold hidden lg:block">{t('decisionSupport.storagePlanning')}</span>
           </button>
           <button
@@ -139,7 +139,7 @@ export default function StoragePlanningView() {
                 : 'text-slate-500 hover:bg-slate-800'
             }`}
           >
-            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <Warning className="w-5 h-5 text-red-500" />
             <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.riskMitigation')}</span>
           </button>
         </nav>
@@ -148,7 +148,7 @@ export default function StoragePlanningView() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
-            <Droplet className="w-6 h-6 text-primary" />
+            <Drop className="w-6 h-6 text-primary" />
             <h1 className="text-3xl font-black text-white">Storage Planning</h1>
           </div>
           <p className="text-slate-400">Reservoir capacity planning and supply management</p>
@@ -253,7 +253,7 @@ export default function StoragePlanningView() {
                     <div className="text-xs text-slate-500 mb-1">days</div>
                     {storageData.shortfall_date && (
                       <div className="flex items-center gap-2 mt-4 text-xs font-bold text-red-500">
-                        <AlertTriangle className="w-4 h-4" />
+                        <Warning className="w-4 h-4" />
                         <span>Shortfall expected by {new Date(storageData.shortfall_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                       </div>
                     )}
@@ -268,7 +268,7 @@ export default function StoragePlanningView() {
                   {/* Safe Window */}
                   <div className="bg-slate-900/50 p-4 rounded-xl">
                     <div className="flex items-center gap-2 mb-2">
-                      <Droplet className="w-4 h-4 text-amber-500" />
+                      <Drop className="w-4 h-4 text-amber-500" />
                       <span className="text-xs font-bold text-amber-400 uppercase">Safe Operational Window</span>
                     </div>
                     <div className="text-sm font-bold text-white">
@@ -370,7 +370,7 @@ export default function StoragePlanningView() {
                         }`}
                       >
                         <div className="flex items-center gap-2 mb-1">
-                          <AlertTriangle
+                          <Warning
                             className={`w-4 h-4 ${
                               rec.priority === 'urgent' ? 'text-red-500' : rec.priority === 'high' ? 'text-orange-500' : 'text-yellow-500'
                             }`}

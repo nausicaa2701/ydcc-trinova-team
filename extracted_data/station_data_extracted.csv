@@ -1,13 +1,13 @@
 ﻿station_name,river_name,distance_km,smax_observed,observed_period,smax_forecast,forecast_date,temperature,water_level,ec,salinity,do,source_file,extraction_method,extraction_timestamp
-Lý Nhơn,Soài Rạp,7.0,27.0,Smax thực đo từ 21/03 - 31/03 (‰),27.3,07/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:56:55.084796
-Nhà Bè,Đồng Điền,38.0,15.8,Smax thực đo từ 21/03 - 31/03 (‰),16.8,08/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:56:55.084803
-Cát Lái,Sài Gòn,58.0,9.9,Smax thực đo từ 21/03 - 31/03 (‰),9.7,09/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:56:55.084805
-Long Đại,Đồng Nai,80.0,2.8,Smax thực đo từ 21/03 - 31/03 (‰),2.7,01/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-21T23:56:55.084806
-Lý Nhơn,Soài Rạp,7.0,18.0,Smax thực đo từ 11/01 - 20/01 (‰),18.9,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:56:55.138410
-Nhà Bè,Đồng Điền,38.0,7.3,Smax thực đo từ 11/01 - 20/01 (‰),8.6,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:56:55.138416
-Cát Lái,Sài Gòn,58.0,5.1,Smax thực đo từ 11/01 - 20/01 (‰),6.6,23/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:56:55.138417
-Long Đại,Đồng Nai,80.0,0.0,Smax thực đo từ 11/01 - 20/01 (‰),0.0,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-21T23:56:55.138418
-Lý Nhơn,Soài Rạp,7.0,23.2,Smax thực đo từ 01/03 - 10/03 (‰),24.1,12/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:56:55.186900
-Nhà Bè,Đồng Điền,38.0,11.7,Smax thực đo từ 01/03 - 10/03 (‰),12.3,12/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:56:55.186905
-Cát Lái,Sài Gòn,58.0,6.9,Smax thực đo từ 01/03 - 10/03 (‰),7.2,15/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:56:55.186906
-Long Đại,Đồng Nai,80.0,1.5,Smax thực đo từ 01/03 - 10/03 (‰),2.2,16/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-21T23:56:55.186907
+Lý Nhơn,Soài Rạp,7.0,27.0,Smax thực đo từ 21/03 - 31/03 (‰),27.3,07/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-23T17:52:26.109096
+Nhà Bè,Đồng Điền,38.0,15.8,Smax thực đo từ 21/03 - 31/03 (‰),16.8,08/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-23T17:52:26.109103
+Cát Lái,Sài Gòn,58.0,9.9,Smax thực đo từ 21/03 - 31/03 (‰),9.7,09/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-23T17:52:26.109104
+Long Đại,Đồng Nai,80.0,2.8,Smax thực đo từ 21/03 - 31/03 (‰),2.7,01/04,,,,,,HOCM_XMAN_20240331_1530.pdf,table,2026-01-23T17:52:26.109105
+Lý Nhơn,Soài Rạp,7.0,18.0,Smax thực đo từ 11/01 - 20/01 (‰),18.9,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-23T17:52:26.161133
+Nhà Bè,Đồng Điền,38.0,7.3,Smax thực đo từ 11/01 - 20/01 (‰),8.6,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-23T17:52:26.161137
+Cát Lái,Sài Gòn,58.0,5.1,Smax thực đo từ 11/01 - 20/01 (‰),6.6,23/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-23T17:52:26.161138
+Long Đại,Đồng Nai,80.0,0.0,Smax thực đo từ 11/01 - 20/01 (‰),0.0,31/01,,,,,,HOCM_XMAN_20260120_1530.pdf,table,2026-01-23T17:52:26.161140
+Lý Nhơn,Soài Rạp,7.0,23.2,Smax thực đo từ 01/03 - 10/03 (‰),24.1,12/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-23T17:52:26.213863
+Nhà Bè,Đồng Điền,38.0,11.7,Smax thực đo từ 01/03 - 10/03 (‰),12.3,12/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-23T17:52:26.213873
+Cát Lái,Sài Gòn,58.0,6.9,Smax thực đo từ 01/03 - 10/03 (‰),7.2,15/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-23T17:52:26.213874
+Long Đại,Đồng Nai,80.0,1.5,Smax thực đo từ 01/03 - 10/03 (‰),2.2,16/03,,,,,,HOCM_XMAN_20250310_1530.pdf,table,2026-01-23T17:52:26.213874
