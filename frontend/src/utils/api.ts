@@ -437,3 +437,169 @@ export async function fetchRiskMitigation(
     return null
   }
 }
+
+// ===================== Salinity Station Data API =====================
+export interface SalinityStationData {
+  station_name: string
+  river_name?: string | null
+  distance_km?: number | null
+  smax_observed?: number | null
+  observed_period?: string | null
+  smax_forecast?: number | null
+  forecast_date?: string | null
+  temperature?: number | null
+  water_level?: number | null
+  ec?: number | null
+  salinity?: number | null
+  do?: number | null
+  source_file?: string | null
+  extraction_method?: string | null
+  extraction_timestamp?: string | null
+}
+
+export async function fetchLatestSalinityData(forceRefresh: boolean = false): Promise<SalinityStationData[]> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/salinity/latest?force_refresh=${forceRefresh}`
+    )
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching latest salinity data:', error)
+    // Fallback to empty array
+    return []
+  }
+}
+
+export async function fetchSalinityStations(): Promise<string[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/salinity/stations`)
+    if (!response.ok) {
+      return []
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching salinity stations:', error)
+    return []
+  }
+}
+
+export async function fetchStationData(stationName: string): Promise<SalinityStationData[]> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/salinity/stations/${encodeURIComponent(stationName)}`
+    )
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data for station: ${stationName}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error(`Error fetching data for station ${stationName}:`, error)
+    return []
+  }
+}
+
+// ===================== TH2I Data API =====================
+export interface TH2IObservation {
+  date?: string | null
+  station: string
+  rain_mm?: number | null
+  water_level_m?: number | null
+  inflow_m3s?: number | null
+  turbine_flow_m3s?: number | null
+  discharge_m3s?: number | null
+  source_file?: string | null
+}
+
+export interface TH2ITideMeasured {
+  date?: string | null
+  station: string
+  peaks: Array<{
+    level_m?: number | null
+    time?: string | null
+  }>
+  source_file?: string | null
+}
+
+export interface TH2IData {
+  observation: TH2IObservation[]
+  tide_measured: TH2ITideMeasured[]
+  tide_forecast: Record<string, any>
+  source_file?: string | null
+  extraction_date?: string | null
+}
+
+export async function fetchLatestTH2IData(forceRefresh: boolean = false): Promise<TH2IData | null> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/th2i/latest?force_refresh=${forceRefresh}`
+    )
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching latest TH2I data:', error)
+    return null
+  }
+}
+
+export async function fetchTH2IObservation(forceRefresh: boolean = false): Promise<TH2IObservation[]> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/th2i/observation?force_refresh=${forceRefresh}`
+    )
+    if (!response.ok) {
+      return []
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching TH2I observation:', error)
+    return []
+  }
+}
+
+export async function fetchTH2ITideMeasured(forceRefresh: boolean = false): Promise<TH2ITideMeasured[]> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/th2i/tide-measured?force_refresh=${forceRefresh}`
+    )
+    if (!response.ok) {
+      return []
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching TH2I tide measured:', error)
+    return []
+  }
+}
+
+export async function fetchTH2ITideForecast(forceRefresh: boolean = false): Promise<Record<string, any> | null> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/th2i/tide-forecast?force_refresh=${forceRefresh}`
+    )
+    if (!response.ok) {
+      return null
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching TH2I tide forecast:', error)
+    return null
+  }
+}
+
+export async function fetchTH2IStations(): Promise<string[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/th2i/stations`)
+    if (!response.ok) {
+      return []
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching TH2I stations:', error)
+    return []
+  }
+}

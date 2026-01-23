@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Add current directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from backend.routers import auth, cooperatives, farmers, alerts
+from backend.routers import auth, cooperatives, farmers, alerts, salinity_data, th2i_data
 
 app = FastAPI(
     title="Mekong Farm Management API",
@@ -30,6 +30,8 @@ app.include_router(auth.router)
 app.include_router(cooperatives.router)
 app.include_router(farmers.router)
 app.include_router(alerts.router)
+app.include_router(salinity_data.router)
+app.include_router(th2i_data.router)
 
 # Note: Salinity forecasting endpoints are in tiengiang-salinity-forecasting/api/main.py
 # They can run on the same port or be proxied separately
@@ -46,6 +48,8 @@ async def root():
             "/coops": "Cooperative management (SYSTEM_ADMIN)",
             "/coops/{id}/farmers": "Farmer management (COOP_ADMIN)",
             "/coops/{id}/alerts": "Alert configuration (COOP_ADMIN)",
+            "/api/salinity/latest": "Latest salinity station data from PDF extraction",
+            "/api/th2i/latest": "Latest TH2I (HCMC TVHN) data from PDF extraction",
             "/forecast": "Salinity forecasting API (existing)"
         }
     }

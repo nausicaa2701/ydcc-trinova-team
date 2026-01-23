@@ -6,10 +6,14 @@ import {
   fetchTrendAnalysis,
   fetchStoragePlanning,
   fetchRiskMitigation,
+  fetchLatestSalinityData,
+  // fetchLatestTH2IData, // Reserved for future use
   type TrendAnalysis,
   type StoragePlanning,
   type RiskMitigation,
-  type Station
+  type Station,
+  type SalinityStationData
+  // type TH2IData // Reserved for future use
 } from '@/utils/api'
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -30,17 +34,21 @@ export default function DecisionSupportView() {
   const [riskMitigation, setRiskMitigation] = useState<RiskMitigation | null>(null)
   const [loading, setLoading] = useState(false)
   const [stations, setStations] = useState<Station[]>([])
+  const [salinityStationData, setSalinityStationData] = useState<SalinityStationData[]>([])
+  // const [th2iData, setTh2iData] = useState<TH2IData | null>(null) // Reserved for future use
 
   useEffect(() => {
     const loadData = async () => {
       setLoading(true)
       try {
-        const [stationsList, pred, trend, storage, mitigation] = await Promise.all([
+        const [stationsList, pred, trend, storage, mitigation, salinityData] = await Promise.all([
           fetchStations(),
           fetchSalinityPrediction(30),
           fetchTrendAnalysis(undefined, 30),
           fetchStoragePlanning(undefined, 68.0, 1000.0, 50000.0, 30),
-          fetchRiskMitigation(undefined, 30)
+          fetchRiskMitigation(undefined, 30),
+          fetchLatestSalinityData(false)
+          // fetchLatestTH2IData(false) // Reserved for future use
         ])
         
         setStations(stationsList)
@@ -48,6 +56,8 @@ export default function DecisionSupportView() {
         if (trend) setTrendAnalysis(trend)
         if (storage) setStoragePlanning(storage)
         if (mitigation) setRiskMitigation(mitigation)
+        setSalinityStationData(salinityData)
+        // setTh2iData(th2i) // Reserved for future use
       } catch (error) {
         console.error('Error loading data:', error)
       } finally {
@@ -132,7 +142,9 @@ export default function DecisionSupportView() {
               <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
             </div>
             <p className="text-[10px] font-bold text-slate-500 leading-tight hidden lg:block">
-              {t('decisionSupport.processingLiveSensorFeed', { count: stations.length.toString() || '0' })}
+              {t('decisionSupport.processingLiveSensorFeed', { 
+                count: (salinityStationData.length > 0 ? salinityStationData.length : stations.length).toString() || '0' 
+              })}
             </p>
           </div>
         </div>

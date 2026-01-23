@@ -1,7 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
-import { fetchBoundariesForDate, fetchRiskSurfaceForDate, fetchSalinityPrediction, fetchStations, type Station, type SalinityPrediction } from '@/utils/api'
+import { 
+  fetchBoundariesForDate, 
+  fetchRiskSurfaceForDate, 
+  fetchSalinityPrediction, 
+  fetchStations, 
+  fetchLatestSalinityData,
+  fetchLatestTH2IData,
+  type Station, 
+  type SalinityPrediction,
+  type SalinityStationData,
+  type TH2IData
+} from '@/utils/api'
 import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
@@ -27,6 +38,8 @@ export default function SalinityMapView() {
   const [loading, setLoading] = useState(false)
   const [cooperativeData, setCooperativeData] = useState<any>(null)
   const [cooperatives, setCooperatives] = useState<any[]>([])
+  const [salinityStationData, setSalinityStationData] = useState<SalinityStationData[]>([])
+  const [th2iData, setTh2iData] = useState<TH2IData | null>(null)
   
   const {
     selectedDate,
@@ -144,6 +157,32 @@ export default function SalinityMapView() {
       }
     }
     loadStations()
+  }, [])
+
+  // Fetch latest salinity station data from PDF extraction
+  useEffect(() => {
+    const loadSalinityData = async () => {
+      try {
+        const data = await fetchLatestSalinityData(false)
+        setSalinityStationData(data)
+      } catch (error) {
+        console.error('Error fetching salinity station data:', error)
+      }
+    }
+    loadSalinityData()
+  }, [])
+
+  // Fetch latest TH2I data from PDF extraction
+  useEffect(() => {
+    const loadTH2IData = async () => {
+      try {
+        const data = await fetchLatestTH2IData(false)
+        setTh2iData(data)
+      } catch (error) {
+        console.error('Error fetching TH2I data:', error)
+      }
+    }
+    loadTH2IData()
   }, [])
 
   // Fetch cooperative data for COOP_ADMIN
@@ -656,19 +695,35 @@ export default function SalinityMapView() {
   const selectedDateObj = new Date(selectedDate)
   const daysFromToday = Math.floor((selectedDateObj.getTime() - today.getTime()) / (24 * 60 * 60 * 1000))
 
-  // Calculate statistics from predictions
+  // Calculate statistics from predictions or real data
   const avgRiskScore = predictions?.risk_scores 
-    ? Object.values(predictions.risk_scores).reduce((a: number, b: number) => a + b, 0) / Object.keys(predictions.risk_scores).length
+    ? Math.round(Object.values(predictions.risk_scores).reduce((a: number, b: number) => a + b, 0) / Object.keys(predictions.risk_scores).length)
+    : salinityStationData.length > 0
+    ? Math.round(salinityStationData.reduce((sum, s) => {
+        // Use smax_observed or smax_forecast to estimate risk
+        const salinity = s.smax_observed || s.smax_forecast || 0
+        const risk = salinity >= 4 ? 75 : salinity >= 1 ? 50 : 25
+        return sum + risk
+      }, 0) / salinityStationData.length)
     : 0
   
   const avgSalinity = predictions?.predictions
-    ? Object.values(predictions.predictions).flat().reduce((a: number, b: number) => a + b, 0) / 
-      (Object.values(predictions.predictions).flat().length || 1)
+    ? Object.values(predictions.predictions).reduce((sum: number[], pred: number[]) => {
+        return sum.map((s, i) => s + (pred[i] || 0))
+      }, Array(7).fill(0)).map(s => s / Object.keys(predictions.predictions).length)[0] || 0
+    : salinityStationData.length > 0
+    ? salinityStationData.reduce((sum, s) => {
+        const salinity = s.smax_observed || s.smax_forecast || s.salinity || 0
+        return sum + salinity
+      }, 0) / salinityStationData.length
     : 0
   
   const highRiskStations = predictions?.risk_scores
     ? Object.values(predictions.risk_scores).filter((score: number) => score >= 50).length
-    : 0
+    : salinityStationData.filter(s => {
+        const salinity = s.smax_observed || s.smax_forecast || s.salinity || 0
+        return salinity >= 1
+      }).length
 
   return (
     <div className="flex flex-1 overflow-hidden relative">
@@ -982,30 +1037,51 @@ export default function SalinityMapView() {
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">{t('map.monitoringStations')}</h4>
             <div className="space-y-2">
-              {stations.map(station => {
-                const stationPred = predictions?.predictions?.[station.station_id]
-                const stationRisk = predictions?.risk_scores?.[station.station_id] || 0
-                const currentSalinity = stationPred?.[0] || 0
+              {(() => {
+                // Use real station data if available, otherwise use predictions
+                const displayStations = salinityStationData.length > 0 
+                  ? salinityStationData.map(s => ({
+                      station_id: s.station_name || 'unknown',
+                      station_name: s.station_name,
+                      distance_to_sea_km: s.distance_km || 0,
+                      currentSalinity: s.smax_observed || s.smax_forecast || s.salinity || 0,
+                      riskScore: (() => {
+                        const sal = s.smax_observed || s.smax_forecast || s.salinity || 0
+                        return sal >= 4 ? 75 : sal >= 1 ? 50 : 25
+                      })()
+                    }))
+                  : stations.map(station => {
+                      const stationPred = predictions?.predictions?.[station.station_id]
+                      const stationRisk = predictions?.risk_scores?.[station.station_id] || 0
+                      const currentSalinity = stationPred?.[0] || 0
+                      return {
+                        station_id: station.station_id,
+                        station_name: station.station_name || station.station_id,
+                        distance_to_sea_km: station.distance_to_sea_km,
+                        currentSalinity,
+                        riskScore: stationRisk
+                      }
+                    })
                 
-                return (
+                return displayStations.map(station => (
                   <div key={station.station_id} className="p-3 rounded-lg bg-slate-800 border border-slate-700">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-bold text-white">{station.station_name}</span>
                       <span className={`text-xs font-bold px-2 py-0.5 rounded ${
-                        stationRisk >= 75 ? 'bg-red-500/20 text-red-500' :
-                        stationRisk >= 50 ? 'bg-yellow-500/20 text-yellow-500' :
+                        station.riskScore >= 75 ? 'bg-red-500/20 text-red-500' :
+                        station.riskScore >= 50 ? 'bg-yellow-500/20 text-yellow-500' :
                         'bg-green-500/20 text-green-500'
                       }`}>
-                        {Math.round(stationRisk)}
+                        {Math.round(station.riskScore)}
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-slate-400">{station.distance_to_sea_km}{t('map.kmFromSea')}</span>
-                      <span className="text-white font-bold">{currentSalinity.toFixed(1)} ‰</span>
+                      <span className="text-white font-bold">{station.currentSalinity.toFixed(1)} ‰</span>
                     </div>
                   </div>
-                )
-              })}
+                ))
+              })()}
             </div>
           </div>
         </div>
@@ -1019,7 +1095,21 @@ export default function SalinityMapView() {
                 <span className="text-sm text-white">{t('map.waterLevelTide')}</span>
               </div>
               <span className="font-bold text-white">
-                {predictions?.confidence ? `±${(predictions.confidence * 100).toFixed(0)}%` : t('map.dataUnavailable') || 'N/A'}
+                {(() => {
+                  // Try to get from TH2I data first
+                  if (th2iData?.tide_measured && th2iData.tide_measured.length > 0) {
+                    const latestTide = th2iData.tide_measured[0]
+                    if (latestTide.peaks && latestTide.peaks.length > 0) {
+                      const avgTide = latestTide.peaks.reduce((sum, p) => sum + (p.level_m || 0), 0) / latestTide.peaks.length
+                      return `${avgTide.toFixed(2)} m`
+                    }
+                  }
+                  // Fallback to predictions confidence
+                  if (predictions?.confidence) {
+                    return `±${(predictions.confidence * 100).toFixed(0)}%`
+                  }
+                  return t('map.dataUnavailable') || 'N/A'
+                })()}
               </span>
             </div>
             <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800 border border-slate-700">
@@ -1030,7 +1120,22 @@ export default function SalinityMapView() {
                 <span className="text-sm text-white">{t('map.riverFlowSpeed')}</span>
               </div>
               <span className="font-bold text-white">
-                {avgSalinity > 0 ? `${(avgSalinity * 0.2).toFixed(2)} m/s` : t('map.dataUnavailable') || 'N/A'}
+                {(() => {
+                  // Try to get from TH2I observation data
+                  if (th2iData?.observation && th2iData.observation.length > 0) {
+                    const latestObs = th2iData.observation[0]
+                    if (latestObs.discharge_m3s !== null && latestObs.discharge_m3s !== undefined) {
+                      // Estimate flow speed from discharge (rough calculation)
+                      const flowSpeed = (latestObs.discharge_m3s / 1000).toFixed(2)
+                      return `${flowSpeed} m/s`
+                    }
+                  }
+                  // Fallback to calculated value
+                  if (avgSalinity > 0) {
+                    return `${(avgSalinity * 0.2).toFixed(2)} m/s`
+                  }
+                  return t('map.dataUnavailable') || 'N/A'
+                })()}
               </span>
             </div>
           </div>

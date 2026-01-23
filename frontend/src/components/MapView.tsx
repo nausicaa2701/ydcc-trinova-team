@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useAppStore } from '@/store/useAppStore'
-import { getBoundariesForDate, getRiskSurfaceForDate } from '@/data/mockSaltIntrusion'
+import { fetchBoundariesForDate, fetchRiskSurfaceForDate } from '@/utils/api'
 import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
@@ -255,88 +255,101 @@ export default function MapView() {
   useEffect(() => {
     if (!map.current || !mapLoaded) return
 
-    const boundaries = getBoundariesForDate(selectedDate)
+    const loadBoundaries = async () => {
+      try {
+        const boundaries = await fetchBoundariesForDate(selectedDate)
+        
+        if (!Array.isArray(boundaries)) return
+        
+        const currentMap = map.current
+        if (!currentMap) return
     
-    // Remove existing boundary sources
-    if (map.current.getSource('salt-boundaries-1')) {
-      map.current.removeLayer('salt-boundaries-1-fill')
-      map.current.removeLayer('salt-boundaries-1-line')
-      map.current.removeSource('salt-boundaries-1')
-    }
-    if (map.current.getSource('salt-boundaries-4')) {
-      map.current.removeLayer('salt-boundaries-4-fill')
-      map.current.removeLayer('salt-boundaries-4-line')
-      map.current.removeSource('salt-boundaries-4')
-    }
+        // Remove existing boundary sources
+        if (currentMap.getSource('salt-boundaries-1')) {
+          currentMap.removeLayer('salt-boundaries-1-fill')
+          currentMap.removeLayer('salt-boundaries-1-line')
+          currentMap.removeSource('salt-boundaries-1')
+        }
+        if (currentMap.getSource('salt-boundaries-4')) {
+          currentMap.removeLayer('salt-boundaries-4-fill')
+          currentMap.removeLayer('salt-boundaries-4-line')
+          currentMap.removeSource('salt-boundaries-4')
+        }
 
-    if (showBoundaries) {
-      // Add 1‰ boundary
-      const boundary1 = boundaries.find(b => b.salinity === 1)
-      if (boundary1) {
-        map.current.addSource('salt-boundaries-1', {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            geometry: boundary1.geometry,
-            properties: { salinity: 1 },
-          },
-        })
+        if (showBoundaries) {
+          // Add 1‰ boundary
+          const boundary1 = boundaries.find(b => b.salinity === 1)
+          if (boundary1) {
+            currentMap.addSource('salt-boundaries-1', {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                geometry: boundary1.geometry,
+                properties: { salinity: 1 },
+              },
+            })
 
-        map.current.addLayer({
-          id: 'salt-boundaries-1-fill',
-          type: 'fill',
-          source: 'salt-boundaries-1',
-          paint: {
-            'fill-color': '#3b82f6',
-            'fill-opacity': 0.2,
-          },
-        })
+            currentMap.addLayer({
+              id: 'salt-boundaries-1-fill',
+              type: 'fill',
+              source: 'salt-boundaries-1',
+              paint: {
+                'fill-color': '#3b82f6',
+                'fill-opacity': 0.2,
+              },
+            })
 
-        map.current.addLayer({
-          id: 'salt-boundaries-1-line',
-          type: 'line',
-          source: 'salt-boundaries-1',
-          paint: {
-            'line-color': '#3b82f6',
-            'line-width': 2,
-            'line-dasharray': [2, 2],
-          },
-        })
+            currentMap.addLayer({
+              id: 'salt-boundaries-1-line',
+              type: 'line',
+              source: 'salt-boundaries-1',
+              paint: {
+                'line-color': '#3b82f6',
+                'line-width': 2,
+                'line-dasharray': [2, 2],
+              },
+            })
       }
 
-      // Add 4‰ boundary
-      const boundary4 = boundaries.find(b => b.salinity === 4)
-      if (boundary4) {
-        map.current.addSource('salt-boundaries-4', {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            geometry: boundary4.geometry,
-            properties: { salinity: 4 },
-          },
-        })
+          // Add 4‰ boundary
+          const boundary4 = boundaries.find(b => b.salinity === 4)
+          if (boundary4) {
+            currentMap.addSource('salt-boundaries-4', {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                geometry: boundary4.geometry,
+                properties: { salinity: 4 },
+              },
+            })
 
-        map.current.addLayer({
-          id: 'salt-boundaries-4-fill',
-          type: 'fill',
-          source: 'salt-boundaries-4',
-          paint: {
-            'fill-color': '#ef4444',
-            'fill-opacity': 0.3,
-          },
-        })
+            currentMap.addLayer({
+              id: 'salt-boundaries-4-fill',
+              type: 'fill',
+              source: 'salt-boundaries-4',
+              paint: {
+                'fill-color': '#ef4444',
+                'fill-opacity': 0.3,
+              },
+            })
 
-        map.current.addLayer({
-          id: 'salt-boundaries-4-line',
-          type: 'line',
-          source: 'salt-boundaries-4',
-          paint: {
-            'line-color': '#ef4444',
-            'line-width': 2,
-          },
-        })
+            currentMap.addLayer({
+              id: 'salt-boundaries-4-line',
+              type: 'line',
+              source: 'salt-boundaries-4',
+              paint: {
+                'line-color': '#ef4444',
+                'line-width': 2,
+              },
+            })
+          }
+        }
+      } catch (error) {
+        console.error('Error loading boundaries:', error)
       }
     }
+    
+    loadBoundaries()
   }, [selectedDate, showBoundaries, mapLoaded])
 
   // Update farms layer
@@ -613,48 +626,59 @@ export default function MapView() {
     }
 
     if (showRiskHeatmap) {
-      const riskSurface = getRiskSurfaceForDate(selectedDate)
-      if (riskSurface) {
-        const heatmapData = {
-          type: 'FeatureCollection' as const,
-          features: riskSurface.riskScores.map(point => ({
-            type: 'Feature' as const,
-            geometry: {
-              type: 'Point' as const,
-              coordinates: point.coordinates,
+      const loadRiskSurface = async () => {
+        try {
+          const riskSurface = await fetchRiskSurfaceForDate(selectedDate)
+          if (!riskSurface) return
+          
+          const currentMap = map.current
+          if (!currentMap) return
+          
+          const heatmapData = {
+            type: 'FeatureCollection' as const,
+            features: riskSurface.riskScores.map(point => ({
+              type: 'Feature' as const,
+              geometry: {
+                type: 'Point' as const,
+                coordinates: point.coordinates,
+              },
+              properties: {
+                riskScore: point.riskScore,
+              },
+            })),
+          }
+
+          currentMap.addSource('risk-heatmap', {
+            type: 'geojson',
+            data: heatmapData,
+          })
+
+          currentMap.addLayer({
+            id: 'risk-heatmap-circles',
+            type: 'circle',
+            source: 'risk-heatmap',
+            paint: {
+              'circle-radius': 8,
+              'circle-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'riskScore'],
+                0, '#22c55e',
+                25, '#eab308',
+                50, '#ea580c',
+                75, '#dc2626',
+              ],
+              'circle-opacity': 0.6,
+              'circle-stroke-width': 1,
+              'circle-stroke-color': '#ffffff',
             },
-            properties: {
-              riskScore: point.riskScore,
-            },
-          })),
+          })
+        } catch (error) {
+          console.error('Error loading risk surface:', error)
         }
-
-        map.current.addSource('risk-heatmap', {
-          type: 'geojson',
-          data: heatmapData,
-        })
-
-        map.current.addLayer({
-          id: 'risk-heatmap-circles',
-          type: 'circle',
-          source: 'risk-heatmap',
-          paint: {
-            'circle-radius': 8,
-            'circle-color': [
-              'interpolate',
-              ['linear'],
-              ['get', 'riskScore'],
-              0, '#22c55e',
-              25, '#eab308',
-              50, '#ea580c',
-              75, '#dc2626',
-            ],
-            'circle-opacity': 0.6,
-            'circle-stroke-width': 1,
-            'circle-stroke-color': '#ffffff',
-          },
-        })
       }
+      
+      loadRiskSurface()
     }
   }, [selectedDate, showRiskHeatmap, mapLoaded])
 
