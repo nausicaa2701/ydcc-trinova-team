@@ -3,8 +3,9 @@
 import { SaltIntrusionData, RiskSurface, SaltIntrusionBoundary } from '@/types'
 import { Farm, Cooperative } from '@/types'
 
-const AI_API_BASE_URL = import.meta.env.VITE_AI_API_BASE_URL || 'http://localhost:8001'
+// All APIs are now integrated into main backend (port 8000)
 const API_BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const AI_API_BASE_URL = API_BASE_URL  // AI API is now part of main backend
 
 // Salt Intrusion API
 export async function fetchSaltIntrusionData(
@@ -25,7 +26,7 @@ export async function fetchBoundariesForDate(
   salinity?: number
 ): Promise<SaltIntrusionBoundary[]> {
   try {
-    const response = await fetch(`${AI_API_BASE_URL}/boundaries?date=${date}`)
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/boundaries?date=${date}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -55,7 +56,7 @@ export async function fetchRiskSurfaceForDate(
   date: string
 ): Promise<RiskSurface | null> {
   try {
-    const response = await fetch(`${AI_API_BASE_URL}/risk?date=${date}`)
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/risk?date=${date}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -114,7 +115,7 @@ export async function fetchSalinityPrediction(
   date?: string
 ): Promise<SalinityPrediction | null> {
   try {
-    const response = await fetch(`${AI_API_BASE_URL}/predict`, {
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/predict`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -161,7 +162,7 @@ export async function fetchStations(): Promise<Station[]> {
   }
   
   try {
-    const response = await fetch(`${AI_API_BASE_URL}/stations`)
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/stations`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -325,7 +326,7 @@ export async function fetchTrendAnalysis(
     if (stationId) params.append('station_id', stationId)
     params.append('days', days.toString())
     
-    const response = await fetch(`${AI_API_BASE_URL}/trend?${params}`)
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/trend?${params}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -373,7 +374,7 @@ export async function fetchStoragePlanning(
     params.append('total_capacity_m3', totalCapacityM3.toString())
     params.append('horizon_days', horizonDays.toString())
     
-    const response = await fetch(`${AI_API_BASE_URL}/storage?${params}`)
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/storage?${params}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }
@@ -427,7 +428,7 @@ export async function fetchRiskMitigation(
     if (stationId) params.append('station_id', stationId)
     params.append('horizon_days', horizonDays.toString())
     
-    const response = await fetch(`${AI_API_BASE_URL}/mitigation?${params}`)
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/mitigation?${params}`)
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
     }

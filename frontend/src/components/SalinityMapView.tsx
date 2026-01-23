@@ -164,7 +164,31 @@ export default function SalinityMapView() {
     const loadSalinityData = async () => {
       try {
         const data = await fetchLatestSalinityData(false)
-        setSalinityStationData(data)
+        
+        // Filter to get only the latest data for each station (by station_name)
+        // Group by station_name and keep the one with the latest extraction_timestamp or forecast_date
+        const stationMap = new Map<string, SalinityStationData>()
+        
+        data.forEach(station => {
+          const stationName = station.station_name || 'unknown'
+          const existing = stationMap.get(stationName)
+          
+          if (!existing) {
+            stationMap.set(stationName, station)
+          } else {
+            // Compare timestamps to get the latest
+            const existingTime = existing.extraction_timestamp || existing.forecast_date || ''
+            const currentTime = station.extraction_timestamp || station.forecast_date || ''
+            
+            if (currentTime > existingTime) {
+              stationMap.set(stationName, station)
+            }
+          }
+        })
+        
+        // Convert map back to array (only latest data for each station)
+        const latestData = Array.from(stationMap.values())
+        setSalinityStationData(latestData)
       } catch (error) {
         console.error('Error fetching salinity station data:', error)
       }
@@ -286,6 +310,18 @@ export default function SalinityMapView() {
 
     const loadBoundaries = async () => {
       try {
+        // ALWAYS remove risk-heatmap first to prevent duplicate source errors
+        try {
+          if (currentMap.getLayer('risk-heatmap-circles')) {
+            currentMap.removeLayer('risk-heatmap-circles')
+          }
+          if (currentMap.getSource('risk-heatmap')) {
+            currentMap.removeSource('risk-heatmap')
+          }
+        } catch (err) {
+          // Ignore errors if source/layer doesn't exist
+        }
+        
         const boundaries = await fetchBoundariesForDate(selectedDate)
         
         if (!Array.isArray(boundaries)) return
@@ -307,8 +343,8 @@ export default function SalinityMapView() {
           console.warn('Error removing station layers:', err)
         }
 
-        // Remove existing sources (excluding stations which we already handled)
-        const sourceIds = ['salt-boundaries-1', 'salt-boundaries-4', 'farms', 'risk-heatmap']
+        // Remove existing sources (excluding stations and risk-heatmap which we already handled)
+        const sourceIds = ['salt-boundaries-1', 'salt-boundaries-4', 'farms']
         sourceIds.forEach(sourceId => {
           if (currentMap.getSource(sourceId)) {
             const layers = ['fill', 'line', 'circles'].map(type => `${sourceId}-${type}`)
@@ -617,9 +653,10 @@ export default function SalinityMapView() {
           })
         }
 
+        // Handle risk-heatmap (already removed at the start, so just add if needed)
         if (showRiskHeatmap && currentMap) {
           const riskSurface = await fetchRiskSurfaceForDate(selectedDate)
-          if (riskSurface) {
+          if (riskSurface && riskSurface.riskScores && riskSurface.riskScores.length > 0) {
             const heatmapData = {
               type: 'FeatureCollection' as const,
               features: riskSurface.riskScores.map(point => ({
@@ -629,20 +666,29 @@ export default function SalinityMapView() {
               })),
             }
 
-            currentMap.addSource('risk-heatmap', { type: 'geojson', data: heatmapData })
-            currentMap.addLayer({
-              id: 'risk-heatmap-circles',
-              type: 'circle',
-              source: 'risk-heatmap',
-              paint: {
-                'circle-radius': 8,
-                'circle-color': [
-                  'interpolate', ['linear'], ['get', 'riskScore'],
-                  0, '#22c55e', 25, '#eab308', 50, '#ea580c', 75, '#dc2626',
-                ],
-                'circle-opacity': 0.6,
-              },
-            })
+            // Double-check source doesn't exist before adding
+            if (!currentMap.getSource('risk-heatmap')) {
+              currentMap.addSource('risk-heatmap', { type: 'geojson', data: heatmapData })
+              currentMap.addLayer({
+                id: 'risk-heatmap-circles',
+                type: 'circle',
+                source: 'risk-heatmap',
+                paint: {
+                  'circle-radius': 8,
+                  'circle-color': [
+                    'interpolate', ['linear'], ['get', 'riskScore'],
+                    0, '#22c55e', 25, '#eab308', 50, '#ea580c', 75, '#dc2626',
+                  ],
+                  'circle-opacity': 0.6,
+                },
+              })
+            } else {
+              // Update existing source data instead
+              const source = currentMap.getSource('risk-heatmap') as mapboxgl.GeoJSONSource
+              if (source && source.setData) {
+                source.setData(heatmapData)
+              }
+            }
           }
         }
       } catch (error) {
@@ -1039,6 +1085,7 @@ export default function SalinityMapView() {
             <div className="space-y-2">
               {(() => {
                 // Use real station data if available, otherwise use predictions
+                // Data is already filtered to latest per station, so we can use station_name as key
                 const displayStations = salinityStationData.length > 0 
                   ? salinityStationData.map(s => ({
                       station_id: s.station_name || 'unknown',

@@ -52,11 +52,10 @@ ydcc-trinova-team/
 │   ├── database.py        # Database initialization
 │   ├── auth.py            # Authentication logic
 │   └── requirements.txt
-├── tiengiang-salinity-forecasting/  # AI API
-│   ├── api/               # FastAPI endpoints
-│   ├── utils/             # ML utilities
-│   ├── models/            # Trained model files
-│   ├── train.py           # Model training script
+├── backend/               # FastAPI backend (includes AI API)
+│   ├── routers/           # API route handlers (including ai_forecast.py)
+│   ├── utils/              # ML utilities (migrated from tiengiang-salinity-forecasting)
+│   ├── models/             # Trained model files
 │   └── requirements.txt
 ├── dataset/               # Training and reference data
 ├── scripts/               # Utility scripts
@@ -67,16 +66,16 @@ ydcc-trinova-team/
 ## Features
 
 ### Core Features
-- ✅ **Interactive Salinity Map** with real-time boundaries (1‰ and 4‰ thresholds)
-- ✅ **Risk Heatmap Visualization** showing salinity risk scores
-- ✅ **AI-Powered Forecasting** (7, 14, 30-day horizons)
-- ✅ **Farm & Cooperative Management** with role-based views
-- ✅ **Decision Support Tools**:
+-  **Interactive Salinity Map** with real-time boundaries (1‰ and 4‰ thresholds)
+-  **Risk Heatmap Visualization** showing salinity risk scores
+-  **AI-Powered Forecasting** (7, 14, 30-day horizons)
+-  **Farm & Cooperative Management** with role-based views
+-  **Decision Support Tools**:
   - Trend Analysis (long-term patterns, seasonal analysis)
   - Storage Planning (reservoir management, optimal fill dates)
   - Risk Mitigation (harvest deadlines, operational windows)
-- ✅ **Automated PDF Data Extraction** from forecast reports
-- ✅ **Multi-language Support** (English/Vietnamese)
+-  **Automated PDF Data Extraction** from forecast reports
+-  **Multi-language Support** (English/Vietnamese)
 
 ### User Roles
 - **SYSTEM_ADMIN**: Full system access, manages all cooperatives
@@ -92,11 +91,10 @@ ydcc-trinova-team/
 
 ### Running All Services
 
-**Important:** You need to run **three separate services** in **three different terminal windows**:
+**Important:** You need to run **two separate services** in **two different terminal windows**:
 
-1. **Terminal 1**: Main Backend API (Port 8000) - See [Backend API Setup](#2-backend-api-setup-port-8000)
-2. **Terminal 2**: AI API Server (Port 8001) - See [AI API Setup](#3-ai-api-setup-port-8001)
-3. **Terminal 3**: Frontend (Port 5173) - See [Frontend Setup](#1-frontend-setup)
+1. **Terminal 1**: Main Backend API (Port 8000) - Includes all APIs (auth, PDF extraction, AI forecasting) - See [Backend API Setup](#2-backend-api-setup-port-8000)
+2. **Terminal 2**: Frontend (Port 5173) - See [Frontend Setup](#1-frontend-setup)
 
 Each service must be running for the application to work properly.
 
@@ -111,7 +109,8 @@ npm install
 # Create .env file
 echo "VITE_MAPBOX_TOKEN=your_mapbox_token_here" > .env
 echo "VITE_API_BASE_URL=http://localhost:8000" >> .env
-echo "VITE_AI_API_BASE_URL=http://localhost:8001" >> .env
+# AI API is now integrated into main backend (port 8000)
+# No need to set VITE_AI_API_BASE_URL separately
 
 # Start development server
 npm run dev
@@ -300,13 +299,15 @@ The script will:
 - `PUT /coops/{id}/alerts/config` - Update alert configuration
 - `POST /coops/{id}/alerts/test` - Test alert notification
 
-### AI API (Port 8001)
+### AI API (Integrated - Port 8000)
+
+All AI endpoints are prefixed with `/api/ai/`:
 
 #### Health Check
-- `GET /health` - API health status
+- `GET /api/ai/health` - API health status
 
 #### Predictions
-- `POST /predict` - Get salinity predictions
+- `POST /api/ai/predict` - Get salinity predictions
   ```json
   {
     "station_id": "TG01",  // optional
@@ -316,18 +317,18 @@ The script will:
   ```
 
 #### Boundaries
-- `GET /boundaries?date=2024-01-15` - Get salt intrusion boundaries (1‰ and 4‰) as GeoJSON
+- `GET /api/ai/boundaries?date=2024-01-15` - Get salt intrusion boundaries (1‰ and 4‰) as GeoJSON
 
 #### Risk Scores
-- `GET /risk?date=2024-01-15` - Get risk scores for all stations
+- `GET /api/ai/risk?date=2024-01-15` - Get risk scores for all stations
 
 #### Stations
-- `GET /stations` - Get all monitoring stations metadata
+- `GET /api/ai/stations` - Get all monitoring stations metadata
 
 #### Decision Support
-- `GET /trend?station_id=TG01&start_date=2024-01-01&end_date=2024-01-31` - Trend analysis
-- `GET /storage?current_level_percent=68&daily_consumption_m3=1000&total_capacity_m3=50000&horizon_days=30` - Storage planning
-- `GET /mitigation?station_id=TG01&horizon_days=30` - Risk mitigation recommendations
+- `GET /api/ai/trend?station_id=TG01&days=30` - Trend analysis
+- `GET /api/ai/storage?current_level_percent=68&daily_consumption_m3=1000&total_capacity_m3=50000&horizon_days=30` - Storage planning
+- `GET /api/ai/mitigation?station_id=TG01&horizon_days=30` - Risk mitigation recommendations
 
 ## AI Models
 
@@ -336,7 +337,8 @@ The script will:
 Before using the AI API, you need to train the models using the real dataset:
 
 ```bash
-cd tiengiang-salinity-forecasting
+# If training script still exists in tiengiang-salinity-forecasting:
+cd tiengiang-salinity-forecasting  # If folder still exists
 source venv/bin/activate
 
 # Train all models (LSTM, GRU, Risk)
@@ -346,12 +348,16 @@ python3 train.py --data ../dataset/station_data_daily.csv --model all --epochs 5
 python3 train.py --data ../dataset/station_data_daily.csv --model lstm --epochs 50
 python3 train.py --data ../dataset/station_data_daily.csv --model gru --epochs 50
 python3 train.py --data ../dataset/station_data_daily.csv --model risk
+
+# After training, copy models to backend/models/
+cp models/*.ckpt ../backend/models/
+cp models/*.pkl ../backend/models/
 ```
 
-**Trained models will be saved to:**
-- `tiengiang-salinity-forecasting/models/lstm_multi_h7_*.ckpt`
-- `tiengiang-salinity-forecasting/models/gru_multi_h16_*.ckpt`
-- `tiengiang-salinity-forecasting/models/risk_*.pkl`
+**Trained models should be in:**
+- `backend/models/lstm_multi_h7_*.ckpt`
+- `backend/models/gru_multi_h16_*.ckpt`
+- `backend/models/risk_*.pkl`
 
 ### Forecasting Models
 - **LSTM** (Short-term: 1-7 days)
@@ -470,7 +476,8 @@ npm install
 cat > .env << EOF
 VITE_MAPBOX_TOKEN=your_mapbox_token_here
 VITE_API_BASE_URL=http://localhost:8000
-VITE_AI_API_BASE_URL=http://localhost:8001
+# AI API is integrated into main backend (port 8000)
+# No separate VITE_AI_API_BASE_URL needed
 EOF
 
 # Start development server
@@ -484,8 +491,7 @@ npm run dev
 
 | Service | Port | URL | Docs |
 |---------|------|-----|------|
-| Main Backend API | 8000 | http://localhost:8000 | http://localhost:8000/docs |
-| AI API Server | 8001 | http://localhost:8001 | http://localhost:8001/docs |
+| Main Backend API (includes AI) | 8000 | http://localhost:8000 | http://localhost:8000/docs |
 | Frontend | 5173 | http://localhost:5173 | - |
 
 ### Quick Test Commands
@@ -498,9 +504,9 @@ curl http://localhost:8000/docs
 
 **Test AI API:**
 ```bash
-curl http://localhost:8001/health
-curl http://localhost:8001/stations
-curl -X POST http://localhost:8001/predict -H "Content-Type: application/json" -d '{"horizon_days": 7}'
+curl http://localhost:8000/api/ai/health
+curl http://localhost:8000/api/ai/stations
+curl -X POST http://localhost:8000/api/ai/predict -H "Content-Type: application/json" -d '{"horizon_days": 7}'
 ```
 
 **Test Frontend:**
@@ -512,7 +518,8 @@ Open browser and navigate to `http://localhost:5173`
 ```bash
 VITE_MAPBOX_TOKEN=your_mapbox_token_here
 VITE_API_BASE_URL=http://localhost:8000
-VITE_AI_API_BASE_URL=http://localhost:8001
+# AI API is integrated into main backend (port 8000)
+# No separate VITE_AI_API_BASE_URL needed
 ```
 
 **Backend:**
@@ -520,7 +527,7 @@ VITE_AI_API_BASE_URL=http://localhost:8001
 - JWT secret key can be configured in `backend/auth.py`
 
 **AI API:**
-- Automatically loads models from `tiengiang-salinity-forecasting/models/`
+- Automatically loads models from `backend/models/`
 - Uses dataset from `dataset/station_data_daily.csv` (falls back to mock dataset if not found)
 
 ### Troubleshooting Services
@@ -529,7 +536,7 @@ VITE_AI_API_BASE_URL=http://localhost:8001
 ```bash
 # Check which process is using the port
 lsof -i :8000  # Main Backend
-lsof -i :8001  # AI API
+# AI API is on port 8000 (same as main backend)
 lsof -i :5173  # Frontend
 
 # Kill the process if needed
@@ -542,12 +549,12 @@ kill -9 <PID>
 - Verify dependencies are installed: `pip install -r backend/requirements.txt`
 
 **AI API not loading models:**
-- Ensure models exist in `tiengiang-salinity-forecasting/models/`
+- Ensure models exist in `backend/models/`
 - Train models if missing: `python3 train.py --data ../dataset/station_data_daily.csv --model all`
 - Check dataset path: `dataset/station_data_daily.csv`
 
 **Frontend connection errors:**
-- Verify both backend services are running (ports 8000 and 8001)
+- Verify backend service is running (port 8000) - includes all APIs
 - Check `.env` file has correct API URLs
 - Check browser console for detailed error messages
 

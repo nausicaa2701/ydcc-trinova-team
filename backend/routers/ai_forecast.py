@@ -1,4 +1,4 @@
-"""FastAPI server for Tiền Giang salinity forecasting API."""
+"""AI Forecasting API endpoints for salinity prediction, risk scoring, trend analysis, etc."""
 
 import os
 import sys
@@ -9,33 +9,27 @@ import torch
 import numpy as np
 import pandas as pd
 import joblib
-from fastapi import FastAPI, HTTPException, Query
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
-sys.path.append(str(Path(__file__).parent.parent))
-from utils.data_loader import load_tiengiang_data, prepare_features, get_all_stations, get_all_stations
-from utils.models import LSTMModel, GRUModel
-from utils.risk_scoring import calculate_risk_score, predict_risk_class
-from utils.trend_analysis import calculate_trend, analyze_seasonal_pattern, forecast_trend, compare_periods
-from utils.storage_planning import calculate_days_of_supply, calculate_optimal_fill_date, estimate_storage_requirements
-from utils.risk_mitigation import calculate_harvest_deadline, generate_mitigation_recommendations, find_safe_operational_window
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from backend.utils.data_loader import load_tiengiang_data, prepare_features, get_all_stations
+from backend.utils.models import LSTMModel, GRUModel
+from backend.utils.risk_scoring import calculate_risk_score, predict_risk_class
+from backend.utils.trend_analysis import calculate_trend, analyze_seasonal_pattern, forecast_trend, compare_periods
+from backend.utils.storage_planning import calculate_days_of_supply, calculate_optimal_fill_date, estimate_storage_requirements
+from backend.utils.risk_mitigation import calculate_harvest_deadline, generate_mitigation_recommendations, find_safe_operational_window
 
-app = FastAPI(title="Tiền Giang Salinity Forecasting API", version="1.0.0")
+router = APIRouter(prefix="/api/ai", tags=["AI Forecasting"])
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-MODELS_DIR = Path(__file__).parent.parent / 'models'
+# Paths relative to project root
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+MODELS_DIR = PROJECT_ROOT / 'backend' / 'models'
 # Try to use real dataset first, fallback to mock dataset
-DATA_PATH = Path(__file__).parent.parent.parent / 'dataset' / 'station_data_daily.csv'
+DATA_PATH = PROJECT_ROOT / 'dataset' / 'station_data_daily.csv'
 if not DATA_PATH.exists():
-    DATA_PATH = Path(__file__).parent.parent.parent / 'dataset' / 'mekong_delta_salinity_stations.csv'
+    DATA_PATH = PROJECT_ROOT / 'dataset' / 'mekong_delta_salinity_stations.csv'
 
 models_cache = {}
 scalers_cache = {}
@@ -98,13 +92,10 @@ def load_models():
         risk_models_cache['random_forest'] = joblib.load(risk_rf_path)
 
 
-@app.on_event("startup")
-async def startup_event():
-    """Load models on startup."""
-    global all_stations_cache
-    print("Loading models...")
+# Load models on module import
+try:
     load_models()
-    print(f"Models loaded: LSTM={('lstm' in models_cache)}, GRU={('gru' in models_cache)}, Risk={len(risk_models_cache) > 0}")
+    print(f"AI Models loaded: LSTM={('lstm' in models_cache)}, GRU={('gru' in models_cache)}, Risk={len(risk_models_cache) > 0}")
     
     # Load all available stations from dataset
     if DATA_PATH.exists():
@@ -114,12 +105,14 @@ async def startup_event():
             print(f"Loaded {len(all_stations_cache)} stations: {all_stations_cache[:5]}...")
         except Exception as e:
             print(f"Warning: Could not load stations: {e}")
-            import traceback
-            traceback.print_exc()
             all_stations_cache = []
     else:
         print(f"Warning: Dataset file not found: {DATA_PATH}")
         all_stations_cache = []
+except Exception as e:
+    print(f"Warning: Could not load AI models: {e}")
+    import traceback
+    traceback.print_exc()
 
 
 class PredictionRequest(BaseModel):
@@ -137,26 +130,7 @@ class PredictionResponse(BaseModel):
     confidence: float
 
 
-@app.get("/")
-async def root():
-    """API root endpoint."""
-    return {
-        "name": "Tiền Giang Salinity Forecasting API",
-        "version": "1.0.0",
-        "endpoints": {
-            "/predict": "Get salinity predictions",
-            "/boundaries": "Get salinity boundaries (1‰ and 4‰)",
-            "/risk": "Get risk scores",
-            "/trend": "Get trend analysis",
-            "/storage": "Get storage planning recommendations",
-            "/mitigation": "Get risk mitigation recommendations",
-            "/stations": "Get list of available stations",
-            "/health": "Health check"
-        }
-    }
-
-
-@app.get("/health")
+@router.get("/health")
 async def health():
     """Health check endpoint."""
     return {
@@ -169,7 +143,7 @@ async def health():
     }
 
 
-@app.get("/stations")
+@router.get("/stations")
 async def get_stations():
     """Get list of all available stations from dataset."""
     try:
@@ -238,7 +212,7 @@ async def get_stations():
         raise HTTPException(status_code=500, detail=error_detail)
 
 
-@app.post("/predict", response_model=PredictionResponse)
+@router.post("/predict", response_model=PredictionResponse)
 async def predict(request: PredictionRequest):
     """Predict salinity for all stations."""
     try:
@@ -341,7 +315,7 @@ async def predict(request: PredictionRequest):
         raise HTTPException(status_code=500, detail=error_detail)
 
 
-@app.get("/boundaries")
+@router.get("/boundaries")
 async def get_boundaries(
     date: Optional[str] = None,
     threshold_1ppt: float = 1.0,
@@ -358,7 +332,7 @@ async def get_boundaries(
         raise HTTPException(status_code=500, detail=error_detail)
 
 
-@app.get("/risk")
+@router.get("/risk")
 async def get_risk(
     station_id: Optional[str] = None,
     date: Optional[str] = None
@@ -443,7 +417,7 @@ def generate_boundaries(predictions: Dict[str, List[float]], df: Optional[pd.Dat
     }
 
 
-@app.get("/trend")
+@router.get("/trend")
 async def get_trend_analysis(
     station_id: Optional[str] = None,
     days: int = 30
@@ -517,7 +491,7 @@ async def get_trend_analysis(
         raise HTTPException(status_code=500, detail=error_detail)
 
 
-@app.get("/storage")
+@router.get("/storage")
 async def get_storage_planning(
     station_id: Optional[str] = None,
     current_level_percent: float = 68.0,
@@ -608,7 +582,7 @@ async def get_storage_planning(
         raise HTTPException(status_code=500, detail=error_detail)
 
 
-@app.get("/mitigation")
+@router.get("/mitigation")
 async def get_mitigation_recommendations(
     station_id: Optional[str] = None,
     horizon_days: int = 30
@@ -672,9 +646,3 @@ async def get_mitigation_recommendations(
         import traceback
         error_detail = f"{str(e)}\n{traceback.format_exc()}"
         raise HTTPException(status_code=500, detail=error_detail)
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
-
