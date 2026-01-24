@@ -21,9 +21,10 @@ export default function RoleBasedHeader() {
   // System Admin navigation
   if (user.role === 'SYSTEM_ADMIN') {
     const navItems = [
+      { path: '/admin/map', label: t('navigation.mapView'), icon: <MapTrifold className="w-5 h-5" /> },
       { path: '/admin/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/admin/coops', label: t('navigation.htxManagement'), icon: <Users className="w-5 h-5" /> },
-      { path: '/admin/map', label: t('navigation.mapView'), icon: <MapTrifold className="w-5 h-5" /> },
+      { path: '/admin/alerts', label: t('navigation.alerts'), icon: <Gear className="w-5 h-5" /> },
     ]
 
     return (
@@ -68,10 +69,9 @@ export default function RoleBasedHeader() {
   // HTX Admin navigation
   if (user.role === 'COOP_ADMIN') {
     const navItems = [
+      { path: '/coop/map', label: t('navigation.map'), icon: <MapTrifold className="w-5 h-5" /> },
       { path: '/coop/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/coop/farmers', label: t('navigation.farmers'), icon: <Users className="w-5 h-5" /> },
-      { path: '/coop/alerts', label: t('navigation.alerts'), icon: <Gear className="w-5 h-5" /> },
-      { path: '/coop/map', label: t('navigation.map'), icon: <MapTrifold className="w-5 h-5" /> },
     ]
 
     return (
@@ -116,8 +116,8 @@ export default function RoleBasedHeader() {
   // Farmer navigation
   if (user.role === 'FARMER') {
     const navItems = [
-      { path: '/farmer/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/farmer/map', label: t('navigation.map'), icon: <MapTrifold className="w-5 h-5" /> },
+      { path: '/farmer/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/farmer/profile', label: t('navigation.profile'), icon: <User className="w-5 h-5" /> },
     ]
 

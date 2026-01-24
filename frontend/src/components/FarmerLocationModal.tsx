@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapPin, Target, CheckCircle, Info, X } from '@phosphor-icons/react'
+import { MapPin, CheckCircle, Info, X, MagnifyingGlass } from '@phosphor-icons/react'
 import { apiRequest } from '@/utils/apiClient'
 
 interface Station {
@@ -41,6 +41,8 @@ export default function FarmerLocationModal({
   onClose,
   onSaved
 }: FarmerLocationModalProps) {
+  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
+  const [address, setAddress] = useState('')
   const [lat, setLat] = useState(currentLat?.toString() || '')
   const [lon, setLon] = useState(currentLon?.toString() || '')
   const [suggestedStations, setSuggestedStations] = useState<Station[]>([])
@@ -97,6 +99,45 @@ export default function FarmerLocationModal({
     }
   }
 
+  const handleGeocodeAddress = async () => {
+    if (!address.trim()) {
+      setMessage('Vui lòng nhập địa chỉ')
+      return
+    }
+
+    if (!mapboxToken) {
+      setMessage('Thiếu VITE_MAPBOX_TOKEN để chuyển địa chỉ thành tọa độ')
+      return
+    }
+
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const resp = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxToken}&limit=1&country=VN&language=vi&proximity=106.7,10.7`
+      )
+      const data = await resp.json()
+
+      if (!data.features || data.features.length === 0) {
+        setMessage('Không tìm thấy tọa độ cho địa chỉ này')
+        return
+      }
+
+      const [lonValue, latValue] = data.features[0].center
+      setLat(latValue.toFixed(6))
+      setLon(lonValue.toFixed(6))
+      setShowSuggestions(false)
+      setSuggestedStations([])
+      setMessage('Đã tìm tọa độ từ địa chỉ. Kiểm tra rồi nhấn "Tìm trạm phù hợp".')
+    } catch (error) {
+      console.error('Geocode error:', error)
+      setMessage('Lỗi khi chuyển địa chỉ thành tọa độ')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const handleSave = async () => {
     if (!lat || !lon || !selectedStation) {
       setMessage('Vui lòng nhập vị trí và chọn trạm quan trắc')
@@ -134,27 +175,6 @@ export default function FarmerLocationModal({
     }
   }
 
-  const getCurrentLocation = () => {
-    if ('geolocation' in navigator) {
-      setLoading(true)
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLat(position.coords.latitude.toFixed(6))
-          setLon(position.coords.longitude.toFixed(6))
-          setLoading(false)
-          setMessage('Đã lấy vị trí hiện tại từ GPS')
-        },
-        (error) => {
-          console.error('Geolocation error:', error)
-          setMessage('Không thể lấy vị trí GPS. Vui lòng nhập thủ công.')
-          setLoading(false)
-        }
-      )
-    } else {
-      setMessage('Trình duyệt không hỗ trợ GPS')
-    }
-  }
-
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-slate-800 rounded-xl border border-slate-700 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -180,16 +200,39 @@ export default function FarmerLocationModal({
             <div className="text-sm text-blue-300">
               <p className="font-medium mb-1">Hướng dẫn:</p>
               <ul className="list-disc list-inside space-y-1 text-blue-300/80">
-                <li>Nhập tọa độ vị trí trang trại (latitude, longitude)</li>
-                <li>Hoặc dùng nút "Lấy vị trí hiện tại" để lấy GPS</li>
+                <li>Nhập địa chỉ, nhấn "Tìm tọa độ" để tự sinh Lat/Lon</li>
                 <li>Nhấn "Tìm trạm phù hợp" để xem các trạm quan trắc gần nhất</li>
                 <li>Chọn trạm và lưu để farmer nhận cảnh báo chính xác</li>
               </ul>
             </div>
           </div>
 
-          {/* Location Input */}
+          {/* Address & Location Input */}
           <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">
+                Địa chỉ trang trại
+              </label>
+              <div className="flex flex-col md:flex-row gap-2">
+                <input
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Ví dụ: Xã Phước Long B, Quận 9, TP.HCM"
+                  className="flex-1 rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-white focus:border-primary focus:outline-none"
+                />
+                <button
+                  onClick={handleGeocodeAddress}
+                  disabled={loading || !address.trim()}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all flex items-center gap-2 disabled:opacity-50"
+                >
+                  <MagnifyingGlass className="w-4 h-4" />
+                  {loading ? 'Đang tìm tọa độ...' : 'Tìm tọa độ'}
+                </button>
+              </div>
+              <p className="text-xs text-slate-500 mt-1">Hệ thống sẽ tự động lấy Lat/Lon từ địa chỉ (Mapbox).</p>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -219,14 +262,6 @@ export default function FarmerLocationModal({
 
             <div className="flex gap-2">
               <button
-                onClick={getCurrentLocation}
-                disabled={loading}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all flex items-center gap-2 disabled:opacity-50"
-              >
-                <Target className="w-4 h-4" />
-                Lấy vị trí hiện tại
-              </button>
-              <button
                 onClick={handleSuggestStations}
                 disabled={loading || !lat || !lon}
                 className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:brightness-110 transition-all flex items-center gap-2 disabled:opacity-50"
@@ -240,7 +275,7 @@ export default function FarmerLocationModal({
           {/* Message */}
           {message && (
             <div className={`p-3 rounded-lg ${
-              message.includes('thành công') || message.includes('Đã lấy')
+              message.includes('thành công') || message.includes('Đã lấy') || message.includes('Đã tìm')
                 ? 'bg-green-500/10 text-green-400 border border-green-500/30'
                 : 'bg-red-500/10 text-red-400 border border-red-500/30'
             }`}>
