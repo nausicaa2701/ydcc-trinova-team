@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
+import FarmerLocationModal from '@/components/FarmerLocationModal'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
-import { Plus, PencilSimple, Trash, Phone, User } from '@phosphor-icons/react'
+import { Plus, PencilSimple, Trash, Phone, User, MapPin } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Farmer {
@@ -10,6 +11,13 @@ interface Farmer {
   name: string
   phone: string
   coop_id: string
+  lat?: number
+  lon?: number
+  station_id?: string
+  crop_type?: string
+  crop_stage?: string
+  threshold_salinity?: number
+  storage_capacity_m3?: number
   metadata?: Record<string, any>
 }
 
@@ -21,6 +29,8 @@ export default function CoopFarmersManagement() {
   const [showModal, setShowModal] = useState(false)
   const [editingFarmer, setEditingFarmer] = useState<Farmer | null>(null)
   const [formData, setFormData] = useState({ name: '', phone: '', metadata: {} })
+  const [showLocationModal, setShowLocationModal] = useState(false)
+  const [selectedFarmerForLocation, setSelectedFarmerForLocation] = useState<Farmer | null>(null)
 
   useEffect(() => {
     if (user?.coop_id) {
@@ -119,7 +129,8 @@ export default function CoopFarmersManagement() {
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.name')}</th>
                     <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('coop.phone')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.id')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Vị trí</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Trạm</th>
                     <th className="px-6 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.actions')}</th>
                   </tr>
                 </thead>
@@ -129,7 +140,15 @@ export default function CoopFarmersManagement() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <User className="w-4 h-4 text-slate-400" />
-                          <span className="text-sm font-medium text-white">{farmer.name}</span>
+                          <div>
+                            <span className="text-sm font-medium text-white block">{farmer.name}</span>
+                            {farmer.crop_type && (
+                              <span className="text-xs text-slate-400">
+                                {farmer.crop_type}
+                                {farmer.crop_stage && ` • ${farmer.crop_stage}`}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
@@ -138,9 +157,34 @@ export default function CoopFarmersManagement() {
                           <span className="text-sm">{farmer.phone}</span>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm font-mono text-slate-400">{farmer.id}</td>
+                      <td className="px-6 py-4">
+                        {farmer.lat && farmer.lon ? (
+                          <div className="text-xs text-slate-300">
+                            <div className="font-mono">{farmer.lat.toFixed(4)}, {farmer.lon.toFixed(4)}</div>
+                          </div>
+                        ) : (
+                          <span className="text-xs text-slate-500 italic">Chưa có</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
+                        {farmer.station_id ? (
+                          <span className="text-xs font-medium text-primary">{farmer.station_id}</span>
+                        ) : (
+                          <span className="text-xs text-slate-500 italic">Chưa gán</span>
+                        )}
+                      </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => {
+                              setSelectedFarmerForLocation(farmer)
+                              setShowLocationModal(true)
+                            }}
+                            className="p-2 text-slate-400 hover:text-green-400 transition-colors"
+                            title="Cập nhật vị trí"
+                          >
+                            <MapPin className="w-4 h-4" />
+                          </button>
                           <button
                             onClick={() => {
                               setEditingFarmer(farmer)
@@ -220,6 +264,25 @@ export default function CoopFarmersManagement() {
             </form>
           </div>
         </div>
+      )}
+
+      {/* Location Update Modal */}
+      {showLocationModal && selectedFarmerForLocation && user?.coop_id && (
+        <FarmerLocationModal
+          farmerId={selectedFarmerForLocation.id}
+          coopId={user.coop_id}
+          currentLat={selectedFarmerForLocation.lat}
+          currentLon={selectedFarmerForLocation.lon}
+          currentStationId={selectedFarmerForLocation.station_id}
+          isOpen={showLocationModal}
+          onClose={() => {
+            setShowLocationModal(false)
+            setSelectedFarmerForLocation(null)
+          }}
+          onSaved={() => {
+            loadFarmers()
+          }}
+        />
       )}
     </div>
   )

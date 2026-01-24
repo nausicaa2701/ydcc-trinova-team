@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
+import FarmerLocationInput from '@/components/FarmerLocationInput'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
 import { User, Phone, Key, FloppyDisk } from '@phosphor-icons/react'
@@ -85,6 +86,23 @@ export default function FarmerProfile() {
               </div>
             </div>
           </div>
+
+          {/* Farmer Location & Station Selection */}
+          {user?.id && user?.coop_id && (
+            <div className="mb-6">
+              <FarmerLocationInput
+                farmerId={user.id}
+                coopId={user.coop_id}
+                currentLat={(user as any).lat}
+                currentLon={(user as any).lon}
+                currentStationId={(user as any).station_id}
+                onLocationUpdated={() => {
+                  // Optionally reload user data
+                  window.location.reload()
+                }}
+              />
+            </div>
+          )}
 
           {/* Change Password */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
