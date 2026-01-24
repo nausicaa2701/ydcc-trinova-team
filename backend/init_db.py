@@ -97,122 +97,7 @@ def init_sample_data():
         db.add_all(cooperatives)
         db.flush()
         
-        # Sample users
-        users = [
-            UserDB(
-                id="user-001",
-                phone="0901234567",
-                name="System Administrator",
-                role="SYSTEM_ADMIN",
-                password_hash=hash_password("admin123")
-            ),
-            UserDB(
-                id="user-002",
-                phone="0987654321",
-                name="HTX Manager - Phước Long",
-                role="COOP_ADMIN",
-                coop_id="htx-hcm-001",
-                password_hash=hash_password("coop123")
-            ),
-            # Farmers for HTX Phước Long
-            UserDB(
-                id="farmer-001",
-                phone="0911111111",
-                name="Nguyễn Văn A",
-                role="FARMER",
-                coop_id="htx-hcm-001",
-                lat=10.8422,
-                lon=106.8099,
-                crop_type="rice",
-                crop_stage="tillering",
-                threshold_salinity=4.0,
-                storage_capacity_m3=500.0,
-                station_id="HCM01",
-                password_hash=hash_password("111111")
-            ),
-            UserDB(
-                id="farmer-002",
-                phone="0912222222",
-                name="Trần Thị B",
-                role="FARMER",
-                coop_id="htx-hcm-001",
-                lat=10.8450,
-                lon=106.8120,
-                crop_type="shrimp",
-                crop_stage="seedling",
-                threshold_salinity=3.5,
-                storage_capacity_m3=800.0,
-                station_id="HCM01",
-                password_hash=hash_password("222222")
-            ),
-            UserDB(
-                id="farmer-003",
-                phone="0913333333",
-                name="Hoàng Văn C",
-                role="FARMER",
-                coop_id="htx-hcm-001",
-                lat=10.8400,
-                lon=106.8050,
-                crop_type="rice",
-                crop_stage="heading",
-                threshold_salinity=4.0,
-                storage_capacity_m3=600.0,
-                station_id="HCM02",
-                password_hash=hash_password("333333")
-            ),
-            # Farmers for HTX Linh Xuân
-            UserDB(
-                id="farmer-004",
-                phone="0914444444",
-                name="Lê Thị D",
-                role="FARMER",
-                coop_id="htx-hcm-002",
-                lat=10.8497,
-                lon=106.7637,
-                crop_type="rice",
-                crop_stage="seedling",
-                threshold_salinity=4.0,
-                storage_capacity_m3=700.0,
-                station_id="HCM02",
-                password_hash=hash_password("444444")
-            ),
-            UserDB(
-                id="farmer-005",
-                phone="0915555555",
-                name="Phạm Văn E",
-                role="FARMER",
-                coop_id="htx-hcm-002",
-                lat=10.8520,
-                lon=106.7650,
-                crop_type="shrimp",
-                crop_stage="harvest",
-                threshold_salinity=3.5,
-                storage_capacity_m3=1000.0,
-                station_id="HCM03",
-                password_hash=hash_password("555555")
-            ),
-            # Farmers for HTX Bình Chánh
-            UserDB(
-                id="farmer-006",
-                phone="0916666666",
-                name="Vũ Thị F",
-                role="FARMER",
-                coop_id="htx-hcm-003",
-                lat=10.6994,
-                lon=106.6067,
-                crop_type="rice",
-                crop_stage="tillering",
-                threshold_salinity=4.0,
-                storage_capacity_m3=550.0,
-                station_id="HCM04",
-                password_hash=hash_password("666666")
-            ),
-        ]
-        
-        db.add_all(users)
-        db.flush()
-        
-        # Sample monitoring stations
+        # Sample monitoring stations (must be added BEFORE users that reference them)
         stations = [
             StationDB(
                 id="station-001",
@@ -253,6 +138,121 @@ def init_sample_data():
         ]
         
         db.add_all(stations)
+        db.flush()
+        
+        # Sample users (after stations are created)
+        users = [
+            UserDB(
+                id="user-001",
+                phone="0901234567",
+                name="System Administrator",
+                role="SYSTEM_ADMIN",
+                password_hash=hash_password("admin123")
+            ),
+            UserDB(
+                id="user-002",
+                phone="0987654321",
+                name="HTX Manager - Phước Long",
+                role="COOP_ADMIN",
+                coop_id="htx-hcm-001",
+                password_hash=hash_password("coop123")
+            ),
+            # Farmers for HTX Phước Long
+            UserDB(
+                id="farmer-001",
+                phone="0911111111",
+                name="Nguyễn Văn A",
+                role="FARMER",
+                coop_id="htx-hcm-001",
+                lat=10.8422,
+                lon=106.8099,
+                crop_type="rice",
+                crop_stage="tillering",
+                threshold_salinity=4.0,
+                storage_capacity_m3=500.0,
+                station_id="station-001",
+                password_hash=hash_password("111111")
+            ),
+            UserDB(
+                id="farmer-002",
+                phone="0912222222",
+                name="Trần Thị B",
+                role="FARMER",
+                coop_id="htx-hcm-001",
+                lat=10.8450,
+                lon=106.8120,
+                crop_type="shrimp",
+                crop_stage="seedling",
+                threshold_salinity=3.5,
+                storage_capacity_m3=800.0,
+                station_id="station-001",
+                password_hash=hash_password("222222")
+            ),
+            UserDB(
+                id="farmer-003",
+                phone="0913333333",
+                name="Hoàng Văn C",
+                role="FARMER",
+                coop_id="htx-hcm-001",
+                lat=10.8400,
+                lon=106.8050,
+                crop_type="rice",
+                crop_stage="heading",
+                threshold_salinity=4.0,
+                storage_capacity_m3=600.0,
+                station_id="station-002",
+                password_hash=hash_password("333333")
+            ),
+            # Farmers for HTX Linh Xuân
+            UserDB(
+                id="farmer-004",
+                phone="0914444444",
+                name="Lê Thị D",
+                role="FARMER",
+                coop_id="htx-hcm-002",
+                lat=10.8497,
+                lon=106.7637,
+                crop_type="rice",
+                crop_stage="seedling",
+                threshold_salinity=4.0,
+                storage_capacity_m3=700.0,
+                station_id="station-002",
+                password_hash=hash_password("444444")
+            ),
+            UserDB(
+                id="farmer-005",
+                phone="0915555555",
+                name="Phạm Văn E",
+                role="FARMER",
+                coop_id="htx-hcm-002",
+                lat=10.8520,
+                lon=106.7650,
+                crop_type="shrimp",
+                crop_stage="harvest",
+                threshold_salinity=3.5,
+                storage_capacity_m3=1000.0,
+                station_id="station-003",
+                password_hash=hash_password("555555")
+            ),
+            # Farmers for HTX Bình Chánh
+            UserDB(
+                id="farmer-006",
+                phone="0916666666",
+                name="Vũ Thị F",
+                role="FARMER",
+                coop_id="htx-hcm-003",
+                lat=10.6994,
+                lon=106.6067,
+                crop_type="rice",
+                crop_stage="tillering",
+                threshold_salinity=4.0,
+                storage_capacity_m3=550.0,
+                station_id="station-004",
+                password_hash=hash_password("666666")
+            ),
+        ]
+        
+        db.add_all(users)
         db.flush()
         
         # Assign stations to cooperatives (n-n relationship)

@@ -27,6 +27,8 @@ services:
     ports:
       - "8000:8000"
     environment:
+      - DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/mekong_farm
+      - DB_HOST=postgres
       - VIRTUAL_HOST=api.trinova.it.com
       - VIRTUAL_PORT=8000
       - LETSENCRYPT_HOST=api.trinova.it.com
@@ -34,6 +36,8 @@ services:
     volumes:
       - ./backend:/app/backend
       - ./dataset:/app/dataset
+    depends_on:
+      - postgres
     networks:
       - web
     restart: unless-stopped
@@ -50,6 +54,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - web
 volumes:
   postgres_data:
 networks:
