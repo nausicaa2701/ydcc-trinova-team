@@ -207,6 +207,3 @@ ydcc-trinova-team/
 └── docker-compose.yml     # Docker setup
 ```
 
-## License
-
-[Your License Here]
