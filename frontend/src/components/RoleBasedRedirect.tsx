@@ -11,7 +11,7 @@ export default function RoleBasedRedirect() {
       if (user.role === 'SYSTEM_ADMIN') {
         navigate('/admin/dashboard', { replace: true })
       } else if (user.role === 'COOP_ADMIN') {
-        navigate('/coop/dashboard', { replace: true })
+        navigate('/coop/map', { replace: true })
       } else if (user.role === 'FARMER') {
         navigate('/farmer/dashboard', { replace: true })
       }

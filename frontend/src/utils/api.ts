@@ -135,6 +135,58 @@ export async function fetchSalinityPrediction(
   }
 }
 
+// Real-time Salinity Prediction API (30-minute resolution)
+export interface RealtimeForecastPoint {
+  timestamp: string
+  step_index: number
+  salinity: number
+}
+
+export interface RealtimePrediction {
+  station_id: string
+  step_minutes: number
+  horizon_steps: number
+  history_start: string
+  history_end: string
+  current_salinity: number
+  forecast: RealtimeForecastPoint[]
+  summary: {
+    station_id: string
+    current_salinity: number
+    max_salinity_6h: number
+    max_salinity_24h: number
+    first_crossing_1ppt: string | null
+    first_crossing_4ppt: string | null
+    risk_level: 'danger' | 'warning' | 'watch' | 'safe'
+    step_minutes: number
+  }
+}
+
+export async function fetchRealtimeSalinityPrediction(
+  stationId?: string,
+  historyMinutes?: number
+): Promise<RealtimePrediction | null> {
+  try {
+    const response = await fetch(`${AI_API_BASE_URL}/api/ai/realtime_predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        station_id: stationId,
+        history_minutes: historyMinutes,
+      }),
+    })
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`)
+    }
+    
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching realtime salinity prediction:', error)
+    return null
+  }
+}
+
 // Stations (all stations from dataset)
 export interface Station {
   station_id: string

@@ -12,6 +12,12 @@ import joblib
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
+from backend.utils.realtime_config import (
+    REALTIME_STEP_MINUTES,
+    REALTIME_SEQ_LENGTH,
+    REALTIME_HORIZON_STEPS,
+)
+
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from backend.utils.data_loader import load_tiengiang_data, prepare_features, get_all_stations
@@ -26,10 +32,27 @@ router = APIRouter(prefix="/api/ai", tags=["AI Forecasting"])
 # Paths relative to project root
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 MODELS_DIR = PROJECT_ROOT / 'backend' / 'models'
-# Try to use real dataset first, fallback to mock dataset
-DATA_PATH = PROJECT_ROOT / 'dataset' / 'station_data_daily.csv'
+
+# Dataset path: allow overriding via environment for (daily or realtime) datasets
+_default_daily = PROJECT_ROOT / 'dataset' / 'station_data_daily.csv'
+_default_realtime = PROJECT_ROOT / 'dataset' / 'station_data_realtime.csv'
+
+env_dataset_path = os.getenv("SALINITY_DATASET_PATH")
+if env_dataset_path:
+    DATA_PATH = Path(env_dataset_path)
+else:
+    # Prefer enriched real-time dataset if it exists, else fall back to daily
+    if _default_realtime.exists():
+        DATA_PATH = _default_realtime
+    else:
+        DATA_PATH = _default_daily
+
 if not DATA_PATH.exists():
+    # Final fallback to mock dataset
     DATA_PATH = PROJECT_ROOT / 'dataset' / 'mekong_delta_salinity_stations.csv'
+
+# Explicit realtime dataset path for short-term 30-minute model
+REALTIME_DATA_PATH = PROJECT_ROOT / 'dataset' / 'station_data_realtime.csv'
 
 models_cache = {}
 scalers_cache = {}
@@ -82,6 +105,18 @@ def load_models():
             scaler_path = scaler_path[0] if scaler_path else None
         if scaler_path and Path(scaler_path).exists():
             scalers_cache['gru'] = joblib.load(scaler_path)
+
+    # Optional: load short-term real-time LSTM model (30-minute resolution)
+    realtime_lstm_path = list(MODELS_DIR.glob('lstm_realtime_*.ckpt'))
+    if realtime_lstm_path:
+        try:
+            models_cache['lstm_realtime'] = LSTMModel.load_from_checkpoint(str(realtime_lstm_path[0]))
+            models_cache['lstm_realtime'].eval()
+            rt_scaler_path = MODELS_DIR / 'lstm_realtime_scaler.pkl'
+            if rt_scaler_path.exists():
+                scalers_cache['lstm_realtime'] = joblib.load(rt_scaler_path)
+        except Exception as e:
+            print(f"Warning: Could not load realtime LSTM model: {e}")
     
     risk_lr_path = MODELS_DIR / 'risk_logistic_regression.pkl'
     risk_rf_path = MODELS_DIR / 'risk_random_forest.pkl'
@@ -130,6 +165,29 @@ class PredictionResponse(BaseModel):
     confidence: float
 
 
+class RealtimePredictionRequest(BaseModel):
+    station_id: Optional[str] = None
+    # History length used for context (minutes); default = 24h
+    history_minutes: int = REALTIME_SEQ_LENGTH * REALTIME_STEP_MINUTES
+
+
+class RealtimeForecastPoint(BaseModel):
+    timestamp: str
+    step_index: int
+    salinity: float
+
+
+class RealtimePredictionResponse(BaseModel):
+    station_id: str
+    step_minutes: int
+    horizon_steps: int
+    history_start: str
+    history_end: str
+    current_salinity: float
+    forecast: List[RealtimeForecastPoint]
+    summary: Dict
+
+
 @router.get("/health")
 async def health():
     """Health check endpoint."""
@@ -138,6 +196,7 @@ async def health():
         "models_loaded": {
             "lstm": "lstm" in models_cache,
             "gru": "gru" in models_cache,
+            "lstm_realtime": "lstm_realtime" in models_cache,
             "risk": len(risk_models_cache) > 0
         }
     }
@@ -415,6 +474,210 @@ def generate_boundaries(predictions: Dict[str, List[float]], df: Optional[pd.Dat
         'type': 'FeatureCollection',
         'features': features
     }
+
+
+def _load_realtime_station_series(station_id: Optional[str]) -> pd.DataFrame:
+    """Helper: load realtime series for a specific station, sorted by datetime."""
+    if not REALTIME_DATA_PATH.exists():
+        raise HTTPException(
+            status_code=500,
+            detail=f"Realtime dataset file not found: {REALTIME_DATA_PATH}",
+        )
+
+    df = pd.read_csv(REALTIME_DATA_PATH)
+    if "date" not in df.columns or "time" not in df.columns:
+        raise HTTPException(
+            status_code=500,
+            detail="Realtime dataset must contain 'date' and 'time' columns.",
+        )
+
+    df["datetime"] = pd.to_datetime(df["date"] + " " + df["time"])
+
+    if station_id:
+        df = df[df["station_id"] == station_id].copy()
+        if df.empty:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Station {station_id} not found in realtime dataset",
+            )
+    else:
+        # Default to first station in dataset
+        first_station = df["station_id"].iloc[0]
+        df = df[df["station_id"] == first_station].copy()
+        station_id = first_station
+
+    df = df.sort_values("datetime").reset_index(drop=True)
+    return df
+
+
+@router.post("/realtime_predict", response_model=RealtimePredictionResponse)
+async def realtime_predict(request: RealtimePredictionRequest):
+    """
+    Short-term (6–24h) real-time salinity forecast at 30-minute resolution.
+
+    Uses LSTM model trained on `station_data_realtime.csv` with history window
+    REALTIME_SEQ_LENGTH and horizon REALTIME_HORIZON_STEPS.
+    """
+    try:
+        model_key = "lstm_realtime"
+        if model_key not in models_cache:
+            raise HTTPException(
+                status_code=503,
+                detail="Realtime LSTM model not loaded. "
+                "Train it with backend/train_realtime_lstm.py and restart backend.",
+            )
+        model = models_cache[model_key]
+        scaler = scalers_cache.get(model_key)
+        if scaler is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Realtime scaler not loaded for LSTM. "
+                "Ensure lstm_realtime_scaler.pkl exists in backend/models.",
+            )
+
+        df_station = _load_realtime_station_series(request.station_id)
+        station_id = df_station["station_id"].iloc[0]
+
+        # Determine history length in steps
+        history_steps = max(
+            REALTIME_SEQ_LENGTH, request.history_minutes // REALTIME_STEP_MINUTES
+        )
+
+        if len(df_station) < history_steps:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    f"Not enough realtime history for station {station_id}. "
+                    f"Need at least {history_steps} records, got {len(df_station)}"
+                ),
+            )
+
+        history_df = df_station.tail(history_steps).copy()
+
+        feature_cols = [
+            "salinity_ppt",
+            "discharge_TC_m3s",
+            "tide_vungtau_m",
+            "rainfall_mm",
+            "water_level_m",
+            "nino34_anom",
+            "salinity_lag_1d",
+            "salinity_lag_7d",
+            "discharge_lag_1d",
+            "distance_to_sea_km",
+            "elevation_m",
+            "month",
+            "day_of_year",
+        ]
+
+        for col in feature_cols:
+            if col not in history_df.columns:
+                history_df[col] = 0.0
+
+        feature_values = history_df[feature_cols].astype(float).values
+        feature_values_scaled = scaler.transform(feature_values)
+
+        # Use last REALTIME_SEQ_LENGTH steps as model input
+        if len(feature_values_scaled) < REALTIME_SEQ_LENGTH:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    f"Not enough history for model window (need {REALTIME_SEQ_LENGTH}, "
+                    f"got {len(feature_values_scaled)})"
+                ),
+            )
+
+        window_scaled = feature_values_scaled[-REALTIME_SEQ_LENGTH:]
+        device = next(model.parameters()).device
+        X = torch.FloatTensor(window_scaled).unsqueeze(0).to(device)
+
+        with torch.no_grad():
+            y_scaled = model(X).cpu().numpy()[0]  # shape: (HORIZON_STEPS,)
+
+        # Inverse-transform forecast using scaler
+        dummy = np.zeros((len(y_scaled), len(feature_cols)))
+        dummy[:, 0] = y_scaled
+        unscaled = scaler.inverse_transform(dummy)[:, 0]
+
+        current_row = history_df.iloc[-1]
+        current_salinity = float(current_row["salinity_ppt"])
+        last_timestamp = pd.to_datetime(
+            current_row["date"] + " " + current_row["time"]
+        )
+
+        # Build forecast timeline
+        horizon_steps = REALTIME_HORIZON_STEPS
+        forecast_points: List[RealtimeForecastPoint] = []
+        for i in range(horizon_steps):
+            ts = last_timestamp + timedelta(
+                minutes=(i + 1) * REALTIME_STEP_MINUTES
+            )
+            forecast_points.append(
+                RealtimeForecastPoint(
+                    timestamp=ts.isoformat(),
+                    step_index=i,
+                    salinity=float(unscaled[i]),
+                )
+            )
+
+        # Simple real-time risk summary over next 6h and 24h
+        steps_6h = min(horizon_steps, max(1, 6 * 60 // REALTIME_STEP_MINUTES))
+        steps_24h = min(horizon_steps, max(1, 24 * 60 // REALTIME_STEP_MINUTES))
+
+        arr = np.array([p.salinity for p in forecast_points])
+        max_6h = float(arr[:steps_6h].max()) if steps_6h > 0 and len(arr) else 0.0
+        max_24h = float(arr[:steps_24h].max()) if steps_24h > 0 and len(arr) else 0.0
+
+        def _first_cross(threshold: float) -> Optional[str]:
+            for p in forecast_points:
+                if p.salinity >= threshold:
+                    return p.timestamp
+            return None
+
+        first_cross_1 = _first_cross(1.0)
+        first_cross_4 = _first_cross(4.0)
+
+        # Risk level based on short-term behaviour
+        if current_salinity >= 4.0 or max_6h >= 4.0:
+            risk_level = "danger"
+        elif current_salinity >= 1.0 or max_6h >= 1.0:
+            risk_level = "warning"
+        elif max_24h >= 1.0:
+            risk_level = "watch"
+        else:
+            risk_level = "safe"
+
+        summary = {
+            "station_id": station_id,
+            "current_salinity": current_salinity,
+            "max_salinity_6h": max_6h,
+            "max_salinity_24h": max_24h,
+            "first_crossing_1ppt": first_cross_1,
+            "first_crossing_4ppt": first_cross_4,
+            "risk_level": risk_level,
+            "step_minutes": REALTIME_STEP_MINUTES,
+        }
+
+        history_start = history_df["datetime"].iloc[0].isoformat()
+        history_end = history_df["datetime"].iloc[-1].isoformat()
+
+        return RealtimePredictionResponse(
+            station_id=station_id,
+            step_minutes=REALTIME_STEP_MINUTES,
+            horizon_steps=horizon_steps,
+            history_start=history_start,
+            history_end=history_end,
+            current_salinity=current_salinity,
+            forecast=forecast_points,
+            summary=summary,
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+
+        error_detail = f"{str(e)}\n{traceback.format_exc()}"
+        raise HTTPException(status_code=500, detail=error_detail)
 
 
 @router.get("/trend")

@@ -17,7 +17,7 @@ import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarm
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
 import { fetchCooperatives } from '@/utils/api'
-import { Plus, Minus, Compass, Stack, TrendUp, Drop, Brain, Download, X, Users, MapPin, WarningCircle } from '@phosphor-icons/react'
+import { Plus, Minus, Compass, Stack, TrendUp, Drop, Brain, Download, X, Users, MapPin, WarningCircle, List } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -40,10 +40,10 @@ export default function SalinityMapView() {
   const [cooperatives, setCooperatives] = useState<any[]>([])
   const [salinityStationData, setSalinityStationData] = useState<SalinityStationData[]>([])
   const [th2iData, setTh2iData] = useState<TH2IData | null>(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // Mobile sidebar toggle
   
   const {
     selectedDate,
-    setSelectedDate,
     showBoundaries,
     showRiskHeatmap,
     showFarms,
@@ -737,10 +737,6 @@ export default function SalinityMapView() {
     loadPredictions()
   }, [forecastHorizon])
 
-  const today = new Date()
-  const selectedDateObj = new Date(selectedDate)
-  const daysFromToday = Math.floor((selectedDateObj.getTime() - today.getTime()) / (24 * 60 * 60 * 1000))
-
   // Calculate statistics from predictions or real data
   const avgRiskScore = predictions?.risk_scores 
     ? Math.round(Object.values(predictions.risk_scores).reduce((a: number, b: number) => a + b, 0) / Object.keys(predictions.risk_scores).length)
@@ -797,6 +793,15 @@ export default function SalinityMapView() {
         <>
           <div ref={mapContainer} className="w-full h-full" />
           
+          {/* Hamburger Menu Button - Mobile Only */}
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="lg:hidden absolute top-6 right-6 z-20 w-12 h-12 bg-slate-900/90 backdrop-blur-md flex items-center justify-center hover:bg-primary/20 text-white rounded-lg border border-slate-700 shadow-xl"
+            aria-label="Toggle sidebar"
+          >
+            <List className="w-6 h-6" />
+          </button>
+          
           {/* Map Controls */}
           <div className="absolute top-6 left-6 flex flex-col gap-2 z-10">
             <div className="bg-slate-900/90 backdrop-blur-md p-1 rounded-lg border border-slate-700 flex flex-col shadow-xl">
@@ -817,7 +822,7 @@ export default function SalinityMapView() {
           </div>
 
           {/* Legend */}
-          <div className="absolute bottom-32 right-6 w-48 bg-slate-900/90 backdrop-blur-md p-4 rounded-xl border border-slate-700 shadow-2xl z-10">
+          <div className="absolute bottom-32 right-6 w-48 bg-slate-900/90 backdrop-blur-md p-4 rounded-xl border border-slate-700 shadow-2xl z-10 hidden md:block">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">{t('map.salinity')}</h4>
             <div className="space-y-2">
               <div className="flex items-center gap-3">
@@ -840,7 +845,7 @@ export default function SalinityMapView() {
           </div>
 
           {/* Time Selection Buttons */}
-          <div className="absolute bottom-6 left-6 right-6 bg-slate-900/95 backdrop-blur-md rounded-xl border border-slate-700 shadow-2xl px-6 py-4 flex items-center justify-between gap-6 z-10">
+          <div className="absolute bottom-6 left-6 right-6 lg:right-[400px] bg-slate-900/95 backdrop-blur-md rounded-xl border border-slate-700 shadow-2xl px-4 lg:px-6 py-3 lg:py-4 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 lg:gap-6 z-10">
             <div className="flex items-center gap-3">
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-primary uppercase">{t('map.current')}</span>
@@ -848,45 +853,6 @@ export default function SalinityMapView() {
                   {new Date(selectedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-bold text-slate-400 uppercase">{t('map.selectDays') || 'Select Days:'}</span>
-              <button 
-                onClick={() => {
-                  const newDate = new Date()
-                  newDate.setDate(newDate.getDate() + 7)
-                  setSelectedDate(newDate.toISOString().split('T')[0])
-                }}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
-                  Math.abs(daysFromToday - 7) < 1 ? 'bg-primary text-white' : 'bg-slate-800 text-white hover:bg-slate-700'
-                }`}
-              >
-                7 {t('map.days') || 'Days'}
-              </button>
-              <button 
-                onClick={() => {
-                  const newDate = new Date()
-                  newDate.setDate(newDate.getDate() + 14)
-                  setSelectedDate(newDate.toISOString().split('T')[0])
-                }}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
-                  Math.abs(daysFromToday - 14) < 1 ? 'bg-primary text-white' : 'bg-slate-800 text-white hover:bg-slate-700'
-                }`}
-              >
-                14 {t('map.days') || 'Days'}
-              </button>
-              <button 
-                onClick={() => {
-                  const newDate = new Date()
-                  newDate.setDate(newDate.getDate() + 30)
-                  setSelectedDate(newDate.toISOString().split('T')[0])
-                }}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
-                  Math.abs(daysFromToday - 30) < 1 ? 'bg-primary text-white' : 'bg-slate-800 text-white hover:bg-slate-700'
-                }`}
-              >
-                30 {t('map.days') || 'Days'}
-              </button>
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
@@ -924,8 +890,38 @@ export default function SalinityMapView() {
         )}
       </div>
 
-      {/* Sidebar */}
-      <aside className="w-96 bg-slate-900 border-l border-slate-700 overflow-y-auto p-5 space-y-6 flex flex-col shrink-0">
+      {/* Sidebar - Responsive: Hidden on mobile, overlay when open */}
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-30"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      
+      <aside className={`
+        fixed lg:static
+        top-0 right-0 h-full
+        w-80 lg:w-96
+        bg-slate-900 border-l border-slate-700
+        overflow-y-auto p-4 lg:p-5 space-y-4 lg:space-y-6
+        flex flex-col shrink-0
+        z-30 lg:z-auto
+        transform transition-transform duration-300 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+        shadow-2xl lg:shadow-none
+      `}>
+        {/* Close Button - Mobile Only */}
+        <div className="lg:hidden flex items-center justify-between mb-4 pb-4 border-b border-slate-700">
+          <h2 className="text-lg font-bold text-white">Thông tin</h2>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            aria-label="Close sidebar"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
         {/* Selected Cooperative Info */}
         {selectedCooperative && (() => {
           // Try to find in cooperatives from API first, then fallback to mock

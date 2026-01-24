@@ -13,8 +13,8 @@ import AdminMapView from './views/admin/AdminMapView'
 // HTX Admin Views
 import CoopDashboard from './views/coop/CoopDashboard'
 import CoopFarmersManagement from './views/coop/CoopFarmersManagement'
-import CoopAlertsConfig from './views/coop/CoopAlertsConfig'
 import CoopMapView from './views/coop/CoopMapView'
+import ZaloMessageManagement from './views/coop/ZaloMessageManagement'
 
 // Farmer Views
 import FarmerDashboard from './views/farmer/FarmerDashboard'
@@ -26,8 +26,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-gray-900">Loading...</div>
       </div>
     )
   }
@@ -47,7 +47,6 @@ function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="coops" element={<AdminCoopsManagement />} />
               <Route path="map" element={<AdminMapView />} />
-              <Route path="alerts" element={<CoopAlertsConfig />} />
               <Route path="" element={<Navigate to="/admin/map" replace />} />
             </Routes>
           </ProtectedRoute>
@@ -63,6 +62,7 @@ function App() {
               <Route path="dashboard" element={<CoopDashboard />} />
               <Route path="farmers" element={<CoopFarmersManagement />} />
               <Route path="map" element={<CoopMapView />} />
+              <Route path="zalo-messages" element={<ZaloMessageManagement />} />
               <Route path="" element={<Navigate to="/coop/map" replace />} />
             </Routes>
           </ProtectedRoute>

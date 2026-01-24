@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Drop, Calendar, Warning, CheckCircle, Brain, TrendUp } from '@phosphor-icons/react'
+import { Drop, Calendar, Warning, CheckCircle, Brain } from '@phosphor-icons/react'
 import { fetchStoragePlanning, fetchStations, type StoragePlanning, type Station } from '@/utils/api'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAppStore } from '@/store/useAppStore'
@@ -75,11 +75,11 @@ export default function StoragePlanningView() {
   }))
 
   return (
-    <div className="flex flex-1 overflow-hidden">
+    <div className="flex flex-1 overflow-hidden bg-gray-50">
       {/* Sidebar */}
-      <aside className="w-20 lg:w-64 flex-shrink-0 border-r border-slate-700 bg-slate-900 flex flex-col hidden sm:flex">
+      <aside className="w-20 lg:w-64 flex-shrink-0 border-r border-gray-200 bg-white flex flex-col hidden sm:flex shadow-sm">
         <nav className="flex-1 px-4 space-y-2 mt-8">
-          <p className="hidden lg:block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-4">
+          <p className="hidden lg:block text-[10px] font-bold text-gray-500 uppercase tracking-widest px-3 mb-4">
             AI Tools
           </p>
           <button
@@ -90,8 +90,8 @@ export default function StoragePlanningView() {
             }}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
               decisionSupportViewMode === 'overview'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
+                ? 'bg-primary/10 text-primary border border-primary/20'
+                : 'text-gray-600 hover:bg-gray-100 border border-transparent'
             }`}
           >
             <Brain className="w-5 h-5" />
@@ -101,69 +101,40 @@ export default function StoragePlanningView() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              setDecisionSupportViewMode('trend')
-            }}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
-              decisionSupportViewMode === 'trend'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
-            }`}
-          >
-            <TrendUp className="w-5 h-5" />
-            <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.trendAnalysis')}</span>
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
               setDecisionSupportViewMode('storage')
             }}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
               decisionSupportViewMode === 'storage'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
+                ? 'bg-primary/10 text-primary border border-primary/20'
+                : 'text-gray-600 hover:bg-gray-100 border border-transparent'
             }`}
           >
             <Drop className="w-5 h-5" />
-            <span className="text-sm font-bold hidden lg:block">{t('decisionSupport.storagePlanning')}</span>
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              setDecisionSupportViewMode('mitigation')
-            }}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors w-full text-left ${
-              decisionSupportViewMode === 'mitigation'
-                ? 'bg-primary/10 text-primary'
-                : 'text-slate-500 hover:bg-slate-800'
-            }`}
-          >
-            <Warning className="w-5 h-5 text-red-500" />
-            <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.riskMitigation')}</span>
+            <span className="text-sm font-bold hidden lg:block">Lập kế hoạch Lưu trữ</span>
           </button>
         </nav>
       </aside>
-      <main className="flex-1 overflow-y-auto bg-slate-900 p-8 max-w-[1600px] mx-auto w-full">
+      <main className="flex-1 overflow-y-auto bg-gray-50 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
             <Drop className="w-6 h-6 text-primary" />
-            <h1 className="text-3xl font-black text-white">Storage Planning</h1>
+            <h1 className="text-3xl font-black text-gray-900">Lập kế hoạch Lưu trữ Nước</h1>
           </div>
-          <p className="text-slate-400">Reservoir capacity planning and supply management</p>
+          <p className="text-gray-600">Quản lý dung lượng hồ chứa và dự trữ nước cho HTX</p>
         </div>
 
         {/* Input Controls */}
-        <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 mb-6">
-          <h3 className="text-lg font-bold text-white mb-4">Configuration</h3>
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Thông tin Hồ chứa</h3>
+          <p className="text-xs text-gray-600 mb-4">Nhập thông tin hồ chứa của HTX để tính toán dự trữ nước</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-bold text-slate-400 mb-2">Station</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Chọn trạm</label>
               <select
                 value={selectedStation}
                 onChange={(e) => setSelectedStation(e.target.value)}
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm font-bold"
+                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm font-bold focus:ring-2 focus:ring-primary focus:border-primary"
                 disabled={stations.length === 0}
               >
                 {stations.map((station) => (
@@ -174,7 +145,7 @@ export default function StoragePlanningView() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-bold text-slate-400 mb-2">Current Level (%)</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Mức nước hiện tại (%)</label>
               <input
                 type="number"
                 value={currentLevel}
@@ -182,112 +153,118 @@ export default function StoragePlanningView() {
                 min="0"
                 max="100"
                 step="0.1"
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm font-bold"
+                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm font-bold focus:ring-2 focus:ring-primary focus:border-primary"
               />
+              <p className="text-xs text-gray-500 mt-1">Tỷ lệ % dung lượng đã lấp đầy</p>
             </div>
             <div>
-              <label className="block text-sm font-bold text-slate-400 mb-2">Daily Consumption (m³)</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Tiêu thụ hàng ngày (m³)</label>
               <input
                 type="number"
                 value={dailyConsumption}
                 onChange={(e) => setDailyConsumption(parseFloat(e.target.value))}
                 min="0"
                 step="10"
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm font-bold"
+                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm font-bold focus:ring-2 focus:ring-primary focus:border-primary"
               />
+              <p className="text-xs text-gray-500 mt-1">Lượng nước sử dụng mỗi ngày</p>
             </div>
             <div>
-              <label className="block text-sm font-bold text-slate-400 mb-2">Total Capacity (m³)</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Tổng dung lượng (m³)</label>
               <input
                 type="number"
                 value={totalCapacity}
                 onChange={(e) => setTotalCapacity(parseFloat(e.target.value))}
                 min="0"
                 step="1000"
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm font-bold"
+                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-900 text-sm font-bold focus:ring-2 focus:ring-primary focus:border-primary"
               />
+              <p className="text-xs text-gray-500 mt-1">Dung tích tối đa của hồ chứa</p>
             </div>
           </div>
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center h-96">
-            <div className="text-slate-400">Loading storage planning data...</div>
+            <div className="text-gray-500">Đang tải dữ liệu...</div>
           </div>
         ) : !storageData ? (
           <div className="flex items-center justify-center h-96">
-            <div className="text-red-500">Failed to load storage planning data</div>
+            <div className="text-red-600">Không thể tải dữ liệu lập kế hoạch lưu trữ</div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Stats */}
             <div className="lg:col-span-2 space-y-6">
               {/* Current Level & Days Remaining */}
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-white mb-6">Reservoir Status</h3>
+              <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Tình trạng Hồ chứa</h3>
+                <p className="text-xs text-gray-600 mb-6">Thông tin về mức nước và dự trữ hiện tại</p>
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between text-sm font-bold mb-2">
-                      <span className="text-slate-400">Current Reservoir Level</span>
-                      <span className="text-primary">{storageData.current_level_percent.toFixed(1)}%</span>
+                      <span className="text-gray-700">Mức nước hiện tại</span>
+                      <span className="text-primary text-lg">{storageData.current_level_percent.toFixed(1)}%</span>
                     </div>
-                    <div className="w-full bg-slate-700 h-4 rounded-full overflow-hidden">
+                    <div className="w-full bg-gray-200 h-4 rounded-full overflow-hidden">
                       <div
                         className="bg-primary h-full transition-all duration-300"
                         style={{ width: `${storageData.current_level_percent}%` }}
                       />
                     </div>
-                    <div className="text-xs text-slate-500 mt-1">
-                      {((storageData.current_level_percent / 100) * totalCapacity).toFixed(0)} m³ of {totalCapacity.toLocaleString()} m³
+                    <div className="text-xs text-gray-600 mt-2">
+                      {((storageData.current_level_percent / 100) * totalCapacity).toFixed(0)} m³ / {totalCapacity.toLocaleString()} m³
                     </div>
                   </div>
 
                   <div className={`p-6 rounded-xl border ${getDaysRemainingBg(storageData.days_of_supply)}`}>
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-sm font-bold text-slate-400 uppercase">Days of Supply Remaining</h4>
+                      <h4 className="text-sm font-bold text-gray-700">Số ngày còn lại</h4>
                       <Calendar className={`w-5 h-5 ${getDaysRemainingColor(storageData.days_of_supply)}`} />
                     </div>
                     <div className={`text-5xl font-black mb-2 ${getDaysRemainingColor(storageData.days_of_supply)}`}>
                       {storageData.days_of_supply}
                     </div>
-                    <div className="text-xs text-slate-500 mb-1">days</div>
+                    <div className="text-xs text-gray-600 mb-1">ngày</div>
                     {storageData.shortfall_date && (
-                      <div className="flex items-center gap-2 mt-4 text-xs font-bold text-red-500">
+                      <div className="flex items-center gap-2 mt-4 text-xs font-bold text-red-600">
                         <Warning className="w-4 h-4" />
-                        <span>Shortfall expected by {new Date(storageData.shortfall_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        <span>Dự kiến thiếu nước vào: {new Date(storageData.shortfall_date).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}</span>
                       </div>
                     )}
                     {!storageData.shortfall_date && storageData.days_of_supply > 30 && (
-                      <div className="flex items-center gap-2 mt-4 text-xs font-bold text-green-500">
+                      <div className="flex items-center gap-2 mt-4 text-xs font-bold text-green-600">
                         <CheckCircle className="w-4 h-4" />
-                        <span>Supply sufficient for forecast period</span>
+                        <span>Đủ nước cho thời gian dự báo</span>
                       </div>
                     )}
                   </div>
 
                   {/* Safe Window */}
-                  <div className="bg-slate-900/50 p-4 rounded-xl">
+                  <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
                     <div className="flex items-center gap-2 mb-2">
-                      <Drop className="w-4 h-4 text-amber-500" />
-                      <span className="text-xs font-bold text-amber-400 uppercase">Safe Operational Window</span>
+                      <Drop className="w-4 h-4 text-amber-600" />
+                      <span className="text-xs font-bold text-amber-700 uppercase">Cửa sổ An toàn</span>
                     </div>
-                    <div className="text-sm font-bold text-white">
-                      {storageData.safe_window_days} days until salinity exceeds safe threshold
+                    <div className="text-sm font-bold text-gray-900">
+                      Còn {storageData.safe_window_days} ngày trước khi độ mặn vượt ngưỡng an toàn
                     </div>
+                    <p className="text-xs text-gray-600 mt-2">Đây là thời gian còn lại để lấy nước ngọt an toàn</p>
                   </div>
                 </div>
               </div>
 
               {/* Timeline Chart */}
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-white mb-6">Projected Reservoir Level</h3>
+              <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Dự báo Mức nước Hồ chứa</h3>
+                <p className="text-xs text-gray-600 mb-6">Biểu đồ dự báo mức nước trong 30 ngày tới</p>
                 <ResponsiveContainer width="100%" height={300}>
                   <AreaChart data={timelineData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                    <XAxis dataKey="day" stroke="#94a3b8" />
-                    <YAxis stroke="#94a3b8" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="day" stroke="#6b7280" />
+                    <YAxis stroke="#6b7280" />
                     <Tooltip
-                      contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }}
+                      contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px', color: '#111827' }}
                     />
                     <Area
                       type="monotone"
@@ -312,42 +289,46 @@ export default function StoragePlanningView() {
             <div className="space-y-6">
               {/* Optimal Fill Date */}
               {storageData.optimal_fill_date && (
-                <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-6">
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 shadow-sm">
                   <div className="flex items-center gap-2 mb-4">
-                    <Calendar className="w-5 h-5 text-amber-500" />
-                    <h4 className="text-sm font-bold text-amber-400 uppercase">Optimal Fill Date</h4>
+                    <Calendar className="w-5 h-5 text-amber-600" />
+                    <h4 className="text-sm font-bold text-amber-700 uppercase">Thời điểm Lấp đầy Tối ưu</h4>
                   </div>
-                  <div className="text-2xl font-black text-white mb-2">
-                    {new Date(storageData.optimal_fill_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  <div className="text-2xl font-black text-gray-900 mb-2">
+                    {new Date(storageData.optimal_fill_date).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}
                   </div>
-                  <div className="text-xs text-slate-400">
-                    Last safe window to fill reservoirs before salinity increases
+                  <div className="text-xs text-gray-700 leading-relaxed">
+                    Đây là cửa sổ an toàn cuối cùng để lấp đầy hồ chứa trước khi độ mặn tăng cao. HTX nên thông báo cho các hộ dân chuẩn bị lấy nước.
                   </div>
                 </div>
               )}
 
               {/* Storage Requirements */}
-              <div className="bg-slate-800 border border-slate-700 rounded-xl p-6">
-                <h4 className="text-sm font-bold text-slate-400 uppercase mb-4">Storage Requirements</h4>
-                <div className="space-y-3">
-                  <div>
-                    <div className="text-xs text-slate-500 mb-1">Required Capacity</div>
-                    <div className="text-lg font-black text-white">
+              <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <h4 className="text-sm font-bold text-gray-900 mb-4">Yêu cầu Dự trữ</h4>
+                <p className="text-xs text-gray-600 mb-4">Thông tin về lượng nước cần thiết để đảm bảo sản xuất</p>
+                <div className="space-y-4">
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div className="text-xs text-gray-600 mb-1">Dung lượng cần thiết</div>
+                    <div className="text-xl font-black text-gray-900">
                       {storageData.storage_requirements.required_capacity_m3.toLocaleString()} m³
                     </div>
+                    <p className="text-xs text-gray-500 mt-1">Lượng nước tối thiểu cần dự trữ</p>
                   </div>
-                  <div>
-                    <div className="text-xs text-slate-500 mb-1">Critical Period</div>
-                    <div className="text-lg font-black text-white">
-                      {storageData.storage_requirements.critical_period_days} days
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div className="text-xs text-gray-600 mb-1">Giai đoạn quan trọng</div>
+                    <div className="text-xl font-black text-gray-900">
+                      {storageData.storage_requirements.critical_period_days} ngày
                     </div>
+                    <p className="text-xs text-gray-500 mt-1">Thời gian độ mặn ở mức nguy hiểm</p>
                   </div>
                   {storageData.storage_requirements.recommended_fill_date && (
-                    <div>
-                      <div className="text-xs text-slate-500 mb-1">Recommended Fill Date</div>
-                      <div className="text-sm font-bold text-primary">
-                        {new Date(storageData.storage_requirements.recommended_fill_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg">
+                      <div className="text-xs text-gray-600 mb-1">Khuyến nghị lấp đầy</div>
+                      <div className="text-lg font-bold text-primary">
+                        {new Date(storageData.storage_requirements.recommended_fill_date).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}
                       </div>
+                      <p className="text-xs text-gray-700 mt-1">Nên bắt đầu lấy nước từ ngày này</p>
                     </div>
                   )}
                 </div>
@@ -355,32 +336,35 @@ export default function StoragePlanningView() {
 
               {/* Recommendations */}
               {storageData.recommendations && storageData.recommendations.length > 0 && (
-                <div className="bg-slate-800 border border-slate-700 rounded-xl p-6">
-                  <h4 className="text-sm font-bold text-slate-400 uppercase mb-4">Recommendations</h4>
+                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                  <h4 className="text-sm font-bold text-gray-900 mb-2">Khuyến nghị cho HTX</h4>
+                  <p className="text-xs text-gray-600 mb-4">Các hành động cần thực hiện dựa trên tình trạng dự trữ</p>
                   <div className="space-y-3">
                     {storageData.recommendations.map((rec, idx) => (
                       <div
                         key={idx}
-                        className={`p-3 rounded-lg border ${
+                        className={`p-4 rounded-lg border ${
                           rec.priority === 'urgent'
-                            ? 'bg-red-500/10 border-red-500/20'
+                            ? 'bg-red-50 border-red-200'
                             : rec.priority === 'high'
-                            ? 'bg-orange-500/10 border-orange-500/20'
-                            : 'bg-yellow-500/10 border-yellow-500/20'
+                            ? 'bg-orange-50 border-orange-200'
+                            : 'bg-yellow-50 border-yellow-200'
                         }`}
                       >
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-2">
                           <Warning
                             className={`w-4 h-4 ${
-                              rec.priority === 'urgent' ? 'text-red-500' : rec.priority === 'high' ? 'text-orange-500' : 'text-yellow-500'
+                              rec.priority === 'urgent' ? 'text-red-600' : rec.priority === 'high' ? 'text-orange-600' : 'text-yellow-600'
                             }`}
                           />
-                          <span className="text-xs font-bold uppercase">{rec.priority}</span>
+                          <span className="text-xs font-bold uppercase text-gray-900">
+                            {rec.priority === 'urgent' ? 'Khẩn cấp' : rec.priority === 'high' ? 'Cao' : 'Trung bình'}
+                          </span>
                         </div>
-                        <div className="text-sm font-bold text-white mb-1">{rec.message}</div>
+                        <div className="text-sm font-bold text-gray-900 mb-2">{rec.message}</div>
                         {rec.deadline && (
-                          <div className="text-xs text-slate-400">
-                            Deadline: {new Date(rec.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          <div className="text-xs text-gray-600">
+                            Hạn: {new Date(rec.deadline).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}
                           </div>
                         )}
                       </div>

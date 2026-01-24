@@ -40,8 +40,8 @@ interface AppState {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
   
-  decisionSupportViewMode: 'overview' | 'trend' | 'storage' | 'mitigation';
-  setDecisionSupportViewMode: (mode: 'overview' | 'trend' | 'storage' | 'mitigation') => void;
+  decisionSupportViewMode: 'overview' | 'storage';
+  setDecisionSupportViewMode: (mode: 'overview' | 'storage') => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({

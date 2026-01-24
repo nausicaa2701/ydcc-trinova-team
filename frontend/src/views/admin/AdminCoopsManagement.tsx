@@ -194,14 +194,14 @@ export default function AdminCoopsManagement() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-slate-900 overflow-hidden">
+    <div className="flex flex-col h-screen bg-gray-50 overflow-hidden">
       <RoleBasedHeader />
-      <div className="flex-1 overflow-y-auto p-8">
+      <div className="flex-1 overflow-y-auto p-6 lg:p-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">{t('admin.htxManagement')}</h2>
-              <p className="text-slate-400">{t('admin.manageCooperatives')}</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">{t('admin.htxManagement')}</h2>
+              <p className="text-gray-600">{t('admin.manageCooperatives')}</p>
             </div>
             <button
               onClick={() => {
@@ -218,27 +218,27 @@ export default function AdminCoopsManagement() {
           </div>
 
           {loading ? (
-            <div className="text-center py-12 text-slate-400">{t('admin.loading')}</div>
+            <div className="text-center py-12 text-gray-500">{t('admin.loading')}</div>
           ) : (
-            <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
               <table className="w-full">
-                <thead className="bg-slate-900/50 border-b border-slate-700">
+                <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.id')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.name')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.province')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.location')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.status')}</th>
-                    <th className="px-6 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.actions')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.id')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.name')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.province')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.location')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.status')}</th>
+                    <th className="px-6 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.actions')}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-gray-200">
                   {coops.map((coop) => (
-                    <tr key={coop.id} className="hover:bg-slate-800/50">
-                      <td className="px-6 py-4 text-sm font-mono text-slate-300">{coop.id}</td>
-                      <td className="px-6 py-4 text-sm font-medium text-white">{coop.name}</td>
-                      <td className="px-6 py-4 text-sm text-slate-300">{coop.province}</td>
-                      <td className="px-6 py-4 text-sm text-slate-400">
+                    <tr key={coop.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 text-sm font-mono text-gray-700">{coop.id}</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{coop.name}</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">{coop.province}</td>
+                      <td className="px-6 py-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                           <MapPin className="w-4 h-4" />
                           {coop.center_lat.toFixed(4)}, {coop.center_lon.toFixed(4)}
@@ -247,8 +247,8 @@ export default function AdminCoopsManagement() {
                       <td className="px-6 py-4">
                         <span className={`px-2 py-1 rounded text-xs font-bold ${
                           coop.status === 'active' 
-                            ? 'bg-green-500/20 text-green-400' 
-                            : 'bg-red-500/20 text-red-400'
+                            ? 'bg-green-100 text-green-700 border border-green-200' 
+                            : 'bg-red-100 text-red-700 border border-red-200'
                         }`}>
                           {coop.status}
                         </span>
@@ -257,7 +257,7 @@ export default function AdminCoopsManagement() {
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => handleEditConfig(coop)}
-                            className="p-2 text-slate-400 hover:text-primary transition-colors"
+                            className="p-2 text-gray-500 hover:text-primary transition-colors"
                             title="Edit Config"
                           >
                             <Gear className="w-4 h-4" />
@@ -277,14 +277,14 @@ export default function AdminCoopsManagement() {
                               setGeocoding({ loading: false, error: '' })
                               setShowModal(true)
                             }}
-                            className="p-2 text-slate-400 hover:text-blue-400 transition-colors"
+                            className="p-2 text-gray-500 hover:text-blue-600 transition-colors"
                             title="Edit"
                           >
                             <PencilSimple className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(coop.id)}
-                            className="p-2 text-slate-400 hover:text-red-400 transition-colors"
+                            className="p-2 text-gray-500 hover:text-red-600 transition-colors"
                             title="Delete"
                           >
                             <Trash className="w-4 h-4" />
@@ -303,34 +303,34 @@ export default function AdminCoopsManagement() {
       {/* Add/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-xl border border-slate-700 w-full max-w-md p-6">
-            <h3 className="text-xl font-bold text-white mb-4">
+          <div className="bg-white rounded-xl border border-gray-200 w-full max-w-md p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">
               {editingCoop ? t('admin.editCooperative') : t('admin.addCooperative')}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t('admin.name')}</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('admin.name')}</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                  className="w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t('admin.province')}</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('admin.province')}</label>
                 <input
                   type="text"
                   value={formData.province}
                   onChange={(e) => setFormData({ ...formData, province: e.target.value })}
-                  className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                  className="w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">
-                  Địa chỉ <span className="text-slate-500 text-xs">(tùy chọn - sẽ tự động tìm tọa độ)</span>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Địa chỉ <span className="text-gray-500 text-xs">(tùy chọn - sẽ tự động tìm tọa độ)</span>
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -343,7 +343,7 @@ export default function AdminCoopsManagement() {
                       }
                     }}
                     placeholder="Ví dụ: Số 7 Đỗ Xuân Hợp, phường Phước Long B, Quận 9"
-                    className="flex-1 rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                    className="flex-1 rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                   />
                   <button
                     type="button"
@@ -365,16 +365,16 @@ export default function AdminCoopsManagement() {
                   </button>
                 </div>
                 {geocoding.error && (
-                  <p className="mt-1 text-xs text-red-400">{geocoding.error}</p>
+                  <p className="mt-1 text-xs text-red-600">{geocoding.error}</p>
                 )}
                 {!geocoding.error && formData.address && !geocoding.loading && (
-                  <p className="mt-1 text-xs text-green-400">✓ Đã tìm thấy tọa độ</p>
+                  <p className="mt-1 text-xs text-green-600">✓ Đã tìm thấy tọa độ</p>
                 )}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    {t('admin.latitude')} <span className="text-slate-500 text-xs">(tự động điền)</span>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t('admin.latitude')} <span className="text-gray-500 text-xs">(tự động điền)</span>
                   </label>
                   <input
                     type="number"
@@ -394,13 +394,13 @@ export default function AdminCoopsManagement() {
                         reverseGeocode(formData.center_lat, formData.center_lon)
                       }
                     }}
-                    className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                    className="w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
-                    {t('admin.longitude')} <span className="text-slate-500 text-xs">(tự động điền)</span>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t('admin.longitude')} <span className="text-gray-500 text-xs">(tự động điền)</span>
                   </label>
                   <input
                     type="number"
@@ -420,7 +420,7 @@ export default function AdminCoopsManagement() {
                         reverseGeocode(formData.center_lat, formData.center_lon)
                       }
                     }}
-                    className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                    className="w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                     required
                   />
                 </div>
@@ -440,7 +440,7 @@ export default function AdminCoopsManagement() {
                     setFormData({ name: '', province: 'TP. Hồ Chí Minh', address: '', center_lat: 10.8, center_lon: 106.7, status: 'active', config: {} })
         setGeocoding({ loading: false, error: '' })
                   }}
-                  className="px-4 py-2 bg-slate-700 text-white rounded-lg font-bold hover:bg-slate-600 transition-all"
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-bold hover:bg-gray-300 transition-all"
                 >
                   {t('common.cancel')}
                 </button>
@@ -453,12 +453,12 @@ export default function AdminCoopsManagement() {
       {/* Config Modal */}
       {showConfigModal && configCoop && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-xl border border-slate-700 w-full max-w-2xl p-6">
-            <h3 className="text-xl font-bold text-white mb-4">{t('admin.editConfigTitle')} {configCoop.name}</h3>
+          <div className="bg-white rounded-xl border border-gray-200 w-full max-w-2xl p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">{t('admin.editConfigTitle')} {configCoop.name}</h3>
             <textarea
               value={configJson}
               onChange={(e) => setConfigJson(e.target.value)}
-              className="w-full h-64 bg-slate-900 text-white font-mono text-sm p-4 rounded-lg border border-slate-700"
+              className="w-full h-64 bg-gray-50 text-gray-900 font-mono text-sm p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary"
               placeholder='{"threshold_salinity": 4.0, "crops": ["rice", "shrimp"]}'
             />
             <div className="flex gap-3 mt-4">
@@ -470,7 +470,7 @@ export default function AdminCoopsManagement() {
               </button>
               <button
                 onClick={() => setShowConfigModal(false)}
-                className="px-4 py-2 bg-slate-700 text-white rounded-lg font-bold hover:bg-slate-600 transition-all"
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-bold hover:bg-gray-300 transition-all"
               >
                 {t('common.cancel')}
               </button>

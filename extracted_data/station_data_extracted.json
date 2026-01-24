@@ -14,7 +14,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.249217"
+    "extraction_timestamp": "2026-01-25T04:50:59.885859"
   },
   {
     "station_name": "Nhà Bè",
@@ -31,7 +31,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.249224"
+    "extraction_timestamp": "2026-01-25T04:50:59.885869"
   },
   {
     "station_name": "Cát Lái",
@@ -48,7 +48,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.249224"
+    "extraction_timestamp": "2026-01-25T04:50:59.885870"
   },
   {
     "station_name": "Long Đại",
@@ -65,7 +65,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20240331_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.249225"
+    "extraction_timestamp": "2026-01-25T04:50:59.885871"
   },
   {
     "station_name": "Lý Nhơn",
@@ -82,7 +82,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.299978"
+    "extraction_timestamp": "2026-01-25T04:51:00.004185"
   },
   {
     "station_name": "Nhà Bè",
@@ -99,7 +99,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.299984"
+    "extraction_timestamp": "2026-01-25T04:51:00.004200"
   },
   {
     "station_name": "Cát Lái",
@@ -116,7 +116,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.299985"
+    "extraction_timestamp": "2026-01-25T04:51:00.004201"
   },
   {
     "station_name": "Long Đại",
@@ -133,7 +133,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20260120_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.299986"
+    "extraction_timestamp": "2026-01-25T04:51:00.004202"
   },
   {
     "station_name": "Lý Nhơn",
@@ -150,7 +150,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.350233"
+    "extraction_timestamp": "2026-01-25T04:51:00.072802"
   },
   {
     "station_name": "Nhà Bè",
@@ -167,7 +167,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.350239"
+    "extraction_timestamp": "2026-01-25T04:51:00.072808"
   },
   {
     "station_name": "Cát Lái",
@@ -184,7 +184,7 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.350240"
+    "extraction_timestamp": "2026-01-25T04:51:00.072809"
   },
   {
     "station_name": "Long Đại",
@@ -201,6 +201,6 @@
     "do": null,
     "source_file": "HOCM_XMAN_20250310_1530.pdf",
     "extraction_method": "table",
-    "extraction_timestamp": "2026-01-24T00:37:24.350241"
+    "extraction_timestamp": "2026-01-25T04:51:00.072810"
   }
 ]

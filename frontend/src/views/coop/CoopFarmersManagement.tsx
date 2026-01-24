@@ -98,14 +98,14 @@ export default function CoopFarmersManagement() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-slate-900 overflow-hidden">
+    <div className="flex flex-col h-screen bg-gray-50 overflow-hidden">
       <RoleBasedHeader />
       <div className="flex-1 overflow-y-auto p-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">{t('coop.farmerManagement')}</h2>
-              <p className="text-slate-400">{t('coop.manageFarmersInCoop')}</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">{t('coop.farmerManagement')}</h2>
+              <p className="text-gray-600">{t('coop.manageFarmersInCoop')}</p>
             </div>
             <button
               onClick={() => {
@@ -121,29 +121,29 @@ export default function CoopFarmersManagement() {
           </div>
 
           {loading ? (
-            <div className="text-center py-12 text-slate-400">{t('common.loading')}</div>
+            <div className="text-center py-12 text-gray-500">{t('common.loading')}</div>
           ) : (
-            <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
               <table className="w-full">
-                <thead className="bg-slate-900/50 border-b border-slate-700">
+                <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.name')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">{t('coop.phone')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Vị trí</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Trạm</th>
-                    <th className="px-6 py-3 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">{t('admin.actions')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.name')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('coop.phone')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Vị trí</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Trạm</th>
+                    <th className="px-6 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.actions')}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-700">
+                <tbody className="divide-y divide-gray-200">
                   {farmers.map((farmer) => (
-                    <tr key={farmer.id} className="hover:bg-slate-800/50">
+                    <tr key={farmer.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <User className="w-4 h-4 text-slate-400" />
+                          <User className="w-4 h-4 text-gray-500" />
                           <div>
-                            <span className="text-sm font-medium text-white block">{farmer.name}</span>
+                            <span className="text-sm font-medium text-gray-900 block">{farmer.name}</span>
                             {farmer.crop_type && (
-                              <span className="text-xs text-slate-400">
+                              <span className="text-xs text-gray-500">
                                 {farmer.crop_type}
                                 {farmer.crop_stage && ` • ${farmer.crop_stage}`}
                               </span>
@@ -152,25 +152,25 @@ export default function CoopFarmersManagement() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-2 text-slate-300">
+                        <div className="flex items-center gap-2 text-gray-700">
                           <Phone className="w-4 h-4" />
                           <span className="text-sm">{farmer.phone}</span>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         {farmer.lat && farmer.lon ? (
-                          <div className="text-xs text-slate-300">
+                          <div className="text-xs text-gray-700">
                             <div className="font-mono">{farmer.lat.toFixed(4)}, {farmer.lon.toFixed(4)}</div>
                           </div>
                         ) : (
-                          <span className="text-xs text-slate-500 italic">Chưa có</span>
+                          <span className="text-xs text-gray-400 italic">Chưa có</span>
                         )}
                       </td>
                       <td className="px-6 py-4">
                         {farmer.station_id ? (
                           <span className="text-xs font-medium text-primary">{farmer.station_id}</span>
                         ) : (
-                          <span className="text-xs text-slate-500 italic">Chưa gán</span>
+                          <span className="text-xs text-gray-400 italic">Chưa gán</span>
                         )}
                       </td>
                       <td className="px-6 py-4 text-right">
@@ -180,7 +180,7 @@ export default function CoopFarmersManagement() {
                               setSelectedFarmerForLocation(farmer)
                               setShowLocationModal(true)
                             }}
-                            className="p-2 text-slate-400 hover:text-green-400 transition-colors"
+                            className="p-2 text-gray-500 hover:text-green-600 transition-colors"
                             title="Cập nhật vị trí"
                           >
                             <MapPin className="w-4 h-4" />
@@ -191,14 +191,14 @@ export default function CoopFarmersManagement() {
                               setFormData({ name: farmer.name, phone: farmer.phone, metadata: farmer.metadata || {} })
                               setShowModal(true)
                             }}
-                            className="p-2 text-slate-400 hover:text-blue-400 transition-colors"
+                            className="p-2 text-gray-500 hover:text-blue-600 transition-colors"
                             title="Edit"
                           >
                             <PencilSimple className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(farmer.id)}
-                            className="p-2 text-slate-400 hover:text-red-400 transition-colors"
+                            className="p-2 text-gray-500 hover:text-red-600 transition-colors"
                             title="Delete"
                           >
                             <Trash className="w-4 h-4" />
@@ -217,28 +217,28 @@ export default function CoopFarmersManagement() {
       {/* Add/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-xl border border-slate-700 w-full max-w-md p-6">
-            <h3 className="text-xl font-bold text-white mb-4">
+          <div className="bg-white rounded-xl border border-gray-200 w-full max-w-md p-6 shadow-lg">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">
               {editingFarmer ? t('coop.editFarmer') : t('coop.addFarmerTitle')}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t('admin.name')}</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('admin.name')}</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                  className="w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t('coop.phone')}</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('coop.phone')}</label>
                 <input
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
+                  className="w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 border focus:ring-2 focus:ring-primary focus:border-primary"
                   required
                 />
               </div>
@@ -256,7 +256,7 @@ export default function CoopFarmersManagement() {
                     setEditingFarmer(null)
                     setFormData({ name: '', phone: '', metadata: {} })
                   }}
-                  className="px-4 py-2 bg-slate-700 text-white rounded-lg font-bold hover:bg-slate-600 transition-all"
+                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-bold hover:bg-gray-300 transition-all"
                 >
                   {t('common.cancel')}
                 </button>
