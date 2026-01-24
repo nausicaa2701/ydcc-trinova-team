@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Salinity Monitoring Dashboard - Mekong Delta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1392ec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                        "nav-bg": "#16222c",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body { font-family: 'Inter', sans-serif; }
+        .map-gradient {
+            background: radial-gradient(circle at center, rgba(19, 146, 236, 0.15) 0%, rgba(16, 26, 34, 0) 70%);
+        }
+        .contour-line-1 { border: 2px solid #00f2ff; box-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+        .contour-line-4 { border: 2px solid #ff4d4d; box-shadow: 0 0 10px rgba(255, 77, 77, 0.5); }
+        .nav-item-active {
+            @apply text-white border-b-2 border-primary;
+        }
+        .nav-item {
+            @apply text-[#9dadb9] hover:text-white transition-colors px-4 h-full flex items-center gap-2 font-medium;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-white font-display overflow-hidden h-screen flex flex-col">
+<header class="flex items-center justify-between border-b border-solid border-[#283239] bg-nav-bg px-6 h-16 shrink-0">
+<div class="flex items-center h-full gap-10">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+</svg>
+</div>
+<div>
+<h1 class="text-white text-lg font-bold leading-none tracking-tight">Salinity Monitoring</h1>
+<span class="text-[#9dadb9] text-[10px] uppercase font-bold tracking-widest">Mekong Delta AI</span>
+</div>
+</div>
+<nav class="flex items-center h-full">
+<a class="nav-item nav-item-active" href="#">
+<span class="material-symbols-outlined text-[20px]">map</span>
+<span class="text-sm">Salinity Map</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<span class="text-sm">Producers &amp; Co-ops</span>
+</a>
+<a class="nav-item" href="#">
+<span class="material-symbols-outlined text-[20px]">query_stats</span>
+<span class="text-sm">Decision Support</span>
+</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<label class="hidden lg:flex items-center bg-[#283239] rounded-lg px-3 h-10 w-64 border border-[#3b4954]/50">
+<span class="material-symbols-outlined text-[20px] text-[#9dadb9]">search</span>
+<input class="bg-transparent border-none text-white focus:ring-0 text-sm w-full placeholder:text-[#9dadb9]" placeholder="Search regions..." type="text"/>
+</label>
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded-lg bg-[#283239] text-white hover:bg-[#3b4954] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-lg bg-[#283239] text-white hover:bg-[#3b4954] transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<div class="h-8 w-px bg-[#283239] mx-1"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-white">Admin Portal</p>
+<p class="text-[10px] text-[#9dadb9]">Monitoring Unit</p>
+</div>
+<div class="size-9 rounded-full border-2 border-primary/50 overflow-hidden bg-[#283239]">
+<img alt="User avatar" class="size-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU630VI5gLvu_hlgrXm3tcozUYVzOgyshUeAJtlVjJEq6rGbXJrhIXPbfaDbIU1xxxwmqtNLE6DtNEwJcQfNhpfjyf7teU62Ey0KbQunRs5nm2edG8pyNLyEKEloXEyn-QrViEjHzu36c0VYYTmT5t2GKk2PfYI_kQ-DSNcpY2CAvTAjzKA7nIRJ2gSRahdchYaW4G3VcEagLl-ehwf7MuLY8eGPkJK08Jt_VmL4BDCv4Zxun-hZGbrW9zlxTNlWmGa-AiLRz_-xA"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 overflow-hidden relative">
+<div class="flex-1 relative bg-[#0a0f14] overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-40 grayscale-[0.2]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAO2ost8Q0qV-QCMIkVYhlD1I4FZq58MtJpYJABOwpJ-AfeTnbuF4TwVcmg6QMvTxSjEaRpHQ8lwRgNrthXxoE7T64tUIL8zsnw8n4KDlzwY3wusX4hGiWCsRpORRqnGauaji6XjOruW2h-jpsqQ2dS1WokqXU4zuFbWLAbiZoycvT0JDjkySMxqhmQhnJztiNZyufM0yaKl-BjrLsbPao7cPVryItq_KzZ15OXiopne1Did-eoPbyEk1mqOtDbel8_ZV5oEgop9W0");'></div>
+<div class="absolute inset-0 map-gradient pointer-events-none"></div>
+<div class="absolute top-1/4 left-1/4 w-96 h-64 contour-line-4 rounded-full opacity-30 transform -rotate-12 flex items-center justify-center pointer-events-none">
+<span class="text-[#ff4d4d] font-bold text-xs bg-black/80 px-2 py-1 rounded border border-[#ff4d4d]/30">4‰ Threshold</span>
+</div>
+<div class="absolute top-1/3 left-1/3 w-[500px] h-80 contour-line-1 rounded-full opacity-30 transform -rotate-12 flex items-center justify-center pointer-events-none">
+<span class="text-[#00f2ff] font-bold text-xs bg-black/80 px-2 py-1 rounded border border-[#00f2ff]/30">1‰ Threshold</span>
+</div>
+<div class="absolute top-6 left-6 flex flex-col gap-2">
+<div class="bg-[#1c2227]/90 backdrop-blur-md p-1 rounded-lg border border-[#3b4954] flex flex-col shadow-xl">
+<button class="size-10 flex items-center justify-center hover:bg-primary/20 text-white rounded-md transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="h-[1px] bg-[#3b4954] mx-2"></div>
+<button class="size-10 flex items-center justify-center hover:bg-primary/20 text-white rounded-md transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<button class="size-10 bg-[#1c2227]/90 backdrop-blur-md flex items-center justify-center hover:bg-primary/20 text-white rounded-lg border border-[#3b4954] shadow-xl">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+<button class="size-10 bg-[#1c2227]/90 backdrop-blur-md flex items-center justify-center hover:bg-primary/20 text-white rounded-lg border border-[#3b4954] shadow-xl">
+<span class="material-symbols-outlined">layers</span>
+</button>
+</div>
+<div class="absolute bottom-32 right-6 w-48 bg-[#1c2227]/90 backdrop-blur-md p-4 rounded-xl border border-[#3b4954] shadow-2xl">
+<h4 class="text-xs font-bold uppercase tracking-wider text-[#9dadb9] mb-3">Salinity (‰)</h4>
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-sm bg-[#ff4d4d]"></div>
+<span class="text-sm font-medium">&gt; 4.0 Critical</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-sm bg-[#ff9f4d]"></div>
+<span class="text-sm font-medium">2.0 - 4.0 High</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-sm bg-[#00f2ff]"></div>
+<span class="text-sm font-medium">1.0 - 2.0 Mod.</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-sm bg-[#0bda5b]"></div>
+<span class="text-sm font-medium">&lt; 1.0 Low</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 right-6 h-20 bg-[#1c2227]/95 backdrop-blur-md rounded-xl border border-[#3b4954] shadow-2xl px-6 flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="size-10 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary uppercase">Current</span>
+<span class="text-sm font-medium">Mar 15, 14:30</span>
+</div>
+</div>
+<div class="flex-1 relative flex flex-col justify-center">
+<div class="h-2 w-full bg-[#3b4954] rounded-full overflow-hidden relative">
+<div class="absolute left-0 top-0 h-full w-2/3 bg-primary/40"></div>
+<div class="absolute left-2/3 top-1/2 -translate-y-1/2 size-4 bg-primary rounded-full border-2 border-white shadow-md"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-[#9dadb9] font-medium uppercase tracking-tighter">
+<span>Past 48h</span>
+<span>-24h</span>
+<span class="text-primary font-bold">Now</span>
+<span>+24h</span>
+<span>+48h</span>
+<span class="text-primary/70">AI Forecast (7D)</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-[#283239] text-xs font-bold hover:bg-[#3b4954]">1H</button>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-xs font-bold">1D</button>
+<button class="px-3 py-1.5 rounded-lg bg-[#283239] text-xs font-bold hover:bg-[#3b4954]">7D</button>
+</div>
+</div>
+</div>
+<aside class="w-96 bg-[#111518] border-l border-[#283239] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold">Regional Analysis</h3>
+<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-500 text-[10px] font-bold uppercase">High Risk</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2 rounded-xl p-4 border border-[#3b4954] bg-[#1c2227]">
+<p class="text-[#9dadb9] text-xs font-medium uppercase">Risk Score</p>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold">78</span>
+<span class="text-xs text-[#9dadb9]">/100</span>
+</div>
+<p class="text-[#ff4d4d] text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                    </p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-4 border border-[#3b4954] bg-[#1c2227]">
+<p class="text-[#9dadb9] text-xs font-medium uppercase">Avg Salinity</p>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold">3.2</span>
+<span class="text-xs text-[#9dadb9]">‰</span>
+</div>
+<p class="text-[#ff4d4d] text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +0.4
+                    </p>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<h4 class="text-sm font-bold text-[#9dadb9] uppercase tracking-wider">Hydrological Status</h4>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 rounded-lg bg-[#1c2227] border border-[#283239]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">water_drop</span>
+<span class="text-sm">Water Level (Tide)</span>
+</div>
+<span class="font-bold">+1.24m</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-[#1c2227] border border-[#283239]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">speed</span>
+<span class="text-sm">River Flow Speed</span>
+</div>
+<span class="font-bold">0.85 m/s</span>
+</div>
+</div>
+</div>
+<div class="p-5 rounded-xl bg-primary/10 border border-primary/30 space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">psychology</span>
+<h4 class="text-sm font-bold uppercase tracking-wider">AI 7-Day Forecast</h4>
+</div>
+<div class="h-28 flex items-end justify-between gap-1 px-2">
+<div class="w-full bg-primary/30 rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-primary/30 rounded-t-sm h-[45%]"></div>
+<div class="w-full bg-primary/50 rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-primary rounded-t-sm h-[85%]"></div>
+<div class="w-full bg-primary/80 rounded-t-sm h-[75%]"></div>
+<div class="w-full bg-primary/60 rounded-t-sm h-[55%]"></div>
+<div class="w-full bg-primary/40 rounded-t-sm h-[35%]"></div>
+</div>
+<div class="flex justify-between text-[9px] text-[#9dadb9] font-medium px-1 uppercase">
+<span>Mon</span><span>Tue</span><span>Wed</span><span class="text-primary font-bold">Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+<div class="p-3 bg-black/40 rounded-lg">
+<p class="text-xs text-white/80 leading-relaxed">
+<span class="font-bold text-primary">Forecast Insight:</span> Salt wedge expected to advance <span class="text-white font-bold">12km upstream</span> by Thu. Recommend closing sluice gates in Ben Tre.
+                </p>
+</div>
+</div>
+<button class="w-full py-3 rounded-lg bg-[#283239] text-white font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#3b4954] transition-colors mt-auto">
+<span class="material-symbols-outlined text-lg">download</span>
+            Export Regional Report (PDF)
+        </button>
+</aside>
+</main>
+
+</body></html>

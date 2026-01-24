@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hướng Dẫn Ứng Phó Mặn - Hợp tác xã số</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#007f80",
+                        "secondary": "#3498DB",
+                        "warning": "#f59e0b",
+                        "danger": "#ef4444",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Epilogue', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .step-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            width: 2px;
+            height: 40px;
+            background: #cbd5e1;
+            transform: translateX(-50%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full bg-white/70 dark:bg-background-dark/70 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 lg:px-40 py-4">
+<div class="max-w-[1280px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">water_lux</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-none tracking-tight">HTX Số</h2>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary/80">Ứng phó mặn</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-bold shadow-md hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined !text-lg">login</span>
+<span>Đăng nhập</span>
+</button>
+</div>
+</div>
+</header>
+<section class="relative w-full pt-10 lg:pt-20 pb-16 px-4 lg:px-40">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="flex flex-col gap-6 text-left order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-danger/10 text-danger border border-danger/20 text-xs font-bold w-fit">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-danger"></span>
+</span>
+                        CẢNH BÁO THIÊN TAI
+                    </div>
+<h1 class="text-slate-900 dark:text-white text-4xl lg:text-6xl font-black leading-tight tracking-tight">
+                        Đối phó <span class="text-primary italic">Xâm nhập mặn</span> thông minh hơn
+                    </h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg lg:text-xl font-medium leading-relaxed max-w-[540px]">
+                        Lộ trình 3 bước giúp Hợp tác xã và Nông dân Tiền Giang chủ động quản lý nguồn nước, bảo vệ mùa màng trước diễn biến mặn phức tạp.
+                    </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<a class="flex h-14 items-center justify-center rounded-xl px-8 bg-primary text-white text-base font-bold shadow-xl shadow-primary/25 hover:translate-y-[-2px] transition-all" href="#step-1">
+                            Bắt đầu lộ trình
+                        </a>
+<button class="flex h-14 items-center justify-center rounded-xl px-8 bg-white dark:bg-slate-800 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 text-base font-bold hover:bg-slate-50 transition-all">
+                            Tìm hiểu thêm
+                        </button>
+</div>
+</div>
+<div class="relative order-1 lg:order-2">
+<div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] group">
+<img alt="Tình trạng mặn" class="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbWBdO__gRM2qnrfB9scSLYCeT88TTvFV48kculsTDlcYzKHPPO_bOwF5pPYIeOPsEaY6GqGTUsHoXXndEbgQNmhjAlOtvgq1zwwOkqDsMm2aY-Ee92tAaV7w_uWW8ti490kO9HJ0BvnnU6OnujxajdmQrjdZ1MmOlrO3lZ6uX1gSvn6DmBfaYttu9F2Pyhq_vTjfdDXLlRTp6E_NesLwOiHHo_JLNKAsW8_jOaLX_eVva8OFurFQYjhMQSNk0ZSiAK4snkRuJNs8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<div class="glass-card p-4 rounded-xl flex items-center gap-4">
+<div class="size-12 rounded-lg bg-danger flex items-center justify-center text-white">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Tình trạng khẩn cấp</p>
+<p class="text-slate-900 dark:text-white font-bold">Độ mặn tại Tiền Giang đang tăng cao</p>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -top-6 -right-6 size-32 bg-primary/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-6 -left-6 size-48 bg-secondary/20 rounded-full blur-3xl -z-10"></div>
+</div>
+</div>
+</section>
+<section class="relative px-4 lg:px-40 py-24 bg-white dark:bg-slate-900/50" id="step-1">
+<div class="max-w-[1280px] mx-auto">
+<div class="flex flex-col items-center text-center gap-4 mb-16 relative">
+<div class="size-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mb-2 shadow-lg shadow-primary/30 step-line">1</div>
+<h2 class="text-primary text-sm font-bold uppercase tracking-[0.2em]">Bước 01: Theo dõi hiện trạng</h2>
+<h3 class="text-slate-900 dark:text-white text-3xl lg:text-4xl font-black leading-tight">Bản đồ Xâm nhập mặn thời gian thực</h3>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-[700px]">Cập nhật tức thì các chỉ số từ 50+ trạm quan trắc thủy văn trên địa bàn tỉnh Tiền Giang.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<div class="lg:col-span-2 relative">
+<div class="rounded-2xl border-4 border-white dark:border-slate-800 shadow-2xl overflow-hidden aspect-video relative group">
+<img alt="Bản đồ Tiền Giang" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxOKvi8x3oxlQ4R40IPg9zCaE9GtJs5g1spv73NbwGosJKuaVUHq1iXqwTHzyxdHS4yGt_aCenRWDdtQ5qWr76sBaIM7kcefdTTrJbwx0QU1VLUOReQ935KUQbdpfgMalTJniV7W3YD4wQctbGm8YTnWntzTLumDIq_APkOTrFUSZasaLZwko8MILefdY8LLkhF-ZQZGSqxArjoXAFO3HHIJEkliqP54wVkCiNdr5i2q1y2ilE-UEauLscnbl4PPtBrHAv6bf8ABY"/>
+<div class="absolute inset-0 bg-black/10"></div>
+<div class="absolute top-1/3 left-1/4">
+<div class="relative group/pin cursor-pointer">
+<div class="size-4 bg-danger rounded-full animate-ping absolute inset-0"></div>
+<div class="size-4 bg-danger rounded-full relative border-2 border-white shadow-lg"></div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-800 p-2 rounded shadow-xl text-[10px] whitespace-nowrap opacity-0 group-hover/pin:opacity-100 transition-opacity">
+<b class="text-danger">Cửa Tiểu: 4.5g/l</b>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 right-1/3">
+<div class="relative group/pin cursor-pointer">
+<div class="size-4 bg-warning rounded-full relative border-2 border-white shadow-lg"></div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-800 p-2 rounded shadow-xl text-[10px] whitespace-nowrap opacity-0 group-hover/pin:opacity-100 transition-opacity">
+<b class="text-warning">Mỹ Tho: 1.2g/l</b>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+<h4 class="font-bold text-slate-900 dark:text-white mb-4">Chú giải độ mặn</h4>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-danger"></div>
+<span class="text-sm font-medium">Nguy hiểm (&gt; 4.0 g/l)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-warning"></div>
+<span class="text-sm font-medium">Cảnh báo (1.0 - 4.0 g/l)</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-sm font-medium">An toàn (&lt; 1.0 g/l)</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+<h4 class="font-bold text-primary mb-2">Thống kê nhanh</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Số liệu tổng hợp trong 24h qua tại khu vực của bạn.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white dark:bg-slate-800 p-3 rounded-xl text-center">
+<div class="text-xl font-black text-danger">3</div>
+<div class="text-[10px] uppercase font-bold text-slate-400">Điểm nóng</div>
+</div>
+<div class="bg-white dark:bg-slate-800 p-3 rounded-xl text-center">
+<div class="text-xl font-black text-primary">85%</div>
+<div class="text-[10px] uppercase font-bold text-slate-400">Vùng an toàn</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4 lg:px-40 py-24 bg-background-light dark:bg-background-dark" id="step-2">
+<div class="max-w-[1280px] mx-auto">
+<div class="flex flex-col items-center text-center gap-4 mb-16 relative">
+<div class="size-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-lg mb-2 shadow-lg shadow-secondary/30 step-line">2</div>
+<h2 class="text-secondary text-sm font-bold uppercase tracking-[0.2em]">Bước 02: Kế hoạch hành động</h2>
+<h3 class="text-slate-900 dark:text-white text-3xl lg:text-4xl font-black leading-tight">Khuyến nghị dựa trên Dữ liệu</h3>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-[700px]">Hệ thống AI tự động phân tích độ mặn và đề xuất các giải pháp kỹ thuật cụ thể cho từng giai đoạn sản xuất.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all group">
+<div class="size-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl">agriculture</span>
+</div>
+<h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Lịch gieo trồng</h4>
+<p class="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">Đề xuất lùi lịch thời vụ hoặc chuyển đổi sang các giống lúa/cây ăn trái chịu mặn tốt hơn.</p>
+<ul class="space-y-3">
+<li class="flex items-start gap-2 text-sm">
+<span class="material-symbols-outlined text-primary !text-lg">check_circle</span>
+<span>Giống lúa OM6976 chịu mặn 4‰</span>
+</li>
+<li class="flex items-start gap-2 text-sm">
+<span class="material-symbols-outlined text-primary !text-lg">check_circle</span>
+<span>Tránh xuống giống trong tháng 3</span>
+</li>
+</ul>
+</div>
+<div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all group border-t-4 border-t-primary">
+<div class="size-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl">opacity</span>
+</div>
+<h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Quản lý Tưới tiêu</h4>
+<p class="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">Tự động hóa việc đóng mở cống ngăn mặn dựa trên cảm biến mực nước và độ mặn.</p>
+<ul class="space-y-3">
+<li class="flex items-start gap-2 text-sm">
+<span class="material-symbols-outlined text-primary !text-lg">check_circle</span>
+<span>Tưới tiết kiệm phun sương</span>
+</li>
+<li class="flex items-start gap-2 text-sm">
+<span class="material-symbols-outlined text-primary !text-lg">check_circle</span>
+<span>Trữ ngọt trong mương vườn</span>
+</li>
+</ul>
+</div>
+<div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all group">
+<div class="size-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined !text-3xl">support_agent</span>
+</div>
+<h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Hỗ trợ Kỹ thuật</h4>
+<p class="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">Kết nối trực tiếp với chuyên gia Nông nghiệp để nhận tư vấn khi phát hiện bất thường.</p>
+<ul class="space-y-3">
+<li class="flex items-start gap-2 text-sm">
+<span class="material-symbols-outlined text-primary !text-lg">check_circle</span>
+<span>Chat trực tuyến 24/7</span>
+</li>
+<li class="flex items-start gap-2 text-sm">
+<span class="material-symbols-outlined text-primary !text-lg">check_circle</span>
+<span>Tài liệu kỹ thuật canh tác mặn</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4 lg:px-40 py-24">
+<div class="max-w-[1000px] mx-auto bg-slate-900 rounded-[2.5rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl">
+<div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-96 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 size-96 bg-secondary/20 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-center gap-8">
+<div class="size-10 rounded-full bg-white/10 text-white flex items-center justify-center font-bold text-lg mb-2">3</div>
+<h2 class="text-white text-3xl lg:text-5xl font-black leading-tight max-w-[700px]">
+                        Bắt đầu chủ động ứng phó ngay hôm nay
+                    </h2>
+<p class="text-slate-400 text-lg max-w-[600px]">
+                        Gia nhập cộng đồng Hợp tác xã số để nhận thông tin cảnh báo sớm và các giải pháp khuyến nghị độc quyền cho khu vực của bạn.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+<button class="bg-primary text-white px-12 py-5 rounded-2xl font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-primary/20">
+                            Đăng ký HTX ngay
+                        </button>
+<button class="bg-white/10 text-white border border-white/20 backdrop-blur-sm px-12 py-5 rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
+                            Liên hệ tư vấn
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<footer class="px-4 lg:px-40 py-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 text-primary opacity-60">
+<div class="size-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined !text-sm">water_lux</span>
+</div>
+<span class="text-slate-900 dark:text-white font-bold text-sm">Dự án Quản lý mặn Tiền Giang © 2024</span>
+</div>
+<div class="flex gap-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
+<a class="hover:text-primary transition-colors" href="#">Quy trình</a>
+<a class="hover:text-primary transition-colors" href="#">Dữ liệu</a>
+<a class="hover:text-primary transition-colors" href="#">Bảo mật</a>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
