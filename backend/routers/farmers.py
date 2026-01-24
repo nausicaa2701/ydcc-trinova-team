@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from backend.models import User, UserRole
 from backend.database_postgres import get_db
-from backend.db_models import UserDB, CooperativeDB
+from backend.db_models import UserDB, CooperativeDB, StationDB
 from backend.auth import require_role, get_current_user
 from backend.utils.geo_utils import find_nearest_stations, haversine_distance, get_station_location
 
@@ -68,6 +68,25 @@ class FarmerResponse(BaseModel):
     
     class Config:
         from_attributes = True
+    
+    @classmethod
+    def from_orm(cls, farmer: "UserDB"):
+        """Convert UserDB to FarmerResponse, resolving station_id to user-friendly format."""
+        data = {
+            "id": farmer.id,
+            "phone": farmer.phone,
+            "name": farmer.name,
+            "role": farmer.role,
+            "coop_id": farmer.coop_id,
+            "lat": farmer.lat,
+            "lon": farmer.lon,
+            "station_id": farmer.station.station_id if farmer.station else None,  # Use the station's station_id field
+            "crop_type": farmer.crop_type,
+            "crop_stage": farmer.crop_stage,
+            "threshold_salinity": farmer.threshold_salinity,
+            "storage_capacity_m3": farmer.storage_capacity_m3,
+        }
+        return cls(**data)
 
 
 @router.get("", response_model=List[FarmerResponse])
@@ -87,7 +106,7 @@ async def list_farmers(
         UserDB.coop_id == coop_id
     ).all()
     
-    return farmers
+    return [FarmerResponse.from_orm(farmer) for farmer in farmers]
 
 
 @router.post("", response_model=dict)
@@ -118,6 +137,14 @@ async def create_farmer(
     
     farmer_id = f"farmer-{uuid.uuid4().hex[:8]}"
     
+    # Validate and resolve station_id if provided
+    station_pk_id = None
+    if farmer.station_id:
+        station = db.query(StationDB).filter(StationDB.station_id == farmer.station_id).first()
+        if not station:
+            raise HTTPException(status_code=400, detail=f"Station with ID '{farmer.station_id}' not found")
+        station_pk_id = station.id
+    
     new_farmer = UserDB(
         id=farmer_id,
         phone=farmer.phone,
@@ -127,7 +154,7 @@ async def create_farmer(
         password_hash=hash_password(temp_password),
         lat=farmer.lat,
         lon=farmer.lon,
-        station_id=farmer.station_id,
+        station_id=station_pk_id,
         crop_type=farmer.crop_type,
         crop_stage=farmer.crop_stage,
         threshold_salinity=farmer.threshold_salinity,
@@ -170,14 +197,28 @@ async def update_farmer(
     if farmer.coop_id != coop_id:
         raise HTTPException(status_code=403, detail="Farmer not in this cooperative")
     
+    # Validate station_id if provided
     update_data = update.dict(exclude_unset=True)
-    for key, value in update_data.items():
-        setattr(farmer, key, value)
     
-    db.commit()
-    db.refresh(farmer)
+    if "station_id" in update_data and update_data["station_id"] is not None:
+        # Check if station exists by station_id (the string identifier like "HCM02")
+        station = db.query(StationDB).filter(StationDB.station_id == update_data["station_id"]).first()
+        if not station:
+            raise HTTPException(status_code=400, detail=f"Station with ID '{update_data['station_id']}' not found")
+        # Use the station's primary key (id) for the foreign key
+        update_data["station_id"] = station.id
     
-    return farmer
+    try:
+        for key, value in update_data.items():
+            setattr(farmer, key, value)
+        
+        db.commit()
+        db.refresh(farmer)
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Failed to update farmer: {str(e)}")
+    
+    return FarmerResponse.from_orm(farmer)
 
 
 @router.delete("/{farmer_id}")
