@@ -3,6 +3,7 @@ import RoleBasedHeader from '@/components/RoleBasedHeader'
 import { apiRequest } from '@/utils/apiClient'
 import { Plus, PencilSimple, Trash, MapPin, Gear, MagnifyingGlass, CircleNotch } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useAuth } from '@/contexts/AuthContext'
 
 interface Cooperative {
   id: string
@@ -17,6 +18,7 @@ interface Cooperative {
 
 export default function AdminCoopsManagement() {
   const { t } = useLanguage()
+  const { user, token, isAuthenticated, loading: authLoading } = useAuth()
   const [coops, setCoops] = useState<Cooperative[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -28,15 +30,22 @@ export default function AdminCoopsManagement() {
   const [geocoding, setGeocoding] = useState({ loading: false, error: '' })
 
   useEffect(() => {
-    loadCoops()
-  }, [])
+    // Wait for auth to finish loading before attempting to fetch data
+    if (authLoading) return
+    
+    if (isAuthenticated && user?.role === 'SYSTEM_ADMIN' && token) {
+      loadCoops()
+    } else {
+      setLoading(false)
+    }
+  }, [authLoading, isAuthenticated, user, token])
 
   // Auto reverse geocode when editing a coop with coordinates but no address
   useEffect(() => {
     if (editingCoop && !formData.address && formData.center_lat && formData.center_lon) {
       // Only reverse geocode if we have valid coordinates but no address
-      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
-      if (mapboxToken && mapboxToken !== 'your_mapbox_token_here') {
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiY29vazI3MSIsImEiOiJjbWs5N3luYngxbnd4M2Nwdmg4YmQ1anhvIn0.lFqlKHQNxy9LMS2t51Qmhg'
+      if (mapboxToken) {
         reverseGeocode(formData.center_lat, formData.center_lon)
       }
     }
@@ -103,8 +112,8 @@ export default function AdminCoopsManagement() {
     setGeocoding({ loading: true, error: '' })
     
     try {
-      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
-      if (!mapboxToken || mapboxToken === 'your_mapbox_token_here') {
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiY29vazI3MSIsImEiOiJjbWs5N3luYngxbnd4M2Nwdmg4YmQ1anhvIn0.lFqlKHQNxy9LMS2t51Qmhg'
+      if (!mapboxToken || mapboxToken === '') {
         setGeocoding({ loading: false, error: 'Mapbox token not configured' })
         return
       }
@@ -135,8 +144,8 @@ export default function AdminCoopsManagement() {
     setGeocoding({ loading: true, error: '' })
     
     try {
-      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
-      if (!mapboxToken || mapboxToken === 'your_mapbox_token_here') {
+      const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiY29vazI3MSIsImEiOiJjbWs5N3luYngxbnd4M2Nwdmg4YmQ1anhvIn0.lFqlKHQNxy9LMS2t51Qmhg'
+      if (!mapboxToken || mapboxToken === '') {
         setGeocoding({ loading: false, error: '' })
         return
       }

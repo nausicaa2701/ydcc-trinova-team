@@ -3,9 +3,8 @@
 import { SaltIntrusionData, RiskSurface, SaltIntrusionBoundary } from '@/types'
 import { Farm, Cooperative } from '@/types'
 
-// All APIs are now integrated into main backend (port 8000)
+const AI_API_BASE_URL = import.meta.env.VITE_AI_API_BASE_URL || 'http://localhost:8000'
 const API_BASE_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
-const AI_API_BASE_URL = API_BASE_URL  // AI API is now part of main backend
 
 // Salt Intrusion API
 export async function fetchSaltIntrusionData(

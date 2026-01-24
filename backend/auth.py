@@ -18,8 +18,10 @@ except ImportError:
 
 from fastapi import HTTPException, Security, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from sqlalchemy.orm import Session
 from backend.models import User, UserRole
-from backend.database import users_db, verify_password
+from backend.database_postgres import get_db
+from backend.db_models import UserDB
 
 # JWT secret (use environment variable in production)
 SECRET_KEY = "your-secret-key-change-in-production"
@@ -51,17 +53,39 @@ def decode_token(token: str) -> dict:
 
 
 async def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Security(security)
+    credentials: HTTPAuthorizationCredentials = Security(security),
+    db: Session = Depends(get_db)
 ) -> User:
     """Get current authenticated user from JWT token."""
     token = credentials.credentials
     payload = decode_token(token)
     user_id = payload.get("sub")
     
-    if not user_id or user_id not in users_db:
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Invalid token payload")
+    
+    # Query user from PostgreSQL database
+    user_db = db.query(UserDB).filter(UserDB.id == user_id).first()
+    
+    if not user_db:
         raise HTTPException(status_code=401, detail="User not found")
     
-    return users_db[user_id]
+    # Convert UserDB to User model for compatibility
+    return User(
+        id=user_db.id,
+        phone=user_db.phone,
+        name=user_db.name,
+        role=UserRole(user_db.role),
+        coop_id=user_db.coop_id,
+        password_hash=user_db.password_hash,
+        lat=user_db.lat,
+        lon=user_db.lon,
+        station_id=user_db.station_id,
+        crop_type=user_db.crop_type,
+        crop_stage=user_db.crop_stage,
+        threshold_salinity=user_db.threshold_salinity,
+        storage_capacity_m3=user_db.storage_capacity_m3
+    )
 
 
 def require_role(allowed_roles: list[UserRole]):

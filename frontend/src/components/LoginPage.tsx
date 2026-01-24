@@ -106,18 +106,18 @@ export default function LoginPage() {
             <div className="space-y-2 text-xs">
               <div className="bg-slate-900/50 p-2 rounded border border-slate-700">
                 <p className="text-slate-400 mb-1">{t('login.systemAdmin')}</p>
-                <p className="text-slate-300 font-mono">0900000001 / admin123</p>
-                <p className="text-slate-500 text-[10px] mt-1">{t('login.or')}: 0900000010 / admin123</p>
+                <p className="text-slate-300 font-mono">0901234567 / admin123</p>
+                <p className="text-slate-500 text-[10px] mt-1">{t('login.or')}:  </p>
               </div>
               <div className="bg-slate-900/50 p-2 rounded border border-slate-700">
                 <p className="text-slate-400 mb-1">{t('login.htxAdmin')}</p>
-                <p className="text-slate-300 font-mono">0900000002 / coop123</p>
-                <p className="text-slate-500 text-[10px] mt-1">HTX khác: 0900000011, 0900000020, 0900000021</p>
+                <p className="text-slate-300 font-mono">0987654321 / coop123</p>
+                <p className="text-slate-500 text-[10px] mt-1">(HTX Phước Long)</p>
               </div>
               <div className="bg-slate-900/50 p-2 rounded border border-slate-700">
                 <p className="text-slate-400 mb-1">{t('login.farmer')}</p>
-                <p className="text-slate-300 font-mono">0900000003 / farmer123</p>
-                <p className="text-slate-500 text-[10px] mt-1">{t('login.otherFarmers')}: 0900000004-0005, 0900000012-0013, 0900000022-0023, 0900000030-0031</p>
+                <p className="text-slate-300 font-mono">0911111111 / 111111</p>
+                <p className="text-slate-500 text-[10px] mt-1">{t('login.otherFarmers')}: 0912222222 / 222222; 0913333333 / 333333; 0914444444 / 444444; 0915555555 / 555555; 0916666666 / 666666</p>
               </div>
             </div>
           </div>

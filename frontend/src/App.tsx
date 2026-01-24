@@ -48,7 +48,7 @@ function App() {
               <Route path="coops" element={<AdminCoopsManagement />} />
               <Route path="map" element={<AdminMapView />} />
               <Route path="alerts" element={<CoopAlertsConfig />} />
-              <Route path="" element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="" element={<Navigate to="/admin/map" replace />} />
             </Routes>
           </ProtectedRoute>
         }
@@ -63,7 +63,7 @@ function App() {
               <Route path="dashboard" element={<CoopDashboard />} />
               <Route path="farmers" element={<CoopFarmersManagement />} />
               <Route path="map" element={<CoopMapView />} />
-              <Route path="" element={<Navigate to="/coop/dashboard" replace />} />
+              <Route path="" element={<Navigate to="/coop/map" replace />} />
             </Routes>
           </ProtectedRoute>
         }
@@ -78,7 +78,7 @@ function App() {
               <Route path="dashboard" element={<FarmerDashboard />} />
               <Route path="map" element={<FarmerMapView />} />
               <Route path="profile" element={<FarmerProfile />} />
-              <Route path="" element={<Navigate to="/farmer/dashboard" replace />} />
+              <Route path="" element={<Navigate to="/farmer/map" replace />} />
             </Routes>
           </ProtectedRoute>
         }
