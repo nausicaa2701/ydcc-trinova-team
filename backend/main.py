@@ -9,6 +9,14 @@ from fastapi.middleware.cors import CORSMiddleware
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from backend.routers import auth, cooperatives, farmers, alerts, salinity_data, th2i_data, ai_forecast, recommendations
+from backend.database_postgres import init_db
+
+# Initialize database tables
+try:
+    init_db()
+    print("Database tables initialized successfully")
+except Exception as e:
+    print(f"Warning: Could not initialize database tables: {e}")
 
 app = FastAPI(
     title="Mekong Farm Management API",
@@ -66,4 +74,3 @@ async def root():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-

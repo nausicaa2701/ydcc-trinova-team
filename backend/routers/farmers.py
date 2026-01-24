@@ -3,21 +3,29 @@
 from typing import List, Optional
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, Depends, Query
+from sqlalchemy.orm import Session
 from pydantic import BaseModel
 import uuid
 import sys
 from pathlib import Path
+import hashlib
 import pandas as pd
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from backend.models import User, UserRole
-from backend.database import users_db, hash_password, cooperatives_db
-from backend.auth import require_role, require_coop_access, get_current_user
+from backend.database_postgres import get_db
+from backend.db_models import UserDB, CooperativeDB
+from backend.auth import require_role, get_current_user
 from backend.utils.geo_utils import find_nearest_stations, haversine_distance, get_station_location
 
 router = APIRouter(prefix="/coops/{coop_id}/farmers", tags=["farmers"])
+
+
+def hash_password(password: str) -> str:
+    """Hash password using SHA256."""
+    return hashlib.sha256(password.encode()).hexdigest()
 
 
 class FarmerCreate(BaseModel):
@@ -30,7 +38,6 @@ class FarmerCreate(BaseModel):
     crop_stage: Optional[str] = None  # e.g., "seedling", "tillering", "harvest"
     threshold_salinity: Optional[float] = None  # Override coop default if needed
     storage_capacity_m3: Optional[float] = None  # Water storage capacity
-    metadata: dict = {}
 
 
 class FarmerUpdate(BaseModel):
@@ -43,13 +50,31 @@ class FarmerUpdate(BaseModel):
     crop_stage: Optional[str] = None
     threshold_salinity: Optional[float] = None
     storage_capacity_m3: Optional[float] = None
-    metadata: Optional[dict] = None
 
 
-@router.get("", response_model=List[dict])
+class FarmerResponse(BaseModel):
+    id: str
+    phone: str
+    name: str
+    role: str
+    coop_id: Optional[str]
+    lat: Optional[float]
+    lon: Optional[float]
+    station_id: Optional[str]
+    crop_type: Optional[str]
+    crop_stage: Optional[str]
+    threshold_salinity: Optional[float]
+    storage_capacity_m3: Optional[float]
+    
+    class Config:
+        from_attributes = True
+
+
+@router.get("", response_model=List[FarmerResponse])
 async def list_farmers(
     coop_id: str,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """List farmers in a cooperative."""
     # Check access
@@ -57,11 +82,11 @@ async def list_farmers(
         if current_user.role != UserRole.COOP_ADMIN or current_user.coop_id != coop_id:
             raise HTTPException(status_code=403, detail="Access denied to this cooperative")
     
-    farmers = [
-        user.dict(exclude={"password_hash"})
-        for user in users_db.values()
-        if user.role == UserRole.FARMER and user.coop_id == coop_id
-    ]
+    farmers = db.query(UserDB).filter(
+        UserDB.role == "FARMER",
+        UserDB.coop_id == coop_id
+    ).all()
+    
     return farmers
 
 
@@ -69,7 +94,8 @@ async def list_farmers(
 async def create_farmer(
     coop_id: str,
     farmer: FarmerCreate,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """Create new farmer account (COOP_ADMIN only)."""
     # Check access
@@ -78,20 +104,25 @@ async def create_farmer(
             raise HTTPException(status_code=403, detail="Access denied to this cooperative")
     
     # Check if phone already exists
-    for user in users_db.values():
-        if user.phone == farmer.phone:
-            raise HTTPException(status_code=400, detail="Phone number already registered")
+    existing_user = db.query(UserDB).filter(UserDB.phone == farmer.phone).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Phone number already registered")
     
-    # Generate temporary password (first 6 digits of phone)
+    # Check if cooperative exists
+    coop = db.query(CooperativeDB).filter(CooperativeDB.id == coop_id).first()
+    if not coop:
+        raise HTTPException(status_code=404, detail="Cooperative not found")
+    
+    # Generate temporary password (last 6 digits of phone)
     temp_password = farmer.phone[-6:]
     
     farmer_id = f"farmer-{uuid.uuid4().hex[:8]}"
     
-    new_farmer = User(
+    new_farmer = UserDB(
         id=farmer_id,
         phone=farmer.phone,
         name=farmer.name,
-        role=UserRole.FARMER,
+        role="FARMER",
         coop_id=coop_id,
         password_hash=hash_password(temp_password),
         lat=farmer.lat,
@@ -102,20 +133,28 @@ async def create_farmer(
         threshold_salinity=farmer.threshold_salinity,
         storage_capacity_m3=farmer.storage_capacity_m3
     )
-    users_db[farmer_id] = new_farmer
+    
+    db.add(new_farmer)
+    db.commit()
+    db.refresh(new_farmer)
     
     return {
-        **new_farmer.dict(exclude={"password_hash"}),
+        "id": new_farmer.id,
+        "phone": new_farmer.phone,
+        "name": new_farmer.name,
+        "role": new_farmer.role,
+        "coop_id": new_farmer.coop_id,
         "temp_password": temp_password  # Return temp password for admin to share
     }
 
 
-@router.put("/{farmer_id}", response_model=dict)
+@router.put("/{farmer_id}", response_model=FarmerResponse)
 async def update_farmer(
     coop_id: str,
     farmer_id: str,
     update: FarmerUpdate,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """Update farmer info (COOP_ADMIN only)."""
     # Check access
@@ -123,10 +162,11 @@ async def update_farmer(
         if current_user.role != UserRole.COOP_ADMIN or current_user.coop_id != coop_id:
             raise HTTPException(status_code=403, detail="Access denied to this cooperative")
     
-    if farmer_id not in users_db:
+    farmer = db.query(UserDB).filter(UserDB.id == farmer_id).first()
+    
+    if not farmer:
         raise HTTPException(status_code=404, detail="Farmer not found")
     
-    farmer = users_db[farmer_id]
     if farmer.coop_id != coop_id:
         raise HTTPException(status_code=403, detail="Farmer not in this cooperative")
     
@@ -134,17 +174,18 @@ async def update_farmer(
     for key, value in update_data.items():
         setattr(farmer, key, value)
     
-    farmer.updated_at = datetime.now()
-    users_db[farmer_id] = farmer
+    db.commit()
+    db.refresh(farmer)
     
-    return farmer.dict(exclude={"password_hash"})
+    return farmer
 
 
 @router.delete("/{farmer_id}")
 async def delete_farmer(
     coop_id: str,
     farmer_id: str,
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """Delete/deactivate farmer (COOP_ADMIN only)."""
     # Check access
@@ -152,15 +193,16 @@ async def delete_farmer(
         if current_user.role != UserRole.COOP_ADMIN or current_user.coop_id != coop_id:
             raise HTTPException(status_code=403, detail="Access denied to this cooperative")
     
-    if farmer_id not in users_db:
+    farmer = db.query(UserDB).filter(UserDB.id == farmer_id).first()
+    
+    if not farmer:
         raise HTTPException(status_code=404, detail="Farmer not found")
     
-    farmer = users_db[farmer_id]
     if farmer.coop_id != coop_id:
         raise HTTPException(status_code=403, detail="Farmer not in this cooperative")
     
-    # Soft delete: remove from active users (in production, add is_active flag)
-    del users_db[farmer_id]
+    db.delete(farmer)
+    db.commit()
     
     return {"message": "Farmer account deleted"}
 
@@ -170,7 +212,8 @@ async def suggest_stations_for_farmer(
     coop_id: str,
     farmer_id: str,
     top_n: int = Query(default=3, ge=1, le=10),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
     """
     Suggest nearest monitoring stations for a farmer based on location.
@@ -183,10 +226,11 @@ async def suggest_stations_for_farmer(
             if current_user.role != UserRole.FARMER or current_user.id != farmer_id:
                 raise HTTPException(status_code=403, detail="Access denied")
     
-    if farmer_id not in users_db:
+    farmer = db.query(UserDB).filter(UserDB.id == farmer_id).first()
+    
+    if not farmer:
         raise HTTPException(status_code=404, detail="Farmer not found")
     
-    farmer = users_db[farmer_id]
     if farmer.coop_id != coop_id:
         raise HTTPException(status_code=403, detail="Farmer not in this cooperative")
     
@@ -196,8 +240,8 @@ async def suggest_stations_for_farmer(
     
     if target_lat is None or target_lon is None:
         # Fallback to cooperative center
-        if coop_id in cooperatives_db:
-            coop = cooperatives_db[coop_id]
+        coop = db.query(CooperativeDB).filter(CooperativeDB.id == coop_id).first()
+        if coop:
             target_lat = coop.center_lat
             target_lon = coop.center_lon
         else:
