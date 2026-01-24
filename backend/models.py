@@ -24,6 +24,15 @@ class User(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     
+    # Farm context (for FARMER role)
+    lat: Optional[float] = None
+    lon: Optional[float] = None
+    station_id: Optional[str] = None  # Primary monitoring station
+    crop_type: Optional[str] = None  # e.g., "rice", "shrimp", "vegetables"
+    crop_stage: Optional[str] = None  # e.g., "seedling", "tillering", "harvest"
+    threshold_salinity: Optional[float] = None  # Override coop default
+    storage_capacity_m3: Optional[float] = None  # Water storage capacity
+    
     class Config:
         use_enum_values = True
 
