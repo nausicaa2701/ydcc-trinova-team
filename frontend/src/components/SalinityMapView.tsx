@@ -7,17 +7,15 @@ import {
   fetchSalinityPrediction, 
   fetchStations, 
   fetchLatestSalinityData,
-  fetchLatestTH2IData,
   type Station, 
   type SalinityPrediction,
-  type SalinityStationData,
-  type TH2IData
+  type SalinityStationData
 } from '@/utils/api'
 import { mockFarms, mockCooperatives, getCooperativeById } from '@/data/mockFarms'
 import { useAuth } from '@/contexts/AuthContext'
 import { apiRequest } from '@/utils/apiClient'
 import { fetchCooperatives } from '@/utils/api'
-import { Plus, Minus, Compass, Stack, TrendUp, Drop, Brain, Download, X, Users, MapPin, WarningCircle, List } from '@phosphor-icons/react'
+import { Plus, Minus, Compass, Stack, TrendUp, Download, X, Users, MapPin, WarningCircle, List } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
@@ -39,7 +37,6 @@ export default function SalinityMapView() {
   const [cooperativeData, setCooperativeData] = useState<any>(null)
   const [cooperatives, setCooperatives] = useState<any[]>([])
   const [salinityStationData, setSalinityStationData] = useState<SalinityStationData[]>([])
-  const [th2iData, setTh2iData] = useState<TH2IData | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false) // Mobile sidebar toggle
   
   const {
@@ -194,19 +191,6 @@ export default function SalinityMapView() {
       }
     }
     loadSalinityData()
-  }, [])
-
-  // Fetch latest TH2I data from PDF extraction
-  useEffect(() => {
-    const loadTH2IData = async () => {
-      try {
-        const data = await fetchLatestTH2IData(false)
-        setTh2iData(data)
-      } catch (error) {
-        console.error('Error fetching TH2I data:', error)
-      }
-    }
-    loadTH2IData()
   }, [])
 
   // Fetch cooperative data for COOP_ADMIN
@@ -1126,112 +1110,6 @@ export default function SalinityMapView() {
                 ))
               })()}
             </div>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider">{t('map.hydrologicalStatus')}</h4>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800 border border-slate-700">
-              <div className="flex items-center gap-3">
-                <Drop className="w-5 h-5 text-primary" />
-                <span className="text-sm text-white">{t('map.waterLevelTide')}</span>
-              </div>
-              <span className="font-bold text-white">
-                {(() => {
-                  // Try to get from TH2I data first
-                  if (th2iData?.tide_measured && th2iData.tide_measured.length > 0) {
-                    const latestTide = th2iData.tide_measured[0]
-                    if (latestTide.peaks && latestTide.peaks.length > 0) {
-                      const avgTide = latestTide.peaks.reduce((sum, p) => sum + (p.level_m || 0), 0) / latestTide.peaks.length
-                      return `${avgTide.toFixed(2)} m`
-                    }
-                  }
-                  // Fallback to predictions confidence
-                  if (predictions?.confidence) {
-                    return `±${(predictions.confidence * 100).toFixed(0)}%`
-                  }
-                  return t('map.dataUnavailable') || 'N/A'
-                })()}
-              </span>
-            </div>
-            <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800 border border-slate-700">
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                <span className="text-sm text-white">{t('map.riverFlowSpeed')}</span>
-              </div>
-              <span className="font-bold text-white">
-                {(() => {
-                  // Try to get from TH2I observation data
-                  if (th2iData?.observation && th2iData.observation.length > 0) {
-                    const latestObs = th2iData.observation[0]
-                    if (latestObs.discharge_m3s !== null && latestObs.discharge_m3s !== undefined) {
-                      // Estimate flow speed from discharge (rough calculation)
-                      const flowSpeed = (latestObs.discharge_m3s / 1000).toFixed(2)
-                      return `${flowSpeed} m/s`
-                    }
-                  }
-                  // Fallback to calculated value
-                  if (avgSalinity > 0) {
-                    return `${(avgSalinity * 0.2).toFixed(2)} m/s`
-                  }
-                  return t('map.dataUnavailable') || 'N/A'
-                })()}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-5 rounded-xl bg-primary/10 border border-primary/30 space-y-4">
-          <div className="flex items-center gap-2 text-primary">
-            <Brain className="w-5 h-5" />
-            <h4 className="text-sm font-bold uppercase tracking-wider">{t('map.aiForecast', { days: String(forecastHorizon) })}</h4>
-          </div>
-          {predictions?.predictions ? (
-            <div className="h-28 flex items-end justify-between gap-1 px-2">
-              {Object.values(predictions.predictions)[0]?.slice(0, Math.min(forecastHorizon, 7)).map((salinity: number, i: number) => {
-                const height = Math.min((salinity / 10) * 100, 100)
-                return (
-                  <div
-                    key={i}
-                    className="w-full bg-primary rounded-t-sm transition-all"
-                    style={{ height: `${height}%` }}
-                    title={`Day ${i + 1}: ${salinity.toFixed(1)} ‰`}
-                  />
-                )
-              })}
-            </div>
-          ) : (
-            <div className="h-28 flex items-center justify-center text-slate-400 text-sm">
-              {loading ? t('map.loadingPredictions') : t('map.noPredictionsAvailable')}
-            </div>
-          )}
-          <div className="flex justify-between text-[10px] text-slate-400">
-            <span>{t('map.today')}</span>
-            <span>+{forecastHorizon}D</span>
-          </div>
-          <div className="p-3 bg-black/40 rounded-lg">
-            <p className="text-xs text-white/80 leading-relaxed">
-              <span className="font-bold text-primary">{t('map.forecastInsight')}</span>{' '}
-              {predictions?.predictions && Object.keys(predictions.predictions).length > 0 ? (
-                (() => {
-                  const firstStationPred = Object.values(predictions.predictions)[0] as number[]
-                  const maxSalinity = Math.max(...firstStationPred)
-                  const daysToPeak = firstStationPred.indexOf(maxSalinity) + 1
-                  const peakDate = new Date()
-                  peakDate.setDate(peakDate.getDate() + daysToPeak)
-                  return t('map.forecastInsightText', {
-                    peakSalinity: maxSalinity.toFixed(1),
-                    days: String(daysToPeak),
-                    date: peakDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-                  }) || `Peak salinity ${maxSalinity.toFixed(1)}‰ expected in ${daysToPeak} days (${peakDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}). ${avgRiskScore >= 50 ? t('map.recommendAction') || 'Immediate action recommended.' : t('map.monitorClosely') || 'Monitor closely.'}`
-                })()
-              ) : (
-                t('map.noForecastData') || 'No forecast data available. Please wait for predictions to load.'
-              )}
-            </p>
           </div>
         </div>
 
