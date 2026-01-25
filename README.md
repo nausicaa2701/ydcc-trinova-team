@@ -1,5 +1,4 @@
-# iCoop Mekong - AI-Driven Salinity Intrusion Monitoring System
-
+# iCoop Mekong 
 A comprehensive web application for monitoring and forecasting salt intrusion in the Mekong Delta region, with integrated farm and cooperative management capabilities.
 
 ## Tech Stack
