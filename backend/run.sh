@@ -44,8 +44,8 @@ fi
 
 # Run the server with PYTHONPATH set to project root
 echo ""
-echo "✅ Starting server on http://localhost:8000"
-echo "📖 API docs available at http://localhost:8000/docs"
+echo "✅ Starting server on https://icoopmk-api.trinova.it.com"
+echo "📖 API docs available at https://icoopmk-api.trinova.it.com/docs"
 echo "🛑 Press Ctrl+C to stop the server"
 echo ""
 export PYTHONPATH="$PROJECT_ROOT:$PYTHONPATH"

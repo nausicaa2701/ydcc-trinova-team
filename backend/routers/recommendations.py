@@ -253,7 +253,7 @@ async def get_farmer_recommendations(
         async with httpx.AsyncClient(timeout=30.0) as client:
             # Assuming API is running on same host
             response = await client.get(
-                f"http://localhost:8000/api/ai/predict",
+                f"https://icoopmk-api.trinova.it.com/api/ai/predict",
                 params={
                     'station_id': farmer.station_id,
                     'horizon_days': horizon_days

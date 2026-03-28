@@ -19,7 +19,7 @@ def hash_password(password: str) -> str:
 def create_database():
     """Create the mekong_farm database if it doesn't exist."""
     # Connect to default postgres database
-    default_db_url = "postgresql://postgres:postgres123@localhost:5432/postgres"
+    default_db_url = "postgresql://postgres:postgres123@postgres:5432/postgres"
     
     try:
         engine = create_engine(default_db_url)

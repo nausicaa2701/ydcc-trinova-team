@@ -1,6 +1,7 @@
 """Main FastAPI application with auth and role-based access."""
 
 import sys
+import os
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,10 +25,23 @@ app = FastAPI(
     version="2.0.0"
 )
 
+# Comma-separated list from env, e.g.:
+# CORS_ALLOW_ORIGINS="https://icoopmk.trinova.it.com,http://localhost:5173"
+cors_origins_env = os.getenv("CORS_ALLOW_ORIGINS", "")
+allowed_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+
+# Sensible defaults for local dev + current production frontend.
+if not allowed_origins:
+    allowed_origins = [
+        "https://icoopmk.trinova.it.com",
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ]
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify frontend URL
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

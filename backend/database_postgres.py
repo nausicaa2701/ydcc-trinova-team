@@ -8,7 +8,7 @@ from sqlalchemy.pool import QueuePool
 # Get database URL from environment or use default
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:postgres123@localhost:5432/mekong_farm"
+    "postgresql://postgres:postgres123@postgres:5432/mekong_farm"
 )
 
 # Create engine with connection pooling

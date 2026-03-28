@@ -146,8 +146,8 @@ export PYTHONPATH="$(pwd):$PYTHONPATH"
 python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-Backend available at: `http://localhost:8000`  
-API Docs: `http://localhost:8000/docs`
+Backend available at: `https://icoopmk-api.trinova.it.com`  
+API Docs: `https://icoopmk-api.trinova.it.com/docs`
 
 ### Frontend Setup
 
@@ -159,7 +159,7 @@ npm install
 
 # Create .env file
 echo "VITE_MAPBOX_TOKEN=your_token_here" > .env
-echo "VITE_API_BASE_URL=http://localhost:8000" >> .env
+echo "VITE_API_BASE_URL=https://icoopmk-api.trinova.it.com" >> .env
 
 # Start dev server
 npm run dev

@@ -6,11 +6,11 @@ services:
       dockerfile: Dockerfile
     container_name: mekong-farm-frontend
     environment:
-      - VITE_API_URL=https://api.trinova.it.com
+      - VITE_API_URL=https://icoopmk-api.trinova.it.com
       - VITE_MAPBOX_TOKEN=${VITE_MAPBOX_TOKEN}
-      - VIRTUAL_HOST=trinova.it.com
+      - VIRTUAL_HOST=icoopmk.trinova.it.com
       - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=trinova.it.com
+      - LETSENCRYPT_HOST=icoopmk.trinova.it.com
       - LETSENCRYPT_EMAIL=trungnguyen.19972707@gmail.com
     depends_on:
       - backend
@@ -29,9 +29,9 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/mekong_farm
       - DB_HOST=postgres
-      - VIRTUAL_HOST=api.trinova.it.com
+      - VIRTUAL_HOST=icoopmk-api.trinova.it.com
       - VIRTUAL_PORT=8000
-      - LETSENCRYPT_HOST=api.trinova.it.com
+      - LETSENCRYPT_HOST=icoopmk-api.trinova.it.com
       - LETSENCRYPT_EMAIL=trungnguyen.19972707@gmail.com
     volumes:
       - ./backend:/app/backend
