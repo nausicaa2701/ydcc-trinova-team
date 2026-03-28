@@ -29,6 +29,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/mekong_farm
       - DB_HOST=postgres
+      - CORS_ALLOW_ORIGINS=https://icoopmk.trinova.it.com,http://localhost:3000,http://localhost:5173
       - VIRTUAL_HOST=icoopmk-api.trinova.it.com
       - VIRTUAL_PORT=8000
       - LETSENCRYPT_HOST=icoopmk-api.trinova.it.com
@@ -51,7 +52,7 @@ services:
       POSTGRES_DB: mekong_farm
       TZ: Asia/Ho_Chi_Minh
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
