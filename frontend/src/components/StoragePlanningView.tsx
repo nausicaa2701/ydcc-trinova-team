@@ -247,7 +247,7 @@ export default function StoragePlanningView() {
                       <span className="text-xs font-bold text-amber-700 uppercase">{t('storagePlanning.storagePlanningSafeWindow')}</span>
                     </div>
                     <div className="text-sm font-bold text-gray-900">
-                      {t('storagePlanning.storagePlanningDaysBeforeThreshold', { days: storageData.safe_window_days })}
+                      {t('storagePlanning.storagePlanningDaysBeforeThreshold', { days: String(storageData.safe_window_days) })}
                     </div>
                     <p className="text-xs text-gray-600 mt-2">{t('storagePlanning.storagePlanningSafeWindowDesc')}</p>
                   </div>

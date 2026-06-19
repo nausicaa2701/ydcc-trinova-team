@@ -114,7 +114,7 @@ export default function DecisionSupportView() {
               <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
             </div>
             <p className="text-[10px] font-bold text-gray-600 leading-tight hidden lg:block">
-              {t('decisionSupport.decisionSupportProcessingData', { count: stations.length })}
+              {t('decisionSupport.decisionSupportProcessingData', { count: String(stations.length) })}
             </p>
           </div>
         </div>
@@ -273,7 +273,7 @@ export default function DecisionSupportView() {
               <Card className="shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900">{t('decisionSupport.decisionSupportForecastDays', { days: forecastHorizon })}</h3>
+                    <h3 className="text-lg font-bold text-gray-900">{t('decisionSupport.decisionSupportForecastDays', { days: String(forecastHorizon) })}</h3>
                     <p className="text-xs text-gray-600 mt-1">
                       {t('decisionSupport.decisionSupportFrom')} {new Date(selectedDate).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })} {t('decisionSupport.decisionSupportTo')} {new Date(new Date(selectedDate).getTime() + forecastHorizon * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                     </p>
