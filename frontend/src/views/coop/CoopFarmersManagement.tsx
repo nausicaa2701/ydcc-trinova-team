@@ -129,8 +129,8 @@ export default function CoopFarmersManagement() {
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.name')}</th>
                     <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('coop.phone')}</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Vị trí</th>
-                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Trạm</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('coop.coopLocation')}</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">{t('coop.coopStation')}</th>
                     <th className="px-6 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">{t('admin.actions')}</th>
                   </tr>
                 </thead>
@@ -163,14 +163,14 @@ export default function CoopFarmersManagement() {
                             <div className="font-mono">{farmer.lat.toFixed(4)}, {farmer.lon.toFixed(4)}</div>
                           </div>
                         ) : (
-                          <span className="text-xs text-gray-400 italic">Chưa có</span>
+                          <span className="text-xs text-gray-400 italic">{t('coop.coopNotSet')}</span>
                         )}
                       </td>
                       <td className="px-6 py-4">
                         {farmer.station_id ? (
                           <span className="text-xs font-medium text-primary">{farmer.station_id}</span>
                         ) : (
-                          <span className="text-xs text-gray-400 italic">Chưa gán</span>
+                          <span className="text-xs text-gray-400 italic">{t('coop.coopNotAssigned')}</span>
                         )}
                       </td>
                       <td className="px-6 py-4 text-right">
@@ -181,7 +181,7 @@ export default function CoopFarmersManagement() {
                               setShowLocationModal(true)
                             }}
                             className="p-2 text-gray-500 hover:text-green-600 transition-colors"
-                            title="Cập nhật vị trí"
+                            title={t('coop.coopUpdateLocation')}
                           >
                             <MapPin className="w-4 h-4" />
                           </button>

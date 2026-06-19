@@ -132,7 +132,7 @@ export default function RoleBasedHeader() {
       { path: '/coop/map', label: t('navigation.map'), icon: <MapTrifold className="w-5 h-5" /> },
       { path: '/coop/dashboard', label: t('navigation.dashboard'), icon: <ChartBar className="w-5 h-5" /> },
       { path: '/coop/farmers', label: t('navigation.farmers'), icon: <Users className="w-5 h-5" /> },
-      { path: '/coop/zalo-messages', label: 'Quản lý tin nhắn Zalo', icon: <ChatCircle className="w-5 h-5" /> },
+      { path: '/coop/zalo-messages', label: t('header.headerZaloMessageManagement'), icon: <ChatCircle className="w-5 h-5" /> },
     ]
 
     // Check if current path matches map view (default active)

@@ -112,7 +112,7 @@ export default function LoginPage() {
               <div className="bg-slate-900/50 p-2 rounded border border-slate-700">
                 <p className="text-slate-400 mb-1">{t('login.htxAdmin')}</p>
                 <p className="text-slate-300 font-mono">0987654321 / coop123</p>
-                <p className="text-slate-500 text-[10px] mt-1">(HTX Phước Long)</p>
+                <p className="text-slate-500 text-[10px] mt-1">{t('login.loginPhuocLong')}</p>
               </div>
               <div className="bg-slate-900/50 p-2 rounded border border-slate-700">
                 <p className="text-slate-400 mb-1">{t('login.farmer')}</p>

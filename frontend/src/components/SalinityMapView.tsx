@@ -897,7 +897,7 @@ export default function SalinityMapView() {
       `}>
         {/* Close Button - Mobile Only */}
         <div className="lg:hidden flex items-center justify-between mb-4 pb-4 border-b border-slate-700">
-          <h2 className="text-lg font-bold text-white">Thông tin</h2>
+          <h2 className="text-lg font-bold text-white">{t('map.mapInfo')}</h2>
           <button
             onClick={() => setSidebarOpen(false)}
             className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
