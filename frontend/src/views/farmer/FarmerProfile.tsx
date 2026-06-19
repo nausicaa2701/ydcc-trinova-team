@@ -113,7 +113,7 @@ export default function FarmerProfile() {
             <form onSubmit={handleChangePassword} className="space-y-4">
               {message && (
                 <div className={`p-3 rounded-lg ${
-                  message.includes('successfully') || message.includes('thành công')
+                  message.includes('successfully')
                     ? 'bg-green-500/10 text-green-400 border border-green-500/30'
                     : 'bg-red-500/10 text-red-400 border border-red-500/30'
                 }`}>

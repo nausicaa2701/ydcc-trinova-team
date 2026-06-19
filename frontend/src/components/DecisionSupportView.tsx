@@ -104,7 +104,7 @@ export default function DecisionSupportView() {
             }`}
           >
             <Drop className="w-5 h-5" />
-            <span className="text-sm font-medium hidden lg:block">Lập kế hoạch Lưu trữ</span>
+            <span className="text-sm font-medium hidden lg:block">{t('decisionSupport.decisionSupportStoragePlanning')}</span>
           </button>
         </nav>
         <div className="p-4 border-t border-gray-200">
@@ -114,7 +114,7 @@ export default function DecisionSupportView() {
               <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
             </div>
             <p className="text-[10px] font-bold text-gray-600 leading-tight hidden lg:block">
-              Đang xử lý dữ liệu từ {stations.length} trạm giám sát
+              {t('decisionSupport.decisionSupportProcessingData', { count: stations.length })}
             </p>
           </div>
         </div>
@@ -168,7 +168,7 @@ export default function DecisionSupportView() {
                     options={stations.map(s => ({ label: s.station_name || s.station_id, value: s.station_id }))}
                     disabled={stations.length === 0 || loading}
                     className="flex-1"
-                    placeholder="Chọn trạm"
+                    placeholder={t('decisionSupport.decisionSupportSelectStation')}
                   />
                 </div>
               </Card>
@@ -180,22 +180,22 @@ export default function DecisionSupportView() {
                     <div>
                       <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                         <Clock className="w-5 h-5 text-primary" />
-                        Độ mặn thời gian thực (30 phút)
+                        {t('decisionSupport.decisionSupportRealtimeSalinity')}
                       </h3>
                       <p className="text-xs text-gray-600 mt-1">
-                        Dữ liệu từ {(() => {
+                        {t('decisionSupport.decisionSupportDataFrom')} {(() => {
                           const now = new Date()
-                          const startTime = new Date(now.getTime() - 24 * 60 * 60 * 1000) // 24h trước
-                          const endTime = new Date(now.getTime() + 24 * 60 * 60 * 1000) // 24h sau
-                          return `${startTime.toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })} đến ${endTime.toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })}`
+                          const startTime = new Date(now.getTime() - 24 * 60 * 60 * 1000) // 24h before
+                          const endTime = new Date(now.getTime() + 24 * 60 * 60 * 1000) // 24h after
+                          return `${startTime.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })} ${t('decisionSupport.decisionSupportTo')} ${endTime.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' })}`
                         })()}
                       </p>
                     </div>
                     <Badge
                       value={
-                        realtimeData.summary.risk_level === 'danger' ? 'Nguy hiểm' :
-                        realtimeData.summary.risk_level === 'warning' ? 'Cảnh báo' :
-                        realtimeData.summary.risk_level === 'watch' ? 'Theo dõi' : 'An toàn'
+                        realtimeData.summary.risk_level === 'danger' ? t('decisionSupport.decisionSupportDanger') :
+                        realtimeData.summary.risk_level === 'warning' ? t('decisionSupport.decisionSupportWarning') :
+                        realtimeData.summary.risk_level === 'watch' ? t('decisionSupport.decisionSupportWatch') : t('decisionSupport.decisionSupportSafe')
                       }
                       severity={
                         realtimeData.summary.risk_level === 'danger' ? 'danger' :
@@ -207,12 +207,12 @@ export default function DecisionSupportView() {
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={realtimeData.forecast.slice(0, 48).map((p, i) => {
-                        // Tính toán timestamp từ ngày hiện tại
+                        // Calculate timestamp from current date
                         const now = new Date()
-                        const forecastTime = new Date(now.getTime() + i * 30 * 60 * 1000) // Mỗi bước là 30 phút
+                        const forecastTime = new Date(now.getTime() + i * 30 * 60 * 1000) // Each step is 30 minutes
                         return {
-                          time: forecastTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
-                          date: forecastTime.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }),
+                          time: forecastTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+                          date: forecastTime.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit' }),
                           salinity: Number(p.salinity.toFixed(2)),
                           index: i,
                           fullTimestamp: forecastTime
@@ -225,7 +225,7 @@ export default function DecisionSupportView() {
                           interval={7}
                         />
                         <YAxis 
-                          label={{ value: 'Độ mặn (‰)', angle: -90, position: 'insideLeft', style: { fill: '#6b7280' } }}
+                          label={{ value: t('decisionSupport.decisionSupportSalinity'), angle: -90, position: 'insideLeft', style: { fill: '#6b7280' } }}
                           tick={{ fill: '#6b7280', fontSize: 10 }}
                         />
                         <Tooltip
@@ -239,8 +239,8 @@ export default function DecisionSupportView() {
                           }}
                           contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px', color: '#111827' }}
                         />
-                        <ReferenceLine y={4.0} stroke="#ef4444" strokeDasharray="5 5" label={{ value: 'Nguy hiểm (4‰)', position: 'top', style: { fill: '#ef4444', fontSize: '10px' } }} />
-                        <ReferenceLine y={1.0} stroke="#f59e0b" strokeDasharray="5 5" label={{ value: 'Cảnh báo (1‰)', position: 'top', style: { fill: '#f59e0b', fontSize: '10px' } }} />
+                        <ReferenceLine y={4.0} stroke="#ef4444" strokeDasharray="5 5" label={{ value: `${t('decisionSupport.decisionSupportDanger')} (4‰)`, position: 'top', style: { fill: '#ef4444', fontSize: '10px' } }} />
+                        <ReferenceLine y={1.0} stroke="#f59e0b" strokeDasharray="5 5" label={{ value: `${t('decisionSupport.decisionSupportWarning')} (1‰)`, position: 'top', style: { fill: '#f59e0b', fontSize: '10px' } }} />
                         <Line
                           type="monotone"
                           dataKey="salinity"
@@ -254,15 +254,15 @@ export default function DecisionSupportView() {
                   </div>
                   <div className="mt-4 grid grid-cols-3 gap-4">
                     <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                      <div className="text-xs text-gray-600 mb-1">Hiện tại</div>
+                      <div className="text-xs text-gray-600 mb-1">{t('decisionSupport.decisionSupportNow')}</div>
                       <div className="text-xl font-bold text-gray-900">{realtimeData.current_salinity.toFixed(2)}‰</div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                      <div className="text-xs text-gray-600 mb-1">Cao nhất 6h</div>
+                      <div className="text-xs text-gray-600 mb-1">{t('decisionSupport.decisionSupportMax6h')}</div>
                       <div className="text-xl font-bold text-yellow-600">{realtimeData.summary.max_salinity_6h.toFixed(2)}‰</div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                      <div className="text-xs text-gray-600 mb-1">Cao nhất 24h</div>
+                      <div className="text-xs text-gray-600 mb-1">{t('decisionSupport.decisionSupportMax24h')}</div>
                       <div className="text-xl font-bold text-orange-600">{realtimeData.summary.max_salinity_24h.toFixed(2)}‰</div>
                     </div>
                   </div>
@@ -273,14 +273,14 @@ export default function DecisionSupportView() {
               <Card className="shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900">Dự báo độ mặn {forecastHorizon} ngày</h3>
+                    <h3 className="text-lg font-bold text-gray-900">{t('decisionSupport.decisionSupportForecastDays', { days: forecastHorizon })}</h3>
                     <p className="text-xs text-gray-600 mt-1">
-                      Từ {new Date(selectedDate).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })} đến {new Date(new Date(selectedDate).getTime() + forecastHorizon * 24 * 60 * 60 * 1000).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                      {t('decisionSupport.decisionSupportFrom')} {new Date(selectedDate).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })} {t('decisionSupport.decisionSupportTo')} {new Date(new Date(selectedDate).getTime() + forecastHorizon * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
-                      <label className="text-xs font-bold text-gray-700">Bắt đầu:</label>
+                      <label className="text-xs font-bold text-gray-700">{t('decisionSupport.decisionSupportStart')}:</label>
                       <input
                         type="date"
                         value={selectedDate}
@@ -293,7 +293,7 @@ export default function DecisionSupportView() {
                       />
                     </div>
                     <div className="flex items-center gap-2">
-                      <label className="text-xs font-bold text-gray-700">Dự báo:</label>
+                      <label className="text-xs font-bold text-gray-700">{t('decisionSupport.decisionSupportForecast')}:</label>
                       <div className="flex p-1 bg-gray-100 rounded-lg">
                         <button
                           onClick={() => setForecastHorizon(7)}
@@ -301,7 +301,7 @@ export default function DecisionSupportView() {
                             forecastHorizon === 7 ? 'bg-primary text-white' : 'text-gray-600 hover:text-primary'
                           }`}
                         >
-                          7 ngày
+                          {'7 ' + t('decisionSupport.decisionSupportDays')}
                         </button>
                         <button
                           onClick={() => setForecastHorizon(14)}
@@ -309,7 +309,7 @@ export default function DecisionSupportView() {
                             forecastHorizon === 14 ? 'bg-primary text-white' : 'text-gray-600 hover:text-primary'
                           }`}
                         >
-                          14 ngày
+                          {'14 ' + t('decisionSupport.decisionSupportDays')}
                         </button>
                         <button
                           onClick={() => setForecastHorizon(30)}
@@ -317,7 +317,7 @@ export default function DecisionSupportView() {
                             forecastHorizon === 30 ? 'bg-primary text-white' : 'text-gray-600 hover:text-primary'
                           }`}
                         >
-                          30 ngày
+                          {'30 ' + t('decisionSupport.decisionSupportDays')}
                         </button>
                       </div>
                     </div>
@@ -336,20 +336,20 @@ export default function DecisionSupportView() {
                         return {
                           day: i + 1,
                           salinity: Number(val.toFixed(2)),
-                          dateStr: forecastDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }),
-                          dateFull: forecastDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+                          dateStr: forecastDate.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit' }),
+                          dateFull: forecastDate.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' }),
                           dateObj: forecastDate
                         }
                       })}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                         <XAxis 
                           dataKey="dateStr"
-                          label={{ value: 'Ngày tháng', position: 'insideBottom', offset: -5, style: { fill: '#6b7280' } }}
+                          label={{ value: t('decisionSupport.decisionSupportDate'), position: 'insideBottom', offset: -5, style: { fill: '#6b7280' } }}
                           tick={{ fill: '#6b7280', fontSize: 10 }}
                           interval={Math.max(0, Math.floor(forecastHorizon / 7) - 1)}
                         />
                         <YAxis 
-                          label={{ value: 'Độ mặn (‰)', angle: -90, position: 'insideLeft', style: { fill: '#6b7280' } }}
+                          label={{ value: t('decisionSupport.decisionSupportSalinity'), angle: -90, position: 'insideLeft', style: { fill: '#6b7280' } }}
                           tick={{ fill: '#6b7280', fontSize: 10 }}
                         />
                         <Tooltip
@@ -357,14 +357,14 @@ export default function DecisionSupportView() {
                           labelFormatter={(label, payload) => {
                             if (payload && payload.length > 0 && payload[0].payload) {
                               const data = payload[0].payload as any
-                              return `${data.dateFull} (Ngày ${data.day})`
+                              return `${data.dateFull} (Day ${data.day})`
                             }
                             return label
                           }}
                           contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e5e7eb', borderRadius: '8px', color: '#111827' }}
                         />
-                        <ReferenceLine y={4.0} stroke="#ef4444" strokeDasharray="5 5" label={{ value: 'Nguy hiểm (4‰)', position: 'top', style: { fill: '#ef4444', fontSize: '10px' } }} />
-                        <ReferenceLine y={1.0} stroke="#f59e0b" strokeDasharray="5 5" label={{ value: 'Cảnh báo (1‰)', position: 'top', style: { fill: '#f59e0b', fontSize: '10px' } }} />
+                        <ReferenceLine y={4.0} stroke="#ef4444" strokeDasharray="5 5" label={{ value: `${t('decisionSupport.decisionSupportDanger')} (4‰)`, position: 'top', style: { fill: '#ef4444', fontSize: '10px' } }} />
+                        <ReferenceLine y={1.0} stroke="#f59e0b" strokeDasharray="5 5" label={{ value: `${t('decisionSupport.decisionSupportWarning')} (1‰)`, position: 'top', style: { fill: '#f59e0b', fontSize: '10px' } }} />
                         <Line
                           type="monotone"
                           dataKey="salinity"
@@ -377,7 +377,7 @@ export default function DecisionSupportView() {
                     </ResponsiveContainer>
                   ) : (
                     <div className="h-full flex items-center justify-center text-gray-500">
-                      Chưa có dữ liệu dự báo
+                      {t('decisionSupport.decisionSupportNoForecast')}
                     </div>
                   )}
                 </div>
@@ -393,13 +393,13 @@ export default function DecisionSupportView() {
                     <Brain className="w-5 h-5" style={{ fill: 'currentColor' }} />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900">Khuyến nghị cho HTX & Hộ dân</h3>
-                    <p className="text-[10px] font-bold text-gray-500 uppercase">Dựa trên dự báo AI</p>
+                    <h3 className="text-lg font-bold text-gray-900">{t('decisionSupport.decisionSupportRecommendations')}</h3>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase">{t('decisionSupport.decisionSupportBasedOnAI')}</p>
                   </div>
                 </div>
                 <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-xs text-gray-700 leading-relaxed">
-                    <strong className="text-blue-600">Tại sao có phần này?</strong> Dựa trên dự báo độ mặn, hệ thống tự động tính toán và đưa ra các khuyến nghị cụ thể cho <strong>HTX</strong> (lập kế hoạch vận hành, cảnh báo hộ dân) và <strong>hộ dân</strong> (thời điểm thu hoạch, lấy nước, gieo trồng) để giảm thiểu thiệt hại.
+                    {t('decisionSupport.decisionSupportWhySection')}
                   </p>
                 </div>
                 <div className="space-y-4">
@@ -408,15 +408,15 @@ export default function DecisionSupportView() {
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <Drop className="w-5 h-5 text-amber-600" />
-                          <span className="text-sm font-bold text-amber-700">Cho HTX: Lập kế hoạch trữ nước</span>
+                          <span className="text-sm font-bold text-amber-700">{t('decisionSupport.decisionSupportForCoop')}</span>
                         </div>
-                        <Badge value="Quan trọng" severity="warning" />
+                        <Badge value={t('decisionSupport.decisionSupportImportant')} severity="warning" />
                       </div>
                       <p className="text-base font-bold mb-1 text-gray-900">
-                        Lấp đầy hồ chứa trước: {new Date(storagePlanning.optimal_fill_date).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                        {t('decisionSupport.decisionSupportFillReservoir')}: {new Date(storagePlanning.optimal_fill_date).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                       </p>
                       <p className="text-xs text-gray-700 leading-relaxed">
-                        Đây là cửa sổ an toàn cuối cùng để lấy nước ngọt trước khi độ mặn tăng cao. HTX nên thông báo cho các hộ dân chuẩn bị.
+                        {t('decisionSupport.decisionSupportLastSafeWindow')}
                       </p>
                     </div>
                   )}
@@ -439,13 +439,13 @@ export default function DecisionSupportView() {
                         const getPriorityLabel = (priority: string): string => {
                           switch (priority) {
                             case 'urgent':
-                              return 'Khẩn cấp'
+                              return t('decisionSupport.decisionSupportUrgent')
                             case 'high':
-                              return 'Cao'
+                              return t('decisionSupport.decisionSupportHigh')
                             case 'medium':
-                              return 'Trung bình'
+                              return t('decisionSupport.decisionSupportMedium')
                             default:
-                              return 'Thấp'
+                              return t('decisionSupport.decisionSupportLow')
                           }
                         }
                         const severity = getPrioritySeverity(rec.priority)
@@ -470,7 +470,7 @@ export default function DecisionSupportView() {
                                   severity === 'warning' ? 'text-orange-700' :
                                   severity === 'info' ? 'text-amber-700' :
                                   'text-green-700'
-                                }`}>{rec.message.split(':')[0] || 'Khuyến nghị'}</span>
+                                }`}>{rec.message.split(':')[0] || t('decisionSupport.decisionSupportRecommendation')}</span>
                               </div>
                               <Badge value={label} severity={severity} />
                             </div>
@@ -479,7 +479,7 @@ export default function DecisionSupportView() {
                             </p>
                             {rec.deadline && (
                               <p className="text-xs text-gray-600">
-                                Hạn: {new Date(rec.deadline).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                                {t('decisionSupport.decisionSupportDeadline')}: {new Date(rec.deadline).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                               </p>
                             )}
                           </div>
@@ -490,8 +490,8 @@ export default function DecisionSupportView() {
                   
                   {!storagePlanning?.optimal_fill_date && (!storagePlanning?.recommendations || storagePlanning.recommendations.length === 0) && (
                     <div className="text-center py-8 text-gray-500">
-                      <p className="text-sm">Chưa có khuyến nghị cho trạm này</p>
-                      <p className="text-xs mt-2">Hệ thống sẽ tự động tạo khuyến nghị khi có dữ liệu dự báo</p>
+                      <p className="text-sm">{t('decisionSupport.decisionSupportNoRecommendations')}</p>
+                      <p className="text-xs mt-2">{t('decisionSupport.decisionSupportAutoGenerate')}</p>
                     </div>
                   )}
                 </div>
@@ -545,4 +545,3 @@ export default function DecisionSupportView() {
     </div>
   )
 }
-

@@ -113,7 +113,7 @@ export default function ProducerManagementView() {
             </button>
             <button className="flex items-center gap-1.5 rounded-lg bg-primary/20 text-primary border border-primary/30 px-3 py-1.5 text-xs font-medium">
               <Funnel className="w-4 h-4" />
-              TP. Hồ Chí Minh
+              {t('producerManagement.producerManagementHoChiMinh')}
             </button>
           </div>
         </div>

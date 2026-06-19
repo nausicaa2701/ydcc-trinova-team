@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MapPin, CheckCircle, Info, MagnifyingGlass } from '@phosphor-icons/react'
 import { apiRequest } from '@/utils/apiClient'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Station {
   station_id: string
@@ -37,6 +38,7 @@ export default function FarmerLocationInput({
   currentStationId,
   onLocationUpdated
 }: FarmerLocationInputProps) {
+  const { t } = useLanguage()
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN
   const [address, setAddress] = useState('')
   const [lat, setLat] = useState(currentLat?.toString() || '')
@@ -57,12 +59,12 @@ export default function FarmerLocationInput({
 
   const handleGeocodeAddress = async () => {
     if (!address.trim()) {
-      setMessage('Vui lòng nhập địa chỉ')
+      setMessage(t('location.locationEnterAddress'))
       return
     }
 
     if (!mapboxToken) {
-      setMessage('Thiếu VITE_MAPBOX_TOKEN để chuyển địa chỉ thành tọa độ')
+      setMessage(t('location.locationMissingMapboxToken'))
       return
     }
 
@@ -76,7 +78,7 @@ export default function FarmerLocationInput({
       const data = await resp.json()
 
       if (!data.features || data.features.length === 0) {
-        setMessage('Không tìm thấy tọa độ cho địa chỉ này')
+        setMessage(t('location.locationAddressNotFound'))
         return
       }
 
@@ -85,10 +87,10 @@ export default function FarmerLocationInput({
       setLon(lonValue.toFixed(6))
       setShowSuggestions(false)
       setSuggestedStations([])
-      setMessage('Đã tìm tọa độ từ địa chỉ. Kiểm tra rồi nhấn "Tìm trạm phù hợp".')
+      setMessage(t('location.locationFoundCoords'))
     } catch (error) {
       console.error('Geocode error:', error)
-      setMessage('Lỗi khi chuyển địa chỉ thành tọa độ')
+      setMessage(t('location.locationGeocodeError'))
     } finally {
       setLoading(false)
     }
@@ -96,7 +98,7 @@ export default function FarmerLocationInput({
 
   const handleSuggestStations = async () => {
     if (!lat || !lon) {
-      setMessage('Vui lòng nhập tọa độ vị trí')
+      setMessage(t('location.locationEnterCoords'))
       return
     }
 
@@ -104,12 +106,12 @@ export default function FarmerLocationInput({
     const lonNum = parseFloat(lon)
 
     if (isNaN(latNum) || isNaN(lonNum)) {
-      setMessage('Tọa độ không hợp lệ')
+      setMessage(t('location.locationInvalidCoords'))
       return
     }
 
     if (latNum < 8 || latNum > 12 || lonNum < 104 || lonNum > 108) {
-      setMessage('Tọa độ ngoài phạm vi ĐBSCL (lat: 8-12, lon: 104-108)')
+      setMessage(t('location.locationOutOfBounds'))
       return
     }
 
@@ -129,11 +131,11 @@ export default function FarmerLocationInput({
         setMessage('')
       } else {
         const error = await response.json()
-        setMessage(error.detail || 'Không thể tìm trạm phù hợp')
+        setMessage(error.detail || t('location.locationCannotFindStation'))
       }
     } catch (error) {
       console.error('Error suggesting stations:', error)
-      setMessage('Lỗi kết nối tới server')
+      setMessage(t('location.locationServerError'))
     } finally {
       setLoading(false)
     }
@@ -141,7 +143,7 @@ export default function FarmerLocationInput({
 
   const handleSaveLocation = async () => {
     if (!lat || !lon || !selectedStation) {
-      setMessage('Vui lòng nhập vị trí và chọn trạm quan trắc')
+      setMessage(t('location.locationEnterLocationAndStation'))
       return
     }
 
@@ -159,17 +161,17 @@ export default function FarmerLocationInput({
       })
 
       if (response.ok) {
-        setMessage('Đã lưu vị trí và trạm quan trắc thành công!')
+        setMessage(t('location.locationSavedSuccess'))
         if (onLocationUpdated) {
           onLocationUpdated()
         }
       } else {
         const error = await response.json()
-        setMessage(error.detail || 'Không thể lưu thông tin')
+        setMessage(error.detail || t('location.locationCannotSave'))
       }
     } catch (error) {
       console.error('Error saving location:', error)
-      setMessage('Lỗi kết nối tới server')
+      setMessage(t('location.locationServerError'))
     } finally {
       setSaving(false)
     }
@@ -179,18 +181,18 @@ export default function FarmerLocationInput({
     <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
       <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
         <MapPin className="w-5 h-5" />
-        Vị trí trang trại & Trạm quan trắc
+        {t('location.locationFarmLocation')}
       </h3>
 
       {/* Info Box */}
       <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4 flex items-start gap-3">
         <Info className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
         <div className="text-sm text-blue-300">
-          <p className="font-medium mb-1">Hướng dẫn:</p>
+          <p className="font-medium mb-1">{t('location.locationGuide')}</p>
           <ul className="list-disc list-inside space-y-1 text-blue-300/80">
-            <li>Nhập địa chỉ trang trại, nhấn "Tìm tọa độ" để tự động sinh Lat/Lon</li>
-            <li>Sau khi có Lat/Lon, nhấn "Tìm trạm phù hợp" để xem trạm gần nhất</li>
-            <li>Chọn trạm và lưu để nhận cảnh báo chính xác</li>
+            <li>{t('location.locationGuide1b')}</li>
+            <li>{t('location.locationGuide2b')}</li>
+            <li>{t('location.locationGuide3b')}</li>
           </ul>
         </div>
       </div>
@@ -199,14 +201,14 @@ export default function FarmerLocationInput({
       <div className="space-y-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">
-            Địa chỉ trang trại
+            {t('location.locationFarmAddress')}
           </label>
           <div className="flex flex-col md:flex-row gap-2">
             <input
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="Ví dụ: Xã Phước Long B, Quận 9, TP.HCM"
+              placeholder={t('location.locationAddressPlaceholder')}
               className="flex-1 rounded-lg border-slate-700 bg-slate-900 px-4 py-2 text-white"
             />
             <button
@@ -215,16 +217,16 @@ export default function FarmerLocationInput({
               className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all flex items-center gap-2 disabled:opacity-50"
             >
               <MagnifyingGlass className="w-4 h-4" />
-              {loading ? 'Đang tìm tọa độ...' : 'Tìm tọa độ'}
+              {loading ? t('location.locationFindingCoords') : t('location.locationFindCoords')}
             </button>
           </div>
-          <p className="text-xs text-slate-500 mt-1">Hệ thống sẽ tự động lấy Lat/Lon từ địa chỉ (Mapbox).</p>
+          <p className="text-xs text-slate-500 mt-1">{t('location.locationAutoCoordNote')}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">
-              Latitude (Vĩ độ)
+              {t('location.locationLatitude')}
             </label>
             <input
               type="text"
@@ -236,7 +238,7 @@ export default function FarmerLocationInput({
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">
-              Longitude (Kinh độ)
+              {t('location.locationLongitude')}
             </label>
             <input
               type="text"
@@ -255,7 +257,7 @@ export default function FarmerLocationInput({
             className="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:brightness-110 transition-all flex items-center gap-2 disabled:opacity-50"
           >
             <MapPin className="w-4 h-4" />
-            {loading ? 'Đang tìm...' : 'Tìm trạm phù hợp'}
+            {loading ? t('location.locationFinding') : t('location.locationFindStation')}
           </button>
         </div>
       </div>
@@ -263,7 +265,7 @@ export default function FarmerLocationInput({
       {/* Message */}
       {message && (
         <div className={`p-3 rounded-lg mb-4 ${
-          message.includes('thành công') || message.includes('Đã lấy') || message.includes('Đã tìm')
+          message.includes('success') || message.includes('Found') || message.includes('saved')
             ? 'bg-green-500/10 text-green-400 border border-green-500/30'
             : 'bg-red-500/10 text-red-400 border border-red-500/30'
         }`}>
@@ -275,7 +277,7 @@ export default function FarmerLocationInput({
       {showSuggestions && suggestedStations.length > 0 && (
         <div className="mt-4">
           <h4 className="text-sm font-medium text-slate-300 mb-3">
-            Các trạm quan trắc gần nhất:
+            {t('location.locationNearestStations')}
           </h4>
           <div className="space-y-2">
             {suggestedStations.map((station) => (
@@ -301,7 +303,7 @@ export default function FarmerLocationInput({
                       {station.station_name || station.station_id}
                     </div>
                     <div className="text-xs text-slate-400">
-                      ID: {station.station_id} • Tọa độ: {station.lat.toFixed(4)}, {station.lon.toFixed(4)}
+                      ID: {station.station_id} • {t('location.locationCoordinates')}: {station.lat.toFixed(4)}, {station.lon.toFixed(4)}
                     </div>
                   </div>
                 </div>
@@ -324,7 +326,7 @@ export default function FarmerLocationInput({
             className="w-full mt-4 px-4 py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             <CheckCircle className="w-5 h-5" weight="fill" />
-            {saving ? 'Đang lưu...' : 'Lưu vị trí & trạm quan trắc'}
+            {saving ? t('location.locationSaving') : t('location.locationSaveLocationStation')}
           </button>
         </div>
       )}
@@ -332,11 +334,11 @@ export default function FarmerLocationInput({
       {/* Current Station Info */}
       {currentStationId && !showSuggestions && (
         <div className="mt-4 p-3 bg-slate-900 border border-slate-700 rounded-lg">
-          <div className="text-sm text-slate-400 mb-1">Trạm hiện tại:</div>
+          <div className="text-sm text-slate-400 mb-1">{t('location.locationCurrentStation')}</div>
           <div className="text-white font-medium">{currentStationId}</div>
           {currentLat && currentLon && (
             <div className="text-xs text-slate-400 mt-1">
-              Vị trí: {currentLat.toFixed(4)}, {currentLon.toFixed(4)}
+              {t('location.locationPosition')}: {currentLat.toFixed(4)}, {currentLon.toFixed(4)}
             </div>
           )}
         </div>

@@ -10,6 +10,7 @@ import { Calendar } from 'primereact/calendar'
 import { mockZaloMessages, type ZaloMessage } from '@/data/mockZaloMessages'
 import { ChatCircle, MapPin, Building, Warning, CheckCircle, Clock, XCircle, Calendar as CalendarIcon } from '@phosphor-icons/react'
 import RoleBasedHeader from '@/components/RoleBasedHeader'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const PRIORITY_COLORS = {
   CRITICAL: 'danger',
@@ -25,18 +26,19 @@ const DANGER_LEVEL_COLORS = {
   low: 'success'
 } as const
 
-const DANGER_LEVEL_LABELS = {
-  critical: 'Nguy cấp',
-  high: 'Cao',
-  medium: 'Trung bình',
-  low: 'Thấp'
-} as const
-
 export default function ZaloMessageManagement() {
+  const { t } = useLanguage()
   const [messages] = useState<ZaloMessage[]>(mockZaloMessages)
   const [selectedMessage, setSelectedMessage] = useState<ZaloMessage | null>(null)
   const [dialogVisible, setDialogVisible] = useState(false)
   const [dateFilter, setDateFilter] = useState<Date | null>(null)
+
+  const DANGER_LEVEL_LABELS = {
+    critical: t('zalo.zaloCritical'),
+    high: t('zalo.zaloHigh'),
+    medium: t('zalo.zaloMedium'),
+    low: t('zalo.zaloLow')
+  } as const
 
   const filteredMessages = dateFilter
     ? messages.filter(msg => {
@@ -48,34 +50,34 @@ export default function ZaloMessageManagement() {
 
   const formatMessageContent = (message: ZaloMessage): string => {
     const predictionsText = message.predictions
-      .map((p, i) => `Ngày ${i + 1}: ${p.toFixed(2)} g/L`)
+      .map((p, i) => `${t('zalo.zaloDay')} ${i + 1}: ${p.toFixed(2)} g/L`)
       .join('\n')
 
     const newsText = message.newsHighlights
       .map(news => `- ${news}`)
       .join('\n')
 
-    return `Nông dân: ${message.farmerName} (${message.farmerPhone})
-Vị trí: ${message.lat}, ${message.lon}
-Trạm quan trắc: ${message.stationId}
-Kinh doanh: ${message.businessType.join(', ')}
+    return `${t('zalo.zaloFarmer')}: ${message.farmerName} (${message.farmerPhone})
+${t('header.hoSanXuat')}: ${message.lat}, ${message.lon}
+${t('zalo.zaloStation')} ${message.stationId}
+${t('zalo.zaloBusiness')}: ${message.businessType.join(', ')}
 
-Dự báo 7 ngày tới (độ mặn g/L):
+${t('zalo.zalo7DayForecast')}:
 ${predictionsText}
 
-Tin tức nổi bật:
+${t('zalo.zaloNewsHighlights')}:
 ${newsText}
 
-Số ngày vượt ngưỡng: ${message.daysAboveThreshold}
-Ngày mặn cao nhất: Ngày ${message.maxSalinityDay} (${message.maxSalinityValue.toFixed(2)} g/L)
-Mức độ nguy hiểm: ${DANGER_LEVEL_LABELS[message.dangerLevel]}
+${t('zalo.zaloDaysAboveThreshold')}: ${message.daysAboveThreshold}
+${t('zalo.zaloHighestSalinityDay')}: ${t('zalo.zaloDay')} ${message.maxSalinityDay} (${message.maxSalinityValue.toFixed(2)} g/L)
+${t('zalo.zaloDangerLevel')}: ${DANGER_LEVEL_LABELS[message.dangerLevel]}
 
-Hành động đề xuất:
+${t('zalo.zaloSuggestedActions')}:
 ${message.actionPlan.map((action, idx) => 
   `${idx + 1}. ${action.action} (${action.priority})
    ${action.description}
-   Ngày nên thực hiện: ${action.recommendedDays.join(', ')}
-   Ngày nên tránh: ${action.avoidDays.length > 0 ? action.avoidDays.join(', ') : 'Không có'}`
+   ${t('zalo.zaloRecommendedDays')}: ${action.recommendedDays.join(', ')}
+   ${t('zalo.zaloAvoidDays')}: ${action.avoidDays.length > 0 ? action.avoidDays.join(', ') : t('zalo.zaloNone')}`
 ).join('\n\n')}`
   }
 
@@ -101,7 +103,7 @@ ${message.actionPlan.map((action, idx) =>
           <Badge value={highCount} severity="warning" />
         )}
         <span className="text-sm text-gray-600">
-          {rowData.actionPlan.length} hành động
+          {rowData.actionPlan.length} {t('zalo.zaloActionsCount')}
         </span>
       </div>
     )
@@ -111,7 +113,7 @@ ${message.actionPlan.map((action, idx) =>
     return (
       <Button
         icon="pi pi-eye"
-        label="Xem chi tiết"
+        label={t('zalo.zaloViewDetail')}
         className="p-button-text p-button-sm"
         onClick={() => {
           setSelectedMessage(rowData)
@@ -122,7 +124,7 @@ ${message.actionPlan.map((action, idx) =>
   }
 
   const dateBodyTemplate = (rowData: ZaloMessage) => {
-    return new Date(rowData.sentDate).toLocaleDateString('vi-VN', {
+    return new Date(rowData.sentDate).toLocaleDateString('en-US', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
@@ -152,9 +154,9 @@ ${message.actionPlan.map((action, idx) =>
     const maxValue = rowData.maxSalinityValue
     return (
       <div className="text-sm">
-        <div className="font-semibold">Cao nhất: {maxValue.toFixed(2)} g/L</div>
-        <div className="text-gray-500">Ngày {maxDay}</div>
-        <div className="text-gray-500">{rowData.daysAboveThreshold} ngày vượt ngưỡng</div>
+        <div className="font-semibold">{t('zalo.zaloHighest')}: {maxValue.toFixed(2)} g/L</div>
+        <div className="text-gray-500">{t('zalo.zaloDay')} {maxDay}</div>
+        <div className="text-gray-500">{rowData.daysAboveThreshold} {t('zalo.zaloDaysAboveThreshold')}</div>
       </div>
     )
   }
@@ -168,24 +170,24 @@ ${message.actionPlan.map((action, idx) =>
           <div className="flex justify-between items-center mb-4">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                Quản lý tin nhắn Zalo
+                {t('zalo.zaloManagement')}
               </h1>
               <p className="text-gray-600">
-                Danh sách tin nhắn đã gửi đến hộ dân mỗi ngày
+                {t('zalo.zaloMessageList')}
               </p>
             </div>
             <div className="flex gap-3">
               <Calendar
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.value as Date)}
-                placeholder="Lọc theo ngày"
+                placeholder={t('zalo.zaloFilterByDate')}
                 showIcon
                 dateFormat="dd/mm/yy"
                 className="w-48"
               />
               {dateFilter && (
                 <Button
-                  label="Xóa bộ lọc"
+                  label={t('zalo.zaloClearFilter')}
                   icon="pi pi-times"
                   className="p-button-text"
                   onClick={() => setDateFilter(null)}
@@ -199,33 +201,33 @@ ${message.actionPlan.map((action, idx) =>
             paginator
             rows={10}
             rowsPerPageOptions={[10, 20, 50]}
-            emptyMessage="Không có tin nhắn nào"
+            emptyMessage={t('zalo.zaloNoMessages')}
             className="p-datatable-sm"
             stripedRows
           >
             <Column
               field="sentDate"
-              header="Ngày gửi"
+              header={t('zalo.zaloSentDate')}
               body={dateBodyTemplate}
               sortable
               style={{ width: '120px' }}
             />
             <Column
               field="farmerName"
-              header="Nông dân"
+              header={t('zalo.zaloFarmer')}
               body={farmerBodyTemplate}
               sortable
               style={{ width: '180px' }}
             />
             <Column
               field="location"
-              header="Vị trí / Trạm"
+              header={t('zalo.zaloLocationStation')}
               body={locationBodyTemplate}
               style={{ width: '200px' }}
             />
             <Column
               field="businessType"
-              header="Kinh doanh"
+              header={t('zalo.zaloBusiness')}
               body={(row) => (
                 <div className="flex gap-1 flex-wrap">
                   {row.businessType.map((type: string, idx: number) => (
@@ -237,46 +239,46 @@ ${message.actionPlan.map((action, idx) =>
             />
             <Column
               field="dangerLevel"
-              header="Mức độ nguy hiểm"
+              header={t('zalo.zaloDangerLevel')}
               body={dangerLevelBodyTemplate}
               sortable
               style={{ width: '150px' }}
             />
             <Column
               field="predictions"
-              header="Dự báo"
+              header={t('zalo.zaloForecast')}
               body={predictionsBodyTemplate}
               style={{ width: '180px' }}
             />
             <Column
               field="actionPlan"
-              header="Hành động"
+              header={t('zalo.zaloActions')}
               body={actionPlanBodyTemplate}
               style={{ width: '150px' }}
             />
             <Column
               body={actionsBodyTemplate}
-              header="Thao tác"
+              header={t('zalo.zaloOperations')}
               style={{ width: '120px' }}
             />
           </DataTable>
         </Card>
 
         <Dialog
-          header="Chi tiết tin nhắn"
+          header={t('zalo.zaloMessageDetail')}
           visible={dialogVisible}
           style={{ width: '80vw', maxWidth: '900px' }}
           onHide={() => setDialogVisible(false)}
           footer={
             <div>
               <Button
-                label="Đóng"
+                label={t('zalo.zaloClose')}
                 icon="pi pi-times"
                 onClick={() => setDialogVisible(false)}
                 className="p-button-text"
               />
               <Button
-                label="Sao chép nội dung"
+                label={t('zalo.zaloCopyContent')}
                 icon="pi pi-copy"
                 onClick={() => {
                   if (selectedMessage) {
@@ -289,8 +291,8 @@ ${message.actionPlan.map((action, idx) =>
         >
           {selectedMessage && (
             <div className="space-y-6">
-              {/* Thông tin nông dân */}
-              <Card title="Thông tin nông dân" className="mb-4">
+              {/* Farmer Info */}
+              <Card title={t('zalo.zaloFarmerInfo')} className="mb-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center gap-2">
                     <ChatCircle className="w-5 h-5 text-primary" />
@@ -303,7 +305,7 @@ ${message.actionPlan.map((action, idx) =>
                     <MapPin className="w-5 h-5 text-primary" />
                     <div>
                       <div className="text-sm">{selectedMessage.lat}, {selectedMessage.lon}</div>
-                      <div className="text-sm text-gray-500">Trạm: {selectedMessage.stationId}</div>
+                      <div className="text-sm text-gray-500">{t('zalo.zaloStation')} {selectedMessage.stationId}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -316,15 +318,15 @@ ${message.actionPlan.map((action, idx) =>
                     <CalendarIcon className="w-5 h-5 text-primary" />
                     <div>
                       <div className="text-sm">
-                        {new Date(selectedMessage.sentDate).toLocaleDateString('vi-VN')}
+                        {new Date(selectedMessage.sentDate).toLocaleDateString('en-US')}
                       </div>
                     </div>
                   </div>
                 </div>
               </Card>
 
-              {/* Dự báo 7 ngày */}
-              <Card title="Dự báo 7 ngày tới (độ mặn g/L)">
+              {/* 7-Day Forecast */}
+              <Card title={t('zalo.zalo7DayForecast')}>
                 <div className="space-y-2">
                   {selectedMessage.predictions.map((pred, idx) => {
                     const isMax = idx + 1 === selectedMessage.maxSalinityDay
@@ -344,10 +346,10 @@ ${message.actionPlan.map((action, idx) =>
                         }`}
                       >
                         <div className="flex justify-between items-center">
-                          <span className="font-semibold">Ngày {idx + 1}: {pred.toFixed(2)} g/L</span>
-                          {isMax && <Badge value="Cao nhất" severity="danger" />}
-                          {isAbove4 && !isMax && <Badge value="Nguy hiểm" severity="warning" />}
-                          {isAbove1 && !isAbove4 && <Badge value="Cảnh báo" severity="info" />}
+                          <span className="font-semibold">{t('zalo.zaloDay')} {idx + 1}: {pred.toFixed(2)} g/L</span>
+                          {isMax && <Badge value={t('zalo.zaloHighest')} severity="danger" />}
+                          {isAbove4 && !isMax && <Badge value={t('zalo.zaloDanger')} severity="warning" />}
+                          {isAbove1 && !isAbove4 && <Badge value={t('zalo.zaloWarning')} severity="info" />}
                         </div>
                       </div>
                     )
@@ -355,9 +357,9 @@ ${message.actionPlan.map((action, idx) =>
                 </div>
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                   <div className="text-sm">
-                    <div><strong>Số ngày vượt ngưỡng:</strong> {selectedMessage.daysAboveThreshold}</div>
-                    <div><strong>Ngày mặn cao nhất:</strong> Ngày {selectedMessage.maxSalinityDay} ({selectedMessage.maxSalinityValue.toFixed(2)} g/L)</div>
-                    <div><strong>Mức độ nguy hiểm:</strong> 
+                    <div><strong>{t('zalo.zaloDaysAboveThreshold')}:</strong> {selectedMessage.daysAboveThreshold}</div>
+                    <div><strong>{t('zalo.zaloHighestSalinityDay')}:</strong> {t('zalo.zaloDay')} {selectedMessage.maxSalinityDay} ({selectedMessage.maxSalinityValue.toFixed(2)} g/L)</div>
+                    <div><strong>{t('zalo.zaloDangerLevel')}:</strong> 
                       <Tag
                         value={DANGER_LEVEL_LABELS[selectedMessage.dangerLevel]}
                         severity={DANGER_LEVEL_COLORS[selectedMessage.dangerLevel]}
@@ -368,9 +370,9 @@ ${message.actionPlan.map((action, idx) =>
                 </div>
               </Card>
 
-              {/* Tin tức nổi bật */}
+              {/* News Highlights */}
               {selectedMessage.newsHighlights.length > 0 && (
-                <Card title="Tin tức nổi bật">
+                <Card title={t('zalo.zaloNewsHighlights')}>
                   <ul className="list-disc list-inside space-y-1">
                     {selectedMessage.newsHighlights.map((news, idx) => (
                       <li key={idx} className="text-sm">{news}</li>
@@ -379,8 +381,8 @@ ${message.actionPlan.map((action, idx) =>
                 </Card>
               )}
 
-              {/* Hành động đề xuất */}
-              <Card title="Hành động đề xuất">
+              {/* Suggested Actions */}
+              <Card title={t('zalo.zaloSuggestedActions')}>
                 <div className="space-y-4">
                   {selectedMessage.actionPlan.map((action, idx) => {
                     const PriorityIcon = 
@@ -426,17 +428,17 @@ ${message.actionPlan.map((action, idx) =>
                             <div className="flex gap-4 text-sm">
                               {action.recommendedDays.length > 0 && (
                                 <div>
-                                  <span className="font-semibold text-green-700">Ngày nên thực hiện:</span>{' '}
+                                  <span className="font-semibold text-green-700">{t('zalo.zaloRecommendedDays')}:</span>{' '}
                                   <span className="text-gray-600">
-                                    {action.recommendedDays.map(d => `Ngày ${d}`).join(', ')}
+                                    {action.recommendedDays.map(d => `${t('zalo.zaloDay')} ${d}`).join(', ')}
                                   </span>
                                 </div>
                               )}
                               {action.avoidDays.length > 0 && (
                                 <div>
-                                  <span className="font-semibold text-red-700">Ngày nên tránh:</span>{' '}
+                                  <span className="font-semibold text-red-700">{t('zalo.zaloAvoidDays')}:</span>{' '}
                                   <span className="text-gray-600">
-                                    {action.avoidDays.map(d => `Ngày ${d}`).join(', ')}
+                                    {action.avoidDays.map(d => `${t('zalo.zaloDay')} ${d}`).join(', ')}
                                   </span>
                                 </div>
                               )}
@@ -449,8 +451,8 @@ ${message.actionPlan.map((action, idx) =>
                 </div>
               </Card>
 
-              {/* Nội dung tin nhắn */}
-              <Card title="Nội dung tin nhắn đã gửi">
+              {/* Sent Message Content */}
+              <Card title={t('zalo.zaloSentMessageContent')}>
                 <pre className="p-4 bg-gray-100 rounded-lg text-sm whitespace-pre-wrap font-mono">
                   {formatMessageContent(selectedMessage)}
                 </pre>

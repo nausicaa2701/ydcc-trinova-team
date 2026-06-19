@@ -1,3 +1,5 @@
+import { useLanguage } from '@/contexts/LanguageContext'
+
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg'
   showText?: boolean
@@ -6,6 +8,8 @@ interface LogoProps {
 }
 
 export default function Logo({ size = 'md', showText = true, className = '', variant = 'auto' }: LogoProps) {
+  const { t } = useLanguage()
+
   const sizes = {
     sm: { icon: 'size-8', text: 'text-sm', subtitle: 'text-[8px]' },
     md: { icon: 'size-10', text: 'text-lg', subtitle: 'text-[10px]' },
@@ -39,7 +43,7 @@ export default function Logo({ size = 'md', showText = true, className = '', var
             iCoop Mekong
           </h2>
           <span className={`${s.subtitle} font-bold uppercase tracking-widest ${subtitleColors[variant]}`}>
-            Giám sát xâm nhập mặn
+            {t('logo.logoSubtitle')}
           </span>
         </div>
       )}

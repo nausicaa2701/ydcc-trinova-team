@@ -90,7 +90,7 @@ export default function TimeSlider() {
         </div>
         
         <div className="text-sm font-medium text-gray-900 min-w-[100px] text-right">
-          {new Date(selectedDate).toLocaleDateString('vi-VN', {
+          {new Date(selectedDate).toLocaleDateString('en-US', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
